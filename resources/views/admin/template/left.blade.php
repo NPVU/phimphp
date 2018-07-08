@@ -44,33 +44,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-users"></i>
-                    <span>Quản lý nhân công</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ url('/quan-ly/nhan-cong/nhan-vien/') }}"><i class="fa fa-circle-o"></i> Nhân viên</a></li>
-                    <li><a href="{{ url('/quan-ly/cham-cong/cham-cong/') }}"><i class="fa fa-circle-o"></i> Chấm công</a></li>
-                    <li><a href="{{ url('/quan-ly/nhan-cong/luong/') }}"><i class="fa fa-circle-o"></i> Lương</a></li>                   
-                </ul>
-            </li>
-            <li>
-                <a href="{{ url('/quan-ly/san-pham/') }}">
-                    <i class="fa fa-cubes"></i>
-                    <span>Quản lý sản phẩm</span>                    
-                </a>                
-            </li> 
-            <li>
-                <a href="{{ url('/quan-ly/chi-tieu/') }}">
-                    <i class="fa fa-dollar"></i>
-                    <span>Quản lý chi tiêu</span>                    
-                </a>                
-            </li>
+            </li>            
             <li>
                 <a href="{{ url('/quan-ly/cau-hinh/') }}">
                     <i class="fa fa-gears"></i>
