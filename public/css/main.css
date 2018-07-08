@@ -1,0 +1,25 @@
+.list-action-icon .fa {
+    cursor: pointer;
+    padding: 3px;  
+    min-width: 20px;
+    opacity: 0.8;
+}
+.list-action-icon .fa:hover {
+    opacity: 1;
+}
+
+.required {
+    border-left: 3px red solid;
+}
+.display-none {
+    display:none !important;
+}
+.img-select-file {
+    cursor: pointer;
+}
+.boxAvatar {
+    width: 80%;
+    margin-top: 10px;
+    margin-left: 10%;
+    border: 2px #e4e4e4 solid;
+}
