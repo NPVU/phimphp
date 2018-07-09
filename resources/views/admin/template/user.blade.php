@@ -12,7 +12,7 @@
                 <div class="boxUpdateAvatar text-center">
                     <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="80%"
                          onclick="$('#selectFileAvatar').click()" 
-                         class="img-select-file" id="imgDragDrop" ondrop="onDropFile();" ondrag="true"/>
+                         class="img-select-file" id="imgDragDrop"/>
                     <div class="boxAvatar">
                         <img id="imgAfterUpload" class="img-circle" width="100px"/>
                     </div>                    
@@ -91,3 +91,111 @@
     </div>
 </div>
 <script type="text/javascript" src="{{ asset('public/js/userModal.js') }}"></script>
+<script>
+    function updateDisplayUserName() {
+        $.ajax({
+            type: "GET",
+            url: "{{url('/quan-ly/tai-khoan/doi-ten-hien-thi')}}/{{csrf_token()}}/" + $('#txtDisplayUserName').val(),
+            success: function (data) {
+                if (data.status === 1) {
+                    $('.displayUserName').html(data.msg);
+                    $('#modal-name').iziModal('close');
+                } else if (data.status === 0) {
+                    $('.msg-change-display-username-error').html(data.msg);
+                    $('.notify-change-display-username-error').removeClass('display-none');
+                }
+            }
+        });
+    }
+    function updateChangePassword() {
+        $.ajax({
+            type: "GET",
+            url: "{{url('/quan-ly/tai-khoan/doi-mat-khau')}}/{{csrf_token()}}/" + $('#oldPassword').val() + "/" + $('#newPassword').val(),
+            success: function (data) {
+                console.log(data);
+                if (data.status === 1) {
+                    $('.notify-change-password-error').addClass('display-none');
+                    $('.notify-change-password-success').removeClass('display-none');
+                } else if (data.status === 0) {
+                    $('.notify-change-password-success').addClass('display-none');
+                    $('.msg-change-password-error').html(data.msg);
+                    $('.notify-change-password-error').removeClass('display-none');
+                }
+            }
+        });
+    }    
+    function updateChangeAvatar() {
+        $.ajax({
+            type: "GET",
+            url: "{{url('/quan-ly/tai-khoan/doi-avatar')}}/{{csrf_token()}}",
+            success: function (data) {
+                console.log(data);
+                if (data.status === 1) {
+                    $('.avatar').attr('src', data.msg);
+                    $('#modal-avatar').iziModal('close');
+                } else if (data.status === 0) {
+
+                }
+            }
+        });
+    }
+    function autoUploadFile() {
+        sendFile($('#selectFileAvatar').prop('files')[0]);
+    }
+    $( document ).ready(function() {
+        $('#imgDragDrop').on(
+            'dragover',
+            function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        );
+        $('#imgDragDrop').on(
+            'dragenter',
+            function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        );
+        $('#imgDragDrop').on(
+            'drop',
+            function(e){
+                if(e.originalEvent.dataTransfer){
+                    if(e.originalEvent.dataTransfer.files.length) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        /*UPLOAD FILES HERE*/
+                        uploadDragDrop(e.originalEvent.dataTransfer.files);
+                    }   
+                }
+            }
+        );
+        function uploadDragDrop(files){    
+            console.log(files[0]);
+            sendFile(files[0]);
+        }
+    });
+    function sendFile(dataFile){
+        var file_data = dataFile;
+        var form_data = new FormData();
+        form_data.append('avatar', file_data);
+        $.ajax({
+                url: '{{url("quan-ly/tai-khoan/upload-avatar")}}', // point to server-side PHP script 
+                dataType: 'text', // what to expect back from the PHP script, if anything
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (php_script_response) {
+                    $('#imgDragDrop').addClass('display-none');
+                    $('#btnReUploadAvatar').removeClass('display-none');
+                    $('#imgAfterUpload').attr('src', php_script_response);
+                    $('.boxAvatar').removeClass('display-none');
+                }
+        });
+    }
+</script>
