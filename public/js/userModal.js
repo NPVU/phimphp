@@ -62,39 +62,6 @@ $('#modal-password').iziModal({
 });
 $('#modal-password').iziModal('setTitle', 'Thay đổi mật khẩu');
 $('#modal-password').iziModal('setTop', 100);
-
-function updateDisplayUserName() {
-    $.ajax({
-        type: "GET",
-        url: "{{url('/quan-ly/tai-khoan/doi-ten-hien-thi')}}/{{csrf_token()}}/" + $('#txtDisplayUserName').val(),
-        success: function (data) {
-            if (data.status === 1) {
-                $('.displayUserName').html(data.msg);
-                $('#modal-name').iziModal('close');
-            } else if (data.status === 0) {
-                $('.msg-change-display-username-error').html(data.msg);
-                $('.notify-change-display-username-error').removeClass('display-none');
-            }
-        }
-    });
-}
-function updateChangePassword() {
-    $.ajax({
-        type: "GET",
-        url: "{{url('/quan-ly/tai-khoan/doi-mat-khau')}}/{{csrf_token()}}/" + $('#oldPassword').val() + "/" + $('#newPassword').val(),
-        success: function (data) {
-            console.log(data);
-            if (data.status === 1) {
-                $('.notify-change-password-error').addClass('display-none');
-                $('.notify-change-password-success').removeClass('display-none');
-            } else if (data.status === 0) {
-                $('.notify-change-password-success').addClass('display-none');
-                $('.msg-change-password-error').html(data.msg);
-                $('.notify-change-password-error').removeClass('display-none');
-            }
-        }
-    });
-}
 function validForm() {
     $('.renew-password').removeClass('has-error');
     $('.msg_renewpassword_error').html('');
@@ -104,43 +71,4 @@ function validForm() {
         $('.renew-password').addClass('has-error');
         $('.msg_renewpassword_error').html('Xác nhận mật khẩu không khớp');
     }
-}
-
-function autoUploadFile() {
-    var file_data = $('#selectFileAvatar').prop('files')[0];
-    var form_data = new FormData();
-    form_data.append('avatar', file_data);
-    $.ajax({
-        url: '{{url("quan-ly/tai-khoan/upload-avatar")}}', // point to server-side PHP script 
-        dataType: 'text', // what to expect back from the PHP script, if anything
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,
-        type: 'post',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function (php_script_response) {
-            $('#imgDragDrop').addClass('display-none');
-            $('#btnReUploadAvatar').removeClass('display-none');
-            $('#imgAfterUpload').attr('src', php_script_response);
-            $('.boxAvatar').removeClass('display-none');
-        }
-    });
-}
-function updateChangeAvatar() {
-    $.ajax({
-        type: "GET",
-        url: "{{url('/quan-ly/tai-khoan/doi-avatar')}}/{{csrf_token()}}",
-        success: function (data) {
-            console.log(data);
-            if (data.status === 1) {
-                $('.avatar').attr('src', data.msg);
-                $('#modal-avatar').iziModal('close');
-            } else if (data.status === 0) {
-
-            }
-        }
-    });
 }

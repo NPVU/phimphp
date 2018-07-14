@@ -20,7 +20,13 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::post('/upload-avatar','TaiKhoanController@uploadAvatar');
     Route::get('/doi-avatar/{token}','TaiKhoanController@updateAvatar');    
 });
-
+Route::group(['prefix'=>'/quan-ly/phim'],function(){
+    Route::get('/','PhimController@index');    
+});
+Route::group(['prefix' => 'services'], function(){
+	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
+	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');	
+});
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
