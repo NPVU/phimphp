@@ -1,12 +1,6 @@
-function showMessageSuccess(){
-    iziToast.success({        
-        message: 'Cập nhật thành công',
-        position: 'topRight',
-        backgroundColor: '#51a351',
-        messageColor: '#ffffff',
-        iconColor:'#ffffff',
-        icon:'fa fa-check',
-        close:false,        
-        maxWidth: 200
-    });
+function showToast(type, content, title, close){
+    switch(type){
+        case 'success': toastr.options.closeButton = close; toastr.success(content, title); break;
+        case 'error': toastr.options.closeButton = close; toastr.error(content, title); break;
+    }       
 }

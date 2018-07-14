@@ -22,4 +22,8 @@ class ClassCommon extends BaseController
     public static function getPathUploadTemp(){
         return 'public/upload/temp/';
     }
+    
+    public static function showToast(){
+        
+    }
 }

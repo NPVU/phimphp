@@ -23,3 +23,10 @@
     margin-left: 10%;
     border: 2px #e4e4e4 solid;
 }
+
+.form-search-addon, .form-add-addon {
+    width:300px;
+}
+.form-search-addon .fa-search {
+    cursor: pointer;
+}

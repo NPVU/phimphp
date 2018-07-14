@@ -123,31 +123,7 @@
                 }
             }
         });
-    }
-    function autoUploadFile() {
-        var file_data = $('#selectFileAvatar').prop('files')[0];
-        var form_data = new FormData();
-        form_data.append('avatar', file_data);
-        $.ajax({
-            url: '{{url("quan-ly/tai-khoan/upload-avatar")}}', // point to server-side PHP script 
-            dataType: 'text', // what to expect back from the PHP script, if anything
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: form_data,
-            type: 'post',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (php_script_response) {
-                $('#imgDragDrop').addClass('display-none');
-                $('#btnReUploadAvatar').removeClass('display-none');
-                $('#imgAfterUpload').attr('src', php_script_response);
-                $('.boxAvatar').removeClass('display-none');
-            }
-        });
-    }
-	
+    }    	
     function updateChangeAvatar() {
         $.ajax({
             type: "GET",
@@ -218,7 +194,7 @@
                 success: function (php_script_response) {
                     $('#imgDragDrop').addClass('display-none');
                     $('#btnReUploadAvatar').removeClass('display-none');
-                    $('#imgAfterUpload').attr('src', php_script_response);
+                    $('#imgAfterUpload').attr('src', '{{url("/")}}/'+php_script_response);
                     $('.boxAvatar').removeClass('display-none');
                 }
         });

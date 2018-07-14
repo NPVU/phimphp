@@ -12,7 +12,10 @@
 */
 
 Route::get('/quan-ly/', 'QuanLyController@index');
-
+Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
+    Route::get('/','TheLoaiController@index');
+    Route::post('/','TheLoaiController@addTheLoai');
+});
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/','TaiKhoanController@index');
     Route::get('/doi-ten-hien-thi/{token}/{displayUserName}','TaiKhoanController@changeDisplayUserName');

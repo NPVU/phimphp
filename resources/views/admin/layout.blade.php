@@ -17,9 +17,7 @@
         </div>
         @include('admin.template.user')
         <script>
-            <?php if(isset($showToastr) && strcmp($showToastr, 'success') == 0) :?>
-                showMessageSuccess();
-            <?php endif;?>
+            <?php if(isset($showToast) && !empty($showToast)){ echo $showToast;} ?>
         </script>
     </body>
 </html>

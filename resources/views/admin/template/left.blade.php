@@ -5,7 +5,7 @@
         <div class="user-panel" style="min-height:60px">
             <div class="pull-left image">
                 <a href="#" data-izimodal-open="#modal-avatar">
-                    <img src="{{ Auth::user()->avatar }}" class="avatar img-circle" alt="User Image" style="background: white">
+                    <img src="{{ url(Auth::user()->avatar) }}" class="avatar img-circle" alt="User Image" style="background: white">
                 </a>
             </div>
             <div class="pull-left info">
@@ -34,15 +34,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="{{ url('/quan-ly/danh-muc/san-pham/') }}">
-                            <i class="fa fa-circle-o"></i> Danh mục sản phẩm
+                        <a href="{{ url('/quan-ly/danh-muc/the-loai/') }}">
+                            <i class="fa fa-circle-o"></i> Thể loại
                         </a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/quan-ly/danh-muc/khach-hang/') }}">
-                            <i class="fa fa-circle-o"></i> Danh mục khách hàng
-                        </a>
-                    </li>
+                    </li>                    
                 </ul>
             </li>            
             <li>

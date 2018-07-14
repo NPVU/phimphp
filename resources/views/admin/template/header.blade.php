@@ -216,7 +216,7 @@
                 @if (Auth::check())
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ Auth::user()->avatar }}" class="avatar user-image" alt="User Image" style="background: white">
+                        <img src="{{ url(Auth::user()->avatar) }}" class="avatar user-image" alt="User Image" style="background: white">
 <!--                    <span class="hidden-xs displayUserName">
                             {{ Auth::user()->name }}
                         </span>-->
@@ -224,7 +224,7 @@
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{ Auth::user()->avatar }}" class="avatar img-circle" alt="User Image" style="background: white">
+                            <img src="{{ url(Auth::user()->avatar) }}" class="avatar img-circle" alt="User Image" style="background: white">
 
                             <p>
                                 <span class="displayUserName">{{ Auth::user()->name }}</span> - Quản trị viên
