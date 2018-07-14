@@ -30,3 +30,9 @@
 .form-search-addon .fa-search {
     cursor: pointer;
 }
+
+.remove-border {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}

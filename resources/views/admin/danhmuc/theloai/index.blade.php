@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="{{ url('/quan-ly/danh-muc/') }}">Quản lý danh mục</a></li>
-        <li class="active">Thể loại</li>
+        <li class="active"><a href="{{ url('/quan-ly/danh-muc/the-loai') }}">Thể loại</a></li>
     </ol>
 </section>
 <section class="content">
@@ -29,12 +29,15 @@
                         </form>
                     </div>
                     <div class="box-btn-header" style="float:right;">
+                        <form method="GET">
                         <div class="form-search-addon">
                             <div class="input-group">
-                                <input type="search" name="find_theloai" value="{{old('find_theloai')}}" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="search" name="theloai" value="<?php echo isset($_GET['theloai'])?$_GET['theloai']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
+                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-the-loai').click();"><i class="fa fa-search"></i></span>
+                                <button type="submit" id="btn-search-the-loai" class="display-none"></button>
                             </div>         
                         </div>
+                        </form>
                     </div>                    
                 </div>                
                 <div class="box-body">                    

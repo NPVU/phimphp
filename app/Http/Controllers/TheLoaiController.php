@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Routing\Controller as Controller;
 
 class TheLoaiController extends Controller{
@@ -13,8 +14,12 @@ class TheLoaiController extends Controller{
     }
     
     public function index($showToast = ''){
-        $listTheLoai = DB::table('theloai')->get();
-        
+        if(!is_null(Input::get('theloai'))){
+            $listTheLoai = DB::table('theloai')->where('theloai_ten', 'like', '%'.Input::get('theloai').'%')->get();
+        } else {
+            $listTheLoai = DB::table('theloai')->get();
+        }
+                
         $data['listTheLoai'] = $listTheLoai;
         
         $data['title'] = 'Danh Mục Thể Loại';        
