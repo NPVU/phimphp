@@ -62,6 +62,7 @@ $('#modal-password').iziModal({
 });
 $('#modal-password').iziModal('setTitle', 'Thay đổi mật khẩu');
 $('#modal-password').iziModal('setTop', 100);
+
 function validForm() {
     $('.renew-password').removeClass('has-error');
     $('.msg_renewpassword_error').html('');

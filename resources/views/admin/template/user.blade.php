@@ -12,7 +12,7 @@
                 <div class="boxUpdateAvatar text-center">
                     <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="80%"
                          onclick="$('#selectFileAvatar').click()" 
-                         class="img-select-file" id="imgDragDrop" ondrop="onDropFile();" ondrag="true"/>
+                         class="img-select-file" id="imgDragDrop"/>
                     <div class="boxAvatar">
                         <img id="imgAfterUpload" class="img-circle" width="100px"/>
                     </div>                    
@@ -147,6 +147,7 @@
             }
         });
     }
+	
     function updateChangeAvatar() {
         $.ajax({
             type: "GET",
@@ -160,6 +161,66 @@
 
                 }
             }
+        });
+    }
+
+    function autoUploadFile() {
+        sendFile($('#selectFileAvatar').prop('files')[0]);
+    }
+    $( document ).ready(function() {
+        $('#imgDragDrop').on(
+            'dragover',
+            function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        );
+        $('#imgDragDrop').on(
+            'dragenter',
+            function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        );
+        $('#imgDragDrop').on(
+            'drop',
+            function(e){
+                if(e.originalEvent.dataTransfer){
+                    if(e.originalEvent.dataTransfer.files.length) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        /*UPLOAD FILES HERE*/
+                        uploadDragDrop(e.originalEvent.dataTransfer.files);
+                    }   
+                }
+            }
+        );
+        function uploadDragDrop(files){    
+            console.log(files[0]);
+            sendFile(files[0]);
+        }
+    });
+    function sendFile(dataFile){
+        var file_data = dataFile;
+        var form_data = new FormData();
+        form_data.append('avatar', file_data);
+        $.ajax({
+                url: '{{url("quan-ly/tai-khoan/upload-avatar")}}', // point to server-side PHP script 
+                dataType: 'text', // what to expect back from the PHP script, if anything
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (php_script_response) {
+                    $('#imgDragDrop').addClass('display-none');
+                    $('#btnReUploadAvatar').removeClass('display-none');
+                    $('#imgAfterUpload').attr('src', php_script_response);
+                    $('.boxAvatar').removeClass('display-none');
+                }
         });
     }
 </script>
