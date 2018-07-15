@@ -116,9 +116,10 @@
             <input type="hidden" id="upd_theloai_ten_old" name="upd_theloai_ten_old" value="" />
             <div class="modal-body">        
                 <div class="row">                
-                    <div class="col-md-12 text-center">
-                        Nhập tên mới cho thể loại 
+                    <div class="col-md-12 text-left">
+                        <label>Nhập tên mới cho thể loại 
                         <strong style="color: lightseagreen;font-size: 1.5em;" class="upd_theloai_ten_old"></strong>
+                        </label>
                         <input type="text" class="form-control" id="upd_theloai_ten_new" name="upd_theloai_ten_new" />
                     </div>
 
