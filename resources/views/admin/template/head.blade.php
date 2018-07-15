@@ -1,6 +1,7 @@
 <head>    
     <meta charset="utf-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="img/ico" href="{{ asset('favicon.ico') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script type="text/javascript" src="{{ asset('public/template/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/template/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
