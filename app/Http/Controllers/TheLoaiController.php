@@ -28,12 +28,21 @@ class TheLoaiController extends Controller{
         return view('admin/layout', $data);
     }
     
+    public function actionTheLoai(Request $request){
+        if(strcmp($request->btn, 'add') == 0){
+            return $this->addTheLoai($request);
+        } else if(strcmp($request->btn, 'del') == 0){
+            return $this->delTheLoai($request);
+        } else if(strcmp($request->btn, 'upd') == 0){
+            return $this->updTheLoai($request);
+        }
+        
+    }            
+    
     public function addTheLoai(Request $request){
         $valid = true;
         $theloai_ten = $request->add_theloai_ten;
-        
-        
-        
+
         $exist = DB::table('theloai')->where('theloai_ten', '=', $theloai_ten)->count();
         if($exist > 0){
             $valid = false;
@@ -50,6 +59,32 @@ class TheLoaiController extends Controller{
         } else {
             
         }        
+    }
+    
+    public function delTheLoai(Request $request){        
+        $theloai_id = $request->del_theloai_id;
+        $theloai_ten = $request->del_theloai_ten;
+
+        $row = DB::table('theloai')->where('theloai_id', $theloai_id)->delete();
+        if($row > 0){
+            return $this->index('showToast("success", "Thể loại '.$theloai_ten.' đã được xóa", "Xóa thành công !", true)');
+        } else {
+            return $this->index('showToast("error", "", "Xóa thất bại !", true)');
+        }                    
+    }
+    
+    public function updTheLoai(Request $request){        
+        $theloai_id         = $request->upd_theloai_id;
+        $theloai_ten_old    = $request->upd_theloai_ten_old;
+        $theloai_ten_new    = $request->upd_theloai_ten_new;
+               
+        $row = DB::table('theloai')->where('theloai_id', $theloai_id)->update(['theloai_ten' => $theloai_ten_new]);
+        if($row > 0){
+            return $this->index('showToast("success", "Thể loại '.$theloai_ten_old
+                    .' đã được thay đổi thành '.$theloai_ten_new.'", "Cập nhật thành công !", true)');
+        } else {
+            return $this->index('showToast("error", "", "Dữ liệu không thay đổi", true)');
+        }                    
     }
 }
 

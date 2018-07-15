@@ -9,6 +9,8 @@ $('#modal-avatar').iziModal({
     overlayClose: false,
     width: 500,
     headerColor: 'rgb(56, 98, 111)',
+    icon: 'fa fa-image',
+    iconColor: 'white',
     onOpening: function (modal) {
         modal.startLoading();
         $('#imgDragDrop').removeClass('display-none');
@@ -28,6 +30,8 @@ $('#modal-avatar').iziModal('setTop', 100);
 $('#modal-name').iziModal({
     overlayClose: false,
     headerColor: 'rgb(56, 98, 111)',
+    icon: 'fa fa-user',
+    iconColor: 'white',
     onOpening: function (modal) {
         modal.startLoading();
     },
@@ -40,10 +44,13 @@ $('#modal-name').iziModal({
     }
 });
 $('#modal-name').iziModal('setTitle', 'Thay đổi tên hiển thị');
+$('#modal-name').iziModal('setTop', 100);
 
 $('#modal-password').iziModal({
     overlayClose: false,
     headerColor: 'rgb(56, 98, 111)',
+    icon: 'fa fa-key',
+    iconColor: 'white',
     onOpening: function (modal) {
         modal.startLoading();
     },
