@@ -16,6 +16,10 @@ Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
     Route::get('/','TheLoaiController@index');
     Route::post('/','TheLoaiController@actionTheLoai');
 });
+Route::group(['prefix'=>'/quan-ly/danh-muc/phim'],function(){
+    Route::get('/','PhimController@index');
+    Route::post('/','PhimController@actionTheLoai');
+});
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/','TaiKhoanController@index');
     Route::get('/doi-ten-hien-thi/{token}/{displayUserName}','TaiKhoanController@changeDisplayUserName');
