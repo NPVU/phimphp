@@ -28,7 +28,8 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
 });
 Route::group(['prefix' => 'services'], function(){
 	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
-	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');	
+	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');
+        Route::get('google', 'ServicesController@googleAPI');
 });
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
