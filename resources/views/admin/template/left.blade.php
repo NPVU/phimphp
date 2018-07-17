@@ -5,7 +5,7 @@
         <div class="user-panel" style="min-height:60px">
             <div class="pull-left image">
                 <a href="#" data-izimodal-open="#modal-avatar">
-                    <img src="{{ url(Auth::user()->avatar) }}" class="avatar img-circle" alt="User Image" style="background: white">
+                    <img src="{{ asset((Auth::user()->avatar)) }}" class="avatar img-circle" alt="User Image" style="background: white">
                 </a>
             </div>
             <div class="pull-left info">

@@ -13,7 +13,7 @@
                     <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="80%"
                          onclick="$('#selectFileAvatar').click()" 
                          class="img-select-file" id="imgDragDrop"/>
-                    <div class="boxAvatar">
+                    <div class="box-avatar">
                         <img id="imgAfterUpload" class="img-circle" width="100px"/>
                     </div>                    
                 </div>
@@ -131,7 +131,7 @@
             success: function (data) {
                 console.log(data);
                 if (data.status === 1) {
-                    $('.avatar').attr('src', data.msg);
+                    $('.avatar').attr('src', '{{asset("/")}}'+data.msg);
                     $('#modal-avatar').iziModal('close');
                 } else if (data.status === 0) {
 
@@ -195,7 +195,7 @@
                     $('#imgDragDrop').addClass('display-none');
                     $('#btnReUploadAvatar').removeClass('display-none');
                     $('#imgAfterUpload').attr('src', '{{url("/")}}/'+php_script_response);
-                    $('.boxAvatar').removeClass('display-none');
+                    $('.box-avatar').removeClass('display-none');
                 }
         });
     }

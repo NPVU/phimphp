@@ -14,7 +14,7 @@ $('#modal-avatar').iziModal({
     onOpening: function (modal) {
         $('#imgDragDrop').removeClass('display-none');
         $('#btnReUploadAvatar').addClass('display-none');
-        $('.boxAvatar').addClass('display-none');
+        $('.box-avatar').addClass('display-none');
     },    
     onClosing: function (modal) {
         $('.notify-change-avatar-error').addClass('display-none');
