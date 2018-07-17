@@ -12,14 +12,10 @@ $('#modal-avatar').iziModal({
     icon: 'fa fa-image',
     iconColor: 'white',
     onOpening: function (modal) {
-        modal.startLoading();
         $('#imgDragDrop').removeClass('display-none');
         $('#btnReUploadAvatar').addClass('display-none');
         $('.boxAvatar').addClass('display-none');
-    },
-    onOpened: function (modal) {
-        modal.stopLoading();
-    },
+    },    
     onClosing: function (modal) {
         $('.notify-change-avatar-error').addClass('display-none');
     }
@@ -31,13 +27,7 @@ $('#modal-name').iziModal({
     overlayClose: false,
     headerColor: 'rgb(56, 98, 111)',
     icon: 'fa fa-user',
-    iconColor: 'white',
-    onOpening: function (modal) {
-        modal.startLoading();
-    },
-    onOpened: function (modal) {
-        modal.stopLoading();
-    },
+    iconColor: 'white',    
     onClosing: function (modal) {
         $('.notify-change-display-username-error').addClass('display-none');
         $('#txtDisplayUserName').val($('.displayUserName').html());
@@ -50,13 +40,7 @@ $('#modal-password').iziModal({
     overlayClose: false,
     headerColor: 'rgb(56, 98, 111)',
     icon: 'fa fa-key',
-    iconColor: 'white',
-    onOpening: function (modal) {
-        modal.startLoading();
-    },
-    onOpened: function (modal) {
-        modal.stopLoading();
-    },
+    iconColor: 'white',    
     onClosing: function (modal) {
         $('#oldPassword').val('');
         $('#newPassword').val('');

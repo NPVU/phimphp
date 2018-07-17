@@ -27,5 +27,22 @@ class PhimController extends Controller{
         $data['showToast'] = $showToast;
         return view('admin/layout', $data);
     }
+    
+    public function add(){        
+        $data['title'] = 'Thêm Phim';
+        $data['page'] = 'admin.phim.add';        
+        return view('admin/layout', $data);
+    }
+    
+    public function uploadImage(Request $request) {
+        if($request->hasFile('image')){
+            // chuyển file về thư mục cần lưu trữ
+            $file = $request->image;    
+            $newName=time();    
+            $filePath = $file->move(ClassCommon::getPathUploadTemp(), $newName.'_'.$file->getClientOriginalName());
+            session(['fileImagePhim' => $newName.'_'.$file->getClientOriginalName()]);
+            return $filePath;    
+        }
+    }
 }
 

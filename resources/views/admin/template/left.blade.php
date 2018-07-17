@@ -39,7 +39,13 @@
                         </a>
                     </li>                    
                 </ul>
-            </li>            
+            </li> 
+            <li>
+                <a href="{{ url('/quan-ly/phim/') }}">
+                    <i class="fa fa-film"></i>
+                    <span>Phim</span>                    
+                </a>                
+            </li>
             <li>
                 <a href="{{ url('/quan-ly/cau-hinh/') }}">
                     <i class="fa fa-gears"></i>

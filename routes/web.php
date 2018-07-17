@@ -16,9 +16,12 @@ Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
     Route::get('/','TheLoaiController@index');
     Route::post('/','TheLoaiController@actionTheLoai');
 });
-Route::group(['prefix'=>'/quan-ly/danh-muc/phim'],function(){
+Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/','PhimController@index');
     Route::post('/','PhimController@actionTheLoai');
+    
+    Route::get('/them','PhimController@add');
+    Route::post('/upload-image','PhimController@uploadImage');
 });
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/','TaiKhoanController@index');

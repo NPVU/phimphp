@@ -37,3 +37,14 @@
     border-right: none;
 }
 .text-light-red{color:#ff2f00 !important}
+.box-body-title{
+    text-align: center;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #75b1d4;
+}
+
+.npv-add-image{
+    width: 300px;
+}
