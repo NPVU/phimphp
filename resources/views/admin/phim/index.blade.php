@@ -15,7 +15,19 @@
                 <div class="box-header with-border">
                     <h3 class="box-title"></h3>
                     <div class="box-btn-header" style="float:left;">
-                        <form method="POST">
+                        <form method="GET">
+                        <div class="form-search-addon">
+                            <div class="input-group">
+                                <input type="search" name="phim" value="<?php echo isset($_GET['phim'])?$_GET['phim']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
+                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-phim').click();"><i class="fa fa-search"></i></span>
+                                <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/phim')}}';"><i class="fa fa-refresh"></i></span>
+                                <button type="submit" id="btn-search-phim" class="display-none"></button>
+                            </div>         
+                        </div>
+                        </form>
+                    </div>
+                    <div class="box-btn-header" style="float:right;">
+<!--                        <form method="POST">
                             <div class="form-add-addon">
                                 <div class="input-group">
                                     {{csrf_field()}}
@@ -25,20 +37,10 @@
                                     </span>
                                 </div>         
                             </div>
-                        </form>
+                        </form>-->
+                        <a href="{{url('quan-ly/phim/them')}}" class="btn btn-danger">Thêm mới</a>
                     </div>
-                    <div class="box-btn-header" style="float:right;">
-                        <form method="GET">
-                        <div class="form-search-addon">
-                            <div class="input-group">
-                                <input type="search" name="theloai" value="<?php echo isset($_GET['theloai'])?$_GET['theloai']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
-                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-the-loai').click();"><i class="fa fa-search"></i></span>
-                                <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/danh-muc/the-loai')}}';"><i class="fa fa-refresh"></i></span>
-                                <button type="submit" id="btn-search-the-loai" class="display-none"></button>
-                            </div>         
-                        </div>
-                        </form>
-                    </div>                    
+                                        
                 </div>                
                 <div class="box-body">                    
                     <table class="table table-hover">

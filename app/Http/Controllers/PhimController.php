@@ -34,6 +34,59 @@ class PhimController extends Controller{
         return view('admin/layout', $data);
     }
     
+    public function actionPhim(Request $request){
+        if(strcmp($request->btn, 'add') == 0){
+            return $this->addPhim($request);
+        } else if(strcmp($request->btn, 'del') == 0){
+            return $this->delTheLoai($request);
+        } else if(strcmp($request->btn, 'upd') == 0){
+            return $this->updTheLoai($request);
+        }
+    }
+    
+    function addPhim(Request $request){
+        $valid = true;
+        
+        if(empty(trim($request->add_phim_ten))){
+            $data['add_phim_ten_error'] = 'Tên phim là bắt buộc';
+            $valid = false;
+        }
+        if($request->add_phim_sotap <= 0){
+            $data['add_phim_sotap_error'] = 'Số tập phim phải lớn hơn 0';
+            $valid = false;
+        }
+        if($request->add_phim_nam <= 1990 || $request->add_phim_nam >= date('Y')){
+            $data['add_phim_nam_error'] = 'Năm phát hành phải hợp lệ từ năm 1990 - '.date('Y');
+            $valid = false;
+        }
+        if(empty($request->add_phim_image)){
+            $data['add_phim_image_error'] = 'Ảnh bìa của phim là bắt buộc';
+            $valid = false;
+        }
+        
+        if($valid){
+            DB::table('phim')->insert(
+                    [
+                        'theloai_id'      => $request->add_phim_theloai,
+                        'phim_ten'        => $request->add_phim_ten,
+                        'phim_tenkhac'    => $request->add_phim_tenkhac,
+                        'phim_gioithieu'  => $request->add_phim_gioithieu,
+                        'phim_sotap'      => $request->add_phim_sotap,
+                        'phim_nam'        => $request->add_phim_nam,
+                        'phim_tag'        => $request->add_phim_tag,
+                        'phim_hinhanh'    => $request->add_phim_image,
+                        'phim_ngaycapnhat'=> now()
+                    ]
+                );
+            return $this->index('showToast("success", "", "Cập nhật thành công !", true)');
+        } else {
+            $data['title'] = 'Thêm Phim';
+            $data['page'] = 'admin.phim.add';        
+            return view('admin/layout', $data);
+        }
+    }
+
+
     public function uploadImage(Request $request) {
         if($request->hasFile('image')){
             // chuyển file về thư mục cần lưu trữ

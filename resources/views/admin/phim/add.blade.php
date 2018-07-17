@@ -17,33 +17,86 @@
                     <h3 class="box-title"></h3>                                       
                 </div>                
                 <div class="box-body">
-                    <div class="col-md-4">
-                        <div class="col-md-12">
-                            <input type="file" name="add_phim_image" class="form-control display-none" id="selectFileImage" onchange="autoUploadImage()" />
-                            <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}"
-                                onclick="$('#selectFileImage').click()" 
-                                class="img-select-file npv-add-image" id="imgPhimDragDrop"/>                            
-                        </div>                        
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-12 box-body-title">
-                            Thông tin phim
+                    <form method="POST">
+                        {{csrf_field()}}
+                        <div class="col-md-4">
+                            <div class="col-md-12 box-body-title">
+                                ảnh bìa
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group <?php echo isset($add_phim_image_error)?'has-error':''; ?>">
+                                    <input type="hidden" name="add_phim_image" id="add_phim_image" />
+                                    <input type="file" class="form-control display-none" id="selectFileImage" onchange="autoUploadImage()" />
+                                    <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}"
+                                         onclick="$('#selectFileImage').click()" 
+                                         class="img-select-file npv-add-image" id="imgPhimDragDrop"/> 
+                                    <span class="help-block"><?php echo isset($add_phim_image_error)?$add_phim_image_error:''; ?></span>
+                                </div>
+                            </div>                        
                         </div>
-                        <div class="form-group">
-                            <label>Tên phim</label>
-                            <input type="text" name="add_phim_ten" class="form-control" value="<?php echo isset($_POST['add_phim_ten'])?$_POST['add_phim_ten']:'' ?>" />
+                        <div class="col-md-4">
+                            <div class="col-md-12 box-body-title">
+                                Thông tin phim
+                            </div>
+                            
+                            <div class="form-group <?php echo isset($add_phim_ten_error)?'has-error':''; ?>">
+                                <label class="control-label" for="add_phim_ten">Tên phim</label>
+                                <input type="text" id="add_phim_ten" name="add_phim_ten" 
+                                       class="form-control required" value="<?php echo isset($_POST['add_phim_ten']) ? $_POST['add_phim_ten'] : '' ?>"
+                                       placeholder="VD: Naruto"/>
+                                <span class="help-block"><?php echo isset($add_phim_ten_error)?$add_phim_ten_error:''; ?></span>
+                            </div>                            
+                            
+                            <div class="form-group <?php echo isset($add_phim_sotap_error)?'has-error':''; ?>">
+                                <label>Số tập</label>
+                                <input type="number" name="add_phim_sotap" class="form-control required" 
+                                       value="<?php echo isset($_POST['add_phim_sotap']) ? $_POST['add_phim_sotap'] : '' ?>"
+                                       placeholder="VD: 24"/>
+                                <span class="help-block"><?php echo isset($add_phim_sotap_error)?$add_phim_sotap_error:''; ?></span>
+                            </div>
+                            
+                            <div class="form-group <?php echo isset($add_phim_nam_error)?'has-error':''; ?>">
+                                <label>Năm phát hành</label>
+                                <input type="number" name="add_phim_nam" class="form-control required" 
+                                       value="<?php echo isset($_POST['add_phim_nam']) ? $_POST['add_phim_nam'] : '' ?>"
+                                       placeholder="VD: 2018"/>
+                                <span class="help-block"><?php echo isset($add_phim_nam_error)?$add_phim_nam_error:''; ?></span>
+                            </div>
+                            
+                            <div class="form-group <?php echo isset($add_phim_tenkhac_error)?'has-error':''; ?>">
+                                <label class="control-label" for="add_phim_tenkhac">Tên phụ (tên khác)</label>
+                                <input type="text" id="add_phim_tenkhac" name="add_phim_tenkhac" 
+                                       class="form-control" value="<?php echo isset($_POST['add_phim_tenkhac']) ? $_POST['add_phim_tenkhac'] : '' ?>"
+                                       placeholder="VD: Naruto (Phần 1)"/>
+                                <span class="help-block"><?php echo isset($add_phim_tenkhac_error)?$add_phim_tenkhac_error:''; ?></span>
+                            </div>
+                            
+                            <div class="form-group <?php echo isset($add_phim_gioithieu_error)?'has-error':''; ?>">
+                                <label>Giới thiệu</label>
+                                <textarea name="add_phim_gioithieu" class="form-control" rows="5">
+                                    <?php echo isset($_POST['add_phim_gioithieu']) ? $_POST['add_phim_gioithieu'] : '' ?>
+                                </textarea>     
+                                <span class="help-block"><?php echo isset($add_phim_gioithieu_error)?$add_phim_gioithieu_error:''; ?></span>
+                            </div>                            
+                            
+                            <div class="form-group <?php echo isset($add_phim_tag_error)?'has-error':''; ?>">
+                                <label>Tag</label>
+                                <input type="text" name="add_phim_tag" class="form-control" 
+                                       value="<?php echo isset($_POST['add_phim_tag']) ? $_POST['add_phim_tag'] : '' ?>"
+                                       placeholder="VD: Naruto, Ninja, Cửu vĩ hồ"/>
+                                <span class="help-block"><?php echo isset($add_phim_tag_error)?$add_phim_tag_error:''; ?></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md-12 box-body-title">
+                                Thông tin liên quan
+                            </div>                        
                         </div>
                         
-                        <div class="form-group">
-                            <label>Số tập</label>
-                            <input type="number" name="add_phim_sotap" class="form-control" value="<?php echo isset($_POST['add_phim_sotap'])?$_POST['add_phim_sotap']:'' ?>" />
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-danger" name="btn" value="add">Thêm</button>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="col-md-12 box-body-title">
-                            Thông tin liên quan
-                        </div>                        
-                    </div>
+                    </form>
                 </div>                              
             </div>            
         </div>        
@@ -103,7 +156,9 @@
                     },
                     success: function (php_script_response) {
                         console.log(php_script_response);
-                        $('#imgPhimDragDrop').attr('src', '{{url("/")}}/'+php_script_response);                        
+                        var urlImage = '{{url("/")}}/'+php_script_response;
+                        $('#imgPhimDragDrop').attr('src', urlImage);
+                        $('#add_phim_image').val(urlImage);
                     }
             });
         }

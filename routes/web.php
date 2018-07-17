@@ -18,9 +18,10 @@ Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
 });
 Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/','PhimController@index');
-    Route::post('/','PhimController@actionTheLoai');
-    
     Route::get('/them','PhimController@add');
+    
+    Route::post('/','PhimController@actionPhim');
+    Route::post('/them','PhimController@addPhim');   
     Route::post('/upload-image','PhimController@uploadImage');
 });
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){

@@ -15,7 +15,7 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"></h3>
-                    <div class="box-btn-header" style="float:left;">
+                    <div class="box-btn-header" style="float:right;">
                         <form method="POST">
                             <div class="form-add-addon">
                                 <div class="input-group">
@@ -28,7 +28,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="box-btn-header" style="float:right;">
+                    <div class="box-btn-header" style="float:left;">
                         <form method="GET">
                         <div class="form-search-addon">
                             <div class="input-group">
