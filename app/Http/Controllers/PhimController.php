@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Routing\Controller as Controller;
 
 class PhimController extends Controller{
@@ -67,6 +69,8 @@ class PhimController extends Controller{
         }
         
         if($valid){
+            $path = ClassCommon::getPathUploadImage().Session::get('fileImagePhim');
+            rename(ClassCommon::getPathUploadTemp().Session::get('fileImagePhim'), $path);
             DB::table('phim')->insert(
                     [
                         'theloai_id'      => json_encode($request->add_phim_theloai),
@@ -76,7 +80,7 @@ class PhimController extends Controller{
                         'phim_sotap'      => $request->add_phim_sotap,
                         'phim_nam'        => $request->add_phim_nam,
                         'phim_tag'        => $request->add_phim_tag,
-                        'phim_hinhanh'    => $request->add_phim_image,
+                        'phim_hinhanh'    => URL::to('/').'/'.$path,
                         'phim_ngaycapnhat'=> now()
                     ]
                 );

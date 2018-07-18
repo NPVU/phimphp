@@ -19,6 +19,10 @@ class ClassCommon extends BaseController
         return 'public/upload/avatar/';
     }
     
+    public static function getPathUploadImage(){
+        return 'public/upload/image/';
+    }
+    
     public static function getPathUploadTemp(){
         return 'public/upload/temp/';
     }
