@@ -8,6 +8,7 @@
     <script type="text/javascript" src="{{ asset('public/template/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script> 
+    <script type="text/javascript" src="{{ asset('public/template/plugins/iCheck/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/template/adminlte.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/dropzone.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script> 
@@ -16,6 +17,7 @@
     <link href="{{ asset('public/template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/template/plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />   
     <link href="{{ asset('public/css/dropzone.css') }}" rel="stylesheet" type="text/css" /> 

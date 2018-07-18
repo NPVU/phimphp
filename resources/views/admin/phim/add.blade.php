@@ -99,7 +99,12 @@
                                     @foreach ($listTheLoai as $row)
                                         <br/>
                                         <label>
-                                            <input type="checkbox" class="flat-red" checked>
+                                            <input type="checkbox" class="flat-red" 
+                                                   name="add_phim_theloai[]" value="{{$row->theloai_id}}"
+                                                   <?php if(isset($_POST['add_phim_theloai'])): ?>
+                                                   <?php echo in_array($row->theloai_id, $_POST['add_phim_theloai'])?'checked':''?>
+                                                   <?php endif; ?>
+                                                   >
                                         </label>                                
                                         <label>                                    
                                             {{$row->theloai_ten}}
@@ -179,5 +184,5 @@
                     }
             });
         }
-    </script>
+    </script>    
 </section>

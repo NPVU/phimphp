@@ -48,8 +48,7 @@ class PhimController extends Controller{
     }
     
     function addPhim(Request $request){
-        $valid = true;
-        
+        $valid = true;        
         if(empty(trim($request->add_phim_ten))){
             $data['add_phim_ten_error'] = 'Tên phim là bắt buộc';
             $valid = false;
@@ -58,7 +57,7 @@ class PhimController extends Controller{
             $data['add_phim_sotap_error'] = 'Số tập phim phải lớn hơn 0';
             $valid = false;
         }
-        if($request->add_phim_nam <= 1990 || $request->add_phim_nam >= date('Y')){
+        if($request->add_phim_nam < 1990 || $request->add_phim_nam > date('Y')){
             $data['add_phim_nam_error'] = 'Năm phát hành phải hợp lệ từ năm 1990 - '.date('Y');
             $valid = false;
         }
@@ -70,7 +69,7 @@ class PhimController extends Controller{
         if($valid){
             DB::table('phim')->insert(
                     [
-                        'theloai_id'      => $request->add_phim_theloai,
+                        'theloai_id'      => json_encode($request->add_phim_theloai),
                         'phim_ten'        => $request->add_phim_ten,
                         'phim_tenkhac'    => $request->add_phim_tenkhac,
                         'phim_gioithieu'  => $request->add_phim_gioithieu,
