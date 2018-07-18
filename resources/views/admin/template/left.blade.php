@@ -23,6 +23,12 @@
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>                    
                 </a>                
+            </li>
+            <li>
+                <a href="{{ url('/quan-ly/phim/') }}">
+                    <i class="fa fa-film"></i>
+                    <span>Quản lý phim</span>                    
+                </a>                
             </li>            
             <li class="treeview">
                 <a href="#">
@@ -39,20 +45,24 @@
                         </a>
                     </li>                    
                 </ul>
-            </li> 
-            <li>
-                <a href="{{ url('/quan-ly/phim/') }}">
-                    <i class="fa fa-film"></i>
-                    <span>Phim</span>                    
-                </a>                
-            </li>
-            <li>
-                <a href="{{ url('/quan-ly/cau-hinh/') }}">
-                    <i class="fa fa-gears"></i>
-                    <span>Cấu hình hệ thống</span>                    
-                </a>                
-            </li>
-            
+            </li>             
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i> 
+                    <span>Cấu hình</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{ url('/quan-ly/cau-hinh/he-thong') }}">
+                            <i class="fa fa-gear"></i>
+                            <span>Hệ thống</span>                    
+                        </a>                
+                    </li>                    
+                </ul>
+            </li>                        
         </ul>
     </section>
     <!-- /.sidebar -->

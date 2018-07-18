@@ -34,6 +34,11 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
 Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/','PhimController@index');    
 });
+
+Route::group(['prefix'=>'/quan-ly/cau-hinh'],function(){
+    Route::get('/he-thong','CauHinhController@indexHeThong');
+    Route::post('/he-thong','CauHinhController@actionHeThong');
+});
 Route::group(['prefix' => 'services'], function(){
 	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
 	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');
