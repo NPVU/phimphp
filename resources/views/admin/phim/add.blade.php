@@ -90,7 +90,24 @@
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
                                 Thông tin liên quan
-                            </div>                        
+                            </div>
+                            <div class="form-group">
+                                
+                            </div>                            
+                            <div class="form-group <?php echo isset($add_phim_theloai_error)?'has-error':''; ?>">
+                                <label>Thể loại</label>
+                                    @foreach ($listTheLoai as $row)
+                                        <br/>
+                                        <label>
+                                            <input type="checkbox" class="flat-red" checked>
+                                        </label>                                
+                                        <label>                                    
+                                            {{$row->theloai_ten}}
+                                        </label>
+                                    @endforeach
+                                <span class="help-block"><?php echo isset($add_phim_theloai_error)?$add_phim_theloai_error:''; ?></span>
+                            </div>
+                             
                         </div>
                         
                         <div class="col-md-12 text-center">

@@ -28,7 +28,10 @@ class PhimController extends Controller{
         return view('admin/layout', $data);
     }
     
-    public function add(){        
+    public function add(){      
+        $listTheLoai = DB::table('theloai')->get();
+        $data['listTheLoai'] = $listTheLoai;
+        
         $data['title'] = 'Thêm Phim';
         $data['page'] = 'admin.phim.add';        
         return view('admin/layout', $data);
@@ -80,6 +83,8 @@ class PhimController extends Controller{
                 );
             return $this->index('showToast("success", "", "Cập nhật thành công !", true)');
         } else {
+            $listTheLoai = DB::table('theloai')->get();
+            $data['listTheLoai'] = $listTheLoai;
             $data['title'] = 'Thêm Phim';
             $data['page'] = 'admin.phim.add';        
             return view('admin/layout', $data);
