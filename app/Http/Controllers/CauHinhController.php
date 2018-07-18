@@ -14,7 +14,13 @@ class CauHinhController extends Controller{
     }
     
     public function indexHeThong($showToast = ''){
+        $files = glob(ClassCommon::getPathUploadTemp().'*');
+        $count = 0;
+        if ($files){
+            $count = count($files);
+        }        
         
+        $data['count'] = $count;
         $data['title'] = 'Cấu Hình Hệ Thống';
         $data['page'] = 'admin.cauhinh.hethong';
         $data['showToast'] = $showToast;
@@ -28,11 +34,11 @@ class CauHinhController extends Controller{
     }
     
     function delFileTemp(){
-        $files = glob(ClassCommon::getPathUploadTemp().'*'); // get all file names
+        $files = glob(ClassCommon::getPathUploadTemp().'*'); 
         $count = 0;
-        foreach($files as $file){ // iterate files
+        foreach($files as $file){
             if(is_file($file)){
-                unlink($file); // delete file
+                unlink($file);
                 $count++;
             }
         }

@@ -27,17 +27,6 @@
                         </form>
                     </div>
                     <div class="box-btn-header" style="float:right;">
-<!--                        <form method="POST">
-                            <div class="form-add-addon">
-                                <div class="input-group">
-                                    {{csrf_field()}}
-                                    <input type="text" id="add_theloai_ten" name="add_theloai_ten" value="{{old('add_theloai_ten')}}" placeholder="Nhập tên thể loại ..." class="form-control" />
-                                    <span class="input-group-btn">
-                                        <button type="submit" name="btn" value="add" class="btn btn-danger" onclick="return validFormTheLoai();">Thêm</button> 
-                                    </span>
-                                </div>         
-                            </div>
-                        </form>-->
                         <a href="{{url('quan-ly/phim/them')}}" class="btn btn-danger">Thêm mới</a>
                     </div>
                                         
@@ -49,9 +38,14 @@
                         </caption>
                         <thead>
                             <tr class="bg-primary">
-                                <th scope="col" class="text-center" style="width: 5%">#</th>
-                                <th scope="col" class="text-left" style="width: 75%">Tên phim</th>                                
-                                <th scope="col" class="text-center" style="width: 20%">Hành động</th>
+                                <th scope="col" class="text-center" style="width: 5%">#</th>                                
+                                <th scope="col" class="text-left" style="width: 35%">Tên phim</th>
+                                <th scope="col" class="text-left" style="width: 10%">Tag</th>
+                                <th scope="col" class="text-center" style="width: 10%">Số tập</th>
+                                <th scope="col" class="text-center" style="width: 5%">Năm</th>
+                                <th scope="col" class="text-center" style="width: 10%">Lượt xem</th>
+                                <th scope="col" class="text-center" style="width: 15%">Ngày cập nhật</th>
+                                <th scope="col" class="text-center" style="width: 10%">Hành động</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -62,8 +56,18 @@
                             <tr>
                                 <td class="text-center">
                                     <?php $rowIndex++; echo $rowIndex ?>
+                                </td>                                
+                                <td>{{$row->phim_ten}}</td>
+                                <td>{{$row->phim_tag}}</td>
+                                <td class="text-center">??/{{$row->phim_sotap}}</td>
+                                <td class="text-center">{{$row->phim_nam}}</td>
+                                <td class="text-center">{{$row->phim_luotxem}}</td>
+                                <td class="text-center">
+                                    <?php 
+                                        $date = date_create($row->phim_ngaycapnhat);
+                                        echo date_format($date, 'd-m-Y');
+                                        ?>
                                 </td>
-                                <td>{{$row->phim_ten}}</td>                                
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">                                        
                                         <span onclick="preUpdTheLoai({{$row->phim_id}},'{{$row->phim_ten}}')">
@@ -78,7 +82,7 @@
                             @endforeach
                             <?php if($rowIndex == 0) :?>
                             <tr>
-                                <td colspan="3" class="text-center">
+                                <td colspan="4" class="text-center">
                                     Không tìm thấy dữ liệu
                                 </td>
                             </tr>

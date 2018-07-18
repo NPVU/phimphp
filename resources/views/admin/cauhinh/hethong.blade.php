@@ -21,7 +21,7 @@
                         {{csrf_field()}}
                         <div class="col-md-4">
                             <div class="input-group">                                                        
-                                <input type="text" class="form-control" value="Xóa rác thư mục tạm" disabled="true">
+                                <input type="text" class="form-control" value="File rác trong thư mục tạm ({{$count}})" disabled="true">
                                 <div class="input-group-btn">
                                     <button type="submit" name="btn" value="delFileTemp" class="btn btn-danger">Xóa</button>
                                 </div>

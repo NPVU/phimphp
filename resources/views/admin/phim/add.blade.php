@@ -32,6 +32,13 @@
                                          class="img-select-file npv-add-image" id="imgPhimDragDrop"/> 
                                     <span class="help-block"><?php echo isset($add_phim_image_error)?$add_phim_image_error:''; ?></span>
                                 </div>
+                                <div class="form-group <?php echo isset($add_phim_image_link_error)?'has-error':''; ?>">
+                                    <label class="control-label" for="add_phim_image_link"><small>hoặc</small> Đường dẫn ảnh bìa</label>
+                                    <input type="text" id="add_phim_image_link" name="add_phim_image_link" 
+                                           class="form-control" value="<?php echo isset($_POST['add_phim_image_link']) ? $_POST['add_phim_image_link'] : '' ?>"
+                                           placeholder="VD: http://imurg.org/naruto.png"/>
+                                    <span class="help-block"><?php echo isset($add_phim_image_link_error)?$add_phim_image_link_error:''; ?></span>
+                                </div>
                             </div>                        
                         </div>
                         <div class="col-md-4">
