@@ -39,6 +39,19 @@ class PhimController extends Controller{
         return view('admin/layout', $data);
     }
     
+    public function edit($token, $phim_id){
+        $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
+        $listTheLoai = DB::table('theloai')->get();
+        
+        $data['phim'] = $phim;
+        $data['listTheLoai'] = $listTheLoai;
+        $data['token'] = $token;
+        
+        $data['title'] = 'Chỉnh Sửa Phim';
+        $data['page'] = 'admin.phim.edit';        
+        return view('admin/layout', $data);
+    }
+    
     public function actionPhim(Request $request){
         if(strcmp($request->btn, 'add') == 0){
             return $this->addPhim($request);

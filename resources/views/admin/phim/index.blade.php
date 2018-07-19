@@ -70,8 +70,8 @@
                                 </td>
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">                                        
-                                        <span onclick="preUpdTheLoai({{$row->phim_id}},'{{$row->phim_ten}}')">
-                                            <i class="fa fa-edit text-light-blue"></i>
+                                        <span>
+                                            <a href="{{url('quan-ly/phim/chinh-sua')}}/{{csrf_token()}}/{{$row->phim_id}}"><i class="fa fa-edit text-light-blue"></i></a>
                                         </span> 
                                         <span onclick="preDelPhim({{$row->phim_id}})">
                                             <i class="fa fa-close text-light-red"></i>

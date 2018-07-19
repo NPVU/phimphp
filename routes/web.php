@@ -20,6 +20,7 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/','PhimController@index');
     Route::get('/them','PhimController@add');
     Route::get('/xoa/{token}/{phimID}','PhimController@xoaPhim');
+    Route::get('/chinh-sua/{token}/{phimID}','PhimController@edit');
     
     Route::post('/','PhimController@actionPhim');
     Route::post('/them','PhimController@addPhim');   
