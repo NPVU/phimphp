@@ -53,7 +53,7 @@
                                 $rowIndex = 0;                                
                             ?>
                             @foreach ($listPhim as $row)
-                            <tr>
+                            <tr id="row{{$row->phim_id}}">
                                 <td class="text-center">
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
@@ -73,7 +73,7 @@
                                         <span onclick="preUpdTheLoai({{$row->phim_id}},'{{$row->phim_ten}}')">
                                             <i class="fa fa-edit text-light-blue"></i>
                                         </span> 
-                                        <span onclick="preDelTheLoai({{$row->phim_id}},'{{$row->phim_ten}}')">
+                                        <span onclick="preDelPhim({{$row->phim_id}})">
                                             <i class="fa fa-close text-light-red"></i>
                                         </span>
                                     </div>
@@ -92,5 +92,19 @@
                 </div>                              
             </div>            
         </div>        
-    </div>    
+    </div>
+    <script>
+        function preDelPhim(phimID) {
+            $.ajax({
+                type: "GET",
+                url: "{{url('/quan-ly/phim/xoa')}}/{{csrf_token()}}/" + phimID,
+                success: function (data) {
+                    if (data.status === 1) {
+                        $('#row'+phimID).addClass('display-none');
+                        showToast("success", "", "Xóa thành công !", true);
+                    }
+                }
+            });
+        }
+    </script>
 </section>

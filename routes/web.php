@@ -19,6 +19,7 @@ Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
 Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/','PhimController@index');
     Route::get('/them','PhimController@add');
+    Route::get('/xoa/{token}/{phimID}','PhimController@xoaPhim');
     
     Route::post('/','PhimController@actionPhim');
     Route::post('/them','PhimController@addPhim');   
@@ -30,9 +31,6 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/doi-mat-khau/{token}/{oldPassword}/{newPassword}','TaiKhoanController@changePassword');
     Route::post('/upload-avatar','TaiKhoanController@uploadAvatar');
     Route::get('/doi-avatar/{token}','TaiKhoanController@updateAvatar');    
-});
-Route::group(['prefix'=>'/quan-ly/phim'],function(){
-    Route::get('/','PhimController@index');    
 });
 
 Route::group(['prefix'=>'/quan-ly/cau-hinh'],function(){

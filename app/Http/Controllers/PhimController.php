@@ -100,7 +100,18 @@ class PhimController extends Controller{
             return view('admin/layout', $data);
         }
     }
-
+    
+    public function xoaPhim($token, $phim_id){
+        if(strcmp(Session::token(), $token) == 0){
+            $row = DB::table('phim')->where('phim_id', $phim_id)->delete();
+            if($row > 0){
+                $data['status'] = 1;
+            } else {
+                $data['status'] = 0;
+            }             
+            return $data;
+        }
+    }
 
     public function uploadImage(Request $request) {
         if($request->hasFile('image')){
