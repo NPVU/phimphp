@@ -25,9 +25,13 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group <?php echo isset($add_phim_image_error)?'has-error':''; ?>">
-                                    <input type="hidden" name="add_phim_image" id="add_phim_image" />
+                                    <input type="hidden" name="add_phim_image" id="add_phim_image" value="<?php echo isset($_POST['add_phim_image'])?$_POST['add_phim_image']:'' ?>" />
                                     <input type="file" class="form-control display-none" id="selectFileImage" onchange="autoUploadImage()" />
-                                    <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}"
+                                    <img src="<?php if(isset($_POST['add_phim_image']) && !empty($_POST['add_phim_image'])) :?>
+                                         <?php echo $_POST['add_phim_image'] ?>
+                                         <?php else :?>
+                                         {{asset('public/img/themes/jquery-file-upload-scripts.png')}}
+                                         <?php endif; ?>"
                                          onclick="$('#selectFileImage').click()" 
                                          class="img-select-file npv-add-image" id="imgPhimDragDrop"/> 
                                     <span class="help-block"><?php echo isset($add_phim_image_error)?$add_phim_image_error:''; ?></span>

@@ -63,14 +63,21 @@ class PhimController extends Controller{
             $data['add_phim_nam_error'] = 'Năm phát hành phải hợp lệ từ năm 1990 - '.date('Y');
             $valid = false;
         }
-        if(empty($request->add_phim_image)){
+        if(empty($request->add_phim_image) && empty($request->add_phim_image_link)){            
             $data['add_phim_image_error'] = 'Ảnh bìa của phim là bắt buộc';
             $valid = false;
-        }
+        }        
         
         if($valid){
-            $path = ClassCommon::getPathUploadImage().Session::get('fileImagePhim');
-            rename(ClassCommon::getPathUploadTemp().Session::get('fileImagePhim'), $path);
+            $url = "";
+            if(!empty($request->add_phim_image)){
+                $path = ClassCommon::getPathUploadImage().Session::get('fileImagePhim');
+                rename(ClassCommon::getPathUploadTemp().Session::get('fileImagePhim'), $path);
+                $url = URL::to('/').'/'.$path;
+            } else {
+                $url = $request->add_phim_image_link;
+            }
+            
             DB::table('phim')->insert(
                     [
                         'theloai_id'      => json_encode($request->add_phim_theloai),
@@ -80,7 +87,7 @@ class PhimController extends Controller{
                         'phim_sotap'      => $request->add_phim_sotap,
                         'phim_nam'        => $request->add_phim_nam,
                         'phim_tag'        => $request->add_phim_tag,
-                        'phim_hinhanh'    => URL::to('/').'/'.$path,
+                        'phim_hinhanh'    => $url,
                         'phim_ngaycapnhat'=> now()
                     ]
                 );
