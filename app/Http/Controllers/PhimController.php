@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Routing\Controller as Controller;
 
 class PhimController extends Controller{
-    
+       
     public function __construct()
     {
         $this->middleware('auth');
@@ -42,7 +42,7 @@ class PhimController extends Controller{
     public function edit($token, $phim_id){
         $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
         $listTheLoai = DB::table('theloai')->get();
-        
+        session(['phim_hinhanh' => $phim[0]->phim_hinhanh]);        
         $data['phim'] = $phim;
         $data['listTheLoai'] = $listTheLoai;
         $data['token'] = $token;
@@ -73,7 +73,7 @@ class PhimController extends Controller{
             $valid = false;
         }
         if($request->add_phim_nam < 1990 || $request->add_phim_nam > date('Y')){
-            $data['add_phim_nam_error'] = 'Năm phát hành phải hợp lệ từ năm 1990 - '.date('Y');
+            $data['add_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1990 - '.date('Y');
             $valid = false;
         }
         if(empty($request->add_phim_image) && empty($request->add_phim_image_link)){            
@@ -110,6 +110,67 @@ class PhimController extends Controller{
             $data['listTheLoai'] = $listTheLoai;
             $data['title'] = 'Thêm Phim';
             $data['page'] = 'admin.phim.add';        
+            return view('admin/layout', $data);
+        }
+    }
+    
+    function editPhim(Request $request){
+        $valid = true;        
+        if(empty(trim($request->edit_phim_ten))){
+            $data['edit_phim_ten_error'] = 'Tên phim là bắt buộc';
+            $valid = false;
+        }
+        if($request->edit_phim_sotap <= 0){
+            $data['edit_phim_sotap_error'] = 'Số tập phim phải lớn hơn 0';
+            $valid = false;
+        }
+        if($request->edit_phim_nam < 1990 || $request->edit_phim_nam > date('Y')){
+            $data['edit_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1990 - '.date('Y');
+            $valid = false;
+        }
+        if(empty($request->edit_phim_image) && empty($request->edit_phim_image_link)){            
+            $data['edit_phim_image_error'] = 'Ảnh bìa của phim là bắt buộc';
+            $valid = false;
+        }        
+        
+        if($valid){      
+            if(strcmp(Session::get('phim_hinhanh'), $request->edit_phim_image)){
+                $url = "";
+                if(!empty($request->edit_phim_image)){
+                    $path = ClassCommon::getPathUploadImage().Session::get('fileImagePhim');
+                    rename(ClassCommon::getPathUploadTemp().Session::get('fileImagePhim'), $path);
+                    $url = URL::to('/').'/'.$path;
+                } else {
+                    $url = $request->edit_phim_image_link;
+                }
+                DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
+                    [                        
+                        'phim_hinhanh'        => $url                       
+                    ]
+                );
+            }
+            DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
+                    [
+                        'theloai_id'      => json_encode($request->edit_phim_theloai),
+                        'phim_ten'        => $request->edit_phim_ten,
+                        'phim_tenkhac'    => $request->edit_phim_tenkhac,
+                        'phim_gioithieu'  => $request->edit_phim_gioithieu,
+                        'phim_sotap'      => $request->edit_phim_sotap,
+                        'phim_nam'        => $request->edit_phim_nam,
+                        'phim_tag'        => $request->edit_phim_tag                        
+                    ]
+                );
+            return $this->index('showToast("success", "", "Cập nhật thành công !", true)');
+        } else {
+           $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
+            $listTheLoai = DB::table('theloai')->get();
+
+            $data['phim'] = $phim;
+            $data['listTheLoai'] = $listTheLoai;
+            $data['token'] = $request->_token;
+
+            $data['title'] = 'Chỉnh Sửa Phim';
+            $data['page'] = 'admin.phim.edit';        
             return view('admin/layout', $data);
         }
     }

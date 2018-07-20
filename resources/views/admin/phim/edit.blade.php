@@ -25,6 +25,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group <?php echo isset($edit_phim_image_error)?'has-error':''; ?>">
+                                    <input type="hidden" name="edit_phim_id" value="{{$phim[0]->phim_id}}" />
                                     <input type="hidden" name="edit_phim_image" id="edit_phim_image" value="<?php echo isset($_POST['edit_phim_image'])?$_POST['edit_phim_image']:$phim[0]->phim_hinhanh ?>" />
                                     <input type="file" class="form-control display-none" id="selectFileImage" onchange="autoUploadImage()" />
                                     <img src="<?php if(isset($_POST['edit_phim_image']) && !empty($_POST['edit_phim_image'])) :?>
@@ -114,7 +115,7 @@
                                                    name="edit_phim_theloai[]" value="{{$row->theloai_id}}"
                                                    <?php if(isset($_POST['edit_phim_theloai'])): ?>
                                                    <?php echo in_array($row->theloai_id, $_POST['edit_phim_theloai'])?'checked':''?>
-                                                   <?php else: echo in_array($row->theloai_id, is_null($phim[0]->theloai_id)?'[]':'$phim[0]->theloai_id')?'checked':''?>
+                                                   <?php else: echo in_array($row->theloai_id, is_null($phim[0]->theloai_id)?'()':json_decode($phim[0]->theloai_id))?'checked':''?>
                                                    <?php endif; ?>
                                                    >
                                         </label>                                
@@ -129,6 +130,7 @@
                         
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-danger" name="btn" value="edit">Cập nhật</button>
+                            <a href="{{url('quan-ly/phim/')}}" class="btn btn-warning" >Trở về</a>
                         </div>
                     </form>
                 </div>                              
