@@ -96,7 +96,7 @@
                                        value="<?php echo isset($_POST['add_phim_tag']) ? $_POST['add_phim_tag'] : '' ?>"
                                        placeholder="VD: Naruto, Ninja, Cửu vĩ hồ"/>
                                 <span class="help-block"><?php echo isset($add_phim_tag_error)?$add_phim_tag_error:''; ?></span>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">

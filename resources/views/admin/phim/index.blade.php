@@ -40,12 +40,10 @@
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
                                 <th scope="col" class="text-left" style="width: 35%">Tên phim</th>
-                                <th scope="col" class="text-left" style="width: 10%">Tag</th>
-                                <th scope="col" class="text-center" style="width: 10%">Số tập</th>
-                                <th scope="col" class="text-center" style="width: 5%">Năm</th>
-                                <th scope="col" class="text-center" style="width: 10%">Lượt xem</th>
-                                <th scope="col" class="text-center" style="width: 15%">Ngày cập nhật</th>
-                                <th scope="col" class="text-center" style="width: 10%">Hành động</th>
+                                <th scope="col" class="text-center" style="width: 15%">Số tập</th>
+                                <th scope="col" class="text-left" style="width: 15%">Tag</th>                                                                
+                                <th scope="col" class="text-center" style="width: 20%">Lượt xem</th>                                
+                                <th scope="col" class="text-center" style="width: 10%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,22 +56,24 @@
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
                                 <td>{{$row->phim_ten}}</td>
-                                <td>{{$row->phim_tag}}</td>
-                                <td class="text-center">??/{{$row->phim_sotap}}</td>
-                                <td class="text-center">{{$row->phim_nam}}</td>
+                                <td class="text-center">??/{{$row->phim_sotap}}</td> 
+                                <td>{{$row->phim_tag}}</td>                                                              
                                 <td class="text-center">{{$row->phim_luotxem}}</td>
-                                <td class="text-center">
+<!--                                <td class="text-center">
                                     <?php 
-                                        $date = date_create($row->phim_ngaycapnhat);
-                                        echo date_format($date, 'd-m-Y');
+//                                        $date = date_create($row->phim_ngaycapnhat);
+//                                        echo date_format($date, 'd-m-Y');
                                         ?>
-                                </td>
+                                </td>-->
                                 <td class="text-center">                                      
-                                    <div class="list-action-icon">                                        
-                                        <span>
+                                    <div class="list-action-icon">
+                                        <span onclick="preAddTapPhim({{$row->phim_id}})" data-toggle="tooltip" title="Thêm tập">
+                                            <i class="fa fa fa-plus-circle text-light-blue"></i>
+                                        </span>
+                                        <span data-toggle="tooltip" title="Chỉnh sửa phim">
                                             <a href="{{url('quan-ly/phim/chinh-sua')}}/{{csrf_token()}}/{{$row->phim_id}}"><i class="fa fa-edit text-light-blue"></i></a>
                                         </span> 
-                                        <span onclick="preDelPhim({{$row->phim_id}})">
+                                        <span onclick="preDelPhim({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Xóa phim">
                                             <i class="fa fa-close text-light-red"></i>
                                         </span>
                                     </div>
@@ -82,7 +82,7 @@
                             @endforeach
                             <?php if($rowIndex == 0) :?>
                             <tr>
-                                <td colspan="4" class="text-center">
+                                <td colspan="6" class="text-center">
                                     Không tìm thấy dữ liệu
                                 </td>
                             </tr>
@@ -93,18 +93,42 @@
             </div>            
         </div>        
     </div>
-    <script>
-        function preDelPhim(phimID) {
-            $.ajax({
-                type: "GET",
-                url: "{{url('/quan-ly/phim/xoa')}}/{{csrf_token()}}/" + phimID,
-                success: function (data) {
-                    if (data.status === 1) {
-                        $('#row'+phimID).addClass('display-none');
-                        showToast("success", "", "Xóa thành công !", true);
-                    }
-                }
-            });
+    <div id="modal-del-phim" data-izimodal-transitionin="fadeInDown">
+        <form method="POST" action="{{url('quan-ly/phim/xoa')}}">
+            {{csrf_field()}}
+            <input type="hidden" id="del_phim_id" name="del_phim_id" value="" />
+            <input type="hidden" id="del_phim_ten" name="del_phim_ten" value="" />
+            <div class="modal-body">        
+                <div class="row">                
+                    <div class="col-md-12 text-center">
+                        Bạn có đồng ý xóa phim 
+                        <strong style="color: lightseagreen;font-size: 1.5em;" class="del_phim_ten"></strong>
+                        không ?
+                    </div>
+
+                    <div class="col-md-12 text-center" style="margin-top:20px">
+                        <button type="submit" name="btn" value="del" class="btn btn-danger">Đồng ý</button>
+                        <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                    </div>
+                </div>        
+            </div>
+        </form>
+    </div>    
+    <script>        
+        function preDelPhim(id, ten){
+            $('#del_phim_id').val(id);
+            $('#del_phim_ten').val(ten);
+            $('.del_phim_ten').html(ten);            
+            $('#modal-del-phim').iziModal('open');
         }
+        $('#modal-del-phim').iziModal({
+            overlayClose: false,
+            width: 500,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-check',
+            iconColor: 'white'
+        });
+        $('#modal-del-phim').iziModal('setTitle', 'Xác nhận');
+        $('#modal-del-phim').iziModal('setTop', 100);
     </script>
 </section>

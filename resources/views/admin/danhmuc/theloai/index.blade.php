@@ -50,7 +50,7 @@
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>
                                 <th scope="col" class="text-left" style="width: 75%">Tên thể loại</th>                                
-                                <th scope="col" class="text-center" style="width: 20%">Hành động</th>
+                                <th scope="col" class="text-center" style="width: 20%"></th>
                             </tr>
                         </thead>
                         <tbody>

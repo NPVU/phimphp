@@ -42,7 +42,7 @@ class CauHinhController extends Controller{
                 $count++;
             }
         }
-        return $this->indexHeThong('showToast("success", "", "Đã xóa '.$count.' file rác !", true)');
+        return redirect()->route('indexHeThong')->with('success', 'Đã xóa '.$count.' file rác !');        
     }
             
 }

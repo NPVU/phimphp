@@ -19,5 +19,15 @@
         <script>
             <?php if(isset($showToast) && !empty($showToast)){ echo $showToast;} ?>
         </script>
+        @if (session('success'))
+        <script>
+            showToast("success", "", "{{ session('success') }}", true);          
+        </script>
+        @endif
+        @if (session('error'))
+        <script>
+            showToast("error", "", "{{ session('error') }}", true);          
+        </script>
+        @endif
     </body>
 </html>

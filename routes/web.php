@@ -17,13 +17,13 @@ Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
     Route::post('/','TheLoaiController@actionTheLoai');
 });
 Route::group(['prefix'=>'/quan-ly/phim'],function(){
-    Route::get('/','PhimController@index');
-    Route::get('/them','PhimController@add');
-    Route::get('/xoa/{token}/{phimID}','PhimController@xoaPhim');
+    Route::get('/','PhimController@index')->name('listPhim');
+    Route::get('/them','PhimController@add');    
     Route::get('/chinh-sua/{token}/{phimID}','PhimController@edit');
     
     Route::post('/','PhimController@actionPhim');
     Route::post('/them','PhimController@addPhim');  
+    Route::post('/xoa','PhimController@delPhim');
     Route::post('/chinh-sua/{token}/{phimID}','PhimController@editPhim');
     Route::post('/upload-image','PhimController@uploadImage');
 });
@@ -36,7 +36,7 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
 });
 
 Route::group(['prefix'=>'/quan-ly/cau-hinh'],function(){
-    Route::get('/he-thong','CauHinhController@indexHeThong');
+    Route::get('/he-thong','CauHinhController@indexHeThong')->name('indexHeThong');
     Route::post('/he-thong','CauHinhController@actionHeThong');
 });
 Route::group(['prefix' => 'services'], function(){
