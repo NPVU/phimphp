@@ -203,6 +203,39 @@ class PhimController extends Controller{
         }    
     }
 
+    public function addTapPhim(Request $request){
+        $tap = DB::table('tap')->where([
+            ['phim_id', '=', $request->add_phim_id],
+            ['tap_id', '=', $request->add_tapphim_tap]
+        ])->count();
+        if($tap > 0){
+            $data['status'] = 0;
+            $data['msg'] = 'Tập '.$request->add_tapphim_tap.' của phim này đã có, mời bạn vào chức năng chỉnh sửa';
+            return $data;
+        }
+        DB::table('tap')->insert(
+                    [
+                        'phim_id'           => $request->add_phim_id,
+                        'tap_ten'           => trim($request->add_tapphim_ten),
+                        'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
+                        'tap_tapso'         => $request->add_tapphim_tap,
+                        'tap_localhostlink' => trim($request->localhostLink),
+                        'tap_googlelink'    => trim($request->googleLink),
+                        'tap_youtubelink'   => trim($request->youtubeLink),
+                        'tap_openloadlink'  => trim($request->openloadLink),
+                        'tap_luotxem'       => $request->add_tapphim_luotxem,
+                        'tap_ngaycapnhat'   => now()
+                    ]
+                );
+        $data['status'] = 1;
+        return $data;
+    }
+    
+    public function getMaxTapPhim(Request $request){
+        $tap = DB::table('tap')->where('phim_id', $request->phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get;
+        return $tap[0]->tap_tapso;
+    }
+    
     public function uploadImage(Request $request) {
         if($request->hasFile('image')){
             // chuyển file về thư mục cần lưu trữ

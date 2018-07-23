@@ -22,7 +22,9 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/chinh-sua/{token}/{phimID}','PhimController@edit');
     
     Route::post('/','PhimController@actionPhim');
-    Route::post('/them','PhimController@addPhim');  
+    Route::post('/them','PhimController@addPhim'); 
+    Route::post('/them-tap-phim','PhimController@addTapPhim');
+    Route::post('/maxtap-current','PhimController@getMaxTapPhim');
     Route::post('/xoa','PhimController@delPhim');
     Route::post('/chinh-sua/{token}/{phimID}','PhimController@editPhim');
     Route::post('/upload-image','PhimController@uploadImage');

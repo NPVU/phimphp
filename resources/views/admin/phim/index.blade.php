@@ -51,7 +51,7 @@
                                 $rowIndex = 0;                                
                             ?>
                             @foreach ($listPhim as $row)
-                            <tr id="row{{$row->phim_id}}">
+                            <tr id="row{{$row->phim_id}}" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}})" style="cursor:pointer;">
                                 <td class="text-center">
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
@@ -67,7 +67,7 @@
                                 </td>-->
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">
-                                        <span onclick="preAddTapPhim({{$row->phim_id}})" data-toggle="tooltip" title="Thêm tập">
+                                        <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}})" data-toggle="tooltip" title="Thêm tập">
                                             <i class="fa fa fa-plus-circle text-light-blue"></i>
                                         </span>
                                         <span data-toggle="tooltip" title="Chỉnh sửa phim">
@@ -113,7 +113,90 @@
                 </div>        
             </div>
         </form>
-    </div>    
+    </div>
+    <div id="modal-add-tapphim" data-izimodal-transitionin="fadeInDown">
+        <form id="fromAddTapPhim">
+            <input type="hidden" id="add_phim_id" name="add_phim_id" value="" />
+            <input type="hidden" id="add_phim_maxtap" value="" />
+            <div class="modal-body">        
+                <div class="row">                
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">                        
+                            <strong style="color: lightseagreen;font-size: 1.5em;" id="add_phim_ten"></strong>                                            
+                        </div>
+                     </div>
+                    <div class="col-md-4">                    
+                        <div class="form-group add_tapphim_taphienthi">
+                            <label>Tập hiển thị</label>
+                            <input type="text" id="add_tapphim_taphienthi" name="add_tapphim_taphienthi" class="form-control required" value="" placeholder=""/>
+                            <span class="help-block add_tapphim_taphienthi_error"></span>
+                        </div>
+                        <div class="form-group add_tapphim_tap">
+                            <label>Tập</label>
+                            <input type="number" id="add_tapphim_tap" name="add_tapphim_tap" class="form-control required" value="" placeholder=""/>
+                            <span class="help-block add_tapphim_tap_error"></span>
+                        </div>
+                        <div class="form-group add_tapphim_ten">
+                            <label>Tên tập phim</label>
+                            <input type="text" id="add_tapphim_ten" name="add_tapphim_ten" class="form-control" value="" placeholder=""/>
+                            <span class="help-block add_tapphim_ten_error"></span>
+                        </div>
+                        <div class="form-group add_tapphim_luotxem">
+                            <label>Lượt xem</label>
+                            <input type="number" id="add_tapphim_luotxem" name="add_tapphim_luotxem" class="form-control" value="0" placeholder=""/>
+                            <span class="help-block add_tapphim_luotxem_error"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Link Localhost</label>
+                            <div class="input-group">                        
+                                <input type="text" name="localhostLink" value="" placeholder="Nhập link localhost ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkLocalhostLink" class="btn btn-success">Kiểm tra</button>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="form-group">
+                            <label>Link Google Photos</label>
+                            <div class="input-group">                        
+                                <input type="text" name="googleLink" value="" placeholder="Nhập link google photos ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkGoogleLink" class="btn btn-success">Kiểm tra</button>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="form-group">
+                            <label>Link Youtube</label>
+                            <div class="input-group">                        
+                                <input type="text" name="youtubeLink" value="" placeholder="Nhập link youtube ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success">Kiểm tra</button>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="form-group">
+                            <label>Link Openload</label>
+                            <div class="input-group">                        
+                                <input type="text" name="openloadLink" value="" placeholder="Nhập link openload ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkOpenloadLink" class="btn btn-success">Kiểm tra</button>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <video id="videoCheck" src="" width="100%"></video>
+                    </div>
+
+                    <div class="col-md-12 text-center" style="margin-top:20px">                        
+                        <button type="button" name="btn" value="addTapPhim" class="btn btn-danger" onclick="addTapPhim()">Cập nhật</button>                    
+                        <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                    </div>
+                </div>        
+            </div>
+        </form>        
+    </div>
     <script>        
         function preDelPhim(id, ten){
             $('#del_phim_id').val(id);
@@ -130,5 +213,89 @@
         });
         $('#modal-del-phim').iziModal('setTitle', 'Xác nhận');
         $('#modal-del-phim').iziModal('setTop', 100);
+        
+        function preAddTapPhim(id, ten, maxtap){
+            $('#add_phim_id').val(id);
+            $('#add_phim_maxtap').val(maxtap);
+            $('#add_phim_ten').html(ten);
+            resetFormAddTapPhim();                       
+            $('#modal-add-tapphim').iziModal('open');
+        }
+        function resetFormAddTapPhim(){
+            $('#add_tapphim_ten').val('');
+            $('#add_tapphim_taphienthi').val('');
+            $('#add_tapphim_tap').val(0);
+            $('#localhostLink').val('');
+            $('#googleLink').val('');
+            $('#youtubeLink').val('');
+            $('#openloadLink').val('');
+            $('#videoCheck').attr('src', '');
+        }
+        $('#modal-add-tapphim').iziModal({
+            overlayClose: false,
+            width: '80%',
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-plus-circle',
+            iconColor: 'white'
+        });
+        $('#modal-add-tapphim').iziModal('setTitle', 'Thêm tập phim');
+        $('#modal-add-tapphim').iziModal('setTop', 50);
+        
+        function addTapPhim(){
+            var valid = true;
+            var taphienthi = $('#add_tapphim_taphienthi').val();
+            var tap = $('#add_tapphim_tap').val();
+            var tentap = $('#add_tapphim_ten').val();
+            
+            if(taphienthi.trim() === "" || taphienthi.trim().length > 50){
+                $('.add_tapphim_taphienthi').addClass('has-error');
+                $('.add_tapphim_taphienthi_error').html('Tập hiển thị có tối đa 50 ký tự');
+                valid = false;
+            } else {
+                $('.add_tapphim_taphienthi').removeClass('has-error');
+                $('.add_tapphim_taphienthi_error').html('');
+            }
+            if(parseInt(tap) == 0 || parseInt(tap) > $('#add_phim_maxtap').val()){
+                $('.add_tapphim_tap').addClass('has-error');
+                $('.add_tapphim_tap_error').html('Tập hợp lệ trong khoảng 1 - '+$('#add_phim_maxtap').val());
+                valid = false;
+            } else {
+                $('.add_tapphim_tap').removeClass('has-error');
+                $('.add_tapphim_tap_error').html('');
+            }            
+            if(tentap.trim() !== "" && tentap.trim().length > 250){
+                $('.add_tapphim_ten').addClass('has-error');
+                $('.add_tapphim_ten_error').html('Tên tập có tối đa 250 ký tự');
+                valid = false;
+            } else {
+                $('.add_tapphim_ten').removeClass('has-error');
+                $('.add_tapphim_ten_error').html('');
+            }           
+            if(!valid){
+                return false;
+            }
+            var url = "{{url('quan-ly/phim/them-tap-phim/')}}"; // the script where you handle the form input.
+            $.ajax({
+                   type: "POST",
+                   url: url,
+                   headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                   data: $("#fromAddTapPhim").serialize(), // serializes the form's elements.
+                   success: function(data)
+                   {
+                       if(data.status === 0){                           
+                           $('.add_tapphim_tap').addClass('has-error');
+                           $('.add_tapphim_tap_error').html(data.msg);
+                       } else if(data.status === 1) {
+                           $('.add_tapphim_tap').removeClass('has-error');
+                           $('.add_tapphim_tap_error').html(''); 
+                           resetFormAddTapPhim();
+                           $('#add_tapphim_tap').val(parseInt(tap)+1);
+                           showToast('success', 'Đã thêm tập '+tap+' thành công', 'Cập nhật thành công', true);
+                       }
+                   }
+                 });
+        }
     </script>
 </section>

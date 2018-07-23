@@ -175,7 +175,6 @@
             $('.upd_theloai_ten_old').html(ten);            
             $('#modal-upd-theloai').iziModal('open');
             $('#upd_theloai_ten_new').focus();
-        }
-        
+        }        
     </script>
 </section>
