@@ -51,12 +51,12 @@
                                 $rowIndex = 0;                                
                             ?>
                             @foreach ($listPhim as $row)
-                            <tr id="row{{$row->phim_id}}" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}})" style="cursor:pointer;">
+                            <tr id="row{{$row->phim_id}}" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
                                 <td class="text-center">
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
                                 <td>{{$row->phim_ten}}</td>
-                                <td class="text-center">??/{{$row->phim_sotap}}</td> 
+                                <td class="text-center">{{$row->tap}}/{{$row->phim_sotap}}</td> 
                                 <td>{{$row->phim_tag}}</td>                                                              
                                 <td class="text-center">{{$row->phim_luotxem}}</td>
 <!--                                <td class="text-center">
@@ -67,7 +67,7 @@
                                 </td>-->
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">
-                                        <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}})" data-toggle="tooltip" title="Thêm tập">
+                                        <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" data-toggle="tooltip" title="Thêm tập">
                                             <i class="fa fa fa-plus-circle text-light-blue"></i>
                                         </span>
                                         <span data-toggle="tooltip" title="Chỉnh sửa phim">
@@ -191,7 +191,7 @@
 
                     <div class="col-md-12 text-center" style="margin-top:20px">                        
                         <button type="button" name="btn" value="addTapPhim" class="btn btn-danger" onclick="addTapPhim()">Cập nhật</button>                    
-                        <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                        <button type="button" class="btn btn-default" data-izimodal-close="">Đóng</button>
                     </div>
                 </div>        
             </div>
@@ -214,17 +214,17 @@
         $('#modal-del-phim').iziModal('setTitle', 'Xác nhận');
         $('#modal-del-phim').iziModal('setTop', 100);
         
-        function preAddTapPhim(id, ten, maxtap){
+        function preAddTapPhim(id, ten, maxtap, tap){
             $('#add_phim_id').val(id);
             $('#add_phim_maxtap').val(maxtap);
             $('#add_phim_ten').html(ten);
-            resetFormAddTapPhim();                       
+            resetFormAddTapPhim();                   
+            $('#add_tapphim_tap').val(parseInt(tap)+1);
             $('#modal-add-tapphim').iziModal('open');
         }
         function resetFormAddTapPhim(){
             $('#add_tapphim_ten').val('');
-            $('#add_tapphim_taphienthi').val('');
-            $('#add_tapphim_tap').val(0);
+            $('#add_tapphim_taphienthi').val('');            
             $('#localhostLink').val('');
             $('#googleLink').val('');
             $('#youtubeLink').val('');
@@ -236,7 +236,10 @@
             width: '80%',
             headerColor: 'rgb(56, 98, 111)',
             icon: 'fa fa-plus-circle',
-            iconColor: 'white'
+            iconColor: 'white',
+            onClosing: function (modal) {
+                window.location.href = "{{url('quan-ly/phim')}}";
+            }
         });
         $('#modal-add-tapphim').iziModal('setTitle', 'Thêm tập phim');
         $('#modal-add-tapphim').iziModal('setTop', 50);

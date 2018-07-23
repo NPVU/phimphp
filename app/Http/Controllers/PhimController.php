@@ -19,7 +19,7 @@ class PhimController extends Controller{
         if(!is_null(Input::get('phim'))){
             $listPhim = DB::table('phim')->where('phim_ten', 'like', '%'.Input::get('phim').'%')->get();
         } else {
-            $listPhim = DB::table('phim')->get();
+            $listPhim = DB::table('phim')->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')->get();
         }
         
         $data['listPhim'] = $listPhim;
