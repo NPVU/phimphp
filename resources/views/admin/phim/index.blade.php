@@ -137,16 +137,16 @@
                         </div>
                      </div>
                     <div class="col-md-4">                    
-                        <div class="form-group add_tapphim_taphienthi">
-                            <label>Tập hiển thị</label>
-                            <input type="text" id="add_tapphim_taphienthi" name="add_tapphim_taphienthi" class="form-control required" value="" placeholder=""/>
-                            <span class="help-block add_tapphim_taphienthi_error"></span>
-                        </div>
                         <div class="form-group add_tapphim_tap">
                             <label>Tập</label>
                             <input type="number" id="add_tapphim_tap" name="add_tapphim_tap" class="form-control required" value="" placeholder=""/>
                             <span class="help-block add_tapphim_tap_error"></span>
                         </div>
+                        <div class="form-group add_tapphim_taphienthi">
+                            <label>Tập hiển thị</label>
+                            <input type="text" id="add_tapphim_taphienthi" name="add_tapphim_taphienthi" class="form-control required" value="" placeholder=""/>
+                            <span class="help-block add_tapphim_taphienthi_error"></span>
+                        </div>                        
                         <div class="form-group add_tapphim_ten">
                             <label>Tên tập phim</label>
                             <input type="text" id="add_tapphim_ten" name="add_tapphim_ten" class="form-control" value="" placeholder=""/>
@@ -360,7 +360,7 @@
                     }
                 }
             }).fail(function() {
-                console.log('Link '+clas+' photos không đúng');
+                console.log('Link '+clas+' không đúng');
                 $('#videoCheck').attr('src', '');
                 $('.add_'+clasLower+'_link').addClass('has-error');
                 $('.add_'+clasLower+'_link_error').html('Link '+clas+' không đúng');

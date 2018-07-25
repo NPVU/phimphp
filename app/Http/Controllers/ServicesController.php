@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as Controller;
@@ -104,5 +105,21 @@ class ServicesController extends Controller
             return $data; 
         }        
     }
-       
+     
+    
+    public function getInfoTapPhim(){
+        if(strcmp(Session::token(), Input::get('token')) == 0){            
+            $tap = DB::table('tap')->where('tap_id', Input::get('tap'))->get();
+            $data['status'] = 1;
+            $data['message'] = 'Yêu cầu thành công';
+            $data['content'] = $tap[0];
+            return $data;
+        } else {
+            $data['status'] = 0;
+            $data['message'] = 'Token không đúng';                    
+            $data['content'] = "";
+            return $data; 
+        }  
+        
+    }
 }

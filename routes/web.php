@@ -20,7 +20,7 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/','PhimController@index')->name('listPhim');
     Route::get('/them','PhimController@add');    
     Route::get('/chinh-sua/{phimID}/{token}','PhimController@edit');
-    Route::get('/danh-sach-tap/{phimID}/{token}','PhimController@listTap');
+    Route::get('/danh-sach-tap/{phimID}/{token}','PhimController@listTap')->name('listTap');    
     
     Route::post('/','PhimController@actionPhim');
     Route::post('/them','PhimController@addPhim'); 
@@ -28,6 +28,7 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::post('/maxtap-current','PhimController@getMaxTapPhim');
     Route::post('/xoa','PhimController@delPhim');
     Route::post('/chinh-sua/{phimID}/{token}','PhimController@editPhim');
+    Route::post('/danh-sach-tap/{phimID}/{token}','PhimController@editTap');    
     Route::post('/upload-image','PhimController@uploadImage');
 });
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
@@ -46,6 +47,8 @@ Route::group(['prefix' => 'services'], function(){
 	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
 	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');
         Route::get('google', 'ServicesController@googleAPI');
+        
+        Route::get('/get-info-tap','ServicesController@getInfoTapPhim');
 });
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');

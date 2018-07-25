@@ -65,15 +65,14 @@ class PhimController extends Controller{
     
     public function listTap($phim_id, $token){
         if(strcmp(Session::token(), $token) == 0){
+            $list = DB::table('tap')->where('phim_id', $phim_id)->get();
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
-            $listTheLoai = DB::table('theloai')->get();
-            session(['phim_hinhanh' => $phim[0]->phim_hinhanh]);        
+            $data['list'] = $list;
             $data['phim'] = $phim;
-            $data['listTheLoai'] = $listTheLoai;
             $data['token'] = $token;
 
-            $data['title'] = 'Chỉnh Sửa Phim';
-            $data['page'] = 'admin.phim.edit';        
+            $data['title'] = 'Danh sách tập';
+            $data['page'] = 'admin.phim.list';        
             return view('admin/layout', $data);
         } else {
             $data['title'] = 'Không tìm thấy trang';
@@ -262,11 +261,26 @@ class PhimController extends Controller{
         return $data;
     }
     
-    public function getMaxTapPhim(Request $request){
-        $tap = DB::table('tap')->where('phim_id', $request->phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get;
-        return $tap[0]->tap_tapso;
+    public function editTap($phim_id, $token,Request $request) {
+        DB::table('tap')->where('tap_id', $request->tapphim_tap)->update(
+                    [                        
+                        'tap_ten'           => trim($request->tapphim_ten),
+                        'tap_tapsohienthi'  => trim($request->tapphim_taphienthi),                        
+                        'tap_localhostlink' => trim($request->localhostLink),
+                        'tap_googlelink'    => trim($request->googleLink),
+                        'tap_youtubelink'   => trim($request->youtubeLink),
+                        'tap_openloadlink'  => trim($request->openloadLink),
+                        'tap_luotxem'       => $request->tapphim_luotxem                        
+                    ]
+        );
+        return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Cập nhật thành công !');        
     }
     
+    public function getMaxTapPhim(Request $request){
+        $tap = DB::table('tap')->where('phim_id', $request->phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get();
+        return $tap[0]->tap_tapso;
+    }
+            
     public function uploadImage(Request $request) {
         if($request->hasFile('image')){
             // chuyển file về thư mục cần lưu trữ
