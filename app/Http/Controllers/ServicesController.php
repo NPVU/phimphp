@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Routing\Controller as Controller;
 
 class ServicesController extends Controller
@@ -90,9 +91,18 @@ class ServicesController extends Controller
     }
     
     public function googleAPI(){
-        $link = 'https://photos.google.com/u/3/share/AF1QipNBR4FhwlXAleQmuT0qf6y0UXF4UtdSbL7jJAv7GJu8qxFVPL2bg5WEW30HX89MbQ/photo/AF1QipMMldPoVTFVXoEg85BPPQZF7QmRXcluP3-Xr9ym?key=bWM3Ums0SkJiVHVSTHNKME1NZmM4Z0w2ZXVmWmFR';
-        $result = $this->getPhotoGoogle($link);
-        print_r($result);
+        if(strcmp(Session::token(), Input::get('token')) == 0){
+            $result = $this->getPhotoGoogle(Input::get('url'));
+            $data['status'] = 1;
+            $data['message'] = 'Yêu cầu thành công';
+            $data['content'] = $result;
+            return $data;
+        } else {
+            $data['status'] = 0;
+            $data['message'] = 'Token không đúng';                    
+            $data['content'] = "";
+            return $data; 
+        }        
     }
        
 }

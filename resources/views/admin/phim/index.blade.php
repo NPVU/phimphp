@@ -157,14 +157,18 @@
                                 </div>
                             </div>  
                         </div>
-                        <div class="form-group">
+                        <div class="form-group add_google_link">
                             <label>Link Google Photos</label>
                             <div class="input-group">                        
-                                <input type="text" name="googleLink" value="" placeholder="Nhập link google photos ..." class="form-control" />
+                                <input type="text" name="googleLink" id="googleLink" value="" placeholder="Nhập link google photos ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkGoogleLink" class="btn btn-success">Kiểm tra</button>
+                                    <button type="button" name="btn" value="checkGoogleLink" class="btn btn-success" onclick="checkVideo('Google')">
+                                        <span class="btnCheckGoogleLink">Kiểm tra</span>
+                                        <i class="fa iconCheckGoogleLink"></i>
+                                    </button>                                    
                                 </div>
-                            </div>  
+                            </div> 
+                            <span class="help-block add_google_link_error"></span>
                         </div>
                         <div class="form-group">
                             <label>Link Youtube</label>
@@ -186,7 +190,10 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <video id="videoCheck" src="" width="100%"></video>
+                        <div class="form-group text-center">
+                            <label>Kiểm tra link</label>
+                        </div>
+                        <video id="videoCheck" src="" width="100%" controls="true"></video>
                     </div>
 
                     <div class="col-md-12 text-center" style="margin-top:20px">                        
@@ -218,8 +225,10 @@
             $('#add_phim_id').val(id);
             $('#add_phim_maxtap').val(maxtap);
             $('#add_phim_ten').html(ten);
-            resetFormAddTapPhim();                   
-            $('#add_tapphim_tap').val(parseInt(tap)+1);
+            resetFormAddTapPhim();
+            if(parseInt(tap) < $('#add_phim_maxtap').val()){
+                $('#add_tapphim_tap').val(parseInt(tap)+1);
+            }
             $('#modal-add-tapphim').iziModal('open');
         }
         function resetFormAddTapPhim(){
@@ -277,14 +286,14 @@
             if(!valid){
                 return false;
             }
-            var url = "{{url('quan-ly/phim/them-tap-phim/')}}"; // the script where you handle the form input.
+            var url = "{{url('quan-ly/phim/them-tap-phim/')}}";
             $.ajax({
                    type: "POST",
                    url: url,
                    headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                   data: $("#fromAddTapPhim").serialize(), // serializes the form's elements.
+                   data: $("#fromAddTapPhim").serialize(),
                    success: function(data)
                    {
                        if(data.status === 0){                           
@@ -294,11 +303,57 @@
                            $('.add_tapphim_tap').removeClass('has-error');
                            $('.add_tapphim_tap_error').html(''); 
                            resetFormAddTapPhim();
-                           $('#add_tapphim_tap').val(parseInt(tap)+1);
+                           if(parseInt(tap) < $('#add_phim_maxtap').val()){
+                               $('#add_tapphim_tap').val(parseInt(tap)+1);
+                           } else {
+                               $('#modal-add-tapphim').iziModal('close');
+                           }                           
                            showToast('success', 'Đã thêm tập '+tap+' thành công', 'Cập nhật thành công', true);
                        }
                    }
                  });
+        }
+        
+        function checkVideo(clas){
+            var clasLower = clas.toLowerCase();
+            console.log(clas);
+            console.log(clasLower);
+            var link = $('#'+clasLower+'Link').val();
+            $('.iconCheck'+clas+'Link').removeClass('fa-check');
+            $('.iconCheck'+clas+'Link').removeClass('fa-close');
+            if(link.trim() === ""){
+                $('.add_'+clasLower+'_link').addClass('has-error');
+                $('.add_'+clasLower+'_link_error').html('Link kiểm tra không được bỏ trống');
+                return false;
+            } else {
+                $('.add_'+clasLower+'_link').removeClass('has-error');
+                $('.add_'+clasLower+'_link_error').html('');
+            }
+            $('.btnCheck'+clas.toString()+'Link').html('Kiểm tra ...');
+            if(clas === 'Google'){
+                var url = "{{url('services/google/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
+            }
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data){
+                    console.log(data);
+                    if(data.status == 1){
+                        $('#videoCheck').attr('src', data.content['360p']);
+                        $('.btnCheck'+clas+'Link').html('Kiểm tra');                        
+                        $('.iconCheck'+clas+'Link').addClass('fa-check');
+                        $('.add_'+clasLower+'_link').removeClass('has-error');
+                        $('.add_'+clasLower+'_link_error').html('');
+                    }
+                }
+            }).fail(function() {
+                console.log('Link '+clas+' photos không đúng');
+                $('#videoCheck').attr('src', '');
+                $('.add_'+clasLower+'_link').addClass('has-error');
+                $('.add_'+clasLower+'_link_error').html('Link '+clas+' không đúng');
+                $('.btnCheck'+clas+'Link').html('Kiểm tra');                
+                $('.iconCheck'+clas+'Link').addClass('fa-close');
+            });
         }
     </script>
 </section>
