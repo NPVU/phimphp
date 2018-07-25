@@ -28,7 +28,8 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::post('/maxtap-current','PhimController@getMaxTapPhim');
     Route::post('/xoa','PhimController@delPhim');
     Route::post('/chinh-sua/{phimID}/{token}','PhimController@editPhim');
-    Route::post('/danh-sach-tap/{phimID}/{token}','PhimController@editTap');    
+    Route::post('/danh-sach-tap/{phimID}/{token}','PhimController@editTap');
+    Route::post('/danh-sach-tap/xoa','PhimController@delTap');    
     Route::post('/upload-image','PhimController@uploadImage');
 });
 Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){

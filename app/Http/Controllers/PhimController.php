@@ -276,6 +276,16 @@ class PhimController extends Controller{
         return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Cập nhật thành công !');        
     }
     
+    public function delTap(Request $request){        
+        $tap_id = $request->del_tap_id;                
+        $row = DB::table('tap')->where('tap_id', $tap_id)->delete();                
+        if($row > 0){
+            return redirect()->route('listTap', ['phimID' => $request->phim_id, 'token' => $request->_token])->with('success', 'Xóa tập '.$request->del_tap_hienthi.' thành công !');
+        } else {            
+            return redirect()->route('listTap', ['phimID' => $request->phim_id, 'token' => $request->_token])->with('error', 'Xóa tập '.$request->del_tap_hienthi.' thất bại !');
+        }    
+    }
+    
     public function getMaxTapPhim(Request $request){
         $tap = DB::table('tap')->where('phim_id', $request->phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get();
         return $tap[0]->tap_tapso;

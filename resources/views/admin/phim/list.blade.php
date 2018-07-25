@@ -9,6 +9,11 @@
         <li class="active"><a href="{{ url('/quan-ly/phim/danh-sach-tap/') }}/{{$phim[0]->phim_id}}/{{$token}}">Danh sách tập</a></li>
     </ol>
 </section>
+<style>
+    .btn {
+        border-radius: 0px;
+    }
+</style>
 <section class="content">
     <div class="row">        
         <div class="col-md-12">            
@@ -16,13 +21,22 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Danh sách tập</h3>                                       
                 </div>                
-                <div class="box-body">
-                    @foreach ($list as $row)                    
-                        <span class="btn btn-primary" 
-                              style="width:100px;margin-bottom: 5px;"
-                              onclick="preEditTap({{$row->tap_id}})">
-                            {{$row->tap_tapsohienthi}}
-                        </span>                    
+                <div class="box-body text-center">
+                    @foreach ($list as $row)
+                    <div class="col-sm-6 col-md-3 ">
+                        <div class="input-group">                    
+                            <span class="btn btn-primary " 
+                                  style="width:100px;margin-bottom: 5px;"
+                                  onclick="preEditTap({{$row->tap_id}})">
+                                {{$row->tap_tapsohienthi}}
+                            </span>
+                            <span class="btn btn-danger " 
+                                  style="width:50px;margin-bottom: 5px;"
+                                  onclick="preDelTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')">
+                                Xóa
+                            </span>
+                        </div>  
+                    </div>
                     @endforeach
                 </div>                              
             </div>            
@@ -113,12 +127,34 @@
                     </div>
 
                     <div class="col-md-12 text-center" style="margin-top:20px">                        
-                        <button type="submit" name="btn" class="btn btn-danger" onclick="return validFormEditTap();">Cập nhật</button>                    
+                        <button type="submit" name="btn" class="btn btn-danger" onclick="return vf();">Cập nhật</button>                    
                         <button type="button" class="btn btn-default" data-izimodal-close="">Đóng</button>
                     </div>
                 </div>        
             </div>
         </form>        
+    </div>
+    <div id="modal-del-tap" data-izimodal-transitionin="fadeInDown">
+        <form method="POST" action="{{url('quan-ly/phim/danh-sach-tap/xoa')}}">
+            {{csrf_field()}}
+            <input type="hidden" name="phim_id" value="{{$phim[0]->phim_id}}" />
+            <input type="hidden" id="del_tap_id" name="del_tap_id" value="" />
+            <input type="hidden" id="del_tap_hienthi" name="del_tap_hienthi" value="" />
+            <div class="modal-body">        
+                <div class="row">                
+                    <div class="col-md-12 text-center">
+                        Bạn có đồng ý xóa tập 
+                        <strong style="color: lightseagreen;font-size: 1.5em;" class="del_tap_hienthi"></strong>
+                        không ?
+                    </div>
+
+                    <div class="col-md-12 text-center" style="margin-top:20px">
+                        <button type="submit" name="btn" value="del" class="btn btn-danger">Đồng ý</button>
+                        <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                    </div>
+                </div>        
+            </div>
+        </form>
     </div>    
     <script>
         $('#modal-edit-tapphim').iziModal({
@@ -137,7 +173,16 @@
             onOpened: function(modal){
                 modal.stopLoading();
             },
-        }); 
+        });
+        $('#modal-del-tap').iziModal({
+            title:'Xác nhận',
+            top:100,
+            overlayClose: false,
+            width: 500,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-check',
+            iconColor: 'white'
+        });
         function preEditTap(tap){
             $('#modal-edit-tapphim').iziModal('open');
             var url = "{{url('services/get-info-tap/')}}/?tap="+tap+"&token="+$('meta[name="csrf-token"]').attr('content');            
@@ -159,6 +204,12 @@
                        }
                    }
                  });            
+        }
+        function preDelTap(tap, tenhienthi){
+            $('#del_tap_id').val(tap);
+            $('#del_tap_hienthi').val(tenhienthi);
+            $('.del_tap_hienthi').html(tenhienthi);
+            $('#modal-del-tap').iziModal('open');
         }
         function checkVideo(clas){
             var clasLower = clas.toLowerCase();
@@ -201,7 +252,7 @@
                 $('.iconCheck'+clas+'Link').addClass('fa-close');
             });
         }
-        function validFormEditTap(){
+        function vf(){
             var taphienthi = $('#tapphim_taphienthi').val();            
             if(taphienthi.trim() === "" || taphienthi.trim().length > 50){
                 $('.tapphim_taphienthi').addClass('has-error');
