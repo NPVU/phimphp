@@ -78,16 +78,20 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <div class="form-group localhost_link">
                             <label>Link Localhost</label>
                             <div class="input-group">                        
                                 <input type="text" id="localhostLink" name="localhostLink" value="" placeholder="Nhập link localhost ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkLocalhostLink" class="btn btn-success">Kiểm tra</button>
+                                    <button type="button" name="btn" value="checkLocalhostLink" class="btn btn-success" onclick="checkVideo('Localhost')">
+                                        <span class="btnCheckLocalhostLink">Kiểm tra</span>
+                                        <i class="fa iconCheckLocalhostLink"></i>
+                                    </button>
                                 </div>
-                            </div>  
+                            </div> 
+                            <span class="help-block localhost_link_error"></span>
                         </div>
-                        <div class="form-group add_google_link">
+                        <div class="form-group google_link">
                             <label>Link Google Photos</label>
                             <div class="input-group">                        
                                 <input type="text" name="googleLink" id="googleLink" value="" placeholder="Nhập link google photos ..." class="form-control" />
@@ -98,25 +102,33 @@
                                     </button>                                    
                                 </div>
                             </div> 
-                            <span class="help-block add_google_link_error"></span>
+                            <span class="help-block google_link_error"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group youtube_link">
                             <label>Link Youtube</label>
                             <div class="input-group">                        
                                 <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập link youtube ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success">Kiểm tra</button>
+                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success" onclick="checkVideo('Youtube')">
+                                        <span class="btnCheckYoutubeLink">Kiểm tra</span>
+                                        <i class="fa iconCheckYoutubeLink"></i>
+                                    </button>
                                 </div>
                             </div>  
+                            <span class="help-block youtube_link_error"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group openload_link">
                             <label>Link Openload</label>
                             <div class="input-group">                        
                                 <input type="text" id="openloadLink" name="openloadLink" value="" placeholder="Nhập link openload ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkOpenloadLink" class="btn btn-success">Kiểm tra</button>
+                                    <button type="button" name="btn" value="checkOpenloadLink" class="btn btn-success" onclick="checkVideo('Openload')">
+                                        <span class="btnCheckOpenloadLink">Kiểm tra</span>
+                                        <i class="fa iconCheckOpenloadLink"></i>
+                                    </button>
                                 </div>
                             </div>  
+                            <span class="help-block openload_link_error"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -185,6 +197,10 @@
         });
         function preEditTap(tap){
             $('#modal-edit-tapphim').iziModal('open');
+            $('*').removeClass('has-error');
+            $('.help-block').html('');
+            $('.btn > i').removeClass('fa-check');
+            $('.btn > i').removeClass('fa-close');
             var url = "{{url('services/get-info-tap/')}}/?tap="+tap+"&token="+$('meta[name="csrf-token"]').attr('content');            
             $.ajax({
                    type: "GET",
@@ -229,6 +245,12 @@
             $('.btnCheck'+clas.toString()+'Link').html('Kiểm tra ...');
             if(clas === 'Google'){
                 var url = "{{url('services/google/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
+            } else if(clas === 'Openload'){
+                var url = "{{url('services/openload/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
+            } else if(clas === 'Youtube'){
+                var url = "{{url('services/youtube/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
+            } else {
+                var url = "{{url('services/localhost/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
             }
             $.ajax({
                 type: "GET",
