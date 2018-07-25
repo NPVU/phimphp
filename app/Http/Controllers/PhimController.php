@@ -15,18 +15,22 @@ class PhimController extends Controller{
         $this->middleware('auth');
     }
     
-    public function index($showToast = ''){
-        if(!is_null(Input::get('phim'))){
-            $listPhim = DB::table('phim')->where('phim_ten', 'like', '%'.Input::get('phim').'%')->get();
+    public function index(){
+        if(!is_null(Input::get('tukhoa'))){
+            $listPhim = DB::table('phim')
+                    ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
+                    ->where('phim_ten', 'like', '%'.Input::get('tukhoa').'%')
+                    ->get();
         } else {
-            $listPhim = DB::table('phim')->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')->get();
+            $listPhim = DB::table('phim')
+                    ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
+                    ->get();
         }
         
         $data['listPhim'] = $listPhim;
         
         $data['title'] = 'Danh Sách Phim';
         $data['page'] = 'admin.phim.index';
-        $data['showToast'] = $showToast;
         return view('admin/layout', $data);
     }
     
@@ -39,18 +43,45 @@ class PhimController extends Controller{
         return view('admin/layout', $data);
     }
     
-    public function edit($token, $phim_id){
-        $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
-        $listTheLoai = DB::table('theloai')->get();
-        session(['phim_hinhanh' => $phim[0]->phim_hinhanh]);        
-        $data['phim'] = $phim;
-        $data['listTheLoai'] = $listTheLoai;
-        $data['token'] = $token;
-        
-        $data['title'] = 'Chỉnh Sửa Phim';
-        $data['page'] = 'admin.phim.edit';        
-        return view('admin/layout', $data);
-    }        
+    public function edit($phim_id, $token){
+        if(strcmp(Session::token(), $token) == 0){
+            $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
+            $listTheLoai = DB::table('theloai')->get();
+            session(['phim_hinhanh' => $phim[0]->phim_hinhanh]);        
+            $data['phim'] = $phim;
+            $data['listTheLoai'] = $listTheLoai;
+            $data['token'] = $token;
+
+            $data['title'] = 'Chỉnh Sửa Phim';
+            $data['page'] = 'admin.phim.edit';        
+            return view('admin/layout', $data);
+        } else {
+            $data['title'] = 'Không tìm thấy trang';
+            $data['page'] = 'error.404';
+            $data['backURL'] = URL::to('/quan-ly/phim');
+            return view('error/index', $data);            
+        }
+    }
+    
+    public function listTap($phim_id, $token){
+        if(strcmp(Session::token(), $token) == 0){
+            $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
+            $listTheLoai = DB::table('theloai')->get();
+            session(['phim_hinhanh' => $phim[0]->phim_hinhanh]);        
+            $data['phim'] = $phim;
+            $data['listTheLoai'] = $listTheLoai;
+            $data['token'] = $token;
+
+            $data['title'] = 'Chỉnh Sửa Phim';
+            $data['page'] = 'admin.phim.edit';        
+            return view('admin/layout', $data);
+        } else {
+            $data['title'] = 'Không tìm thấy trang';
+            $data['page'] = 'error.404';
+            $data['backURL'] = URL::to('/quan-ly/phim');
+            return view('error/index', $data);            
+        }
+    }
     
     function addPhim(Request $request){
         $valid = true;        
@@ -140,7 +171,7 @@ class PhimController extends Controller{
             $data['edit_phim_image_error'] = 'Ảnh bìa của phim là bắt buộc';
             $valid = false;
         }        
-        if(empty($request->add_phim_theloai)){
+        if(empty($request->edit_phim_theloai)){
             $data['edit_phim_theloai_error'] = 'Phim phải thuộc ít nhất 1 thể loại';
             $valid = false;
         }

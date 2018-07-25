@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li> 
         <li><a href="{{ url('/quan-ly/phim') }}"> Quản lý phim</a></li>
-        <li class="active"><a href="{{ url('/quan-ly/phim/chinh-sua/') }}/{{$token}}/{{$phim[0]->phim_id}}">Chỉnh sửa</a></li>
+        <li class="active"><a href="{{ url('/quan-ly/phim/chinh-sua/') }}/{{$phim[0]->phim_id}}/{{$token}}">Chỉnh sửa</a></li>
     </ol>
 </section>
 <section class="content">

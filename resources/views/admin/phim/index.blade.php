@@ -18,7 +18,7 @@
                         <form method="GET">
                         <div class="form-search-addon">
                             <div class="input-group">
-                                <input type="search" name="phim" value="<?php echo isset($_GET['phim'])?$_GET['phim']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
+                                <input type="search" name="tukhoa" value="<?php echo isset($_GET['tukhoa'])?$_GET['tukhoa']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
                                 <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-phim').click();"><i class="fa fa-search"></i></span>
                                 <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/phim')}}';"><i class="fa fa-refresh"></i></span>
                                 <button type="submit" id="btn-search-phim" class="display-none"></button>
@@ -39,11 +39,11 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
-                                <th scope="col" class="text-left" style="width: 35%">Tên phim</th>
+                                <th scope="col" class="text-left" style="width: 30%">Tên phim</th>
                                 <th scope="col" class="text-center" style="width: 15%">Số tập</th>
                                 <th scope="col" class="text-left" style="width: 15%">Tag</th>                                                                
                                 <th scope="col" class="text-center" style="width: 20%">Lượt xem</th>                                
-                                <th scope="col" class="text-center" style="width: 10%"></th>
+                                <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,14 +51,22 @@
                                 $rowIndex = 0;                                
                             ?>
                             @foreach ($listPhim as $row)
-                            <tr id="row{{$row->phim_id}}" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
-                                <td class="text-center">
+                            <tr id="row{{$row->phim_id}}" >
+                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
-                                <td>{{$row->phim_ten}}</td>
-                                <td class="text-center">{{$row->tap}}/{{$row->phim_sotap}}</td> 
-                                <td>{{$row->phim_tag}}</td>                                                              
-                                <td class="text-center">{{$row->phim_luotxem}}</td>
+                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
+                                    {{$row->phim_ten}}
+                                </td>
+                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
+                                    {{$row->tap}}/{{$row->phim_sotap}}
+                                </td> 
+                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
+                                    {{$row->phim_tag}}
+                                </td>                                                              
+                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" style="cursor:pointer;">
+                                    {{$row->phim_luotxem}}
+                                </td>
 <!--                                <td class="text-center">
                                     <?php 
 //                                        $date = date_create($row->phim_ngaycapnhat);
@@ -66,12 +74,15 @@
                                         ?>
                                 </td>-->
                                 <td class="text-center">                                      
-                                    <div class="list-action-icon">
+                                    <div class="list-action-icon">                                        
                                         <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}})" data-toggle="tooltip" title="Thêm tập">
                                             <i class="fa fa fa-plus-circle text-light-blue"></i>
                                         </span>
+                                        <a href="{{url('quan-ly/phim/danh-sach-tap/')}}/{{$row->phim_id}}/{{csrf_token()}}" data-toggle="tooltip" title="Danh sách tập">
+                                            <i class="fa fa fa-list-ol text-light-blue"></i>
+                                        </a>
                                         <span data-toggle="tooltip" title="Chỉnh sửa phim">
-                                            <a href="{{url('quan-ly/phim/chinh-sua')}}/{{csrf_token()}}/{{$row->phim_id}}"><i class="fa fa-edit text-light-blue"></i></a>
+                                            <a href="{{url('quan-ly/phim/chinh-sua')}}/{{$row->phim_id}}/{{csrf_token()}}"><i class="fa fa-edit text-light-blue"></i></a>
                                         </span> 
                                         <span onclick="preDelPhim({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Xóa phim">
                                             <i class="fa fa-close text-light-red"></i>
@@ -241,8 +252,10 @@
             $('#videoCheck').attr('src', '');
         }
         $('#modal-add-tapphim').iziModal({
-            overlayClose: false,
-            width: '80%',
+            overlayClose: false,            
+            bodyOverflow: true,
+            openFullscreen: true,
+            zindex: 1040,
             headerColor: 'rgb(56, 98, 111)',
             icon: 'fa fa-plus-circle',
             iconColor: 'white',
@@ -251,7 +264,7 @@
             }
         });
         $('#modal-add-tapphim').iziModal('setTitle', 'Thêm tập phim');
-        $('#modal-add-tapphim').iziModal('setTop', 50);
+        $('#modal-add-tapphim').iziModal('setTop', 0);
         
         function addTapPhim(){
             var valid = true;
