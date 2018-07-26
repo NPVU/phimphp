@@ -12,8 +12,18 @@ class TheLoaiController extends Controller{
     {
         $this->middleware('auth');
     }
-    
+    function hasRole(){
+        $user = Auth::user();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = 100 OR role_id = 300)')->count();
+        return $hasRole>0?true:false;
+    }
     public function index($showToast = ''){
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'error.401';
+            $data['backURL'] = URL::to('/');
+            return view('error/index', $data); 
+        }
         if(!is_null(Input::get('theloai'))){
             $listTheLoai = DB::table('theloai')->where('theloai_ten', 'like', '%'.Input::get('theloai').'%')->get();
         } else {

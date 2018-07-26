@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 17, 2018 lúc 05:36 PM
+-- Thời gian đã tạo: Th7 26, 2018 lúc 10:17 AM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -71,16 +71,65 @@ CREATE TABLE `phim` (
   `phim_tag` text COLLATE utf8_unicode_ci,
   `phim_hinhanh` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `phim_luotxem` int(11) NOT NULL DEFAULT '0',
-  `phim_ngaycapnhat` date NOT NULL
+  `phim_ngaycapnhat` date NOT NULL,
+  `phim_hoanthanh` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phim`
 --
 
-INSERT INTO `phim` (`phim_id`, `theloai_id`, `phim_ten`, `phim_tenkhac`, `phim_gioithieu`, `phim_sotap`, `phim_nam`, `phim_tag`, `phim_hinhanh`, `phim_luotxem`, `phim_ngaycapnhat`) VALUES
-(1, NULL, 'Haikyuu', NULL, NULL, 25, 2014, NULL, 'http://localhost/phimphp/public/upload/temp\\1531841169_haikyuu_____icon_2_by_elios96-d9eh5l0.png', 0, '2018-07-17'),
-(2, NULL, 'Haikyuu SS2', 'High Kyuu (2015)', NULL, 25, 2015, 'Haikyuu', 'http://localhost/phimphp/public/upload/temp\\1531841555_haikyuu___2___icon_6_by_elios96-da3k93y.png', 0, '2018-07-17');
+INSERT INTO `phim` (`phim_id`, `theloai_id`, `phim_ten`, `phim_tenkhac`, `phim_gioithieu`, `phim_sotap`, `phim_nam`, `phim_tag`, `phim_hinhanh`, `phim_luotxem`, `phim_ngaycapnhat`, `phim_hoanthanh`) VALUES
+(4, '[\"12\",\"13\",\"14\"]', 'Haikyuu', 'High Kyuu (2014)', 'hrhr', 25, 2014, 'Haikyuu', 'http://localhost/phimphp/public/upload/image/1532097377_haikyuu_____icon_2_by_elios96-d9eh5l0.png', 0, '2018-07-20', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `roles`
+--
+
+CREATE TABLE `roles` (
+  `role_id` int(11) NOT NULL,
+  `role_code` int(3) NOT NULL,
+  `role_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `roles`
+--
+
+INSERT INTO `roles` (`role_id`, `role_code`, `role_name`) VALUES
+(1, 100, 'Quản trị hệ thống'),
+(2, 200, 'Quản trị tài khoản'),
+(3, 300, 'Quản lý phim');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tap`
+--
+
+CREATE TABLE `tap` (
+  `tap_id` int(11) NOT NULL,
+  `phim_id` int(11) NOT NULL,
+  `tap_ten` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `tap_tapsohienthi` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `tap_tapso` int(5) NOT NULL,
+  `tap_googlelink` text COLLATE utf8_unicode_ci,
+  `tap_openloadlink` text COLLATE utf8_unicode_ci,
+  `tap_youtubelink` text COLLATE utf8_unicode_ci,
+  `tap_localhostlink` text COLLATE utf8_unicode_ci,
+  `tap_luotxem` int(11) NOT NULL,
+  `tap_ngaycapnhat` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `tap`
+--
+
+INSERT INTO `tap` (`tap_id`, `phim_id`, `tap_ten`, `tap_tapsohienthi`, `tap_tapso`, `tap_googlelink`, `tap_openloadlink`, `tap_youtubelink`, `tap_localhostlink`, `tap_luotxem`, `tap_ngaycapnhat`) VALUES
+(1, 4, '1', '1', 1, 'https://photos.google.com/u/3/share/AF1QipNBR4FhwlXAleQmuT0qf6y0UXF4UtdSbL7jJAv7GJu8qxFVPL2bg5WEW30HX89MbQ/photo/AF1QipMMldPoVTFVXoEg85BPPQZF7QmRXcluP3-Xr9ym?key=bWM3Ums0SkJiVHVSTHNKME1NZmM4Z0w2ZXVmWmFR', 'openload', 'youtube', 'lcaohost', 1, '2018-07-23'),
+(2, 4, '', '2', 2, '', '', '', '', 0, '2018-07-23');
 
 -- --------------------------------------------------------
 
@@ -126,7 +175,26 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'npvucusc@gmail.com', '$2y$10$xVnUaGhz7v3HQhFeG4vOw.mDurDjeVmEHVY9eGYH6ZHk8gjitSZg.', 'public/upload/avatar/1531551709_Music-Anime-Naruto-Hd-572602.jpg', NULL, '2018-07-07 23:06:42', '2018-07-15 03:28:06');
+(1, 'Administrator', 'npvucusc@gmail.com', '$2y$10$BQnYM36AToONWuGqp3RmE.3o3i3u1wps2xdzl5we0wE1uh0VjBjme', 'public/upload/avatar/1531551709_Music-Anime-Naruto-Hd-572602.jpg', 'sRenO9WBj8rjmJ6Y0ltf9dwGBh35KuP041L7iiqXT7ZzwlEZ2nl86oR9Smbs', '2018-07-07 23:06:42', '2018-07-22 03:20:44'),
+(2, 'Administrator', 'nphivu104@gmail.com', '$2y$10$YQ8fo7pzVBmnjNe/owLhCe.dbpo8feJObkCmINvJsrxsPppsFHr5O', 'public/upload/avatar/user.png', 'ElNCwheC0bhW8T0dKHWL2TDYlb558bU2nZV3xruR4GTrcWFNRnsC7K8TrcaF', '2018-07-26 00:03:23', '2018-07-26 00:03:23');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users_roles`
+--
+
+CREATE TABLE `users_roles` (
+  `role_id` int(3) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users_roles`
+--
+
+INSERT INTO `users_roles` (`role_id`, `user_id`) VALUES
+(100, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -151,6 +219,18 @@ ALTER TABLE `phim`
   ADD PRIMARY KEY (`phim_id`);
 
 --
+-- Chỉ mục cho bảng `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`role_id`);
+
+--
+-- Chỉ mục cho bảng `tap`
+--
+ALTER TABLE `tap`
+  ADD PRIMARY KEY (`tap_id`);
+
+--
 -- Chỉ mục cho bảng `theloai`
 --
 ALTER TABLE `theloai`
@@ -162,6 +242,12 @@ ALTER TABLE `theloai`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Chỉ mục cho bảng `users_roles`
+--
+ALTER TABLE `users_roles`
+  ADD PRIMARY KEY (`role_id`,`user_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -177,7 +263,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `phim`
 --
 ALTER TABLE `phim`
-  MODIFY `phim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `phim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `tap`
+--
+ALTER TABLE `tap`
+  MODIFY `tap_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `theloai`
@@ -189,7 +287,7 @@ ALTER TABLE `theloai`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

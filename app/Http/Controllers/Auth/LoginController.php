@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -34,6 +37,31 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');        
+    }
+    
+    public function postLogin(Request $request){
+        $this->validateLogin($request);
+        
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            
+            $user = Auth::user();
+            $roles = DB::table('users_roles')->selectRaw('role_id')->where('user_id', $user->id)->get();
+            if(count($roles) > 0){
+                Session::put('roles', $roles);
+            }
+            
+            return $this->sendLoginResponse($request);
+        }
+        
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 }

@@ -52,5 +52,6 @@ Route::group(['prefix' => 'services'], function(){
         Route::get('/get-info-tap','ServicesController@getInfoTapPhim');
 });
 Auth::routes();
+Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');

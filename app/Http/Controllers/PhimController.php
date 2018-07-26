@@ -6,16 +6,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller as Controller;
 
 class PhimController extends Controller{
        
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth');        
+    }
+    function hasRole(){
+        $user = Auth::user();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = 100 OR role_id = 300)')->count();
+        return $hasRole>0?true:false;
     }
     
-    public function index(){
+    public function index(){                
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'error.401';
+            $data['backURL'] = URL::to('/');
+            return view('error/index', $data); 
+        }
         if(!is_null(Input::get('tukhoa'))){
             $listPhim = DB::table('phim')
                     ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
@@ -34,7 +46,13 @@ class PhimController extends Controller{
         return view('admin/layout', $data);
     }
     
-    public function add(){      
+    public function add(){  
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'error.401';
+            $data['backURL'] = URL::to('/');
+            return view('error/index', $data); 
+        }
         $listTheLoai = DB::table('theloai')->get();
         $data['listTheLoai'] = $listTheLoai;
         
@@ -44,6 +62,12 @@ class PhimController extends Controller{
     }
     
     public function edit($phim_id, $token){
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'error.401';
+            $data['backURL'] = URL::to('/');
+            return view('error/index', $data); 
+        }
         if(strcmp(Session::token(), $token) == 0){
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
             $listTheLoai = DB::table('theloai')->get();
@@ -64,6 +88,12 @@ class PhimController extends Controller{
     }
     
     public function listTap($phim_id, $token){
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'error.401';
+            $data['backURL'] = URL::to('/');
+            return view('error/index', $data); 
+        }
         if(strcmp(Session::token(), $token) == 0){
             $list = DB::table('tap')->where('phim_id', $phim_id)->get();
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
