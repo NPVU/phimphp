@@ -64,12 +64,9 @@
                         </button>
                     </div>
 
-                    <div class="text-center p-t-12">
-                        <span class="txt1">
-                            Quên
-                        </span>
+                    <div class="text-center p-t-12">                        
                         <a class="txt2" href="{{ route('password.request') }}">
-                            mật khẩu
+                           Quên mật khẩu
                         </a>
                     </div>
 

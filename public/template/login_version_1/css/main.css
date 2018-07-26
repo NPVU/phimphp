@@ -38,12 +38,11 @@ a {
 }
 
 a:focus {
-	outline: none !important;
+    outline: none !important;
 }
 
 a:hover {
-	text-decoration: none;
-  color: #57b846;
+    text-decoration: none;
 }
 
 /*---------------------------------------------*/
@@ -130,6 +129,7 @@ iframe {
   font-size: 13px;
   line-height: 1.5;
   color: #666666;
+  font-weight: 700;
 }
 
 
@@ -162,7 +162,9 @@ iframe {
 
 .wrap-login100 {
   width: 960px;
-  background: #fff;
+  background: #f4ecf5 url(../images/background.png) no-repeat;
+  background-size: 410px;
+  background-position-x: 210px;
   border-radius: 10px;
   overflow: hidden;
 
@@ -346,7 +348,8 @@ iframe {
 
 @media (max-width: 992px) {
   .wrap-login100 {
-    padding: 177px 90px 33px 85px;
+    padding: 137px 90px 33px 85px;
+    background-position-x: center;
   }
 
   .login100-pic {
@@ -356,11 +359,16 @@ iframe {
   .login100-form {
     width: 50%;
   }
+  
+  .txt2{
+    color: #560404;
+  }
 }
 
 @media (max-width: 768px) {
   .wrap-login100 {
     padding: 100px 80px 33px 80px;
+    background-position-x: center;
   }
 
   .login100-pic {
@@ -370,11 +378,20 @@ iframe {
   .login100-form {
     width: 100%;
   }
+  
+  .txt2{
+    color: #560404;
+  }
 }
 
 @media (max-width: 576px) {
   .wrap-login100 {
     padding: 100px 15px 33px 15px;
+    background-position-x: center;
+  }
+  
+  .txt2{
+    color: #560404;
   }
 }
 
