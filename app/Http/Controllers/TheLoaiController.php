@@ -20,9 +20,9 @@ class TheLoaiController extends Controller{
     public function index($showToast = ''){
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
-            $data['page'] = 'error.401';
+            $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
-            return view('error/index', $data); 
+            return view('errors/index', $data); 
         }
         if(!is_null(Input::get('theloai'))){
             $listTheLoai = DB::table('theloai')->where('theloai_ten', 'like', '%'.Input::get('theloai').'%')->get();

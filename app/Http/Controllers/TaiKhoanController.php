@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Controller;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +14,37 @@ class TaiKhoanController extends Controller{
     public function __construct()
     {
         $this->middleware('auth');
+    }
+    function hasRole(){
+        $user = Auth::user();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = 100 OR role_id = 200)')->count();
+        return $hasRole>0?true:false;
+    }
+    
+    public function index(){
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'errors.401';
+            $data['backURL'] = URL::to('/');
+            return view('errors/index', $data); 
+        }
+        if(!is_null(Input::get('tukhoa'))){
+            $tuKhoa = Input::get('tukhoa');
+            $listUser = DB::table('users')                    
+                    ->where('name', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('email', 'like', '%'.$tuKhoa.'%')                    
+                    ->paginate(10);
+            $listUser->appends(['tukhoa' => $tuKhoa]);
+        } else {
+            $listUser = DB::table('users')                    
+                    ->paginate(10);
+        }
+        
+        $data['listUser'] = $listUser;
+        
+        $data['title'] = 'Danh Sách Tài khoản';
+        $data['page'] = 'admin.taikhoan.index';
+        return view('admin/layout', $data);
     }
     
     public function changeDisplayUserName($token, $displayUserName){

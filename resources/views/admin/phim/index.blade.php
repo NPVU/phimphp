@@ -99,6 +99,13 @@
                             </tr>
                             <?php endif; ?>
                         </tbody>
+                        <tfoot>
+                            <tr class="text-center">
+                                <td colspan="6">
+                                    {{ $listPhim->appends(['tukhoa' => Request::get('tukhoa')])->links() }}
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>                              
             </div>            

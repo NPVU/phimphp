@@ -24,19 +24,23 @@ class PhimController extends Controller{
     public function index(){                
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
-            $data['page'] = 'error.401';
+            $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
-            return view('error/index', $data); 
+            return view('errors/index', $data); 
         }
         if(!is_null(Input::get('tukhoa'))){
+            $tuKhoa = Input::get('tukhoa');
             $listPhim = DB::table('phim')
                     ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
-                    ->where('phim_ten', 'like', '%'.Input::get('tukhoa').'%')
-                    ->get();
+                    ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('phim_sotap', $tuKhoa)
+                    ->paginate(10);
+            $listPhim->appends(['tukhoa' => $tuKhoa]);
         } else {
             $listPhim = DB::table('phim')
                     ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
-                    ->get();
+                    ->paginate(10);
         }
         
         $data['listPhim'] = $listPhim;
@@ -49,9 +53,9 @@ class PhimController extends Controller{
     public function add(){  
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
-            $data['page'] = 'error.401';
+            $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
-            return view('error/index', $data); 
+            return view('errors/index', $data); 
         }
         $listTheLoai = DB::table('theloai')->get();
         $data['listTheLoai'] = $listTheLoai;
@@ -64,9 +68,9 @@ class PhimController extends Controller{
     public function edit($phim_id, $token){
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
-            $data['page'] = 'error.401';
+            $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
-            return view('error/index', $data); 
+            return view('errors/index', $data); 
         }
         if(strcmp(Session::token(), $token) == 0){
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
@@ -81,18 +85,18 @@ class PhimController extends Controller{
             return view('admin/layout', $data);
         } else {
             $data['title'] = 'Không tìm thấy trang';
-            $data['page'] = 'error.404';
+            $data['page'] = 'errors.404';
             $data['backURL'] = URL::to('/quan-ly/phim');
-            return view('error/index', $data);            
+            return view('errors/index', $data);            
         }
     }
     
     public function listTap($phim_id, $token){
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
-            $data['page'] = 'error.401';
+            $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
-            return view('error/index', $data); 
+            return view('errors/index', $data); 
         }
         if(strcmp(Session::token(), $token) == 0){
             $list = DB::table('tap')->where('phim_id', $phim_id)->get();
@@ -106,9 +110,9 @@ class PhimController extends Controller{
             return view('admin/layout', $data);
         } else {
             $data['title'] = 'Không tìm thấy trang';
-            $data['page'] = 'error.404';
+            $data['page'] = 'errors.404';
             $data['backURL'] = URL::to('/quan-ly/phim');
-            return view('error/index', $data);            
+            return view('errors/index', $data);            
         }
     }
     

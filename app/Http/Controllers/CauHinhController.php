@@ -23,9 +23,9 @@ class CauHinhController extends Controller{
     public function indexHeThong(){
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
-            $data['page'] = 'error.401';
+            $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
-            return view('error/index', $data); 
+            return view('errors/index', $data); 
         }
         $files = glob(ClassCommon::getPathUploadTemp().'*');
         $count = 0;

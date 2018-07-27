@@ -26,6 +26,14 @@
                     </a>                
                 </li>
                 @endif
+                @if(count(explode('100',Auth::user()->getRoles())) > 1 || count(explode('200',Auth::user()->getRoles())) > 1)
+                <li>
+                    <a href="{{ url('/quan-ly/tai-khoan/') }}">
+                        <i class="fa fa-users"></i>
+                        <span>Quản lý tài khoản</span>                    
+                    </a>                
+                </li>
+                @endif
                 @if(count(explode('100',Auth::user()->getRoles())) > 1 || count(explode('300',Auth::user()->getRoles())) > 1)
                 <li>
                     <a href="{{ url('/quan-ly/phim/') }}">
