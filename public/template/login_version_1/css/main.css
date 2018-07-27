@@ -162,7 +162,7 @@ iframe {
 
 .wrap-login100 {
   width: 960px;
-  background: #f4ecf5 url(../images/background.png) no-repeat;
+  background: #f4ecf5 url(../images/login.png) no-repeat;
   background-size: 410px;
   background-position-x: 210px;
   border-radius: 10px;
@@ -176,6 +176,12 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 137px 130px 33px 95px;
+}
+
+.wrap-register100 {
+  background: #f4ecf5 url(../images/register.png) no-repeat;
+  background-size: 410px;
+  background-position: center;  
 }
 
 /*------------------------------------------------------------------
@@ -273,10 +279,10 @@ iframe {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   position: absolute;
   border-radius: 5px;
-  bottom: 0;
+  bottom: -18px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -370,6 +376,10 @@ iframe {
     padding: 100px 80px 33px 80px;
     background-position-x: center;
   }
+  
+  .wrap-register100 {
+    background-position-x: 270px !important;
+  }
 
   .login100-pic {
     display: none;
@@ -390,14 +400,32 @@ iframe {
     background-position-x: center;
   }
   
+  .wrap-register100 {
+    background-position-x: 70px !important;
+  }
+  
   .txt2{
     color: #560404;
   }
 }
 
+@media (max-width: 320px) {
+    .wrap-register100 {
+        background-position-x: 40px !important;
+    }
+}
+
 
 /*------------------------------------------------------------------
 [ Alert validate ]*/
+
+.is-invalid {
+    border: 1px solid #dc3545;
+}
+
+.is-valid {
+    border: 1px solid #28a745;
+}
 
 .validate-input {
   position: relative;
@@ -406,10 +434,10 @@ iframe {
 .alert-validate::before {
   content: attr(data-validate);
   position: absolute;
-  max-width: 70%;
+  max-width: 75%;
   background-color: white;
   border: 1px solid #c80000;
-  border-radius: 13px;
+  border-radius: 5px;
   padding: 4px 25px 4px 10px;
   top: 50%;
   -webkit-transform: translateY(-50%);
