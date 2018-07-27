@@ -27,7 +27,7 @@
                         </form>
                     </div>
                     <div class="box-btn-header" style="float:right;">
-                        <a href="{{url('quan-ly/phim/them')}}" class="btn btn-danger">Thêm mới</a>
+                        <a href="{{url('quan-ly/phim/add')}}" class="btn btn-danger">Thêm mới</a>
                     </div>
                                         
                 </div>                
@@ -82,7 +82,7 @@
                                             <i class="fa fa fa-list-ol text-light-blue"></i>
                                         </a>
                                         <span data-toggle="tooltip" title="Chỉnh sửa phim">
-                                            <a href="{{url('quan-ly/phim/chinh-sua')}}/{{$row->phim_id}}/{{csrf_token()}}"><i class="fa fa-edit text-light-blue"></i></a>
+                                            <a href="{{url('quan-ly/phim/edit')}}/{{$row->phim_id}}/{{csrf_token()}}"><i class="fa fa-edit text-light-blue"></i></a>
                                         </span> 
                                         <span onclick="preDelPhim({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Xóa phim">
                                             <i class="fa fa-close text-light-red"></i>
@@ -112,7 +112,7 @@
         </div>        
     </div>
     <div id="modal-del-phim" data-izimodal-transitionin="fadeInDown">
-        <form method="POST" action="{{url('quan-ly/phim/xoa')}}">
+        <form method="POST" action="{{url('quan-ly/phim/delete')}}">
             {{csrf_field()}}
             <input type="hidden" id="del_phim_id" name="del_phim_id" value="" />
             <input type="hidden" id="del_phim_ten" name="del_phim_ten" value="" />
@@ -318,7 +318,7 @@
             if(!valid){
                 return false;
             }
-            var url = "{{url('quan-ly/phim/them-tap-phim/')}}";
+            var url = "{{url('quan-ly/phim/add-episode/')}}";
             $.ajax({
                    type: "POST",
                    url: url,

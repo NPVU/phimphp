@@ -47,6 +47,24 @@ class TaiKhoanController extends Controller{
         return view('admin/layout', $data);
     }
     
+    public function lock(Request $request){
+        DB::table('users')->where('id', $request->user_id)->update(
+            [                        
+                'active'        => 0                       
+            ]
+        );
+        return redirect()->route('listTaiKhoan')->with('success', 'Khóa tài khoản '.$request->email.' thành công!');
+    }
+    
+    public function unlock(Request $request){
+        DB::table('users')->where('id', $request->user_id)->update(
+            [                        
+                'active'        => 1                       
+            ]
+        );
+        return redirect()->route('listTaiKhoan')->with('success', 'Mở khóa tài khoản '.$request->email.' thành công!');
+    }
+    
     public function changeDisplayUserName($token, $displayUserName){
         if(strcmp(Session::token(), $token) == 0){
             $user = Auth::user();

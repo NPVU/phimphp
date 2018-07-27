@@ -95,7 +95,7 @@
     function updateDisplayUserName() {
         $.ajax({
             type: "GET",
-            url: "{{url('/quan-ly/tai-khoan/doi-ten-hien-thi')}}/{{csrf_token()}}/" + $('#txtDisplayUserName').val(),
+            url: "{{url('/quan-ly/tai-khoan/change-display-name')}}/{{csrf_token()}}/" + $('#txtDisplayUserName').val(),
             success: function (data) {
                 if (data.status === 1) {
                     $('.displayUserName').html(data.msg);
@@ -110,7 +110,7 @@
     function updateChangePassword() {
         $.ajax({
             type: "GET",
-            url: "{{url('/quan-ly/tai-khoan/doi-mat-khau')}}/{{csrf_token()}}/" + $('#oldPassword').val() + "/" + $('#newPassword').val(),
+            url: "{{url('/quan-ly/tai-khoan/change-password')}}/{{csrf_token()}}/" + $('#oldPassword').val() + "/" + $('#newPassword').val(),
             success: function (data) {
                 console.log(data);
                 if (data.status === 1) {
@@ -127,7 +127,7 @@
     function updateChangeAvatar() {
         $.ajax({
             type: "GET",
-            url: "{{url('/quan-ly/tai-khoan/doi-avatar')}}/{{csrf_token()}}",
+            url: "{{url('/quan-ly/tai-khoan/change-avatar')}}/{{csrf_token()}}",
             success: function (data) {
                 console.log(data);
                 if (data.status === 1) {

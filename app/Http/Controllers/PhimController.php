@@ -270,7 +270,7 @@ class PhimController extends Controller{
     public function addTapPhim(Request $request){
         $tap = DB::table('tap')->where([
             ['phim_id', '=', $request->add_phim_id],
-            ['tap_id', '=', $request->add_tapphim_tap]
+            ['tap_tapso', '=', $request->add_tapphim_tap]
         ])->count();
         if($tap > 0){
             $data['status'] = 0;

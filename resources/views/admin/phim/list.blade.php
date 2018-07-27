@@ -147,7 +147,7 @@
         </form>        
     </div>
     <div id="modal-del-tap" data-izimodal-transitionin="fadeInDown">
-        <form method="POST" action="{{url('quan-ly/phim/danh-sach-tap/xoa')}}">
+        <form method="POST" action="{{url('quan-ly/phim/danh-sach-tap/delete')}}">
             {{csrf_field()}}
             <input type="hidden" name="phim_id" value="{{$phim[0]->phim_id}}" />
             <input type="hidden" id="del_tap_id" name="del_tap_id" value="" />

@@ -484,6 +484,11 @@ iframe {
   opacity: 1;
 }
 
+.invalid-alert {
+    color:#e24b4b;
+    background-color: #e6e6e6c4;
+}
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;

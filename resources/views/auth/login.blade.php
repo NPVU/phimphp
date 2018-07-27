@@ -37,31 +37,26 @@
                         Đăng nhập
                     </span>
                     @csrf
-                                       
+                        
+                    @if ($errors->has('email'))
+                            <span class="invalid-feedback" style="display:block;">
+                                <strong class="invalid-alert">{{ $errors->first('email') }}</strong>
+                            </span>
+                    @endif
                     <div class="wrap-input100 validate-input" data-validate="Email có dạng: ex@abc.xyz">
-                        <input class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" type="email" value="{{ old('email') }}" autofocus name="email" placeholder="Email">
+                        <input class="input100" id="email" type="email" value="{{ old('email') }}" autofocus name="email" placeholder="Email">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span> 
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback" style="display:block;">
-                                <strong style="color:#e24b4b;">{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif 
+                        </span>                          
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Mật khẩu là bắt buộc">
-                        <input class="input100{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password" type="password" name="password" placeholder="Mật khẩu">
+                        <input class="input100" id="password" type="password" name="password" placeholder="Mật khẩu">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>  
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback" style="display:block;">
-                                <strong style="color:#e24b4b;">{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
+                        </span>                          
                     </div>
 
                     <div class="container-login100-form-btn">
