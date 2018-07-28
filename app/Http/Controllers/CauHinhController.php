@@ -16,7 +16,7 @@ class CauHinhController extends Controller{
     
     function hasRole(){
         $user = Auth::user();
-        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND role_id = 100 ')->count();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND role_code = 100 ')->count();
         return $hasRole>0?true:false;
     }
     

@@ -19,7 +19,7 @@ class TaiKhoanController extends Controller{
     function hasRole(){
         $user = Auth::user();
         $hasRole = DB::table('users_roles')
-                ->whereRaw('user_id = '.$user->id.' AND (role_id = '.RoleUtils::getRoleSuperAdmin().' OR role_id = '.RoleUtils::getRoleAdminUser().')')
+                ->whereRaw('user_id = '.$user->id.' AND (role_code = '.RoleUtils::getRoleSuperAdmin().' OR role_code = '.RoleUtils::getRoleAdminUser().')')
                 ->count();
         return $hasRole>0?true:false;
     }
@@ -35,21 +35,34 @@ class TaiKhoanController extends Controller{
             $tuKhoa = Input::get('tukhoa');
             $count  = DB::table('users')                    
                     ->where('name', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('email', 'like', '%'.$tuKhoa.'%')                    
+                    ->orwhere('email', 'like', '%'.$tuKhoa.'%')
+//                    ->whereRaw('(role_id <> '.RoleUtils::getRoleSuperAdmin().' OR role_id is null )')                    
                     ->count();
-            $listUser = DB::table('users')                    
+            $listUser = DB::table('users')
+                    ->selectRaw('users.*, (SELECT MIN(role_code) FROM users_roles WHERE user_id = id) AS role_code')                    
                     ->where('name', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('email', 'like', '%'.$tuKhoa.'%')                    
+                    ->orwhere('email', 'like', '%'.$tuKhoa.'%')
+//                    ->whereRaw('(role_id <> '.RoleUtils::getRoleSuperAdmin().' OR role_id is null )')
                     ->paginate(10);
             $listUser->appends(['tukhoa' => $tuKhoa]);
         } else {
-            $count = DB::table('users')->count();
-            $listUser = DB::table('users')                    
+            $count = DB::table('users')                    
+//                    ->where('users_roles.role_id', '<>', RoleUtils::getRoleSuperAdmin())
+//                    ->orwhere('users_roles.role_id', null)
+                    ->count();
+            $listUser = DB::table('users') 
+                    ->selectRaw('users.*, (SELECT MIN(role_code) FROM users_roles WHERE user_id = id) AS role_code')
+//                    ->where('users_roles.role_id', '<>', RoleUtils::getRoleSuperAdmin())
+//                    ->orwhere('users_roles.role_id', null)                   
                     ->paginate(10);
+        
+            
         }
+        $listRole = DB::table('roles')->get();
         
         $data['listUser'] = $listUser;
         $data['count']    = $count;
+        $data['listRole'] = $listRole;
         $data['title'] = 'Danh Sách Tài khoản';
         $data['page'] = 'admin.taikhoan.index';
         return view('admin/layout', $data);
@@ -71,6 +84,11 @@ class TaiKhoanController extends Controller{
             ]
         );
         return redirect()->route('listTaiKhoan')->with('success', 'Mở khóa tài khoản '.$request->email.' thành công!');
+    }
+    
+    public function getRole(Request $request){
+        $userRoles = DB::table('users_roles')->select('role_code')->where('user_id', $request->user_id)->get();
+        return json_encode($userRoles);
     }
     
     public function changeDisplayUserName($token, $displayUserName){

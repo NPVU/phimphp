@@ -178,8 +178,8 @@
             var form_data = new FormData();
             form_data.append('image', file_data);
             $.ajax({
-                    url: '{{url("quan-ly/phim/upload-image")}}', // point to server-side PHP script 
-                    dataType: 'text', // what to expect back from the PHP script, if anything
+                    url: '{{url("quan-ly/phim/upload-image")}}',
+                    dataType: 'text',
                     cache: false,
                     contentType: false,
                     processData: false,

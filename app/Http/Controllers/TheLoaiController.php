@@ -15,7 +15,7 @@ class TheLoaiController extends Controller{
     }
     function hasRole(){
         $user = Auth::user();
-        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = '.RoleUtils::getRoleSuperAdmin().' OR role_id = '.RoleUtils::getRoleAdminPhim().')')->count();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_code = '.RoleUtils::getRoleSuperAdmin().' OR role_code = '.RoleUtils::getRoleAdminPhim().')')->count();
         return $hasRole>0?true:false;
     }
     public function index($showToast = ''){

@@ -17,7 +17,7 @@ class PhimController extends Controller{
     }
     function hasRole(){
         $user = Auth::user();
-        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = '.RoleUtils::getRoleSuperAdmin().' OR role_id = '.RoleUtils::getRoleAdminPhim().')')->count();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_code = '.RoleUtils::getRoleSuperAdmin().' OR role_code = '.RoleUtils::getRoleAdminPhim().')')->count();
         return $hasRole>0?true:false;
     }
     
@@ -47,10 +47,10 @@ class PhimController extends Controller{
             $listPhim = DB::table('phim')
                     ->selectRaw('phim.*, (SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap')
                     ->paginate(10);
-        }
+        }        
         
         $data['listPhim'] = $listPhim;
-        $data['count'] = $count;
+        $data['count'] = $count;        
         $data['title'] = 'Danh Sách Phim';
         $data['page'] = 'admin.phim.index';
         return view('admin/layout', $data);
