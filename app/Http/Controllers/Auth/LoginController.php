@@ -52,7 +52,7 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             
             $user = Auth::user();
-            $roles = DB::table('users_roles')->selectRaw('role_id')->where('user_id', $user->id)->get();
+            $roles = DB::table('users_roles')->selectRaw('role_code')->where('user_id', $user->id)->get();
             if(count($roles) > 0){
                 Session::put('roles', $roles);
             }
