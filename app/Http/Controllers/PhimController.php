@@ -17,7 +17,7 @@ class PhimController extends Controller{
     }
     function hasRole(){
         $user = Auth::user();
-        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = 100 OR role_id = 300)')->count();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = '.RoleUtils::getRoleSuperAdmin().' OR role_id = '.RoleUtils::getRoleAdminPhim().')')->count();
         return $hasRole>0?true:false;
     }
     
@@ -40,13 +40,13 @@ class PhimController extends Controller{
                     ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('phim_sotap', $tuKhoa)
-                    ->paginate(2);
+                    ->paginate(10);
             $listPhim->appends(['tukhoa' => $tuKhoa]);
         } else {
             $count = DB::table('phim')->count();
             $listPhim = DB::table('phim')
                     ->selectRaw('phim.*, (SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap')
-                    ->paginate(2);
+                    ->paginate(10);
         }
         
         $data['listPhim'] = $listPhim;

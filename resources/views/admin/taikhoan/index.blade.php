@@ -19,7 +19,7 @@
                         <div class="form-search-addon">
                             <div class="input-group">
                                 <input type="search" name="tukhoa" value="<?php echo isset($_GET['tukhoa'])?$_GET['tukhoa']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
-                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-phim').click();"><i class="fa fa-search"></i></span>
+                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-taikhoan').click();"><i class="fa fa-search"></i></span>
                                 <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/tai-khoan')}}';"><i class="fa fa-refresh"></i></span>
                                 <button type="submit" id="btn-search-taikhoan" class="display-none"></button>
                             </div>         
@@ -31,7 +31,7 @@
                 <div class="box-body">                    
                     <table class="table table-hover">
                         <caption>
-                            <span>Tổng: <?php echo count($listUser); ?></span>
+                            <span>Tổng: {{$count}}</span>
                         </caption>
                         <thead>
                             <tr class="bg-primary">

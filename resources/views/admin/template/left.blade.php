@@ -18,7 +18,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu tree" data-widget="tree">
             <li class="header">BẢNG ĐIỀU KHIỂN</li>            
-                @if(count(explode('100',Auth::user()->getRoles())) > 1)
+                @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1)
                 <li>
                     <a href="{{ url('/quan-ly/') }}">
                         <i class="fa fa-dashboard"></i>
@@ -26,7 +26,7 @@
                     </a>                
                 </li>
                 @endif
-                @if(count(explode('100',Auth::user()->getRoles())) > 1 || count(explode('200',Auth::user()->getRoles())) > 1)
+                @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1 || count(explode(RoleUtils::getRoleAdminUser(),Auth::user()->getRoles())) > 1)
                 <li>
                     <a href="{{ url('/quan-ly/tai-khoan/') }}">
                         <i class="fa fa-users"></i>
@@ -34,7 +34,7 @@
                     </a>                
                 </li>
                 @endif
-                @if(count(explode('100',Auth::user()->getRoles())) > 1 || count(explode('300',Auth::user()->getRoles())) > 1)
+                @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1 || count(explode(RoleUtils::getRoleAdminPhim(),Auth::user()->getRoles())) > 1)
                 <li>
                     <a href="{{ url('/quan-ly/phim/') }}">
                         <i class="fa fa-film"></i>
@@ -58,7 +58,7 @@
                     </ul>
                 </li>
                 @endif
-                @if(count(explode('100',Auth::user()->getRoles())) > 1)
+                @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1)
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gears"></i> 

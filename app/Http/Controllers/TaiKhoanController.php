@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
 
 class TaiKhoanController extends Controller{
@@ -17,7 +18,9 @@ class TaiKhoanController extends Controller{
     }
     function hasRole(){
         $user = Auth::user();
-        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_id = 100 OR role_id = 200)')->count();
+        $hasRole = DB::table('users_roles')
+                ->whereRaw('user_id = '.$user->id.' AND (role_id = '.RoleUtils::getRoleSuperAdmin().' OR role_id = '.RoleUtils::getRoleAdminUser().')')
+                ->count();
         return $hasRole>0?true:false;
     }
     
@@ -30,18 +33,23 @@ class TaiKhoanController extends Controller{
         }
         if(!is_null(Input::get('tukhoa'))){
             $tuKhoa = Input::get('tukhoa');
+            $count  = DB::table('users')                    
+                    ->where('name', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('email', 'like', '%'.$tuKhoa.'%')                    
+                    ->count();
             $listUser = DB::table('users')                    
                     ->where('name', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('email', 'like', '%'.$tuKhoa.'%')                    
                     ->paginate(10);
             $listUser->appends(['tukhoa' => $tuKhoa]);
         } else {
+            $count = DB::table('users')->count();
             $listUser = DB::table('users')                    
                     ->paginate(10);
         }
         
         $data['listUser'] = $listUser;
-        
+        $data['count']    = $count;
         $data['title'] = 'Danh Sách Tài khoản';
         $data['page'] = 'admin.taikhoan.index';
         return view('admin/layout', $data);
