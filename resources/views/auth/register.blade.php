@@ -76,7 +76,7 @@
                         @endif
                     </div>
                     
-                    <div class="wrap-input100 validate-input" data-validate = "Nhâp lại mật khẩu là bắt buộc">
+                    <div class="wrap-input100 validate-input" data-validate = "Xác nhận mật khẩu là bắt buộc">
                         <input class="input100{{ $errors->has('password') ? ' is-invalid' : '' }}" id="password-confirm" type="password" name="password_confirmation" placeholder="Xác nhận mật khẩu">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">

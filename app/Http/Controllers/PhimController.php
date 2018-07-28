@@ -30,21 +30,27 @@ class PhimController extends Controller{
         }
         if(!is_null(Input::get('tukhoa'))){
             $tuKhoa = Input::get('tukhoa');
-            $listPhim = DB::table('phim')
-                    ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
+            $count = DB::table('phim')                    
                     ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('phim_sotap', $tuKhoa)
-                    ->paginate(10);
+                    ->count();
+            $listPhim = DB::table('phim')
+                    ->selectRaw('phim.*, (SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap')
+                    ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('phim_sotap', $tuKhoa)
+                    ->paginate(2);
             $listPhim->appends(['tukhoa' => $tuKhoa]);
         } else {
+            $count = DB::table('phim')->count();
             $listPhim = DB::table('phim')
-                    ->selectRaw('*, (select tap_tapso tap from tap where tap.phim_id = phim_id ORDER BY tap_tapso DESC LIMIT 1) as tap')
-                    ->paginate(10);
+                    ->selectRaw('phim.*, (SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap')
+                    ->paginate(2);
         }
         
         $data['listPhim'] = $listPhim;
-        
+        $data['count'] = $count;
         $data['title'] = 'Danh Sách Phim';
         $data['page'] = 'admin.phim.index';
         return view('admin/layout', $data);
