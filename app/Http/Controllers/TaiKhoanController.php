@@ -71,7 +71,9 @@ class TaiKhoanController extends Controller{
     public function lock(Request $request){
         DB::table('users')->where('id', $request->user_id)->update(
             [                        
-                'active'        => 0                       
+                'active'        => 0,
+                'reason'        => $request->reason,
+                'locked_at'     => now()
             ]
         );
         return redirect()->route('listTaiKhoan')->with('success', 'Khóa tài khoản '.$request->email.' thành công!');
@@ -89,6 +91,24 @@ class TaiKhoanController extends Controller{
     public function getRole(Request $request){
         $userRoles = DB::table('users_roles')->select('role_code')->where('user_id', $request->user_id)->get();
         return json_encode($userRoles);
+    }
+    
+    public function addRemoveRole(Request $request){
+        if(strcmp('Thêm', $request->action) == 0){
+            DB::table('users_roles')->insert(
+                [                        
+                    'user_id'        => $request->user_id,
+                    'role_code'      => $request->role_code
+                ]
+            );
+            return 'added';
+        } else {
+           DB::table('users_roles')->where([
+               ['user_id',$request->user_id],
+               ['role_code', $request->role_code]
+           ])->delete();
+           return 'deleted';
+        }            
     }
     
     public function changeDisplayUserName($token, $displayUserName){

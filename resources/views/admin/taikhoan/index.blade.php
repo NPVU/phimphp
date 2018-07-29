@@ -64,7 +64,7 @@
                                 <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="body-table">
                             <?php 
                                 $rowIndex = 0;                                
                             ?>
@@ -148,9 +148,17 @@
                         <strong style="color: lightseagreen;font-size: 1em;" class="verify_email"></strong>
                         không ?
                     </div>
-
+                    <div class="col-md-12">
+                        <div class="form-group reason">
+                            <label class="control-label" for="reason">Lý do</label>
+                            <input type="text" id="reason" name="reason" 
+                                   class="form-control required" value=""
+                                   placeholder="Nhập lý do khóa account"/>
+                            <span class="help-block reason-error"></span>
+                        </div>                        
+                    </div>
                     <div class="col-md-12 text-center" style="margin-top:20px">
-                        <button type="submit" class="btn btn-danger">Đồng ý</button>
+                        <button type="submit" class="btn btn-danger" onclick="return checkReason();">Đồng ý</button>
                         <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
                     </div>
                 </div>        
@@ -171,6 +179,7 @@
                 <div class="row" id="body-role">                
                     <div class="col-md-12 text-center">
                         @foreach ($listRole as $row)
+                        @if($row->role_code != RoleUtils::getRoleSuperAdmin())
                         <div class="input-group margin-bottom">                                                        
                             <input type="text" class="form-control input-role-{{$row->role_code}}" value="{{$row->role_name}}" disabled="true">
                             <div class="input-group-btn">
@@ -179,6 +188,7 @@
                                 </button>
                             </div>
                         </div>
+                        @endif
                         @endforeach
                     </div>
 
@@ -204,7 +214,20 @@
             $('#verify_user_id').val(userid);
             $('#verify_email').val(email);
             $('.verify_email').html(email);
+            $('#reason').val('');
             $('#modal-verify').iziModal('open');
+        }
+        
+        function checkReason(){
+            var reason = $('#reason').val();
+            if(reason.trim().length < 3){
+                $('.reason').addClass('has-error');
+                $('.reason-error').html('Lý do phải có ít nhất 3 ký tự');
+                return false;
+            } else {
+                $('.reason').removeClass('has-error');
+                $('.reason-error').html('');
+            }
         }
         
         function unlock(userid, email){
@@ -223,6 +246,7 @@
             iconColor: 'white',
             onClosing: function (modal) {
                 $("#body-role").load(location.href+" #body-role>*","");
+                $("#body-table").load(location.href+" #body-table>*","");
             }
         });
         
@@ -257,6 +281,43 @@
             });
             $('#modal-role').iziModal('open');
         }
-                
+        function actionRole(role){
+            var userid = $('#role_user_id').val();
+            var action = $('.role-'+role).html();
+            var form_data = new FormData();
+            form_data.append('user_id', userid);
+            form_data.append('role_code', role);
+            form_data.append('action', action);
+            $.ajax({
+                    url: '{{url("quan-ly/tai-khoan/add-remove-role")}}',
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if(data === 'added'){
+                            $('.input-role-'+role).css('border-color', 'rgb(54, 127, 169)');
+                            $('.input-role-'+role).css('background-color', 'rgb(54, 127, 169)');
+                            $('.input-role-'+role).css('color', 'white');
+                            $('.role-'+role).removeClass('btn-primary');
+                            $('.role-'+role).addClass('btn-danger');
+                            $('.role-'+role).html('Xóa'); 
+                        } else {
+                            $('.input-role-'+role).css('border-color', '#d2d6de');
+                            $('.input-role-'+role).css('background-color', '#eee');
+                            $('.input-role-'+role).css('color', '#555');
+                            $('.role-'+role).removeClass('btn-danger');
+                            $('.role-'+role).addClass('btn-primary');                            
+                            $('.role-'+role).html('Thêm'); 
+                        }
+                    }
+            });
+        }     
     </script>
 </section>

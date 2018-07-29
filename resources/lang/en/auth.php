@@ -12,8 +12,8 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
+    'noExist'=> 'Tài khoản không tồn tại.',
+    'failed' => 'Tài khoản hoặc mật khẩu không đúng.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'locked' => 'Tài khoản của bạn đã bị khóa',
 ];

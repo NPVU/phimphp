@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
     /*
@@ -48,7 +48,11 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
-
+        
+        if(!$this->checkActive($request)){
+            return $this->sendLockResponse($request);
+        }
+        
         if ($this->attemptLogin($request)) {
             
             $user = Auth::user();
@@ -63,5 +67,27 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+    
+    function checkActive(Request $request){
+        $active = DB::table('users')->where([
+            ['email', $request->email],
+            ['active', 1]
+        ])->count();
+        return $active>0?true:false;
+    }
+    
+    function sendLockResponse(Request $request){
+        $reason = DB::table('users')->where('email', $request->email)->get();
+        if(count($reason) == 0){
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.noExist')],            
+            ]);
+        } else {
+            throw ValidationException::withMessages([
+                $this->username() => [trans('auth.locked').' ('.$reason[0]->reason.').'],            
+            ]);
+        }
+        
     }
 }
