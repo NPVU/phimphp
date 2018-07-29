@@ -62,3 +62,5 @@ Auth::routes();
 Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/xem-phim/{phimID}/{tap}', 'HomeController@index')->name('home');

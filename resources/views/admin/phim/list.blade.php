@@ -209,7 +209,7 @@
                    {
                        console.log(data);
                        if(data.status === 1){
-                           $('.tapphim_tap').val(data.content.tap_tapso);
+                           $('.tapphim_tap').val(data.content.tap_tapso);                           
                            $('#tapphim_taphienthi').val(data.content.tap_tapsohienthi);
                            $('#tapphim_ten').val(data.content.tap_ten);
                            $('#tapphim_luotxem').val(data.content.tap_luotxem);

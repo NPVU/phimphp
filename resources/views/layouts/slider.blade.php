@@ -12,25 +12,31 @@
                                 <h2 style="display:inline;">{{$phim->tap[0]->tap_tapsohienthi}}</h2>                                
                                 <h4>{{$phim->phim_ten}}</h4>
                                 <div class="w3ls-button">
-                                    <a href="#" data-toggle="modal" data-target="#myModal">Xem ngay</a>
+                                    <a href="{{url('xem-phim')}}/{{md5($phim->phim_id)}}/{{md5($phim->tap[0]->tap_tapso)}}" data-toggle="modal" data-target="">Xem ngay</a>
                                 </div>
                                 <div class="bannergrids">
                                     <div class="col-md-4">
                                         <div class="grid1">
-                                            <i class="fa fa-truck" aria-hidden="true"></i>
-                                            <p>lorem ipsum dolor sit amet consectetur adipiscing</p>
+                                            <i class="fa fa-star" aria-hidden="true"> đánh giá</i> 
+                                            <p>
+                                                <i class="fa fa-star" style="font-size: 1em;"></i>
+                                                <i class="fa fa-star" style="font-size: 1em;"></i>
+                                                <i class="fa fa-star" style="font-size: 1em;"></i>
+                                                <i class="fa fa-star-half-o" style="font-size: 1em;"></i>
+                                                <i class="fa fa-star-o" style="font-size: 1em;"></i>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="grid1">
-                                            <i class="fa fa-ship" aria-hidden="true"></i>
-                                            <p>lorem ipsum dolor sit amet consectetur adipiscing</p>
+                                            <i class="fa fa-play-circle" aria-hidden="true"> số tập</i>
+                                            <p>{{$phim->tap[0]->tap_tapso}}/{{$phim->phim_sotap}}</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="grid1">
-                                            <i class="fa fa-bus" aria-hidden="true"></i>
-                                            <p>lorem ipsum dolor sit amet consectetur adipiscing</p>
+                                            <i class="fa fa-eye" aria-hidden="true"> lượt xem</i>
+                                            <p>{{$phim->phim_luotxem}}</p>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>

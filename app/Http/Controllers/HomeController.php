@@ -32,7 +32,8 @@ class HomeController extends Controller
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi')
-                    ->where('phim_id', $listPhimToday[$i]->phim_id)                    
+                    ->where('phim_id', $listPhimToday[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
         }
         

@@ -1,7 +1,7 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="video-player">
-        <video id="video-player" width="100%" poster="{{ asset('img/poster-video.png') }}"></video>                             
+        <video id="video-player" width="100%" poster="{{ asset('public/img/poster-video.png') }}"></video>                             
         <div class="video-background-loading display-none">
             <div class="video-loader"></div>
         </div>
@@ -81,13 +81,5 @@
     </div>
 
 </div>-->
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div class="chaxbox">
-        <div class="title">
-            chaxbox            
-        </div>
-    </div>
-</div>
-
+<script type="text/javascript" src="{{ asset('js/video-player.js') }}"></script>
 <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
