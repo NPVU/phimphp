@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="img/ico" href="{{ asset('favicon.ico') }}">
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">    
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
@@ -72,7 +71,7 @@
                         </a>                        
                     </li>
                     <li>
-                        <a href="{{ route('logout') }}" class="w3_facebook"
+                        <a href="#" class="w3_facebook"
                            onclick="event.preventDefault();
                            document.getElementById('logout-form').submit();">
                             <i class="fa fa-sign-out"></i>
@@ -87,7 +86,8 @@
             <!-- navbar-header -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#rank" class="hvr-underline-from-center scroll">TOP 20</a></li>
+                    <li><a href="#tapmoi" class="hvr-underline-from-center scroll">TẬP MỚI</a></li>
+                    <li><a href="#top" class="hvr-underline-from-center scroll">TOP</a></li>
                     <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">THỂ LOẠI</span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach($listTheLoai as $row)
@@ -109,13 +109,8 @@
                             </li>
                             @endforeach                            
                         </ul>
-                    </li>
-                    <li><a href="#services" class="hvr-underline-from-center scroll">Hot</a></li>
-                    <li><a href="#team" class="hvr-underline-from-center scroll">Season</a></li>
-                    	
-                    <li><a href="#testimonials" class="hvr-underline-from-center scroll">Testimonials</a></li>
-                    <li><a href="#contact" class="hvr-underline-from-center scroll">Contact</a></li>
-                    @if(Auth::user()->getRoles() != null)                                
+                    </li>                                       
+                    @if(Session::has('roles'))                                
                         <li><a href="{{ url('quan-ly') }}" class="hvr-underline-from-center scroll">Quản lý</a></li>
                     @endif
                 </ul>
