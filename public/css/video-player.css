@@ -7,6 +7,10 @@ and open the template in the editor.
     Created on : Jun 2, 2018, 2:01:00 PM
     Author     : npvu
 */
+.display-none{
+    display: none;
+}
+
 #video-player {
     cursor: pointer;
 /*    box-shadow: 1px 1px 20px 2px #f3492e;*/
@@ -39,7 +43,7 @@ and open the template in the editor.
 }
 .video-control {
     position: relative;
-    bottom: 46px;
+    bottom: 44px;
     width: 100%;
     padding-top: 10px;
     padding-bottom: 10px;

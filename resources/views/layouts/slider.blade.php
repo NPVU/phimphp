@@ -12,7 +12,9 @@
                                 <h2 style="display:inline;">{{$phim->tap[0]->tap_tapsohienthi}}</h2>                                
                                 <h4>{{$phim->phim_ten}}</h4>
                                 <div class="w3ls-button">
-                                    <a href="{{url('xem-phim')}}/{{md5($phim->phim_id)}}/{{md5($phim->tap[0]->tap_tapso)}}" data-toggle="modal" data-target="">Xem ngay</a>
+                                    <a href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim->phim_ten)))}}/tap-{{$phim->tap[0]->tap_tapso}}?pid={{$phim->phim_id}}&t={{$phim->tap[0]->tap_tapso}}&token={{csrf_token()}}" data-toggle="modal" data-target="">
+                                        Xem ngay
+                                    </a>
                                 </div>
                                 <div class="bannergrids">
                                     <div class="col-md-4">

@@ -209,6 +209,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'RoleUtils' => App\Http\Controllers\RoleUtils::class,
+        'ClassCommon' => App\Http\Controllers\ClassCommon::class,
     ],
 
 ];

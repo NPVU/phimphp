@@ -105,8 +105,8 @@ class ServicesController extends Controller
             return $data; 
         }        
     }
-     
     
+     
     public function getInfoTapPhim(){
         if(strcmp(Session::token(), Input::get('token')) == 0){            
             $tap = DB::table('tap')->where('tap_id', Input::get('tap'))->get();

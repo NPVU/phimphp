@@ -1,7 +1,15 @@
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div class="video-player">
-        <video id="video-player" width="100%" poster="{{ asset('public/img/poster-video.png') }}"></video>                             
+        @if(!empty($tap[0]->googleRedirectLink))
+        <video id="video-player" width="100%" poster="{{ $phim[0]->phim_hinhnen }}" src="{{$tap[0]->googleRedirectLink['720p']}}">            
+            <source src="{{$tap[0]->googleRedirectLink['360p']}}" id="google360p" />
+            <source src="{{$tap[0]->googleRedirectLink['720p']}}" id="google720p" />
+        </video>     
+        @else
+        <iframe width="100%" height="450" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        @endif
+        
         <div class="video-background-loading display-none">
             <div class="video-loader"></div>
         </div>
@@ -19,7 +27,7 @@
                 <i class="btn-play fa fa-play"></i>
             </div>
             <div class="player-control">
-                <i class="btn-replay fa fa-redo-alt" data-toggle="tooltip" title="Replay"></i>
+                <i class="btn-replay fa fa-refresh" data-toggle="tooltip" title="Replay"></i>
             </div>
             <div class="player-control" data-toggle="tooltip" title="Volume">
                 <div class="volume-control">
@@ -38,7 +46,7 @@
         </div>
         <div class="control-right">                                
             <div class="player-control" data-toggle="tooltip" title="Setting">
-                <i class="btn-setting fab fa-whmcs"></i>
+                <i class="btn-setting fa fa-gear"></i>
             </div>
             <div class="player-control" data-toggle="tooltip" title="Full screen">
                 <i class="btn-screen fa fa-expand"></i>
@@ -81,5 +89,5 @@
     </div>
 
 </div>-->
-<script type="text/javascript" src="{{ asset('js/video-player.js') }}"></script>
+<script type="text/javascript" src="{{ asset('public/js/video-player.js') }}"></script>
 <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
