@@ -21,7 +21,7 @@
                         {{csrf_field()}}
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
-                                ảnh bìa
+                                ảnh icon
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group <?php echo isset($add_phim_image_error)?'has-error':''; ?>">
@@ -43,7 +43,31 @@
                                            placeholder="VD: http://imurg.org/naruto.png"/>
                                     <span class="help-block"><?php echo isset($add_phim_image_link_error)?$add_phim_image_link_error:''; ?></span>
                                 </div>
-                            </div>                        
+                            </div>
+                            <div class="col-md-12 box-body-title">
+                                ảnh nền
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group <?php echo isset($phim_background_error)?'has-error':''; ?>">
+                                    <input type="hidden" name="phim_background" id="phim_background" value="<?php echo isset($_POST['phim_background'])?$_POST['phim_background']:'' ?>" />
+                                    <input type="file" class="form-control display-none" id="selectFileBackground" onchange="autoUploadBackground()" />
+                                    <img src="<?php if(isset($_POST['phim_background']) && !empty($_POST['phim_background'])) :?>
+                                         <?php echo $_POST['phim_background'] ?>
+                                         <?php else :?>
+                                         {{asset('public/img/themes/jquery-file-upload-scripts.png')}}
+                                         <?php endif; ?>"
+                                         onclick="$('#selectFileBackground').click()" 
+                                         class="img-select-file npv-add-image" id="backgroundPhimDragDrop"/> 
+                                    <span class="help-block"><?php echo isset($phim_background_error)?$phim_background_error:''; ?></span>
+                                </div>
+                                <div class="form-group <?php echo isset($phim_background_link_error)?'has-error':''; ?>">
+                                    <label class="control-label" for="phim_background_link"><small>hoặc</small> Đường dẫn ảnh bìa</label>
+                                    <input type="text" id="phim_background_link" name="phim_background_link" 
+                                           class="form-control" value="<?php echo isset($_POST['phim_background_link']) ? $_POST['phim_background_link'] : '' ?>"
+                                           placeholder="VD: http://imurg.org/naruto.png (Full HD)"/>
+                                    <span class="help-block"><?php echo isset($phim_background_link_error)?$phim_background_link_error:''; ?></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
@@ -127,7 +151,7 @@
                         </div>
                         
                         <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-danger" name="btn" value="add">Thêm</button>
+                            <button type="submit" class="btn btn-danger" name="btn" value="add">Cập nhật</button>
                             <a href="{{url('quan-ly/phim/')}}" class="btn btn-warning" >Trở về</a>
                         </div>
                     </form>
@@ -159,7 +183,36 @@
                             e.preventDefault();
                             e.stopPropagation();
                             /*UPLOAD FILES HERE*/
-                            uploadDragDropImagePhim(e.originalEvent.dataTransfer.files);
+                            uploadDragDropImagePhim(e.originalEvent.dataTransfer.files, 'icon');
+                        }   
+                    }
+                }
+            );        
+        });
+        $( document ).ready(function() {
+            $('#backgroundPhimDragDrop').on(
+                'dragover',
+                function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            );
+            $('#backgroundPhimDragDrop').on(
+                'dragenter',
+                function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            );
+            $('#backgroundPhimDragDrop').on(
+                'drop',
+                function(e){
+                    if(e.originalEvent.dataTransfer){
+                        if(e.originalEvent.dataTransfer.files.length) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            /*UPLOAD FILES HERE*/
+                            uploadDragDropImagePhim(e.originalEvent.dataTransfer.files, 'background');
                         }   
                     }
                 }
@@ -167,16 +220,20 @@
         });
         
         function autoUploadImage() {
-            sendImagePhim($('#selectFileImage').prop('files')[0]);
+            sendImagePhim($('#selectFileImage').prop('files')[0], 'icon');
         }
-        function uploadDragDropImagePhim(files){    
+        function autoUploadBackground() {
+            sendImagePhim($('#selectFileBackground').prop('files')[0], 'background');
+        }
+        function uploadDragDropImagePhim(files, type){    
             console.log(files[0]);
-            sendImagePhim(files[0]);
+            sendImagePhim(files[0], type);
         }
-        function sendImagePhim(dataFile){
+        function sendImagePhim(dataFile, type){
             var file_data = dataFile;
             var form_data = new FormData();
             form_data.append('image', file_data);
+            form_data.append('type', type);
             $.ajax({
                     url: '{{url("quan-ly/phim/upload-image")}}',
                     dataType: 'text',
@@ -188,11 +245,16 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function (php_script_response) {
-                        console.log(php_script_response);
-                        var urlImage = '{{url("/")}}/'+php_script_response;
-                        $('#imgPhimDragDrop').attr('src', urlImage);
-                        $('#add_phim_image').val(urlImage);
+                    success: function (data) {
+                        console.log(data);
+                        var urlImage = '{{url("/")}}/'+data;
+                        if(type === 'icon'){
+                            $('#imgPhimDragDrop').attr('src', urlImage);
+                            $('#add_phim_image').val(urlImage);
+                        } else {
+                            $('#backgroundPhimDragDrop').attr('src', urlImage);
+                            $('#phim_background').val(urlImage);
+                        }
                     }
             });
         }

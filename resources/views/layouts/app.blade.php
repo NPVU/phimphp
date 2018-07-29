@@ -11,70 +11,127 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('public/js/app.js') }}" defer></script>
+    <script src="{{ asset('public/template/road_travel/js/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/owl.carousel.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/SmoothScroll.min.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/move-top.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/easing.js') }}"></script>
+    <script src="{{ asset('public/template/road_travel/js/responsiveslides.min.js') }}"></script>
+    <script type="application/x-javascript"> 
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } 
+    </script>
+    
+    <!-- Fonts -->        
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/road_travel/css/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/road_travel/css/owl.theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/road_travel/css/flexslider.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/road_travel/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/road_travel/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/road_travel/css/font-awesome.css') }}" rel="stylesheet">    
+    
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+<body>                    
+    <div class="header">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    @if(Auth::user()->getRoles() != null)
-                                    <a class="dropdown-item" href="{{ url('quan-ly') }}">
-                                        Quản lý
-                                    </a>
-                                    @endif
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                <h1>
+                    <a href="{{ url('/') }}">
+                        {{ config('app.name') }}
+                    </a>
+                </h1>
             </div>
-        </nav>
+            <div class="top-nav-text">
+<!--                <ul class="social_agileinfo">
+                    <li><a href="#" class="w3_facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#" class="w3_twitter"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#" class="w3_instagram"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#" class="w3_google"><i class="fa fa-google-plus"></i></a></li>
+                </ul>-->
+                <ul class="social_agileinfo">
+                    @guest
+                    <li><a href="{{ route('login') }}" class="w3_facebook"><i class="fa fa-sign-in"></i></a></li>
+                    <li><a href="{{ route('register') }}" class="w3_facebook"><i class="fa fa-registered"></i></a></li>
+                    @else
+                    <li>
+                        <a href="#" class="w3_facebook">
+                            <i class="fa fa-user"></i>
+                        </a>                        
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" class="w3_facebook"
+                           onclick="event.preventDefault();
+                           document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out"></i>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </li>
+                    @endguest
+                </ul>
+            </div>
+            <!-- navbar-header -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#rank" class="hvr-underline-from-center scroll">TOP 20</a></li>
+                    <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">THỂ LOẠI</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach($listTheLoai as $row)
+                            <li>
+                                <a href="#{{md5($row->theloai_ten)}}" class="scroll">
+                                    <span data-hover="{{$row->theloai_ten}}">{{$row->theloai_ten}}</span>
+                                </a>
+                            </li>
+                            @endforeach                            
+                        </ul>
+                    </li>
+                    <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">NĂM</span><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @foreach($listNam as $row)
+                            <li class="text-center">
+                                <a href="#{{md5($row->nam)}}" class="scroll">
+                                    <span data-hover="{{$row->nam}}">{{$row->nam}}</span>
+                                </a>
+                            </li>
+                            @endforeach                            
+                        </ul>
+                    </li>
+                    <li><a href="#services" class="hvr-underline-from-center scroll">Hot</a></li>
+                    <li><a href="#team" class="hvr-underline-from-center scroll">Season</a></li>
+                    	
+                    <li><a href="#testimonials" class="hvr-underline-from-center scroll">Testimonials</a></li>
+                    <li><a href="#contact" class="hvr-underline-from-center scroll">Contact</a></li>
+                    @if(Auth::user()->getRoles() != null)                                
+                        <li><a href="{{ url('quan-ly') }}" class="hvr-underline-from-center scroll">Quản lý</a></li>
+                    @endif
+                </ul>
+            </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <div class="clearfix"> </div>	
+        </nav>
     </div>
+    
+    @yield('slider')
+    @yield('hot')
+    
+    <script type="text/javascript">
+	$(document).ready(function() {
+            $().UItoTop({ easingType: 'easeOutQuart' });								
+	});
+    </script>
 </body>
 </html>

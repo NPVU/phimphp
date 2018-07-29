@@ -81,7 +81,8 @@ class PhimController extends Controller{
         if(strcmp(Session::token(), $token) == 0){
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
             $listTheLoai = DB::table('theloai')->get();
-            session(['phim_hinhanh' => $phim[0]->phim_hinhanh]);        
+            session(['phim_hinhanh' => $phim[0]->phim_hinhanh]); 
+            session(['phim_hinhnen' => $phim[0]->phim_hinhnen]); 
             $data['phim'] = $phim;
             $data['listTheLoai'] = $listTheLoai;
             $data['token'] = $token;
@@ -144,22 +145,34 @@ class PhimController extends Controller{
             $valid = false;
         }
         if(empty($request->add_phim_image) && empty($request->add_phim_image_link)){            
-            $data['add_phim_image_error'] = 'Ảnh bìa của phim là bắt buộc';
+            $data['add_phim_image_error'] = 'Ảnh icon của phim là bắt buộc';
             $valid = false;
-        }              
+        }         
+        if(empty($request->phim_background) && empty($request->phim_background_link)){            
+            $data['phim_background_error'] = 'Ảnh nền của phim là bắt buộc';
+            $valid = false;
+        }       
         if(empty($request->add_phim_theloai)){
             $data['add_phim_theloai_error'] = 'Phim phải thuộc ít nhất 1 thể loại';
             $valid = false;
         }
         
         if($valid){
-            $url = "";
+            $url_icon = "";
+            $url_background = "";
             if(!empty($request->add_phim_image)){
                 $path = ClassCommon::getPathUploadImage().Session::get('fileImagePhim');
                 rename(ClassCommon::getPathUploadTemp().Session::get('fileImagePhim'), $path);
-                $url = URL::to('/').'/'.$path;
+                $url_icon = URL::to('/').'/'.$path;
             } else {
-                $url = $request->add_phim_image_link;
+                $url_icon = $request->add_phim_image_link;
+            }
+            if(!empty($request->phim_background)){
+                $path = ClassCommon::getPathUploadImage().Session::get('fileBackgroundPhim');
+                rename(ClassCommon::getPathUploadTemp().Session::get('fileBackgroundPhim'), $path);
+                $url_background = URL::to('/').'/'.$path;
+            } else {
+                $url_background = $request->phim_background_link;
             }
             
             DB::table('phim')->insert(
@@ -171,7 +184,8 @@ class PhimController extends Controller{
                         'phim_sotap'      => $request->add_phim_sotap,
                         'phim_nam'        => $request->add_phim_nam,
                         'phim_tag'        => $request->add_phim_tag,
-                        'phim_hinhanh'    => $url,
+                        'phim_hinhanh'    => $url_icon,
+                        'phim_hinhnen'    => $url_background,
                         'phim_ngaycapnhat'=> now()
                     ]
                 );
@@ -207,26 +221,53 @@ class PhimController extends Controller{
             $valid = false;
         }
         if(empty($request->edit_phim_image) && empty($request->edit_phim_image_link)){            
-            $data['edit_phim_image_error'] = 'Ảnh bìa của phim là bắt buộc';
+            $data['edit_phim_image_error'] = 'Ảnh icon của phim là bắt buộc';
             $valid = false;
         }        
+        if(empty($request->phim_background) && empty($request->phim_background_link)){            
+            $data['phim_background_error'] = 'Ảnh nền của phim là bắt buộc';
+            $valid = false;
+        } 
         if(empty($request->edit_phim_theloai)){
             $data['edit_phim_theloai_error'] = 'Phim phải thuộc ít nhất 1 thể loại';
             $valid = false;
         }
         if($valid){      
             if(strcmp(Session::get('phim_hinhanh'), $request->edit_phim_image)){
-                $url = "";
+                $url_icon = "";
+                $url_background = "";
                 if(!empty($request->edit_phim_image)){
                     $path = ClassCommon::getPathUploadImage().Session::get('fileImagePhim');
                     rename(ClassCommon::getPathUploadTemp().Session::get('fileImagePhim'), $path);
-                    $url = URL::to('/').'/'.$path;
+                    $url_icon = URL::to('/').'/'.$path;
                 } else {
-                    $url = $request->edit_phim_image_link;
+                    $url_icon = $request->edit_phim_image_link;
                 }
+                if(!empty($request->phim_background)){
+                    $path = ClassCommon::getPathUploadImage().Session::get('fileBackgroundPhim');
+                    rename(ClassCommon::getPathUploadTemp().Session::get('fileBackgroundPhim'), $path);
+                    $url_background = URL::to('/').'/'.$path;
+                } else {
+                    $url_background = $request->phim_background_link;
+                }
+                
+                // Xóa file cũ
+                $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
+                $str = explode("/", $phim[0]->phim_hinhanh);
+                $file_name = end($str);
+                if (file_exists(ClassCommon::getPathUploadImage().$file_name)){
+                    unlink(ClassCommon::getPathUploadImage().$file_name);
+                }
+                $str = explode("/", $phim[0]->phim_hinhnen);
+                $file_name = end($str);
+                if (file_exists(ClassCommon::getPathUploadImage().$file_name)){
+                    unlink(ClassCommon::getPathUploadImage().$file_name);
+                }
+                
                 DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
                     [                        
-                        'phim_hinhanh'        => $url                       
+                        'phim_hinhanh'        => $url_icon,
+                        'phim_hinhnen'        => $url_background
                     ]
                 );
             }
@@ -337,7 +378,11 @@ class PhimController extends Controller{
             $file = $request->image;    
             $newName=time();    
             $filePath = $file->move(ClassCommon::getPathUploadTemp(), $newName.'_'.$file->getClientOriginalName());
-            session(['fileImagePhim' => $newName.'_'.$file->getClientOriginalName()]);
+            if(strcmp('icon', $request->type) == 0){
+                session(['fileImagePhim' => $newName.'_'.$file->getClientOriginalName()]);
+            } else {
+                session(['fileBackgroundPhim' => $newName.'_'.$file->getClientOriginalName()]);
+            }
             return $filePath;    
         }
     }
