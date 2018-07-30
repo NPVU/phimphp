@@ -13,12 +13,12 @@ and open the template in the editor.
 
 #video-player {
     cursor: pointer;
-/*    box-shadow: 1px 1px 20px 2px #f3492e;*/
     border-radius: 5px;
 }
 .video-player {
-    margin-top: 10px;
-    z-index:100;
+    padding-top: 10px;
+    padding-bottom: 5px; 
+    /*z-index:100;*/
     position: relative;
 }
 .video-background-overlay, .video-background-loading{    

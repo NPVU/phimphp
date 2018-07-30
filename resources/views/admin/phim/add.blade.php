@@ -97,7 +97,7 @@
                                        placeholder="VD: 2018"/>
                                 <span class="help-block"><?php echo isset($add_phim_nam_error)?$add_phim_nam_error:''; ?></span>
                             </div>
-                            
+                                                       
                             <div class="form-group <?php echo isset($add_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="add_phim_tenkhac">Tên phụ (tên khác)</label>
                                 <input type="text" id="add_phim_tenkhac" name="add_phim_tenkhac" 
@@ -120,7 +120,15 @@
                                        value="<?php echo isset($_POST['add_phim_tag']) ? $_POST['add_phim_tag'] : '' ?>"
                                        placeholder="VD: Naruto, Ninja, Cửu vĩ hồ"/>
                                 <span class="help-block"><?php echo isset($add_phim_tag_error)?$add_phim_tag_error:''; ?></span>
-                            </div>                            
+                            </div> 
+                            
+                            <div class="form-group <?php echo isset($add_phim_nguon_error)?'has-error':''; ?>">
+                                <label>Nguồn</label>
+                                <input type="text" name="add_phim_nguon" class="form-control" 
+                                       value="<?php echo isset($_POST['add_phim_nguon']) ? $_POST['add_phim_nguon'] : '' ?>"
+                                       placeholder="VD: anime47, phimmoi, vuighe ...."/>
+                                <span class="help-block"><?php echo isset($add_phim_nguon_error)?$add_phim_nguon_error:''; ?></span>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">

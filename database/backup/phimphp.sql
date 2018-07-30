@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 26, 2018 lúc 10:17 AM
+-- Thời gian đã tạo: Th7 30, 2018 lúc 10:18 AM
 -- Phiên bản máy phục vụ: 10.1.30-MariaDB
 -- Phiên bản PHP: 7.2.2
 
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `phimphp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `danhgia`
+--
+
+CREATE TABLE `danhgia` (
+  `user_id` int(11) NOT NULL,
+  `phim_id` int(11) NOT NULL,
+  `danhgia_star` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -69,18 +81,22 @@ CREATE TABLE `phim` (
   `phim_sotap` int(4) NOT NULL,
   `phim_nam` int(4) NOT NULL,
   `phim_tag` text COLLATE utf8_unicode_ci,
-  `phim_hinhanh` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `phim_hinhanh` text COLLATE utf8_unicode_ci NOT NULL,
+  `phim_hinhnen` text COLLATE utf8_unicode_ci NOT NULL,
   `phim_luotxem` int(11) NOT NULL DEFAULT '0',
   `phim_ngaycapnhat` date NOT NULL,
-  `phim_hoanthanh` tinyint(1) NOT NULL DEFAULT '0'
+  `phim_hoanthanh` tinyint(1) NOT NULL DEFAULT '0',
+  `phim_nguon` varchar(200) COLLATE utf8_unicode_ci DEFAULT 'Đang cập nhật'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phim`
 --
 
-INSERT INTO `phim` (`phim_id`, `theloai_id`, `phim_ten`, `phim_tenkhac`, `phim_gioithieu`, `phim_sotap`, `phim_nam`, `phim_tag`, `phim_hinhanh`, `phim_luotxem`, `phim_ngaycapnhat`, `phim_hoanthanh`) VALUES
-(4, '[\"12\",\"13\",\"14\"]', 'Haikyuu', 'High Kyuu (2014)', 'hrhr', 25, 2014, 'Haikyuu', 'http://localhost/phimphp/public/upload/image/1532097377_haikyuu_____icon_2_by_elios96-d9eh5l0.png', 0, '2018-07-20', 0);
+INSERT INTO `phim` (`phim_id`, `theloai_id`, `phim_ten`, `phim_tenkhac`, `phim_gioithieu`, `phim_sotap`, `phim_nam`, `phim_tag`, `phim_hinhanh`, `phim_hinhnen`, `phim_luotxem`, `phim_ngaycapnhat`, `phim_hoanthanh`, `phim_nguon`) VALUES
+(8, '[\"11\"]', 'Claymore', 'Phù thủy mắt bạc', 'Yoma! Quái vật ăn phủ tạng con người. Chúng sống dưới lốt nạn nhân trà trộn vào thế giới loài người. Không ai hay cũng ko ai biết duy chỉ có Claymore - Những thiếu nữ mang trong mình máu thịt của loài quái vật sở hữu đôi mắt làm thành danh tiếng của họ. Phù Thủy Mắt Bạc! Những thiếu nữ mất đi hạnh phúc, mất đi tương lai và liệu Clare - Teresa có bảo vệ họ trước loài Awakened Beings hay với cái tên là loài Thức Tỉnh ...', 26, 2007, 'claymore', 'http://localhost/phimphp/public/upload/image/1532850716_claymore_folder_icon_by_euterpemusa-d4ie3mr.png', 'http://localhost/phimphp/public/upload/image/1532850718_204023.jpg', 0, '2018-07-29', 0, 'youtube'),
+(9, '[\"11\"]', 'Tokyo Ghoul Phần 1', 'Ngạ quỷ Phần 1', NULL, 12, 2014, 'tokyo ghoul, ngạ quỷ', 'https://orig00.deviantart.net/5618/f/2014/270/9/e/tokyo_ghoul_folder_icon_by_adrianecchi-d80qf3y.png', 'https://i.pinimg.com/originals/72/51/6a/72516a470c0cb4c2610742e181a2a074.jpg', 0, '2018-07-29', 0, 'phimmoi'),
+(10, '[\"11\",\"16\"]', 'Attack on Titan Phần 1', 'Shingeki no Kyojin Phần 1', NULL, 25, 2013, 'attack on titan, titan', 'https://orig00.deviantart.net/8e7b/f/2014/266/0/1/shingeki_no_kyojin___icon_folder_by_ubagutobr-d80bkqw.png', 'https://i2.wp.com/attackongeek.com/wp-content/uploads/2017/08/attack-on-titan-ss2-wallpaper-backgrounds-hd-08.jpg', 0, '2018-07-30', 0, 'phimmoi, youtube');
 
 -- --------------------------------------------------------
 
@@ -128,8 +144,13 @@ CREATE TABLE `tap` (
 --
 
 INSERT INTO `tap` (`tap_id`, `phim_id`, `tap_ten`, `tap_tapsohienthi`, `tap_tapso`, `tap_googlelink`, `tap_openloadlink`, `tap_youtubelink`, `tap_localhostlink`, `tap_luotxem`, `tap_ngaycapnhat`) VALUES
-(1, 4, '1', '1', 1, 'https://photos.google.com/u/3/share/AF1QipNBR4FhwlXAleQmuT0qf6y0UXF4UtdSbL7jJAv7GJu8qxFVPL2bg5WEW30HX89MbQ/photo/AF1QipMMldPoVTFVXoEg85BPPQZF7QmRXcluP3-Xr9ym?key=bWM3Ums0SkJiVHVSTHNKME1NZmM4Z0w2ZXVmWmFR', 'openload', 'youtube', 'lcaohost', 1, '2018-07-23'),
-(2, 4, '', '2', 2, '', '', '', '', 0, '2018-07-23');
+(5, 8, '', 'Tập 1', 1, '', '', 'https://www.youtube.com/embed/XNu1jLd4JdA?rel=0&amp;showinfo=0', '', 0, '2018-07-29'),
+(6, 8, '', 'Tập 2', 2, '', '', 'https://www.youtube.com/embed/ZkTTAmkL0r0?rel=0&amp;showinfo=0', '', 0, '2018-07-29'),
+(7, 8, '', 'Tập 3', 3, '', '', 'https://www.youtube.com/embed/qg8cSdp55vQ?rel=0&amp;showinfo=0', '', 0, '2018-07-29'),
+(8, 8, '', 'Tập 4', 4, '', '', 'https://www.youtube.com/embed/xjFkfFg4u-Y?rel=0&amp;showinfo=0', '', 0, '2018-07-29'),
+(9, 8, '', 'Tập 5', 5, 'https://photos.google.com/u/3/share/AF1QipNBR4FhwlXAleQmuT0qf6y0UXF4UtdSbL7jJAv7GJu8qxFVPL2bg5WEW30HX89MbQ/photo/AF1QipMMldPoVTFVXoEg85BPPQZF7QmRXcluP3-Xr9ym?key=bWM3Ums0SkJiVHVSTHNKME1NZmM4Z0w2ZXVmWmFR', '', 'https://www.youtube.com/embed/ZlOIdJBiH7g?rel=0&amp;showinfo=0', '', 0, '2018-07-29'),
+(10, 9, '', 'Tập 1', 1, '', '', '', '', 0, '2018-07-29'),
+(11, 10, '', 'Tập 1', 1, '', '', 'https://www.youtube.com/embed/Da4hSNinQl4?rel=0&amp;showinfo=0', '', 0, '2018-07-30');
 
 -- --------------------------------------------------------
 
@@ -151,7 +172,9 @@ INSERT INTO `theloai` (`theloai_id`, `theloai_ten`) VALUES
 (12, 'Học đường'),
 (13, 'Thể thao'),
 (14, 'Hài hước'),
-(15, 'Robot');
+(16, 'Kinh dị'),
+(17, 'Vampire'),
+(18, 'Game');
 
 -- --------------------------------------------------------
 
@@ -165,6 +188,9 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `avatar` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'public/upload/avatar/user.png',
+  `active` int(1) NOT NULL DEFAULT '1',
+  `reason` text COLLATE utf8_unicode_ci,
+  `locked_at` timestamp NULL DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -174,9 +200,10 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'npvucusc@gmail.com', '$2y$10$BQnYM36AToONWuGqp3RmE.3o3i3u1wps2xdzl5we0wE1uh0VjBjme', 'public/upload/avatar/1531551709_Music-Anime-Naruto-Hd-572602.jpg', 'sRenO9WBj8rjmJ6Y0ltf9dwGBh35KuP041L7iiqXT7ZzwlEZ2nl86oR9Smbs', '2018-07-07 23:06:42', '2018-07-22 03:20:44'),
-(2, 'Administrator', 'nphivu104@gmail.com', '$2y$10$YQ8fo7pzVBmnjNe/owLhCe.dbpo8feJObkCmINvJsrxsPppsFHr5O', 'public/upload/avatar/user.png', 'ElNCwheC0bhW8T0dKHWL2TDYlb558bU2nZV3xruR4GTrcWFNRnsC7K8TrcaF', '2018-07-26 00:03:23', '2018-07-26 00:03:23');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `active`, `reason`, `locked_at`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Administrator', 'npvucusc@gmail.com', '$2y$10$G0a8qwRKX5eluvUsybjmIOFscYrmfMEtE2WkkuUA82M6Xojlq.e9K', 'public/upload/avatar/1532703250_Music-Anime-Naruto-Hd-572602.jpg', 1, NULL, NULL, 'Ru78LxvivjZYhARoJXG0Iqyu9X8Ff48kO7FC8YIciQBYRspRAnJzRb7A1wxE', '2018-07-07 23:06:42', '2018-07-27 08:12:07'),
+(2, 'Administrator', 'nphivu104@gmail.com', '$2y$10$YQ8fo7pzVBmnjNe/owLhCe.dbpo8feJObkCmINvJsrxsPppsFHr5O', 'public/upload/avatar/user.png', 1, 'Phá hoại website', '2018-07-28 20:01:29', 'oRbkZPsHY9OXxZdnto9bqfr6TNNxFcuOzdZzW0tvtKI0e0WcTjhYcM9qlT87', '2018-07-26 00:03:23', '2018-07-26 00:03:23'),
+(3, '!@#', 'nphivu105@gmail.com', '$2y$10$jkbJmq2LY7x756HPg3imE.GBk98JJmv/0I7PbPRVHajj2arlWZh1e', 'public/upload/avatar/user.png', 0, NULL, NULL, 'vDbJPUaqMhTJYEBmVF6kKs3wl637n0Kg2cOlGRkFvLqv8XRi7KfTrfOzQSqN', '2018-07-26 23:37:34', '2018-07-26 23:37:34');
 
 -- --------------------------------------------------------
 
@@ -185,7 +212,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `avatar`, `remember_toke
 --
 
 CREATE TABLE `users_roles` (
-  `role_id` int(3) NOT NULL,
+  `role_code` int(3) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -193,12 +220,18 @@ CREATE TABLE `users_roles` (
 -- Đang đổ dữ liệu cho bảng `users_roles`
 --
 
-INSERT INTO `users_roles` (`role_id`, `user_id`) VALUES
+INSERT INTO `users_roles` (`role_code`, `user_id`) VALUES
 (100, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `danhgia`
+--
+ALTER TABLE `danhgia`
+  ADD PRIMARY KEY (`user_id`,`phim_id`);
 
 --
 -- Chỉ mục cho bảng `migrations`
@@ -247,7 +280,7 @@ ALTER TABLE `users`
 -- Chỉ mục cho bảng `users_roles`
 --
 ALTER TABLE `users_roles`
-  ADD PRIMARY KEY (`role_id`,`user_id`);
+  ADD PRIMARY KEY (`role_code`,`user_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -263,7 +296,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT cho bảng `phim`
 --
 ALTER TABLE `phim`
-  MODIFY `phim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `phim_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `roles`
@@ -275,19 +308,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT cho bảng `tap`
 --
 ALTER TABLE `tap`
-  MODIFY `tap_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tap_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `theloai`
 --
 ALTER TABLE `theloai`
-  MODIFY `theloai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `theloai_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

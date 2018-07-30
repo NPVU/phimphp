@@ -156,7 +156,7 @@ class PhimController extends Controller{
             $data['add_phim_theloai_error'] = 'Phim phải thuộc ít nhất 1 thể loại';
             $valid = false;
         }
-        
+                
         if($valid){
             $url_icon = "";
             $url_background = "";
@@ -186,6 +186,7 @@ class PhimController extends Controller{
                         'phim_tag'        => $request->add_phim_tag,
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
+                        'phim_nguon'      => $request->add_phim_nguon,
                         'phim_ngaycapnhat'=> now()
                     ]
                 );
@@ -279,7 +280,8 @@ class PhimController extends Controller{
                         'phim_gioithieu'  => $request->edit_phim_gioithieu,
                         'phim_sotap'      => $request->edit_phim_sotap,
                         'phim_nam'        => $request->edit_phim_nam,
-                        'phim_tag'        => $request->edit_phim_tag                        
+                        'phim_tag'        => $request->edit_phim_tag,
+                        'phim_nguon'      => $request->edit_phim_nguon
                     ]
                 );
             return redirect()->route('listPhim')->with('success', 'Cập nhật thành công !');

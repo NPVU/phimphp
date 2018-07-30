@@ -252,6 +252,7 @@
         $('#modal-del-phim').iziModal('setTop', 100);
         
         function preAddTapPhim(id, ten, maxtap, tap){
+            $('title').html('Thêm Tập '+ten);
             $('#add_phim_id').val(id);
             $('#add_phim_maxtap').val(maxtap);
             $('#add_phim_ten').html(ten);
@@ -341,6 +342,9 @@
                                $('#modal-add-tapphim').iziModal('close');
                            }                           
                            showToast('success', 'Đã thêm tập '+tap+' thành công', 'Cập nhật thành công', true);
+                             $('button > span').html('Kiểm tra');
+                             $('button > i').removeClass('fa-check');
+                             $('button > i').removeClass('fa-close');
                        }
                    }
                  });

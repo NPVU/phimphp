@@ -39,6 +39,7 @@
     <link href="{{ asset('public/template/road_travel/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />   
 </head>
 <body>                    
     <div class="header">

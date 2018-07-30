@@ -132,6 +132,14 @@
                                        placeholder="VD: Naruto, Ninja, Cửu vĩ hồ"/>
                                 <span class="help-block"><?php echo isset($edit_phim_tag_error)?$edit_phim_tag_error:''; ?></span>
                             </div>
+                            
+                            <div class="form-group <?php echo isset($edit_phim_nguon_error)?'has-error':''; ?>">
+                                <label>Nguồn</label>
+                                <input type="text" name="edit_phim_nguon" class="form-control" 
+                                       value="<?php echo isset($_POST['edit_phim_nguon']) ? $_POST['edit_phim_nguon'] : $phim[0]->phim_nguon ?>"
+                                       placeholder="VD: anime47, phimmoi, vuighe ...."/>
+                                <span class="help-block"><?php echo isset($edit_phim_nguon_error)?$edit_phim_nguon_error:''; ?></span>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
