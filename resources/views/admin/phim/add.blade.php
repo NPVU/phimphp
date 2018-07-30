@@ -160,7 +160,7 @@
                         
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-danger" name="btn" value="add">Cập nhật</button>
-                            <a href="{{url('quan-ly/phim/')}}" class="btn btn-warning" >Trở về</a>
+                            <a href="{{url('quan-ly/phim/')}}" class="btn btn-warning" ><i class="fa fa-backward"></i> Trở về</a>
                         </div>
                     </form>
                 </div>                              

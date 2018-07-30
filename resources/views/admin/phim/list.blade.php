@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        {{$phim[0]->phim_ten}}
+        DANH SÁCH TẬP - {{$phim[0]->phim_ten}}
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -19,7 +19,18 @@
         <div class="col-md-12">            
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Danh sách tập</h3>                                       
+                    <h3 class="box-title"></h3>
+                    <div style="float:right">
+                        @if(sizeof($list) < $phim[0]->phim_sotap)
+                        <button type="button" class="btn btn-danger" 
+                                onclick="preAddTapPhim()">
+                            Thêm tập
+                        </button>
+                        @endif
+                        <a href="{{ url('/quan-ly/phim/') }}" class="btn btn-warning">
+                            <i class="fa fa-backward"></i> Trở về
+                        </a>
+                    </div>
                 </div>                
                 <div class="box-body text-center">
                     @foreach ($list as $row)
@@ -167,6 +178,38 @@
                 </div>        
             </div>
         </form>
+    </div>
+    <div id="modal-add-tap" data-izimodal-transitionin="fadeInDown">
+        <form method="POST" action="{{url('quan-ly/phim/danh-sach-tap/add')}}">
+            {{csrf_field()}}
+            <input type="hidden" name="phim_id" value="{{$phim[0]->phim_id}}" />
+            <input type="hidden" id="phim_sotap" value="{{$phim[0]->phim_sotap}}" />            
+            <div class="modal-body">        
+                <div class="row">          
+                    <div class="col-md-12 text-center">
+                        <div class="form-group">                        
+                            <strong style="color: lightseagreen;font-size: 1.5em;">{{$phim[0]->phim_ten}} ({{$phim[0]->phim_sotap}} tập)</strong>                                            
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group add_tapphim_tap">
+                            <label>Tập</label>
+                            <input type="number" id="add_tapphim_tap" name="add_tapphim_tap" class="form-control required" value="0" placeholder=""/>
+                            <span class="help-block add_tapphim_tap_error"></span>
+                        </div>
+                        <div class="form-group add_tapphim_taphienthi">
+                            <label>Tập hiển thị</label>
+                            <input type="text" id="add_tapphim_taphienthi" name="add_tapphim_taphienthi" class="form-control required" value="" placeholder=""/>
+                            <span class="help-block add_tapphim_taphienthi_error"></span>
+                        </div> 
+                    </div>
+                    <div class="col-md-12 text-center" style="margin-top:20px">
+                        <button type="submit"onclick="return validFormAddTap();" name="btn" value="del" class="btn btn-danger">Cập nhật</button>
+                        <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                    </div>
+                </div>        
+            </div>
+        </form>
     </div>    
     <script>
         $('#modal-edit-tapphim').iziModal({
@@ -181,9 +224,13 @@
             iconColor: 'white',
             onOpening: function(modal){
                 modal.startLoading();
+                $('#videoCheck').attr('src', '');
             },
             onOpened: function(modal){
                 modal.stopLoading();
+            },
+            onClosing: function(modal){               
+                $('title').html('Danh Sách Tập - {{$phim[0]->phim_ten}}');                
             },
         });
         $('#modal-del-tap').iziModal({
@@ -195,7 +242,17 @@
             icon: 'fa fa-check',
             iconColor: 'white'
         });
+        $('#modal-add-tap').iziModal({
+            title:'Thêm tập',
+            top:100,
+            overlayClose: false,
+            width: 500,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-plus',
+            iconColor: 'white'
+        });
         function preEditTap(tap){
+            $('title').html('Chỉnh Sửa Tập '+tap+ ' - {{$phim[0]->phim_ten}}');            
             $('#modal-edit-tapphim').iziModal('open');
             $('*').removeClass('has-error');
             $('.help-block').html('');
@@ -220,6 +277,33 @@
                        }
                    }
                  });            
+        }
+        function preAddTapPhim(){
+            $('#modal-add-tap').iziModal('open');
+        }
+        function validFormAddTap(){
+            var tap = $('#add_tapphim_tap').val();
+            var taphienthi = $('#add_tapphim_taphienthi').val();
+            var valid = true;
+            if(parseInt(tap) == 0 || parseInt(tap) > $('#add_phim_maxtap').val()){
+                $('.add_tapphim_tap').addClass('has-error');
+                $('.add_tapphim_tap_error').html('Tập hợp lệ trong khoảng 1 - '+$('#phim_sotap').val());
+                valid = false;
+            } else {
+                $('.add_tapphim_tap').removeClass('has-error');
+                $('.add_tapphim_tap_error').html('');
+            }  
+            if(taphienthi.trim() === "" || taphienthi.trim().length > 50){
+                $('.add_tapphim_taphienthi').addClass('has-error');
+                $('.add_tapphim_taphienthi_error').html('Tập hiển thị có tối đa 50 ký tự');
+                valid = false;
+            } else {
+                $('.add_tapphim_taphienthi').removeClass('has-error');
+                $('.add_tapphim_taphienthi_error').html('');
+            }
+            if(!valid){
+                return false;
+            }
         }
         function preDelTap(tap, tenhienthi){
             $('#del_tap_id').val(tap);

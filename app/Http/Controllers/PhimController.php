@@ -45,7 +45,8 @@ class PhimController extends Controller{
         } else {
             $count = DB::table('phim')->count();
             $listPhim = DB::table('phim')
-                    ->selectRaw('phim.*, (SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap')
+                    ->selectRaw('phim.*, (SELECT COUNT(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
+                            . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
                     ->paginate(10);
         }        
         
@@ -112,7 +113,7 @@ class PhimController extends Controller{
             $data['phim'] = $phim;
             $data['token'] = $token;
 
-            $data['title'] = 'Danh sách tập';
+            $data['title'] = 'Danh Sách Tập - '.$phim[0]->phim_ten;
             $data['page'] = 'admin.phim.list';        
             return view('admin/layout', $data);
         } else {
@@ -342,6 +343,27 @@ class PhimController extends Controller{
                 );
         $data['status'] = 1;
         return $data;
+    }
+    public function addTapPhimFromListTap(Request $request){
+        $phim_id = $request->phim_id;
+        $token = $request->_token;
+        $tap = DB::table('tap')->where([
+            ['phim_id', '=', $phim_id],
+            ['tap_tapso', '=', $request->add_tapphim_tap]
+        ])->count();
+        if($tap > 0){
+            return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('error', 'Tập này đã có, không thể thêm !');            
+        }
+        DB::table('tap')->insert(
+                    [
+                        'phim_id'           => $phim_id,
+                        'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
+                        'tap_tapso'         => $request->add_tapphim_tap,
+                        'tap_luotxem'       => 0,
+                        'tap_ngaycapnhat'   => now()
+                    ]
+                );        
+        return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Thêm '.trim($request->add_tapphim_taphienthi).' thành công!');
     }
     
     public function editTap($phim_id, $token,Request $request) {
