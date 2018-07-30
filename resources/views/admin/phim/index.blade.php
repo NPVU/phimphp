@@ -132,7 +132,7 @@
             </div>
         </form>
     </div>
-    <div id="modal-add-tapphim" data-izimodal-transitionin="fadeInDown">
+    <div id="modal-add-tapphim" data-izimodal-transitionin="fadeInUp">
         <form id="fromAddTapPhim">
             <input type="hidden" id="add_phim_id" name="add_phim_id" value="" />
             <input type="hidden" id="add_phim_maxtap" value="" />
@@ -234,6 +234,17 @@
             </div>
         </form>        
     </div>
+    <div id="modal-message" data-izimodal-transitionin="fadeInDown">        
+        <div class="modal-body">        
+            <div class="row">                
+                <div class="col-md-12 text-center modal-send-message">                    
+                </div>
+                <div class="col-md-12 text-center" style="margin-top:20px">                        
+                    <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                </div>
+            </div>        
+        </div>
+    </div>
     <script>        
         function preDelPhim(id, ten){
             $('#del_phim_id').val(id);
@@ -242,25 +253,44 @@
             $('#modal-del-phim').iziModal('open');
         }
         $('#modal-del-phim').iziModal({
+            title: 'Xác nhận',
+            top: 100,
             overlayClose: false,
             width: 500,
             headerColor: 'rgb(56, 98, 111)',
             icon: 'fa fa-check',
             iconColor: 'white'
-        });
-        $('#modal-del-phim').iziModal('setTitle', 'Xác nhận');
-        $('#modal-del-phim').iziModal('setTop', 100);
+        });        
         
-        function preAddTapPhim(id, ten, maxtap, tap){
-            $('title').html('Thêm Tập '+ten);
+        $('#modal-message').iziModal({
+            title: 'Thông báo',
+            top: 100,
+            overlayClose: false,
+            width: 500,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-envelope-open',
+            iconColor: 'white',
+            onClosing: function (modal) {
+                $('title').html('Danh sách phim');
+                $('.modal-send-message').html('');
+            }
+        });
+        
+        function preAddTapPhim(id, ten, maxtap, tap){           
             $('#add_phim_id').val(id);
             $('#add_phim_maxtap').val(maxtap);
             $('#add_phim_ten').html(ten);
             resetFormAddTapPhim();
             if(parseInt(tap) < $('#add_phim_maxtap').val()){
+                $('title').html('Thêm Tập '+ten);
                 $('#add_tapphim_tap').val(parseInt(tap)+1);
+                $('#modal-add-tapphim').iziModal('open');
+            } else {
+                $('title').html('Thông báo');
+                $('.modal-send-message').html('Số tập của phim đã đủ không thể thêm tập!');
+                $('#modal-message').iziModal('open');
             }
-            $('#modal-add-tapphim').iziModal('open');
+            
         }
         function resetFormAddTapPhim(){
             $('#add_tapphim_ten').val('');
