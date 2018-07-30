@@ -1,7 +1,7 @@
 @if(!empty($tap[0]->googleRedirectLink))
 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     <div class="video-player">        
-        <video id="video-player" width="100%" src="{{!empty($tap[0]->googleRedirectLink['720p'])?$tap[0]->googleRedirectLink['720p']:$tap[0]->googleRedirectLink['360p']}}" controls>            
+        <video id="video-player" width="100%" src="{{$tap[0]->googleRedirectLink['360p']}}" controls>            
             <source src="{{$tap[0]->googleRedirectLink['360p']}}" id="google360p" />
             @if(!empty($tap[0]->googleRedirectLink['720p']))
             <source src="{{$tap[0]->googleRedirectLink['720p']}}" id="google720p" />
