@@ -9,7 +9,7 @@ body{
 	margin:0;
 	background:#fff;
 	position:relative;
-	font-family: 'Montserrat', sans-serif;
+	font-family: sans-serif;
 }
 body a{
     transition:0.5s all;
@@ -661,50 +661,45 @@ a.navbar-brand span {
 }
 /*-- //slider --*/
 /*-- banner-top --*/
-.w3layouts-banner-top{
-    background: url(../images/bg5.jpg) no-repeat 0px 0px;
+.w3layouts-banner-top{    
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
 	-o-background-size: cover;		
 	-moz-background-size: cover;
-	min-height:700px;
+	min-height:600px;
 }
-.w3layouts-banner-top1{
-	background: url(../images/bg7.jpg) no-repeat 0px 0px;
+.w3layouts-banner-top1{	
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
 	-o-background-size: cover;		
 	-moz-background-size: cover;
-	min-height:700px;
+	min-height:600px;
 }
-.w3layouts-banner-top2{
-	background: url(../images/bg8.jpg) no-repeat 0px 0px;
+.w3layouts-banner-top2{	
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
 	-o-background-size: cover;		
 	-moz-background-size: cover;	
-	min-height:700px;
+	min-height:600px;
 }
-.w3layouts-banner-top3{
-	background: url(../images/bg.jpg) no-repeat 0px 0px;
+.w3layouts-banner-top3{	
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
 	-o-background-size: cover;		
 	-moz-background-size: cover;	
-	min-height:700px;
+	min-height:600px;
 }
-.w3layouts-banner-top4{
-	background: url(../images/bg4.jpg) no-repeat 0px 0px;
+.w3layouts-banner-top4{	
     background-size: cover;	
 	-webkit-background-size: cover;	
 	-moz-background-size: cover;
 	-o-background-size: cover;		
 	-moz-background-size: cover;
-	min-height:700px;
+	min-height:600px;
 }
 .banner-dott, .banner-dott1 {
     background: url(../images/dott.png)repeat 0px 0px;
@@ -2290,6 +2285,9 @@ ul.tweet-agile li p.tweet-p1 a {
 		font-size: 1.6em;
 		width: 35px;
 	}
+        .grid1 {
+            padding: 1em 1em;
+        }
 }
 @media(max-width: 600px){
 	.callbacks_nav.prev {
@@ -2316,6 +2314,9 @@ ul.tweet-agile li p.tweet-p1 a {
 	.address p {
 		font-size: 14px;
 	}
+/*        .bannergrids {
+            display: none;
+        }*/
 }
 @media(max-width: 480px){
 	.top-nav-text {
@@ -2436,7 +2437,7 @@ ul.tweet-agile li p.tweet-p1 a {
 		padding: 3em 0 0;
 	}
 	.callbacks_nav {
-		top: 25%;
+		top: 29%;
 	}
 	.callbacks_nav.prev {
 		left: 39%;
@@ -2471,6 +2472,9 @@ ul.tweet-agile li p.tweet-p1 a {
 	ul.top-links {
 		margin-top: 95px;
 	}
+        .w3layouts-banner-top {
+            min-height: 320px;
+        }
 }
 @media(max-width: 384px){
 	.slider-info h3, .slider-info h2, .slider-info h4 {
@@ -2546,6 +2550,14 @@ ul.tweet-agile li p.tweet-p1 a {
 	.modal-header {
 		font-size: 1.7em;
 	}
+        .callbacks_nav {
+		top: 28%;
+	}
+}
+@media(max-width: 360px){
+        .callbacks_nav {
+		top: 28%;
+	}
 }
 @media(max-width: 320px){
 	.callbacks_nav.prev {
@@ -2555,7 +2567,7 @@ ul.tweet-agile li p.tweet-p1 a {
 		right: 36%;
 	}
 	.callbacks_nav {
-		top: 26%;
+		top: 28%;
 	}
 	h3.heading {
 		font-size: 32px;

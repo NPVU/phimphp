@@ -16,10 +16,11 @@ and open the template in the editor.
     border-radius: 5px;
 }
 .video-player {
-    padding-top: 10px;
-    padding-bottom: 5px; 
+    margin-top: 10px;
+    margin-bottom: 5px; 
     /*z-index:100;*/
     position: relative;
+    border: 1px solid whitesmoke;
 }
 .video-background-overlay, .video-background-loading{    
     position: absolute;
