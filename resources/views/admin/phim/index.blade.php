@@ -368,6 +368,7 @@
                            resetFormAddTapPhim();
                            if(parseInt(tap) < $('#add_phim_maxtap').val()){
                                $('#add_tapphim_tap').val(parseInt(tap)+1);
+                               $('#add_tapphim_taphienthi').val('Tập '+(parseInt(tap)+1));
                            } else {
                                $('#modal-add-tapphim').iziModal('close');
                            }                           

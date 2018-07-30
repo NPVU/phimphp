@@ -1896,11 +1896,14 @@ ul.tweet-agile li p.tweet-p1 a {
 	.slider-info i {
 		font-size: 2em;
 	}
+        .callbacks_nav.prev {
+		left: 1%;
+	}
 	.callbacks_nav.next {
-		right: 46%;
+		right: 1%;
 	}
 	.callbacks_nav {
-		top: 49%;
+		top: 40%;
 	}
 	.packages_right h3 {
 		font-size: 24px;
@@ -2047,18 +2050,24 @@ ul.tweet-agile li p.tweet-p1 a {
 		margin-right: 12%!important;
 	}
 	.callbacks_nav.prev {
-		left: 44%;
+		left: 1%;
+	}
+        .callbacks_nav.next {
+		right: 1%;
 	}
 	.grid1 {
 		padding: 1.5em 1em;
 	}
 	.w3layouts-banner-top, .w3layouts-banner-top1, .w3layouts-banner-top2, .w3layouts-banner-top3, .w3layouts-banner-top4, .w3layouts-banner-top5, .banner-dott, .banner-dott1 {
-		min-height: 540px;
+		min-height: 450px;
 	}
+        .bannergrids {
+            margin-top: 6em;
+        }
 }
 @media(max-width: 768px){
 	.callbacks_nav.next {
-		right: 44%;
+		right: 1%;
 	}
 	.about_left {
 		min-height: 400px;
@@ -2194,16 +2203,19 @@ ul.tweet-agile li p.tweet-p1 a {
 		font-size: 2.2em;
 	}
 	.callbacks_nav.prev {
-		left: 42.5%;
+		left: 1%;
+	}
+        .callbacks_nav.next {
+		right: 1%;
 	}
 	.callbacks_nav {
 		top: 45%;
 	}
 	.bannergrids {
-		margin-top: 6em;
+		margin-top: 2em;
 	}
 	.w3layouts-banner-top, .w3layouts-banner-top1, .w3layouts-banner-top2, .w3layouts-banner-top3, .w3layouts-banner-top4, .w3layouts-banner-top5, .banner-dott, .banner-dott1 {
-		min-height: 480px;
+		min-height: 340px;
 	}
 	.w3-icon-grid1 i {
 		font-size: 1.6em;
@@ -2270,7 +2282,7 @@ ul.tweet-agile li p.tweet-p1 a {
 }
 @media(max-width: 640px){
 	.callbacks_nav.next {
-		right: 43%;
+		right: 1%;
 	}
 	.w3-icon-grid1 {
 		padding: 0 8px;
@@ -2291,7 +2303,10 @@ ul.tweet-agile li p.tweet-p1 a {
 }
 @media(max-width: 600px){
 	.callbacks_nav.prev {
-		left: 42%;
+		left: 1%;
+	}
+        .callbacks_nav.next {
+		right: 1%;
 	}
 	.newsletter input[type="submit"] {
 		width: 29%;
@@ -2338,10 +2353,10 @@ ul.tweet-agile li p.tweet-p1 a {
 		padding: 5px 10px;
 	}
 	.callbacks_nav {
-		top: 29%;
+		top: 38%;
 	}
 	.callbacks_nav.next {
-		right: 39%;
+		right: 1%;
 	}
 	.bannergrids {
 		margin-top: 5em;
@@ -2409,6 +2424,12 @@ ul.tweet-agile li p.tweet-p1 a {
 	ul.tweet-agile li p.tweet-p1 {
 		font-size: 14px;
 	}
+        .bannergrids{
+            display: none;
+        }
+        .w3layouts-banner-top, .w3layouts-banner-top1, .w3layouts-banner-top2, .w3layouts-banner-top3, .w3layouts-banner-top4, .w3layouts-banner-top5, .banner-dott, .banner-dott1 {
+            min-height: 260px;
+        }
 }
 @media(max-width: 414px){
 	.navbar-header h1 a {
@@ -2440,8 +2461,11 @@ ul.tweet-agile li p.tweet-p1 a {
 		top: 29%;
 	}
 	.callbacks_nav.prev {
-		left: 39%;
+		left: 1%;
 	}
+        .callbacks_nav.next {
+            right: 1%;
+        }
 	.w3-services-left-grid h4 {
 		font-size: 1.3em;
 		margin-bottom: .5em;
@@ -2475,6 +2499,13 @@ ul.tweet-agile li p.tweet-p1 a {
         .w3layouts-banner-top {
             min-height: 320px;
         }
+        
+        .w3layouts-banner-top, .w3layouts-banner-top1, .w3layouts-banner-top2, .w3layouts-banner-top3, .w3layouts-banner-top4, .w3layouts-banner-top5, .banner-dott, .banner-dott1 {
+            min-height: 220px !important;
+        }
+        .bannergrids{
+            display: none;
+        }
 }
 @media(max-width: 384px){
 	.slider-info h3, .slider-info h2, .slider-info h4 {
@@ -2489,7 +2520,10 @@ ul.tweet-agile li p.tweet-p1 a {
 		width: 42%;
 	}
 	.callbacks_nav.prev {
-		left: 38%;
+		left: 1%;
+	}
+        .callbacks_nav.next {
+		right: 1%;
 	}
 	.about_right h3 {
 		font-size: 22px;
@@ -2531,8 +2565,11 @@ ul.tweet-agile li p.tweet-p1 a {
 		font-size: 22px;
 		padding: 15px;
 	}
+        .callbacks_nav.prev {
+		left: 1%;
+	}
 	.callbacks_nav.next {
-		right: 38%;
+		right: 1%;
 	}
 	.team-grids {
 		width: 90%;
@@ -2553,6 +2590,10 @@ ul.tweet-agile li p.tweet-p1 a {
         .callbacks_nav {
 		top: 28%;
 	}
+        
+        .w3layouts-banner-top, .w3layouts-banner-top1, .w3layouts-banner-top2, .w3layouts-banner-top3, .w3layouts-banner-top4, .w3layouts-banner-top5, .banner-dott, .banner-dott1 {
+            min-height: 200px !important;
+        }
 }
 @media(max-width: 360px){
         .callbacks_nav {
@@ -2561,10 +2602,10 @@ ul.tweet-agile li p.tweet-p1 a {
 }
 @media(max-width: 320px){
 	.callbacks_nav.prev {
-		left: 35%;
+		left: 1%;
 	}
 	.callbacks_nav.next {
-		right: 36%;
+		right: 1%;
 	}
 	.callbacks_nav {
 		top: 28%;
@@ -2598,6 +2639,9 @@ ul.tweet-agile li p.tweet-p1 a {
 		right: 3px;
 		letter-spacing: 0px;
 	}
+        .w3layouts-banner-top, .w3layouts-banner-top1, .w3layouts-banner-top2, .w3layouts-banner-top3, .w3layouts-banner-top4, .w3layouts-banner-top5, .banner-dott, .banner-dott1 {
+            min-height: 180px !important;
+        }
 }
 @media(max-width: 1680px){
 	
