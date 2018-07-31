@@ -38,7 +38,7 @@
                         <div class="input-group">                    
                             <span class="btn btn-primary " 
                                   style="width:100px;margin-bottom: 5px;"
-                                  onclick="preEditTap({{$row->tap_id}})">
+                                  onclick="preEditTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')">
                                 {{$row->tap_tapsohienthi}}
                             </span>
                             <span class="btn btn-danger " 
@@ -251,8 +251,8 @@
             icon: 'fa fa-plus',
             iconColor: 'white'
         });
-        function preEditTap(tap){
-            $('title').html('Chỉnh Sửa Tập '+tap+ ' - {{$phim[0]->phim_ten}}');            
+        function preEditTap(tap, taphienthi){
+            $('title').html('Chỉnh Sửa '+taphienthi+ ' - {{$phim[0]->phim_ten}}');            
             $('#modal-edit-tapphim').iziModal('open');
             $('*').removeClass('has-error');
             $('.help-block').html('');
