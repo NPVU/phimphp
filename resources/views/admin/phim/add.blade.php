@@ -37,7 +37,7 @@
                                     <span class="help-block"><?php echo isset($add_phim_image_error)?$add_phim_image_error:''; ?></span>
                                 </div>
                                 <div class="form-group <?php echo isset($add_phim_image_link_error)?'has-error':''; ?>">
-                                    <label class="control-label" for="add_phim_image_link"><small>hoặc</small> Đường dẫn ảnh bìa</label>
+                                    <label class="control-label" for="add_phim_image_link"><small>hoặc</small> Đường dẫn ảnh</label>
                                     <input type="text" id="add_phim_image_link" name="add_phim_image_link" 
                                            class="form-control" value="<?php echo isset($_POST['add_phim_image_link']) ? $_POST['add_phim_image_link'] : '' ?>"
                                            placeholder="VD: http://imurg.org/naruto.png"/>
@@ -61,7 +61,7 @@
                                     <span class="help-block"><?php echo isset($phim_background_error)?$phim_background_error:''; ?></span>
                                 </div>
                                 <div class="form-group <?php echo isset($phim_background_link_error)?'has-error':''; ?>">
-                                    <label class="control-label" for="phim_background_link"><small>hoặc</small> Đường dẫn ảnh bìa</label>
+                                    <label class="control-label" for="phim_background_link"><small>hoặc</small> Đường dẫn ảnh</label>
                                     <input type="text" id="phim_background_link" name="phim_background_link" 
                                            class="form-control" value="<?php echo isset($_POST['phim_background_link']) ? $_POST['phim_background_link'] : '' ?>"
                                            placeholder="VD: http://imurg.org/naruto.png (Full HD)"/>

@@ -38,7 +38,7 @@
                                     <span class="help-block"><?php echo isset($edit_phim_image_error)?$edit_phim_image_error:''; ?></span>
                                 </div>
                                 <div class="form-group <?php echo isset($edit_phim_image_link_error)?'has-error':''; ?>">
-                                    <label class="control-label" for="edit_phim_image_link"><small>hoặc</small> Đường dẫn ảnh bìa</label>
+                                    <label class="control-label" for="edit_phim_image_link"><small>hoặc</small> Đường dẫn ảnh</label>
                                     <div class="input-group">
                                         <input type="text" id="edit_phim_image_link" name="edit_phim_image_link" 
                                                class="form-control" value="<?php echo isset($_POST['edit_phim_image_link']) ? $_POST['edit_phim_image_link'] : $phim[0]->phim_hinhanh ?>"
@@ -67,7 +67,7 @@
                                     <span class="help-block"><?php echo isset($phim_background_error)?$phim_background_error:''; ?></span>
                                 </div>
                                 <div class="form-group <?php echo isset($phim_background_link_error)?'has-error':''; ?>">
-                                    <label class="control-label" for="phim_background_link"><small>hoặc</small> Đường dẫn ảnh bìa</label>
+                                    <label class="control-label" for="phim_background_link"><small>hoặc</small> Đường dẫn ảnh</label>
                                     <div class="input-group">
                                         <input type="text" id="phim_background_link" name="phim_background_link" 
                                                class="form-control" value="<?php echo isset($_POST['phim_background_link']) ? $_POST['phim_background_link'] : $phim[0]->phim_hinhnen ?>"

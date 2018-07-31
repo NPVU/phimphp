@@ -11,6 +11,7 @@ $('#modal-avatar').iziModal({
     headerColor: 'rgb(56, 98, 111)',
     icon: 'fa fa-image',
     iconColor: 'white',
+    zindex:10000,
     onOpening: function (modal) {
         $('#imgDragDrop').removeClass('display-none');
         $('#btnReUploadAvatar').addClass('display-none');
