@@ -133,5 +133,7 @@
             $().UItoTop({ easingType: 'easeOutQuart' });								
 	});
     </script>
+    <div class="npv-page-loading">        
+    </div>
 </body>
 </html>

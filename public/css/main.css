@@ -1,3 +1,13 @@
+.npv-page-loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+    background: #ffffff url('../img/themes/loading.gif') no-repeat;
+    background-position-x: center;
+}
 .list-action-icon .fa {
     cursor: pointer;
     padding: 3px;  

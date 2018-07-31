@@ -51,7 +51,7 @@
                         @endif
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Email có dạng: ex@abc.xyz">
-                        <input class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" type="email" value="{{ old('email') }}" autofocus name="email" placeholder="Email (Tài khoản)">
+                        <input class="input100{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" type="email" value="{{ old('email') }}" name="email" placeholder="Email (Tài khoản)">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>

@@ -1,14 +1,15 @@
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
-
+window.onload = function(){
+    $('.npv-page-loading').remove();  
+};
 function showToast(type, content, title, close){
     switch(type){
         case 'success': toastr.options.closeButton = close; toastr.success(content, title); break;
         case 'error': toastr.options.closeButton = close; toastr.error(content, title); break;
     }       
 }
-
 
 (function ($) {
     "use strict";
