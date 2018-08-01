@@ -84,6 +84,7 @@
     height: 30px;
     border-radius: 50%;
     background-color: #da9d40;
+    cursor: pointer;
 }
 
 .npv-icon > i {
