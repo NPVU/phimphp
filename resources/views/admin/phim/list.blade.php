@@ -150,6 +150,7 @@
                     </div>
 
                     <div class="col-md-12 text-center" style="margin-top:20px">                        
+                        <button type="button" name="btn" class="btn btn-primary" onclick="return next();">Lưu và tiếp tục</button>
                         <button type="submit" name="btn" class="btn btn-danger" onclick="return vf();">Cập nhật</button>                    
                         <button type="button" class="btn btn-default" data-izimodal-close="">Đóng</button>
                     </div>
@@ -223,11 +224,11 @@
             icon: 'fa fa-plus-circle',
             iconColor: 'white',
             onOpening: function(modal){
-                modal.startLoading();
+                
                 $('#videoCheck').attr('src', '');
             },
             onOpened: function(modal){
-                modal.stopLoading();
+                
             },
             onClosing: function(modal){               
                 $('title').html('Danh Sách Tập - {{$phim[0]->phim_ten}}');                
@@ -368,7 +369,48 @@
                 $('.tapphim_taphienthi').removeClass('has-error');
                 $('.tapphim_taphienthi_error').html('');
             }
+            if($('#tapphim_luotxem').val() === ""){
+                $('#tapphim_luotxem').val(0);
+            }
             return true;
+        }
+        function next(){
+            var taphienthi = $('#tapphim_taphienthi').val();            
+            if(taphienthi.trim() === "" || taphienthi.trim().length > 50){
+                $('.tapphim_taphienthi').addClass('has-error');
+                $('.tapphim_taphienthi_error').html('Tập hiển thị có tối đa 50 ký tự');
+                return false;
+            } else {
+                $('.tapphim_taphienthi').removeClass('has-error');
+                $('.tapphim_taphienthi_error').html('');
+            }
+            if($('#tapphim_luotxem').val() === ""){
+                $('#tapphim_luotxem').val(0);
+            }
+            var url = "{{url('quan-ly/phim/danh-sach-tap/')}}/{{$phim[0]->phim_id}}/"+$('meta[name="csrf-token"]').attr('content')+"/next";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#fromEditTapPhim").serialize(),
+                headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                success: function(data){
+                    console.log(data);                    
+                    $('button > span').html('Kiểm tra');
+                    $('button > i').removeClass('fa-check');
+                    $('button > i').removeClass('fa-close');
+                    $('#videoCheck').attr('src', '');
+                    $('.tapphim_tap').val(data[0].tap_tapso);
+                    $('#tapphim_taphienthi').val(data[0].tap_tapsohienthi);
+                    $('#tapphim_ten').val(data[0].tap_ten);
+                    $('#tapphim_luotxem').val(data[0].tap_luotxem);
+                    $('#localhostLink').val(data[0].tap_tentap_localhostlink);
+                    $('#googleLink').val(data[0].tap_googlelink);
+                    $('#youtubeLink').val(data[0].tap_youtubelink);
+                    $('#openloadLink').val(data[0].tap_openloadlink);
+                }
+            })
         }
     </script>
 </section>

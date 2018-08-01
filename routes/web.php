@@ -29,6 +29,7 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::post('/delete','PhimController@delPhim');
     Route::post('/edit/{phimID}/{token}','PhimController@editPhim');
     Route::post('/danh-sach-tap/{phimID}/{token}','PhimController@editTap');
+    Route::post('/danh-sach-tap/{phimID}/{token}/next','PhimController@editTapAndNext');
     Route::post('/danh-sach-tap/delete','PhimController@delTap');
     Route::post('/danh-sach-tap/add','PhimController@addTapPhimFromListTap');    
     Route::post('/upload-image','PhimController@uploadImage');

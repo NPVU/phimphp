@@ -381,6 +381,25 @@ class PhimController extends Controller{
         return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Cập nhật '.$request->tapphim_tap.' thành công !');        
     }
     
+    public function editTapAndNext($phim_id, $token,Request $request) {
+        DB::table('tap')->where([['phim_id', $request->edit_phim_id],['tap_tapso', $request->tapphim_tap]])->update(
+                    [                        
+                        'tap_ten'           => trim($request->tapphim_ten),
+                        'tap_tapsohienthi'  => trim($request->tapphim_taphienthi),                        
+                        'tap_localhostlink' => trim($request->localhostLink),
+                        'tap_googlelink'    => trim($request->googleLink),
+                        'tap_youtubelink'   => trim($request->youtubeLink),
+                        'tap_openloadlink'  => trim($request->openloadLink),
+                        'tap_luotxem'       => $request->tapphim_luotxem                        
+                    ]
+        );
+        $tap = DB::table('tap')->where([
+                ['phim_id', $phim_id],
+                ['tap_tapso', ($request->tapphim_tap+1)]
+            ])->get();
+        return $tap;        
+    }
+    
     public function delTap(Request $request){        
         $tap_id = $request->del_tap_id;                
         $row = DB::table('tap')->where('tap_id', $tap_id)->delete();                
