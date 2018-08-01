@@ -41,7 +41,9 @@
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />   
 </head>
-<body>                    
+<body> 
+    <div class="npv-page-loading">        
+    </div>
     <div class="header">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
@@ -132,8 +134,6 @@
 	$(document).ready(function() {
             $().UItoTop({ easingType: 'easeOutQuart' });								
 	});
-    </script>
-    <div class="npv-page-loading">        
-    </div>
+    </script>    
 </body>
 </html>

@@ -1,3 +1,10 @@
+body::-webkit-scrollbar {
+    width: 6px;
+    height: 6px !important;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #3c8dbc !important;
+}
 .npv-page-loading {
     position: absolute;
     top: 0;

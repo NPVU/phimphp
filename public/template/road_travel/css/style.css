@@ -79,8 +79,8 @@ label{
     color: #fff;
 }
 .w3_facebook:hover {
-    border-color: #3b5998;
-    color: #3b5998;
+    border-color: #fff;
+    color: #fff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -472,7 +472,7 @@ a.navbar-brand span {
     padding: 10px 0;
 }
 .header {
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    background: #3c8dbc;
     border-bottom: 1px solid #9e9e9e;
 	padding:0 0em;
 }
