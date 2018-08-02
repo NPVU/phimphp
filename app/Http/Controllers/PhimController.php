@@ -36,7 +36,8 @@ class PhimController extends Controller{
                     ->orwhere('phim_sotap', $tuKhoa)
                     ->count();
             $listPhim = DB::table('phim')
-                    ->selectRaw('phim.*, (SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap')
+                    ->selectRaw('phim.*, (SELECT COUNT(1) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
+                            . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
                     ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('phim_sotap', $tuKhoa)
@@ -45,7 +46,7 @@ class PhimController extends Controller{
         } else {
             $count = DB::table('phim')->count();
             $listPhim = DB::table('phim')
-                    ->selectRaw('phim.*, (SELECT COUNT(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
+                    ->selectRaw('phim.*, (SELECT COUNT(1) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
                             . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
                     ->paginate(10);
         }        

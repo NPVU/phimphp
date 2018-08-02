@@ -110,6 +110,19 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 
+.npv-server-box {
+    padding-bottom: 5px;
+}
+.npv-server-google, .npv-server-youtube, .npv-server-openload {
+    opacity: 0.3;
+    border-radius: 5px;
+}
+
+.npv-server-active {
+    opacity: 1;
+    background-color: white;
+}
+
 iframe.npv-youtube {
     margin: 10px 5px;
     width: 100%;

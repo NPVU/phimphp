@@ -21,6 +21,8 @@ and open the template in the editor.
     /*z-index:100;*/
     position: relative;
     border: 1px solid whitesmoke;
+    line-height: 0px;
+    border-radius: 5px;
 }
 .video-background-overlay, .video-background-loading{    
     position: absolute;

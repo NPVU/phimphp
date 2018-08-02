@@ -7,8 +7,18 @@
             <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
                 @include('plugin.video')
             </div>            
+        </div>  
+        <div class="npv-server-box">
+            <div class="text-center">
+                @if(!empty($tap[0]->googleRedirectLink))
+                <img class="npv-server-google npv-server-active" src="{{asset('public/img/themes/google-drive-32x32.png')}}" />
+                @endif
+                @if(!empty($tap[0]->tap_youtubelink))
+                <img class="npv-server-youtube" src="{{asset('public/img/themes/youtube-32x32.png')}}" />
+                @endif
+            </div>
         </div>
-    </div>
+    </div>            
 </section>
 
 @endsection
