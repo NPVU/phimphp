@@ -68,6 +68,21 @@ body::-webkit-scrollbar-thumb {
 .npv-add-image{
     width: 100%;
 }
+.npv-progress {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 5px;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 0px;
+    z-index: 100;
+    display: none;
+}
+
+.progress-bar {
+    background-color: #14415a;
+}
 
 .npv-viewer{
     
@@ -97,7 +112,7 @@ body::-webkit-scrollbar-thumb {
 .npv-icon > i {
     position: relative;    
     top: 5px;
-    left: 10px;
+    left: 9px;
     color: white;
 }
 .npv-icon > b {
@@ -116,6 +131,7 @@ body::-webkit-scrollbar-thumb {
 .npv-server-google, .npv-server-youtube, .npv-server-openload {
     opacity: 0.3;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .npv-server-active {

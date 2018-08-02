@@ -1,5 +1,10 @@
 $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+    $('[data-toggle="tooltip"]').tooltip();  
+    $('a.click-loading').click(function(){
+      $('.npv-progress').css('display','block');
+      $('.npv-progress-bar').animate({width:'30%'});      
+      $('.npv-progress-bar').animate({width:'80%'});
+    });
 });
 window.onload = function(){
     $('.npv-page-loading').remove();  

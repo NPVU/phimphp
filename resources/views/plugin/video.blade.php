@@ -1,4 +1,4 @@
-@if(!empty($tap[0]->googleRedirectLink))
+@if(strcmp($_GET['s'], md5('google'))==0)
 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
     <div class="video-player">        
         <video id="video-player" width="100%" controls>            
@@ -8,7 +8,8 @@
             @endif
             @if(!empty($tap[0]->googleRedirectLink['1080p']))
             <source src="{{$tap[0]->googleRedirectLink['1080p']}}" id="google1080p" type="video/mp4"/>
-            @endif            
+            @endif     
+            Máy chủ bị lỗi, vui lòng chọn máy chủ khác
         </video>                   
     </div>
 </div>
@@ -67,7 +68,7 @@
         }
     </script>
 </div>
-@elseif(!empty($tap[0]->tap_youtubelink))
+@elseif(strcmp($_GET['s'], md5('youtube'))==0)
     <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
         <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white"></iframe>
     </div>

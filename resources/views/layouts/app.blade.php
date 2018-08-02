@@ -7,7 +7,7 @@
     <link rel="icon" type="img/ico" href="{{ asset('favicon.ico') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">    
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('public/template/road_travel/js/jquery-2.1.4.min.js') }}"></script>
@@ -44,6 +44,9 @@
 <body> 
     <div class="npv-page-loading">        
     </div>
+    <div class="progress sm npv-progress">
+        <div class="progress-bar progress-bar-aqua npv-progress-bar" style="width: 0%"></div>
+    </div>
     <div class="header">
         <nav class="navbar navbar-default">
             <div class="navbar-header">
@@ -54,7 +57,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <h1>
-                    <a href="{{ url('/') }}">
+                    <a href="{{ url('/') }}" class="click-loading">
                         {{ config('app.name') }}
                     </a>
                 </h1>
