@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('a.click-loading').click(function(){
       $('.npv-progress').css('display','block');
       $('.npv-progress-bar').animate({width:'30%'});      
-      $('.npv-progress-bar').animate({width:'80%'});
+      $('.npv-progress-bar').animate({width:'95%'});
     });
 });
 window.onload = function(){

@@ -29,7 +29,7 @@ class XemPhimController extends Controller{
     function xemPhim(){
         $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->get();
         $listTap = DB::table('tap')
-                ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi')
+                ->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
                 ->where('phim_id', Input::get('pid'))->get();
         $tap_current = DB::table('tap')->where([
                     ['phim_id', Input::get('pid')],

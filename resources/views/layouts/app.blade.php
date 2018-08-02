@@ -45,7 +45,7 @@
     <div class="npv-page-loading">        
     </div>
     <div class="progress sm npv-progress">
-        <div class="progress-bar progress-bar-aqua npv-progress-bar" style="width: 0%"></div>
+        <div class="progress-bar progress-bar-aqua npv-progress-bar" style="width: 10%"></div>
     </div>
     <div class="header">
         <nav class="navbar navbar-default">
