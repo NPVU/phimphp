@@ -30,12 +30,40 @@
     
     
 </section>
-<section style="padding: 5em 0;">
+<section style="padding: 3em 0;">
     <div class="container">
-        <h3 class="heading">DANH SÁCH TẬP</h3>
+        <h3 class="heading">
+             DANH SÁCH
+        </h3>
+        @if(count($listTap) > 36)
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 10px;">            
+            <div class="col-xs-8 col-sm-4 col-md-3" style="float:right;">
+                <div class="input-group totap">
+                    <input type="number" id="toTap" value="" placeholder="Tập" class="form-control" />
+                    <span class="input-group-addon" style="cursor: pointer" id="iconToTap"><i class="fa fa-youtube-play"></i></span>                                
+                </div>
+                <a id="hrefToTap" class="click-loading display-none" href="" ></a>
+            </div>            
+            <script>
+                $('#iconToTap').click(function(){
+                   var t = $('#toTap').val();
+                   if(t.length === 0){                       
+                       $('#toTap').attr('placeholder', 'Vui lòng nhập số tập');
+                       $('.totap').addClass('has-error');
+                   } else {                
+                       t = t<0?(t*-1):t;
+                       $('#toTap').val(t);
+                       $('.totap').removeClass('has-error');                          
+                       $('#hrefToTap').click();
+                       window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t="+t+"&s={{md5('google')}}&token={{$_GET['token']}}";
+                   }                   
+                });
+            </script>
+        </div>        
+        @endif
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
             @foreach($listTap as $tap)            
-            <div class="col-md-2">
+            <div class="col-xs-6 col-sm-3 col-md-2">
                 @if($_GET['t'] != $tap->tap_tapso)
                 <a class="click-loading btn btn-primary" style="width: 100px;margin-bottom: 5px;"
                    href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}//?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}&token={{$_GET['token']}}">
@@ -54,14 +82,24 @@
 </section>
 <section style="padding: 5em 0;">
     <div class="container">
-        <h3 class="heading">THÔNG TIN PHIM</h3>        
+        <h3 class="heading">THÔNG TIN</h3>        
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <img src="{{$phim[0]->phim_hinhanh}}" width="100%"/>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-left">
-                <span>{{$phim[0]->phim_ten}} ({{$phim[0]->phim_tenkhac}})</span>
-                <span>{{count($listTap)}}/{{$phim[0]->phim_sotap}}</span>
+                <table class="table-light">
+                    <tbody>
+                        <tr>
+                            <td style="width:25%">Tên phim</td>
+                            <td style="width:75%"><b>{{$phim[0]->phim_ten}}</b></td>
+                        </tr>
+                        <tr>
+                            <td style="width:25%">Số tập</td>
+                            <td style="width:75%">{{count($listTap)}}/{{$phim[0]->phim_sotap}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
