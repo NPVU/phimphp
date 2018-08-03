@@ -69,9 +69,15 @@
     </script>
 </div>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
+    @if(!empty($tap[0]->tap_youtubelink))
     <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
         <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white"></iframe>
     </div>
+    @else    
+    <script>
+        window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{$_GET['token']}}";
+    </script>
+    @endif
 @else
     
 @endif 
