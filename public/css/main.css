@@ -91,7 +91,7 @@ body::-webkit-scrollbar-thumb {
     position: relative;
     float: left;
     width: 100%;
-    background-color: #0202024d;
+    background-color: white;
 }
 
 .npv-list-action {
@@ -151,6 +151,10 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;   
 }
 
+#modal-info-phim ul {
+    list-style: none;
+}
+
 .npv-server-box {
     padding-bottom: 5px;
 }
@@ -162,6 +166,7 @@ body::-webkit-scrollbar-thumb {
 
 .npv-server-active {
     opacity: 1;
+    border: 1px solid wheat;
     background-color: white;
 }
 
@@ -171,6 +176,20 @@ iframe.npv-youtube {
     height:540px;
     border: 1px solid white;
 }
+
+.npv-title-video {
+    float:left;
+    line-height: 1.5;
+    font-size:24px;
+    font-weight: 600;
+    color: darkgrey;
+}
+.npv-view-times {
+    float:right; 
+    color:gray;
+    line-height: 3;
+}
+
 @media(max-width: 900px){
     iframe.npv-youtube {
         height: 440px;
@@ -186,21 +205,30 @@ iframe.npv-youtube {
     iframe.npv-youtube {
         height: 320px;
     }
+    .npv-view-times {
+        width: 100%;
+        float:left;
+        line-height: 2;
+    }
 }
 @media(max-width: 480px){
     iframe.npv-youtube {
         height: 320px;
-    }
+    }    
 }
 @media(max-width: 414px){
     iframe.npv-youtube {
         height: 220px;
-    }
+    }    
 }
 
 @media(max-width: 375px){
     iframe.npv-youtube {
         height: 200px;
+    }
+    .npv-title-video {
+        font-size: 18px;
+        line-height: 2;
     }
 }
 

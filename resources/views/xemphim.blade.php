@@ -14,17 +14,21 @@
         <div>
             <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11" style="padding-bottom: 5px;">
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-center">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                     @if(!empty($tap[0]->googleRedirectLink))
-                    <a class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{$_GET['token']}}">
+                    <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{$_GET['token']}}">
                         <img class="npv-server-google {{strcmp($_GET['s'], md5('google'))==0?'npv-server-active':''}}" src="{{asset('public/img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
                     </a>
-                    @endif
+                    @endif                    
                     @if(!empty($tap[0]->tap_youtubelink))
-                    <a class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}&token={{$_GET['token']}}">
+                    <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}&token={{$_GET['token']}}">
                         <img class="npv-server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?'npv-server-active':''}}" src="{{asset('public/img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
                     </a>
                     @endif
+                    <span class="npv-title-video">
+                        {{$phim[0]->phim_ten}} - {{$tap[0]->tap_tapsohienthi}}
+                    </span>
+                    <span class="npv-view-times">{{$tap[0]->tap_luotxem}} lượt xem</span>
                 </div>
             </div>
         </div>
@@ -116,7 +120,7 @@
 </section>
 <section>
     <div id="modal-info-phim" data-izimodal-transitionin="comingInDown">
-        <div class="modal-body">        
+        <div class="modal-body" style="padding-bottom: 20px">        
             <div class="row">                
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4">
@@ -126,11 +130,58 @@
                         <div class="text-center">
                             <strong style="color: lightseagreen;font-size: 1.5em;">
                                 {{$phim[0]->phim_ten}}
-                            </strong>
+                            </strong>                            
+                        </div>
+                        <div>
+                            <ul class="">
+                                <li>
+                                    <label>Tên khác:</label>
+                                    <span>{{$phim[0]->phim_tenkhac}}</span>
+                                </li>
+                                <li>
+                                    <label>Thể loại:</label>
+                                    <span>
+                                        <?php
+                                            for($i = 0; $i < count($listTheLoai); $i++){
+                                                echo $listTheLoai[$i]->theloai_ten;
+                                                echo $i+1<count($listTheLoai)?', ':'.';
+                                            }
+                                        ?>                                        
+                                    </span>
+                                </li>
+                                <li>
+                                    <label>Số tập:</label>
+                                    <span>{{$phim[0]->phim_sotap}}</span>
+                                </li>
+                                <li>
+                                    <label>Năm phát hành:</label>
+                                    <span>{{$phim[0]->phim_nam}}</span>
+                                </li>
+                                <li>
+                                    <label>Lượt xem:</label>
+                                    <span>{{$phim[0]->phim_luotxem}}</span>
+                                </li>                                
+                            </ul>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul>
+                            <li>
+                                <label>Đánh giá:</label>
+                                <span></span>
+                            </li>
+                            <li>
+                                <label>Nguồn video:</label>
+                                <span>{{$phim[0]->phim_nguon}}</span>
+                            </li>
+                            <li>
+                                <label>Tóm tắt nội dung:</label>
+                                <span>{{empty($phim[0]->phim_gioithieu)?'đang cập nhật':$phim[0]->phim_gioithieu}}</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>               
-            </div>        
+            </div>            
         </div>
     </div>
     <script>

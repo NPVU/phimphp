@@ -70,7 +70,7 @@
 </div>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
     @if(!empty($tap[0]->tap_youtubelink))
-    <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
         <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white"></iframe>
     </div>
     @else    
