@@ -60,7 +60,11 @@ class XemPhimController extends Controller{
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';
-            $data['backURL'] = URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'?pid='.$phim[0]->phim_id.'&t=1&s='.md5('google').'&token='.Session::token());
+            if(!isset($phim)){
+                $data['backURL'] = URL::to('/');
+            } else {
+                $data['backURL'] = URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'?pid='.$phim[0]->phim_id.'&t=1&s='.md5('google').'&token='.Session::token());
+            }
             return view('errors/index', $data);
         }
     }
