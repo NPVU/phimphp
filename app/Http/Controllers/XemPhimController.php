@@ -51,7 +51,7 @@ class XemPhimController extends Controller{
         } else {
             $check = false;
         }
-        if($check){
+        if($check){            
             $data['phim'] = $phim;
             $data['listTheLoai'] = $listTheLoai;
             $data['listTap'] = $listTap;
@@ -67,8 +67,18 @@ class XemPhimController extends Controller{
             }
             return view('errors/index', $data);
         }
-    }
+    }        
     
+    public function addLuotXem(){
+        if(strcmp(Session::token(), Input::get('token')) == 0){
+            ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));            
+            $luotxem = DB::table('tap')->selectRaw('tap_luotxem')->where([
+                        ['phim_id', Input::get('pid')],
+                        ['tap_tapso', Input::get('t')]
+                ])->get();
+            return $luotxem[0]->tap_luotxem;
+        }
+    }
     
     function curl($url) {
         $ch = @curl_init();

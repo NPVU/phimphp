@@ -29,44 +29,8 @@
         @endif
     </ul>
     <script type="text/javascript">
-        var video = document.getElementById('video-player');
-        $('.npv-play').click(function(){           
-           if(video.paused){               
-               video.play();
-           } else {               
-               video.pause();
-           }
-        });
-        $('.npv-quality').click(function(){
-            var currentTime = video.currentTime;
-            if($('.npv-quality').attr('quality') === "360"){
-                console.log('720');
-                video.setAttribute('src', $('#google720p').attr('src'));
-                $('.npv-quality').css('color','white');
-                $('.npv-quality').attr('quality', "720");
-                video.onerror = function(){
-                    video.setAttribute('src', $('#google360p').attr('src'));
-                    video.currentTime = currentTime;
-                    video.play();
-                };
-            } else {
-                console.log('360');
-                video.setAttribute('src', $('#google360p').attr('src'));
-                $('.npv-quality').css('color','gray');
-                $('.npv-quality').attr('quality', "360");
-            }     
-            video.currentTime = currentTime;
-            video.play();
-        });
-        video.onplaying = function(){
-            $('.npv-play > i').addClass('fa-pause');
-            $('.npv-play > i').removeClass('fa-play');
-        };
-        video.onpause = function(){
-            $('.npv-play > i').addClass('fa-play');
-            $('.npv-play > i').removeClass('fa-pause');
-        }
-    </script>
+        var video = document.getElementById('video-player');var v = 0;$('.npv-play').click(function(){if(video.paused){video.play();}else{video.pause();}});$('.npv-quality').click(function(){var currentTime = video.currentTime;if($('.npv-quality').attr('quality') === "360"){console.log('720');video.setAttribute('src', $('#google720p').attr('src'));$('.npv-quality').css('color','white');$('.npv-quality').attr('quality', "720");video.onerror = function(){video.setAttribute('src', $('#google360p').attr('src'));video.currentTime = currentTime;video.play();};}else{console.log('360');video.setAttribute('src', $('#google360p').attr('src'));$('.npv-quality').css('color','gray');$('.npv-quality').attr('quality', "360");}video.currentTime = currentTime;video.play();});video.onplaying = function(){$('.npv-play > i').addClass('fa-pause');$('.npv-play > i').removeClass('fa-play');if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{$_GET['token']}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');}        
+    </script>    
 </div>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
     @if(!empty($tap[0]->tap_youtubelink))

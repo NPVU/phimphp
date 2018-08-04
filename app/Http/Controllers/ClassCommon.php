@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\DB;
 
 class ClassCommon extends BaseController
 {
@@ -27,10 +28,18 @@ class ClassCommon extends BaseController
         return 'public/upload/temp/';
     }
     
-    public static function showToast(){
-        
+    public static function addLuotXem($phimID, $tap){
+        DB::table('tap')->where([
+                        ['phim_id', $phimID],
+                        ['tap_tapso', $tap]
+                    ])->update([
+                        'tap_luotxem' => DB::raw('tap_luotxem + 1')
+                    ]);
+        DB::table('phim')->where('phim_id', $phimID)->update([
+            'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')')
+        ]);
     }
-    
+                     
     public static function removeVietnamese($str){
         $unicode = array(
             'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',

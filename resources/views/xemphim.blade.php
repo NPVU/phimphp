@@ -42,7 +42,7 @@
         <h3 class="heading">
              DANH SÁCH
         </h3>
-        @if(count($listTap) > 10)
+        @if(count($listTap) > 60)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 10px;">            
             <div class="col-xs-12 col-sm-4 col-md-3" style="float:right;">
                 <div class="input-group totap">
@@ -78,7 +78,7 @@
             <div class="col-xs-4 col-sm-2 col-md-1">
                 @if($_GET['t'] != $tap->tap_tapso)
                 <a class="click-loading btn btn-primary" style="min-width: 80px;margin-bottom: 5px;"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}//?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}&token={{$_GET['token']}}">
+                   href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}&token={{$_GET['token']}}">
                     <span>{{$tap->tap_tapsohienthi}}</span>
                 </a>
                 @else

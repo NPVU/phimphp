@@ -65,4 +65,5 @@ Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/xem-phim/{phimID}/', 'XemPhimController@xemPhim')->name('xemPhim');
+Route::get('/xem-phim/{str}/', 'XemPhimController@xemPhim')->name('xemPhim');
+Route::get('/update/{str}', 'XemPhimController@addLuotXem');
