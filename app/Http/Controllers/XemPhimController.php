@@ -29,6 +29,7 @@ class XemPhimController extends Controller{
     }
     
     function xemPhim(){
+        $check = true;
         if(strcmp(Session::token(), Input::get('token')) == 0){
             $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->get();
             $listTap = DB::table('tap')
@@ -38,18 +39,25 @@ class XemPhimController extends Controller{
                         ['phim_id', Input::get('pid')],
                         ['tap_tapso', Input::get('t')]
                     ])->get();
-            if(!empty($tap_current[0]->tap_googlelink)){
-                $tap_current[0]->googleRedirectLink =  $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
-            }
-
+            if(count($tap_current)>0){
+                if(!empty($tap_current[0]->tap_googlelink)){
+                    $tap_current[0]->googleRedirectLink =  $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
+                }
+            } else {
+                $check = false;
+            }              
+        } else {
+            $check = false;
+        }
+        if($check){
             $data['phim'] = $phim;
             $data['listTap'] = $listTap;
             $data['tap'] = $tap_current;
-            return view('xemphim', $data, $this->getDataHeader());   
+            return view('xemphim', $data, $this->getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';
-            $data['backURL'] = URL::to('/');
+            $data['backURL'] = URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'?pid='.$phim[0]->phim_id.'&t=1&s='.md5('google').'&token='.Session::token());
             return view('errors/index', $data);
         }
     }

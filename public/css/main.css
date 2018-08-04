@@ -125,6 +125,32 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 
+.npv-icon-right {
+    position: fixed;
+    z-index: 101;
+    top: 40%;
+    right: 0px;
+    width: 50px;
+    background-color: #3c8dbc;
+    text-align: center;          
+}
+
+.npv-icon-right > ul {
+    list-style: none
+}
+
+.npv-icon-right > ul > li > a > div{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 5px;   
+}
+
+.npv-icon-right > ul > li > a{
+    cursor: pointer;   
+}
+
 .npv-server-box {
     padding-bottom: 5px;
 }

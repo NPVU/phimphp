@@ -18,6 +18,7 @@
     <script src="{{ asset('public/template/road_travel/js/move-top.js') }}"></script>
     <script src="{{ asset('public/template/road_travel/js/easing.js') }}"></script>
     <script src="{{ asset('public/template/road_travel/js/responsiveslides.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
     <script type="application/x-javascript"> 
@@ -37,6 +38,7 @@
     <link href="{{ asset('public/template/road_travel/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('public/template/road_travel/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('public/template/road_travel/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />   
