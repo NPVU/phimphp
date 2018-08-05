@@ -132,6 +132,7 @@
     </div>
     
     @yield('slider')    
+    @yield('tapmoi')
     @include('layouts.tapmoi')
     @yield('video')
     
