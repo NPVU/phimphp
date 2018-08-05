@@ -342,6 +342,7 @@ class PhimController extends Controller{
                         'tap_ngaycapnhat'   => now()
                     ]
                 );
+        ClassCommon::updateLuotXem($request->add_phim_id);
         $data['status'] = 1;
         return $data;
     }
@@ -379,6 +380,7 @@ class PhimController extends Controller{
                         'tap_luotxem'       => $request->tapphim_luotxem                        
                     ]
         );
+        ClassCommon::updateLuotXem($request->edit_phim_id);
         return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Cập nhật '.$request->tapphim_tap.' thành công !');        
     }
     

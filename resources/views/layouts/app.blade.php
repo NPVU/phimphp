@@ -97,8 +97,8 @@
             <!-- navbar-header -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{url('/')}}#tapmoi" class="hvr-underline-from-center scroll">TẬP MỚI</a></li>
-                    <li><a href="{{url('/')}}#top" class="hvr-underline-from-center scroll">TOP</a></li>
+                    <li><a href="{{url('/')}}/#tapmoi" class="hvr-underline-from-center scroll">TẬP MỚI</a></li>
+                    <li><a href="{{url('/')}}/#top" class="hvr-underline-from-center scroll">TOP</a></li>
                     <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">THỂ LOẠI</span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach($listTheLoai as $row)
@@ -132,7 +132,7 @@
     </div>
     
     @yield('slider')
-    @yield('hot')
+    @yield('tapmoi')
     @yield('video')
     
     <script type="text/javascript">

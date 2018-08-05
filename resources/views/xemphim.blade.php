@@ -133,11 +133,7 @@
                             </strong>                            
                         </div>
                         <div>
-                            <ul class="">
-                                <li>
-                                    <label>Tên khác:</label>
-                                    <span>{{$phim[0]->phim_tenkhac}}</span>
-                                </li>
+                            <ul class="">                                
                                 <li>
                                     <label>Thể loại:</label>
                                     <span>
@@ -160,16 +156,16 @@
                                 <li>
                                     <label>Lượt xem:</label>
                                     <span>{{$phim[0]->phim_luotxem}}</span>
-                                </li>                                
+                                </li>
+                                <li>
+                                    <label>Đánh giá:</label>
+                                    <span></span>
+                                </li>                                                                
                             </ul>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <ul>
-                            <li>
-                                <label>Đánh giá:</label>
-                                <span></span>
-                            </li>
+                        <ul>                            
                             <li>
                                 <label>Nguồn video:</label>
                                 <span>{{$phim[0]->phim_nguon}}</span>

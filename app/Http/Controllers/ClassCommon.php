@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Session;
 
 class ClassCommon extends BaseController
 {
@@ -34,10 +36,83 @@ class ClassCommon extends BaseController
                         ['tap_tapso', $tap]
                     ])->update([
                         'tap_luotxem' => DB::raw('tap_luotxem + 1')
-                    ]);
+                    ]);        
         DB::table('phim')->where('phim_id', $phimID)->update([
             'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')')
         ]);
+    }
+    
+    public static function updateLuotXem($phimID){
+        DB::table('phim')->where('phim_id', $phimID)->update([
+            'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')')
+        ]);
+    }
+    
+    public static function getStrSoNgayDaQua($str){
+        $date = date(strtotime($str));
+        $day1 = date('d-m-Y H:i:s', $date);
+        $day2 = date('d-m-Y H:i:s', time());
+        $s = strtotime($day2) - strtotime($day1);
+        $phut   = 60;
+        $gio    = $phut*60;
+        $ngay   = $gio*24;
+        $tuan   = $ngay*7;
+        $thang  = $tuan*4;        
+        $nam    = $thang*12;
+        $result = '1 phút trước';
+        if(($s/$nam)>=1){
+            $result = round($s/$nam).' năm trước';
+        } else if(($s/$thang)>=1){
+            $result = round($s/$thang).' tháng trước';
+        } else if(($s/$tuan)>=1){
+            $result = round($s/$tuan).' tuần trước';
+        } else if(($s/$ngay)>=1){
+            $result = round($s/$ngay).' ngày trước';
+        } else if(($s/$gio)>=1){
+            $result = round($s/$gio).' giờ trước';
+        } else if(($s/$phut)>=1){
+            $result = round($s/$phut).' phút trước';
+        }                
+        return $result;
+    }
+    
+    public static function getHTMLTapMoi($limit, $offset){
+        $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
+                . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
+                . ' ON phim.phim_id IN (tap.phim_id) ORDER BY phim.phim_id DESC'));            
+        for($i = 0; $i < count($listPhimToday); $i++){
+            $listPhimToday[$i]->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
+                    ->where('phim_id', $listPhimToday[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+        }
+        
+        if(count($listPhimToday)>0){
+            $html = '';
+            foreach ($listPhimToday as $row){
+                $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
+                $html .=        '<div class="npv-box-phim">';
+                $html .=            '<div class="box-image">';
+                $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
+                $html .=            '</div>';
+                $html .=            '<div class="box-info">';
+                $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
+                $html .=                '<div class="box-text">';
+                $html .=                    '<span style="float:left;">'.$row->phim_luotxem.' lượt xem</span>';
+                $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
+                $html .=                '</div>';
+                $html .=            '</div>';
+                $html .=        '</div>';
+                $html .=    '</a>';
+                $html .= '</div>';
+            }
+            return $html;
+        } else {
+            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không còn dữ liệu</i></span></div>';
+        }        
     }
                      
     public static function removeVietnamese($str){

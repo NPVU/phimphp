@@ -190,6 +190,35 @@ iframe.npv-youtube {
     line-height: 3;
 }
 
+.npv-box-phim {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 270px;
+}
+
+.npv-box-phim > .box-image {
+    height: 200px;
+}
+
+.npv-box-phim > .box-info {
+    height: 70px;
+}
+
+.npv-box-phim > .box-info > .box-title{
+    font-size:16px;
+    word-break: break-all;
+    font-weight: 700;
+}
+
+.npv-box-phim > .box-info > .box-text{
+    color: darkgray;
+}
+
+.npv-icon-xemthem {
+    color:#3c8dbc;
+    cursor: pointer;
+}
+
 @media(max-width: 900px){
     iframe.npv-youtube {
         height: 440px;

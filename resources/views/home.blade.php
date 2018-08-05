@@ -5,6 +5,6 @@
 @section('slider')
     @include('layouts.slider')
 @endsection
-@section('hot')
-    @include('layouts.hot')
+@section('tapmoi')
+    @include('layouts.tapmoi')
 @endsection
