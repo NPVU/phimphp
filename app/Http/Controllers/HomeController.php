@@ -8,27 +8,8 @@ use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */    
-    public function __construct()
-    {
-        $config = DB::table('config')->get();
-        session(['PhimPerPage' => $config[0]->config_phim_per_page]);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $listTheLoai = DB::table('theloai')->get();
-        $listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->orderBy('phim_nam')->get();
-            
+    
+    public function index(){        
         $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
                 . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT 10) tap '
                 . ' ON phim.phim_id IN (tap.phim_id) ORDER BY phim.phim_id DESC'));            
@@ -38,14 +19,10 @@ class HomeController extends Controller
                     ->where('phim_id', $listPhimToday[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
-        }        
-        $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);     
-        
-        $data['listTheLoai']    = $listTheLoai;
-        $data['listNam']        = $listNam;        
-        $data['listPhimToday']  = $listPhimToday;
-        $data['htmlTapMoi']     = $htmlTapMoi;
-        return view('home', $data);
+        }                     
+                
+        $data['listPhimToday']  = $listPhimToday;        
+        return view('home', $data, parent::getDataHeader());
     }
     
     public function xemThemTapMoi(){ 

@@ -186,6 +186,7 @@
                 top: 100,
                 overlayClose: true,                
                 width: 600,
+                openFullscreen:false,
                 headerColor: 'rgb(56, 98, 111)',
                 icon: 'fa fa-info',
                 iconColor: 'white'

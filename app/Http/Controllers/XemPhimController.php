@@ -18,15 +18,7 @@ use Illuminate\Support\Facades\URL;
  * @author npvu
  */
 class XemPhimController extends Controller{
-    //put your code here
-    
-    function getDataHeader(){
-        $listTheLoai = DB::table('theloai')->get();
-        $listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->get();
-        $data['listTheLoai'] = $listTheLoai;
-        $data['listNam']     = $listNam;
-        return $data;
-    }
+    //put your code here        
     
     function xemPhim(){
         $check = true;
@@ -56,7 +48,7 @@ class XemPhimController extends Controller{
             $data['listTheLoai'] = $listTheLoai;
             $data['listTap'] = $listTap;
             $data['tap'] = $tap_current;
-            return view('xemphim', $data, $this->getDataHeader()); 
+            return view('xemphim', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';

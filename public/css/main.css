@@ -205,7 +205,7 @@ iframe.npv-youtube {
 }
 
 .npv-box-phim > .box-info > .box-title{
-    font-size:16px;
+    font-size:1em;
     word-break: break-all;
     font-weight: 700;
 }
@@ -244,11 +244,36 @@ iframe.npv-youtube {
     iframe.npv-youtube {
         height: 320px;
     }    
+    .npv-box-phim {       
+        height: 200px;
+    }
+
+    .npv-box-phim > .box-image {
+        height: 130px;
+    }
+
+    .npv-box-phim > .box-info {
+        height: 70px;
+    }
 }
 @media(max-width: 414px){
     iframe.npv-youtube {
         height: 220px;
+    }
+    .npv-box-phim {       
+        height: 170px;
+    }
+
+    .npv-box-phim > .box-image {
+        height: 100px;
+    }
+
+    .npv-box-phim > .box-info {
+        height: 70px;
     }    
+    .npv-box-phim > .box-info > .box-text{
+        font-size:0.6em;
+    }
 }
 
 @media(max-width: 375px){

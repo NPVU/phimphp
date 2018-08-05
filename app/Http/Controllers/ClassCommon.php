@@ -76,6 +76,18 @@ class ClassCommon extends BaseController
         return $result;
     }
     
+    public static function demLuotXem($n){
+        $str = $n;
+        $k = 1000;
+        $m = $k*1000;
+        if($n / $m > 1){
+            $str = round($n/$m). ' Tr';
+        } else if($n / $k > 1){
+            $str = round($n/$k). ' N';
+        }
+        return $str;
+    }
+    
     public static function getHTMLTapMoi($limit, $offset){
         $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
                 . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
@@ -101,7 +113,7 @@ class ClassCommon extends BaseController
                 $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
                 $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                 $html .=                '<div class="box-text">';
-                $html .=                    '<span style="float:left;">'.$row->phim_luotxem.' lượt xem</span>';
+                $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
                 $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
                 $html .=                '</div>';
                 $html .=            '</div>';
