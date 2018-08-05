@@ -97,6 +97,14 @@
                                        placeholder="VD: 2018"/>
                                 <span class="help-block"><?php echo isset($add_phim_nam_error)?$add_phim_nam_error:''; ?></span>
                             </div>
+                            
+                            <div class="form-group <?php echo isset($add_phim_season_error)?'has-error':''; ?>">
+                                <label>Season (Phần)</label>
+                                <input type="number" name="add_phim_season" class="form-control required" 
+                                       value="<?php echo isset($_POST['add_phim_season']) ? $_POST['add_phim_season'] : '' ?>"
+                                       placeholder="VD: 1"/>
+                                <span class="help-block"><?php echo isset($add_phim_season_error)?$add_phim_season_error:''; ?></span>
+                            </div>
                                                        
                             <div class="form-group <?php echo isset($add_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="add_phim_tenkhac">Tên phụ (tên khác)</label>

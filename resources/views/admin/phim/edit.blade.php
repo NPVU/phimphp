@@ -109,6 +109,14 @@
                                 <span class="help-block"><?php echo isset($edit_phim_nam_error)?$edit_phim_nam_error:''; ?></span>
                             </div>
                             
+                            <div class="form-group <?php echo isset($edit_phim_season_error)?'has-error':''; ?>">
+                                <label>Season (Phần)</label>
+                                <input type="number" name="edit_phim_season" class="form-control required" 
+                                       value="<?php echo isset($_POST['edit_phim_season']) ? $_POST['edit_phim_season'] : $phim[0]->phim_season ?>"
+                                       placeholder="VD: 1"/>
+                                <span class="help-block"><?php echo isset($edit_phim_season_error)?$edit_phim_season_error:''; ?></span>
+                            </div>
+                            
                             <div class="form-group <?php echo isset($edit_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="edit_phim_tenkhac">Tên phụ (tên khác)</label>
                                 <input type="text" id="edit_phim_tenkhac" name="edit_phim_tenkhac" 

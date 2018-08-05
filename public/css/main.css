@@ -196,6 +196,10 @@ iframe.npv-youtube {
     height: 270px;
 }
 
+.npv-box-phim:hover {
+    color: red;
+}
+
 .npv-box-phim > .box-image {
     height: 200px;
 }
