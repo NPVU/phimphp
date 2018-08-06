@@ -133,7 +133,11 @@
                             </strong>                            
                         </div>
                         <div>
-                            <ul class="">                                
+                            <ul class="">      
+                                <li>
+                                    <label>Season:</label>
+                                    <span>{{$phim[0]->phim_season}}</span>
+                                </li>
                                 <li>
                                     <label>Thể loại:</label>
                                     <span>
@@ -152,7 +156,7 @@
                                 <li>
                                     <label>Năm phát hành:</label>
                                     <span>{{$phim[0]->phim_nam}}</span>
-                                </li>
+                                </li>                                
                                 <li>
                                     <label>Lượt xem:</label>
                                     <span>{{$phim[0]->phim_luotxem}}</span>
