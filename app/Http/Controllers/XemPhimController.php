@@ -25,7 +25,7 @@ class XemPhimController extends Controller{
         if(strcmp(Session::token(), Input::get('token')) == 0){
             $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->get();
             $idTheLoai = json_decode($phim[0]->theloai_id);
-            $listTheLoai = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
             $listTap = DB::table('tap')
                     ->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
                     ->where('phim_id', Input::get('pid'))->get();
@@ -45,7 +45,7 @@ class XemPhimController extends Controller{
         }
         if($check){            
             $data['phim'] = $phim;
-            $data['listTheLoai'] = $listTheLoai;
+            $data['listTheLoaiPhim'] = $listTheLoaiPhim;
             $data['listTap'] = $listTap;
             $data['tap'] = $tap_current;
             return view('xemphim', $data, parent::getDataHeader()); 

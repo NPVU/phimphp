@@ -142,9 +142,9 @@
                                     <label>Thể loại:</label>
                                     <span>
                                         <?php
-                                            for($i = 0; $i < count($listTheLoai); $i++){
-                                                echo $listTheLoai[$i]->theloai_ten;
-                                                echo $i+1<count($listTheLoai)?', ':'.';
+                                            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                                                echo $listTheLoaiPhim[$i]->theloai_ten;
+                                                echo $i+1<count($listTheLoaiPhim)?', ':'.';
                                             }
                                         ?>                                        
                                     </span>
