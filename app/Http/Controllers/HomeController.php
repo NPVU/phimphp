@@ -36,4 +36,16 @@ class HomeController extends Controller
         }   
         return $htmlTapMoi;
     }
+    
+    public function xemThemTheLoai(){ 
+        $phim_per_page = Session::get('PhimPerPage');
+        if(Input::get('page') != null){
+            $page  = Input::get('page')==0?1:Input::get('page');
+            $offset = ($page-1) * $phim_per_page;            
+            $htmlTapMoi = ClassCommon::getHTMLTheLoai(Input::get('theloai'),$phim_per_page,$offset);
+        } else {
+            $htmlTapMoi = ClassCommon::getHTMLTheLoai(Input::get('theloai'),$phim_per_page,0);
+        }   
+        return $htmlTapMoi;
+    }
 }

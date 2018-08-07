@@ -123,7 +123,46 @@ class ClassCommon extends BaseController
             }
             return $html;
         } else {
-            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không còn dữ liệu</i></span></div>';
+            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
+        }        
+    }
+    
+    public static function getHTMLTheLoai($theloai, $limit, $offset){
+        $listPhimTheLoai = DB::select(DB::raw('SELECT * FROM phim '
+                . ' WHERE theloai_id like "%\"'.$theloai.'\"%" '
+                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));            
+        for($i = 0; $i < count($listPhimTheLoai); $i++){
+            $listPhimTheLoai[$i]->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
+                    ->where('phim_id', $listPhimTheLoai[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+        }
+        
+        if(count($listPhimTheLoai)>0){
+            $html = '';
+            foreach ($listPhimTheLoai as $row){
+                $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
+                $html .=        '<div class="npv-box-phim">';
+                $html .=            '<div class="box-image">';
+                $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
+                $html .=            '</div>';
+                $html .=            '<div class="box-info">';
+                $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
+                $html .=                '<div class="box-text">';
+                $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
+                $html .=                '</div>';
+                $html .=            '</div>';
+                $html .=        '</div>';
+                $html .=    '</a>';
+                $html .= '</div>';
+            }
+            return $html;
+        } else {
+            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
         }        
     }
                      

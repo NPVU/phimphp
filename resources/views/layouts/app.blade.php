@@ -99,17 +99,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#tapmoi">TẬP MỚI</a></li>
                     <li><a href="{{url('/')}}/#top" class="hvr-underline-from-center scroll">TOP</a></li>
-                    <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">THỂ LOẠI</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @foreach($listTheLoai as $row)
-                            <li>
-                                <a href="#{{md5($row->theloai_ten)}}" class="scroll">
-                                    <span data-hover="{{$row->theloai_ten}}">{{$row->theloai_ten}}</span>
-                                </a>
-                            </li>
-                            @endforeach                            
-                        </ul>
-                    </li>
+                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#theloai">THỂ LOẠI</a></li>
                     <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">NĂM</span><span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach($listNam as $row)
@@ -134,6 +124,7 @@
     @yield('slider')    
     @yield('tapmoi')
     @include('layouts.tapmoi')
+    @include('layouts.theloai')
     @yield('video')
     
     <script type="text/javascript">

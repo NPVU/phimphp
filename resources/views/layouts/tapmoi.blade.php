@@ -29,13 +29,11 @@
                 });
             }
         $('#tapmoi').iziModal({
-            title: 'Tập Mới',        
+            title: 'Tập mới',        
             overlayClose: true,                        
             openFullscreen:true,
             bodyOverflow:true,
-            headerColor: 'rgb(56, 98, 111)',
-            icon: 'fa fa-list',
-            iconColor: 'white'
+            headerColor: 'rgb(56, 98, 111)'
         });
     </script>
 </section>
