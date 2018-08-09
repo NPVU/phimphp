@@ -103,23 +103,25 @@ class ClassCommon extends BaseController
         if(count($listPhimToday)>0){
             $html = '';
             foreach ($listPhimToday as $row){
-                $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
-                $html .=        '<div class="npv-box-phim">';
-                $html .=            '<div class="box-image">';
-                $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
-                $html .=            '</div>';
-                $html .=            '<div class="box-info">';
-                $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
-                $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
-                $html .=                '<div class="box-text">';
-                $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
-                $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
-                $html .=                '</div>';
-                $html .=            '</div>';
-                $html .=        '</div>';
-                $html .=    '</a>';
-                $html .= '</div>';
+                if(count($row->tap)>0){
+                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
+                    $html .=        '<div class="npv-box-phim">';
+                    $html .=            '<div class="box-image">';
+                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
+                    $html .=            '</div>';
+                    $html .=            '<div class="box-info">';
+                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
+                    $html .=                '<div class="box-text">';
+                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
+                    $html .=                '</div>';
+                    $html .=            '</div>';
+                    $html .=        '</div>';
+                    $html .=    '</a>';
+                    $html .= '</div>';
+                }
             }
             return $html;
         } else {
@@ -142,23 +144,66 @@ class ClassCommon extends BaseController
         if(count($listPhimTheLoai)>0){
             $html = '';
             foreach ($listPhimTheLoai as $row){
-                $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
-                $html .=        '<div class="npv-box-phim">';
-                $html .=            '<div class="box-image">';
-                $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
-                $html .=            '</div>';
-                $html .=            '<div class="box-info">';
-                $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
-                $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
-                $html .=                '<div class="box-text">';
-                $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
-                $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
-                $html .=                '</div>';
-                $html .=            '</div>';
-                $html .=        '</div>';
-                $html .=    '</a>';
-                $html .= '</div>';
+                if(count($row->tap)>0){
+                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
+                    $html .=        '<div class="npv-box-phim">';
+                    $html .=            '<div class="box-image">';
+                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
+                    $html .=            '</div>';
+                    $html .=            '<div class="box-info">';
+                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
+                    $html .=                '<div class="box-text">';
+                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
+                    $html .=                '</div>';
+                    $html .=            '</div>';
+                    $html .=        '</div>';
+                    $html .=    '</a>';
+                    $html .= '</div>';
+                }
+            }
+            return $html;
+        } else {
+            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
+        }        
+    }
+    
+    public static function getHTMLNam($nam, $limit, $offset){
+        $listPhimNam = DB::select(DB::raw('SELECT * FROM phim '
+                . ' WHERE phim_nam = ' .$nam
+                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset)); 
+        for($i = 0; $i < count($listPhimNam); $i++){
+            $listPhimNam[$i]->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
+                    ->where('phim_id', $listPhimNam[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+        }
+        
+        if(count($listPhimNam)>0){
+            $html = '';
+            foreach ($listPhimNam as $row){
+                if(count($row->tap)>0){
+                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
+                    $html .=        '<div class="npv-box-phim">';
+                    $html .=            '<div class="box-image">';
+                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
+                    $html .=            '</div>';
+                    $html .=            '<div class="box-info">';
+                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
+                    $html .=                '<div class="box-text">';
+                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
+                    $html .=                '</div>';
+                    $html .=            '</div>';
+                    $html .=        '</div>';
+                    $html .=    '</a>';
+                    $html .= '</div>';
+                }
             }
             return $html;
         } else {

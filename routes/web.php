@@ -69,3 +69,4 @@ Route::get('/xem-phim/{str}/', 'XemPhimController@xemPhim')->name('xemPhim');
 Route::get('/update/{str}', 'XemPhimController@addLuotXem');
 Route::get('/tap-moi/', 'HomeController@xemThemTapMoi');
 Route::get('/the-loai/', 'HomeController@xemThemTheLoai');
+Route::get('/nam/', 'HomeController@xemThemNam');

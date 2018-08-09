@@ -100,17 +100,7 @@
                     <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#tapmoi">TẬP MỚI</a></li>
                     <li><a href="{{url('/')}}/#top" class="hvr-underline-from-center scroll">TOP</a></li>
                     <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#theloai">THỂ LOẠI</a></li>
-                    <li><a href="#" data-toggle="dropdown"><span data-hover="dropdown">NĂM</span><span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @foreach($listNam as $row)
-                            <li class="text-center">
-                                <a href="#{{md5($row->nam)}}" class="scroll">
-                                    <span data-hover="{{$row->nam}}">{{$row->nam}}</span>
-                                </a>
-                            </li>
-                            @endforeach                            
-                        </ul>
-                    </li>                                       
+                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#nam">NĂM</a></li>                                                          
                     @if(Session::has('roles'))                                
                         <li><a href="{{ url('quan-ly') }}" class="hvr-underline-from-center scroll">Quản lý</a></li>
                     @endif
@@ -125,6 +115,7 @@
     @yield('tapmoi')
     @include('layouts.tapmoi')
     @include('layouts.theloai')
+    @include('layouts.nam')
     @yield('video')
     
     <script type="text/javascript">

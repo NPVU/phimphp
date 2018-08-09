@@ -48,4 +48,15 @@ class HomeController extends Controller
         }   
         return $htmlTapMoi;
     }
+    public function xemThemNam(){ 
+        $phim_per_page = Session::get('PhimPerPage');
+        if(Input::get('page') != null){
+            $page  = Input::get('page')==0?1:Input::get('page');
+            $offset = ($page-1) * $phim_per_page;            
+            $htmlTapMoi = ClassCommon::getHTMLNam(Input::get('nam'),$phim_per_page,$offset);
+        } else {
+            $htmlTapMoi = ClassCommon::getHTMLNam(Input::get('nam'),$phim_per_page,0);
+        }   
+        return $htmlTapMoi;
+    }
 }
