@@ -159,7 +159,7 @@
                                 </li>                                
                                 <li>
                                     <label>Lượt xem:</label>
-                                    <span>{{$phim[0]->phim_luotxem}}</span>
+                                    <span class="npv-modal-view-times">{{$phim[0]->phim_luotxem}}</span>
                                 </li>
                                 <li>
                                     <label>Đánh giá:</label>
