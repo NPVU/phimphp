@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Trang chủ - {{ config('app.name') }}
+    Trang Chủ - {{ config('app.name') }}
 @endsection
 @section('slider')
     @include('layouts.slider')

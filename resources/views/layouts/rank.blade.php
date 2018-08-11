@@ -1,4 +1,4 @@
-<section class="special">
+<section class="special">    
     <div class="container">        
         <h3 class="heading">Bảng Xếp Hạng</h3>  
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 listRanking">
@@ -10,38 +10,44 @@
                         <li><a data-content="all" href="#all">Tất cả</a></li>				
                     </ul>
                 </nav>
-                <ul class="cd-tabs__content js-cd-content">
-                    <li data-content="week" class="cd-selected">
-                        <div class="list-rank-week">
-                            <span class="rank-week-page-1">
+                <ul class="cd-tabs__content js-cd-content" id="npv-responsive-table">
+                    <li data-content="week" class="cd-selected">                        
+                        <table class="col-md-12 table-striped table-condensed cf list-rank-week">
+                            <tbody class="rank-week-page-1">
                                 <?php echo $htmlPhimXepHangTuan ?>
-                            </span>
-                            <span class="rank-week-page-2"></span>
-                        </div>
+                            </tbody>
+                            <tbody class="rank-week-page-2">
+                                
+                            </tbody>
+                        </table>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                             <i onclick="xtrank('w','week')" aria-page="2" class="xtrw npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
                         </div>
                     </li>
 
                     <li data-content="month">
-                        <div class="list-rank-month">
-                            <span class="rank-month-page-1">
+                        <table class="col-md-12 table-striped table-condensed cf list-rank-month">
+                            <tbody class="rank-month-page-1">
                                 <?php echo $htmlPhimXepHangThang ?>
-                            </span>
-                            <span class="rank-month-page-2"></span>
-                        </div>
+                            </tbody>
+                            <tbody class="rank-month-page-2">
+                                
+                            </tbody>
+                        </table>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                             <i onclick="xtrank('m','month')" aria-page="2" class="xtrm npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
                         </div>
                     </li>
 
                     <li data-content="all">
-                        <div class="list-rank-all">
-                            <span class="rank-all-page-1">
+                        <table class="col-md-12 table-striped table-condensed cf list-rank-all">
+                            <tbody class="rank-all-page-1">
                                 <?php echo $htmlPhimXepHangAll ?>
-                            </span>
-                            <span class="rank-all-page-2"></span>
-                        </div>
+                            </tbody>
+                            <tbody class="rank-all-page-2">
+                                
+                            </tbody>
+                        </table>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
                             <i onclick="xtrank('a','all')" aria-page="2" class="xtra npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
                         </div>
@@ -187,7 +193,7 @@
             $('.rank-'+j+'-page-'+page).html(data);
             var nextPage = parseInt(page)+1;
             $('.xtr'+i).attr('aria-page', nextPage);
-            var newPage = document.createElement('span');
+            var newPage = document.createElement('tbody');
             newPage.className = 'rank-'+j+'-page-'+nextPage;
             $('.list-rank-'+j).append(newPage);
             }

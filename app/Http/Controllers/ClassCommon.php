@@ -215,11 +215,13 @@ class ClassCommon extends BaseController
         if(strcmp($time, 'week') == 0){
             $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
+                . ' WHERE phim_luotxem_tuan > 0 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
-                . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
+                . ' WHERE phim_luotxem_thang > 0 '
+                . 'ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
             $listPhimXemHang = DB::select(DB::raw('SELECT * FROM phim '                
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
@@ -233,31 +235,23 @@ class ClassCommon extends BaseController
         }
         
         if(count($listPhimXemHang)>0){
+            $rank = 1+$offset;
             $html = '';
             foreach ($listPhimXemHang as $row){
                 if(count($row->tap)>0){
-                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
-                    $html .=        '<div class="npv-box-phim">';
-                    $html .=            '<div class="box-image">';
-                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
-                    $html .=            '</div>';
-                    $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
-                    $html .=                '<div class="box-text" style="display: inline;float: left;">'.$row->phim_sotap.' tập</div>';
-                    $html .=                '<div class="box-text" style="display: inline;float: right;">';
-                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
-//                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
-                    $html .=                '</div>';
-                    $html .=            '</div>';
-                    $html .=        '</div>';
-                    $html .=    '</a>';
-                    $html .= '</div>';
+                    $html .= '<tr>';
+                    $html .=    '<td data-title="Hạng" class="text-center npv-rank-number">#'.$rank.'</td>';
+                    $html .=    '<td data-title="" class="text-center npv-rank-td-image"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></td>';
+                    $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
+                    $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view">'.$row->phim_luotxem.'</td>';
+                    $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia">dang cap nhat</td>';
+                    $html .= '</tr>';
+                    $rank++;
                 }
             }
             return $html;
         } else {
-            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
+            return '<tr><td colspan="5" class="text-center"><i style="color:gray">Không tìm thấy dữ liệu</i></td></tr>';
         }        
     }
                      
