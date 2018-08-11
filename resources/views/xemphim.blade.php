@@ -40,7 +40,7 @@
 <section style="padding: 3em 0;">
     <div class="container">
         <h3 class="heading">
-             DANH SÁCH
+             Danh sách
         </h3>
         @if(count($listTap) > 60)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom: 10px;">            
@@ -94,7 +94,7 @@
 </section>
 <section style="padding: 5em 0;">
     <div class="container">
-        <h3 class="heading">BÌNH LUẬN</h3>        
+        <h3 class="heading">Bình luận</h3>        
         <div id="binhluan" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             
         </div>

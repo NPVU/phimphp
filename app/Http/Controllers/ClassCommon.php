@@ -37,14 +37,14 @@ class ClassCommon extends BaseController
                     ])->update([
                         'tap_luotxem' => DB::raw('tap_luotxem + 1')
                     ]);        
-        DB::table('phim')->where('phim_id', $phimID)->update([
-            'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')')
-        ]);
+        self::updateLuotXem($phimID);
     }
     
     public static function updateLuotXem($phimID){
         DB::table('phim')->where('phim_id', $phimID)->update([
-            'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')')
+            'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')'),
+            'phim_luotxem_tuan'  => DB::raw('(SELECT phim_luotxem_tuan + 1 )'),
+            'phim_luotxem_thang'  => DB::raw('(SELECT phim_luotxem_thang + 1 )')
         ]);
     }
     
