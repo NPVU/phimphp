@@ -183,6 +183,7 @@ iframe.npv-youtube {
     font-size:24px;
     font-weight: 600;
     color: darkgrey;
+    margin-left: 5px;
 }
 .npv-view-times {
     float:right; 

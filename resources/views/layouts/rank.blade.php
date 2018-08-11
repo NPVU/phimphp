@@ -5,9 +5,9 @@
             <div class="cd-tabs js-cd-tabs">
                 <nav>
                     <ul class="cd-tabs__navigation js-cd-navigation">
-                        <li><a data-content="week" class="cd-selected" href="#week">Tuần</a></li>
-                        <li><a data-content="month" href="#month">Tháng {{date('m')}}</a></li>
-                        <li><a data-content="all" href="#all">Tất cả</a></li>				
+                        <li><a data-content="week" class="cd-selected" href="javascript:void();">Tuần</a></li>
+                        <li><a data-content="month" href="javascript:void();">Tháng {{date('m')}}</a></li>
+                        <li><a data-content="all" href="javascript:void();">Tất cả</a></li>				
                     </ul>
                 </nav>
                 <ul class="cd-tabs__content js-cd-content" id="npv-responsive-table">
