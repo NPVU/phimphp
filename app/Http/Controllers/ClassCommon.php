@@ -242,7 +242,7 @@ class ClassCommon extends BaseController
                     $html .= '<tr>';
                     $html .=    '<td data-title="Hạng" class="text-center npv-rank-number" style="width:10%">#'.$rank.'</td>';
                     $html .=    '<td data-title="" class="npv-rank-td-image" style="width:15%"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></td>';
-                    $html .=    '<td data-title="Tên phim" class="text-left" style="width:40%"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
+                    $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
                     $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view" style="width:15%">'.$row->phim_luotxem.'</td>';
                     $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia" style="width:20%">dang cap nhat</td>';
                     $html .= '</tr>';

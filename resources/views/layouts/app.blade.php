@@ -118,6 +118,7 @@
     @include('layouts.theloai')
     @include('layouts.nam')
     @yield('video')
+    @include('layouts.footer')
     
     <script type="text/javascript">
 	$(document).ready(function() {
