@@ -21,3 +21,6 @@
     </div>
 </section>
 @endsection
+@section('bangxephang')
+    @include('layouts.rank')
+@endsection

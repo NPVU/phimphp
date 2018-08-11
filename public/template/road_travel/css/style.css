@@ -1512,7 +1512,7 @@ input.email {
 /*-- subscribe --*/
 /*-- newsletter --*/
 h3.heading {
-    text-align: center;
+    text-align: left;
     font-size: 45px;
     text-transform: capitalize;
     color: #000;
@@ -1524,9 +1524,9 @@ h3.heading:before {
     content: '';
     background: #da9d40;
     height: 3px;
-    width: 10%;
+    width: 100%;
     bottom: -15%;
-    left: 45%;
+    left: 0%;
     position: absolute;
 }
 .subscribe p {

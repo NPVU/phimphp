@@ -113,6 +113,7 @@
     
     @yield('slider')    
     @yield('tapmoi')
+    @yield('bangxephang')
     @include('layouts.tapmoi')
     @include('layouts.theloai')
     @include('layouts.nam')

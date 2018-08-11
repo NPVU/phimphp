@@ -210,6 +210,56 @@ class ClassCommon extends BaseController
             return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
         }        
     }
+    
+    public static function getHTMLBangXepHang($time, $limit, $offset){
+        if(strcmp($time, 'week') == 0){
+            $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
+                . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
+        } else if(strcmp($time, 'month') == 0){
+            $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
+                . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
+        } else {
+            $listPhimXemHang = DB::select(DB::raw('SELECT * FROM phim '                
+                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
+        }         
+        for($i = 0; $i < count($listPhimXemHang); $i++){
+            $listPhimXemHang[$i]->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
+                    ->where('phim_id', $listPhimXemHang[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+        }
+        
+        if(count($listPhimXemHang)>0){
+            $html = '';
+            foreach ($listPhimXemHang as $row){
+                if(count($row->tap)>0){
+                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="modal" data-target="">';
+                    $html .=        '<div class="npv-box-phim">';
+                    $html .=            '<div class="box-image">';
+                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
+                    $html .=            '</div>';
+                    $html .=            '<div class="box-info">';
+                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="box-text" style="display: inline;float: left;">'.$row->phim_sotap.' tập</div>';
+                    $html .=                '<div class="box-text" style="display: inline;float: right;">';
+                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+//                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
+                    $html .=                '</div>';
+                    $html .=            '</div>';
+                    $html .=        '</div>';
+                    $html .=    '</a>';
+                    $html .= '</div>';
+                }
+            }
+            return $html;
+        } else {
+            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
+        }        
+    }
                      
     public static function removeVietnamese($str){
         $unicode = array(
