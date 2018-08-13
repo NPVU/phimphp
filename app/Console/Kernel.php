@@ -24,8 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            \App\Http\Controllers\ClassCommon::resetViewThang();
+            \App\Http\Controllers\ClassCommon::resetViewTuan();
+        })->dailyAt('23:00');        
     }
 
     /**

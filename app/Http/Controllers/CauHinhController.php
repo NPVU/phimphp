@@ -57,4 +57,7 @@ class CauHinhController extends Controller{
         return redirect()->route('indexHeThong')->with('success', 'Đã xóa '.$count.' file rác !');        
     }
             
+    public function resetView(){
+        ClassCommon::resetView();
+    }
 }

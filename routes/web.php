@@ -51,6 +51,7 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
 
 Route::group(['prefix'=>'/quan-ly/cau-hinh'],function(){
     Route::get('/he-thong','CauHinhController@indexHeThong')->name('indexHeThong');
+    Route::get('/he-thong/reset-view','CauHinhController@resetView');
     Route::post('/he-thong','CauHinhController@actionHeThong');
 });
 Route::group(['prefix' => 'services'], function(){

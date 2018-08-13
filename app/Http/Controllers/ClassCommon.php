@@ -255,6 +255,67 @@ class ClassCommon extends BaseController
         }        
     }
                      
+    public static function resetView(){
+        self::resetViewTuan();
+        self::resetViewThang();
+    }
+    
+    public static function resetViewTuan(){
+        $result = 0;
+        if(date('W') == 1){
+            $exist = DB::table('thongke_luotxem_tuan')->where([
+                ['tuan',42],
+                ['nam',date('Y')-1]
+            ])->exists();
+            if($exist != 1){
+                $result = DB::insert(DB::raw('INSERT INTO thongke_luotxem_tuan(tuan, nam, phim_id, phim_luotxem_tuan, ngaycapnhat)'
+                        . ' SELECT 42, '.(date('Y')-1).',phim_id, phim_luotxem_tuan, "'.now().'" FROM phim'));
+            }
+        } else {
+            $exist = DB::table('thongke_luotxem_tuan')->where([
+                ['tuan',(date('W')-1)],
+                ['nam',date('Y')]
+            ])->exists();
+            if($exist != 1){
+                $result = DB::insert(DB::raw('INSERT INTO thongke_luotxem_tuan(tuan, nam, phim_id, phim_luotxem_tuan, ngaycapnhat)'
+                        . ' SELECT '.(date('W')-1).', '.date('Y').',phim_id, phim_luotxem_tuan, "'.now().'" FROM phim'));                
+            }
+        }
+        if($result == 1){
+            DB::table('phim')->update(
+                ['phim_luotxem_tuan' => 0]
+            );
+        }
+    }
+    
+    public static function resetViewThang(){
+        $result = 0;
+        if(date('m') == 1){
+            $exist = DB::table('thongke_luotxem_thang')->where([
+                ['thang',12],
+                ['nam',date('Y')-1]
+            ])->exists();
+            if($exist != 1){
+                $result = DB::insert(DB::raw('INSERT INTO thongke_luotxem_thang(thang, nam, phim_id, phim_luotxem_thang, ngaycapnhat)'
+                        . ' SELECT 12, '.(date('Y')-1).',phim_id, phim_luotxem_thang, "'.now().'" FROM phim'));
+            }
+        } else {
+            $exist = DB::table('thongke_luotxem_thang')->where([
+                ['thang',(date('m')-1)],
+                ['nam',date('Y')]
+            ])->exists();
+            if($exist != 1){
+                $result = DB::insert(DB::raw('INSERT INTO thongke_luotxem_thang(thang, nam, phim_id, phim_luotxem_thang, ngaycapnhat)'
+                        . ' SELECT '.(date('m')-1).', '.date('Y').',phim_id, phim_luotxem_thang, "'.now().'" FROM phim'));                
+            }
+        }
+        if($result == 1){
+            DB::table('phim')->update(
+                ['phim_luotxem_thang' => 0]
+            );
+        }
+    }
+    
     public static function removeVietnamese($str){
         $unicode = array(
             'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
