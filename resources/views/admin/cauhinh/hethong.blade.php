@@ -24,6 +24,14 @@
                                 <input type="text" class="form-control" value="File rác trong thư mục tạm ({{$count}})" disabled="true">
                                 <div class="input-group-btn">
                                     <button type="submit" name="btn" value="delFileTemp" class="btn btn-danger">Xóa</button>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value="Reset lượt xem tuần + tháng" disabled="true">
+                                <div class="input-group-btn">
+                                    <button type="submit" name="btn" value="resetView" class="btn btn-danger">Reset</button>
                                 </div>
                             </div>
                         </div>

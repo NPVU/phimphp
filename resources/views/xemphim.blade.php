@@ -110,6 +110,13 @@
             </a>            
         </li>
         <li>
+            <a data-toggle="tooltip" title="Đánh giá" data-izimodal-open="#modal-info-phim">
+                <div>
+                    <span class="fa fa fa-star-half-full" style="color: red; line-height: 2.8;"></span>
+                </div>
+            </a>            
+        </li>
+        <li>
             <a href="#binhluan" data-toggle="tooltip" title="Bình luận">
                 <div>
                     <span class="fa fa fa-comment" style="color: red; line-height: 2.8;"></span>

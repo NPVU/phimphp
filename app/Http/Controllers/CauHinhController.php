@@ -42,7 +42,10 @@ class CauHinhController extends Controller{
     public function actionHeThong(Request $request){
         if(strcmp($request->btn, 'delFileTemp') == 0){
             return $this->delFileTemp();
-        } 
+        }
+        if(strcmp($request->btn, 'resetView') == 0){
+            return $this->resetView();
+        }
     }
     
     function delFileTemp(){
@@ -59,5 +62,6 @@ class CauHinhController extends Controller{
             
     public function resetView(){
         ClassCommon::resetView();
+        return redirect()->route('indexHeThong')->with('success', 'Đã reset lượt xem !');
     }
 }
