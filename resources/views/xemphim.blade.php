@@ -110,7 +110,7 @@
             </a>            
         </li>
         <li>
-            <a data-toggle="tooltip" title="Đánh giá" data-izimodal-open="#modal-info-phim">
+            <a data-toggle="tooltip" title="Đánh giá" data-izimodal-open="#modal-vote-phim">
                 <div>
                     <span class="fa fa fa-star-half-full" style="color: red; line-height: 2.8;"></span>
                 </div>
@@ -125,7 +125,7 @@
         </li>
     </ul>    
 </section>
-<section>
+<section>    
     <div id="modal-info-phim" data-izimodal-transitionin="comingInDown">
         <div class="modal-body" style="padding-bottom: 20px">        
             <div class="row">                
@@ -191,6 +191,32 @@
             </div>            
         </div>
     </div>
+    <div id="modal-vote-phim" data-izimodal-transitionin="comingInDown">
+        <div class="modal-body" style="padding: 20px">        
+            <div class="row">                
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="rate text-center"></div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .rate-base-layer
+        {
+            color: #aaa;
+        }
+        .rate-hover-layer
+        {
+            color: orange;
+        }
+        .rate-select-layer{
+            color: yellow;
+        }
+        .rate {            
+            font-size: 32px;
+            left:35%;
+        }
+    </style>
     <script>
         $('#modal-info-phim').iziModal({
                 title: 'Thông tin phim {{$phim[0]->phim_ten}}',
@@ -202,6 +228,24 @@
                 icon: 'fa fa-info',
                 iconColor: 'white'
             }); 
+        $('#modal-vote-phim').iziModal({
+                title: 'Đánh giá phim {{$phim[0]->phim_ten}}',
+                top: 100,
+                overlayClose: true,                
+                width: 600,
+                openFullscreen:false,
+                headerColor: 'rgb(56, 98, 111)',
+                icon: 'fa fa-star-half-o',
+                iconColor: 'white',
+                onOpening: function(){
+                    $('.rate').attr('data-rate-value',3);
+                    $('.rate-select-layer').css('width', 20*3+'%');
+                }
+            }); 
+        $(document).ready(function(){            
+            $(".rate").rate();
+        });
     </script>
+    
 </section>
 @endsection

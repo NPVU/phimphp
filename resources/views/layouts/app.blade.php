@@ -21,6 +21,7 @@
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>    
     <script type="application/x-javascript"> 
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
         function hideURLbar(){ window.scrollTo(0,1); } 
@@ -41,7 +42,7 @@
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />   
+    <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />    
 </head>
 <body> 
     <div class="npv-page-loading">        
