@@ -88,7 +88,7 @@
 
 
     <script src="{{ asset('public/template/login_version_1/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('public/js/popper.js') }}"></script>
+    <script src="{{ asset('public/js/popper.min.js') }}"></script>
     <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/template/login_version_1/vendor/select2/select2.min.js') }}"></script>
     <script src="{{ asset('public/template/login_version_1/vendor/tilt/tilt.jquery.min.js') }}"></script>

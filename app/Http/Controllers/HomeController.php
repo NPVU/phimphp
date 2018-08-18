@@ -19,6 +19,9 @@ class HomeController extends Controller
                     ->where('phim_id', $listPhimToday[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
+                    
+            $star = ClassCommon::getStar($listPhimToday[$i]->phim_id);
+            $listPhimToday[$i]->star = $star;
         }                     
                 
         $data['listPhimToday']  = $listPhimToday;        

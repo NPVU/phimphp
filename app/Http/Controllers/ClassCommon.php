@@ -239,12 +239,23 @@ class ClassCommon extends BaseController
             $html = '';
             foreach ($listPhimXemHang as $row){
                 if(count($row->tap)>0){
+                    $star = ClassCommon::getStar($row->phim_id);
                     $html .= '<tr>';
-                    $html .=    '<td data-title="Hạng" class="text-center npv-rank-number" style="width:10%">#'.$rank.'</td>';
-                    $html .=    '<td data-title="" class="npv-rank-td-image" style="width:15%"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></td>';
+                    $html .=    '<td data-title="Hạng" class="text-center npv-rank-number">#'.$rank.'</td>';
+                    $html .=    '<td data-title="" class="npv-rank-td-image"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></a></td>';
                     $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
-                    $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view" style="width:15%">'.$row->phim_luotxem.' lượt xem</td>';
-                    $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia" style="width:20%">đang cap nhat</td>';
+                    $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view">'.$row->phim_luotxem.' lượt xem</td>';
+                    $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia">';
+                    for($i = 1; $i <= 5; $i++){
+                        if($i <= intval($star)){
+                            $html .= '<span class="fa fa-star star star-color"></span>';
+                        } else if($i > $star && ($i-1) < $star){
+                            $html .= '<span class="fa fa-star-half-full star star-half-color"></span>';
+                        } else {
+                            $html .= '<span class="fa fa-star-o star"></span>';
+                        }
+                    }
+                    $html .=    '</td>';
                     $html .= '</tr>';
                     $rank++;
                 }
@@ -316,6 +327,25 @@ class ClassCommon extends BaseController
         }
     }
     
+    public static function getStar($phim_id) {
+        $danhGia = DB::table('danhgia')->selectRaw('SUM(danhgia_star) as sumStar, count(1) as countLuot')->where('phim_id', $phim_id)->get();
+        if($danhGia[0]->sumStar > 0){
+            $star = $danhGia[0]->sumStar / $danhGia[0]->countLuot;
+            if (strlen($star) > 1) {
+                if (intval(substr($star, 2)) == 5) {
+                    $star = intval($star) + 0.5;
+                } else if (intval(substr($star, 2)) > 50) {
+                    $star = intval($star) + 1;
+                } else {
+                    $star = $star - 0.25;
+                }
+            }    
+            return $star;
+        } else {
+            return 3;
+        }        
+    }
+
     public static function removeVietnamese($str){
         $unicode = array(
             'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',

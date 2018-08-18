@@ -169,8 +169,16 @@
                                     <span class="npv-modal-view-times">{{$phim[0]->phim_luotxem}}</span>
                                 </li>
                                 <li>
-                                    <label>Đánh giá:</label>
-                                    <span></span>
+                                    <label>Đánh giá:</label>                                    
+                                    <?php for($i = 1; $i <= 5; $i++): ?>
+                                        @if($i <= intval($star))
+                                            <span class="fa fa-star star star-color"></span>
+                                        @elseif($i > $star && ($i-1) < $star)
+                                            <span class="fa fa-star-half-full star star-half-color"></span>
+                                        @else
+                                            <span class="fa fa-star-o star"></span>
+                                        @endif
+                                    <?php endfor; ?>                                    
                                 </li>                                                                
                             </ul>
                         </div>
@@ -194,29 +202,20 @@
     <div id="modal-vote-phim" data-izimodal-transitionin="comingInDown">
         <div class="modal-body" style="padding: 20px">        
             <div class="row">                
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center danh-gia">
+                    @guest
+                    <h5>Bạn cần phải đăng nhập để thực hiện đánh giá</h5>
+                    <a href="{{ route('login') }}?backURL=true">Bấm vào đây</a> để đăng nhập
+                    @else
+                    <div class="text-center">
+                        <p>Mỗi tài khoản có thể đánh giá nhiều lần, nhưng chỉ tính lần sau cùng.</p>
+                    </div>
                     <div class="rate text-center"></div> 
+                    @endguest
                 </div>
             </div>
         </div>
-    </div>
-    <style>
-        .rate-base-layer
-        {
-            color: #aaa;
-        }
-        .rate-hover-layer
-        {
-            color: orange;
-        }
-        .rate-select-layer{
-            color: yellow;
-        }
-        .rate {            
-            font-size: 32px;
-            left:35%;
-        }
-    </style>
+    </div>    
     <script>
         $('#modal-info-phim').iziModal({
                 title: 'Thông tin phim {{$phim[0]->phim_ten}}',
@@ -238,13 +237,30 @@
                 icon: 'fa fa-star-half-o',
                 iconColor: 'white',
                 onOpening: function(){
-                    $('.rate').attr('data-rate-value',3);
-                    $('.rate-select-layer').css('width', 20*3+'%');
+                    $('.rate').attr('data-rate-value',{{$star}});
+                    $('.rate-select-layer').css('width', 20*{{$star}}+'%');
                 }
             }); 
         $(document).ready(function(){            
             $(".rate").rate();
         });
+        function danhGia(value){
+            $.ajax({
+                url: '{{url("/danh-gia/")}}?pid={{$_GET['pid']}}&star='+value+'&token={{csrf_token()}}',
+                dataType: 'text',                    
+                type: 'get',                    
+                success: function (data) {
+                    if(data == 1){                        
+                        var newElement = document.createElement('span');
+                        newElement.className = 'fa fa-2x fa-check icon-voted';  
+                        $('.danh-gia').html('<div>Cảm ơn bạn đã đánh giá !</div>');
+                        $('.danh-gia').append(newElement);
+                        
+                        
+                    }                   
+                }
+            });
+        }
     </script>
     
 </section>

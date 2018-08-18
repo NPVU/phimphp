@@ -503,6 +503,42 @@ table {
   margin-bottom: 2em;
 }
 
+.rate-base-layer
+{
+    color: #aaa;
+}
+.rate-hover-layer
+{
+    color: orange;
+    cursor: pointer;
+}
+.rate-select-layer{
+    color: yellow;
+}
+.rate {            
+    font-size: 32px;
+    left:35%;
+}
+
+.icon-voted {
+    background: #008000;
+    border-radius: 100%;
+    padding: 10px;
+    color:white;
+}
+
+.star {
+    font-size: 1.2em;
+}
+
+.star-color {
+    color:yellow;
+}
+
+.star-half-color {
+    color:yellow;
+}
+
 @media only screen and (min-width: 768px) {
   .cd-tabs__content {
     min-height: 480px;

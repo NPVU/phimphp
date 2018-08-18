@@ -20,12 +20,16 @@
                                     <div class="col-md-4">
                                         <div class="grid1">
                                             <i class="fa fa-star" aria-hidden="true"> đánh giá</i> 
-                                            <p>
-                                                <i class="fa fa-star" style="font-size: 1em;"></i>
-                                                <i class="fa fa-star" style="font-size: 1em;"></i>
-                                                <i class="fa fa-star" style="font-size: 1em;"></i>
-                                                <i class="fa fa-star-half-o" style="font-size: 1em;"></i>
-                                                <i class="fa fa-star-o" style="font-size: 1em;"></i>
+                                            <p>                                                
+                                                <?php for($i = 1; $i <= 5; $i++): ?>
+                                                    @if($i <= intval($phim->star))
+                                                        <span class="fa fa-star"></span>
+                                                    @elseif($i > $phim->star && ($i-1) < $phim->star)
+                                                        <span class="fa fa-star-half-full"></span>
+                                                    @else
+                                                        <span class="fa fa-star-o"></span>
+                                                    @endif
+                                                <?php endfor; ?>  
                                             </p>
                                         </div>
                                     </div>

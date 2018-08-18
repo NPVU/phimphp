@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
 /**
  * Description of XemPhimController
  *
@@ -22,32 +23,32 @@ class XemPhimController extends Controller{
     
     function xemPhim(){
         $check = true;
-        if(strcmp(Session::token(), Input::get('token')) == 0){
-            $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->get();
-            $idTheLoai = json_decode($phim[0]->theloai_id);
-            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-            $listTap = DB::table('tap')
-                    ->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
-                    ->where('phim_id', Input::get('pid'))->get();
-            $tap_current = DB::table('tap')->where([
+
+        $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->get();
+        $idTheLoai = json_decode($phim[0]->theloai_id);
+        $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+        $listTap = DB::table('tap')
+                        ->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
+                        ->where('phim_id', Input::get('pid'))->get();
+        $tap_current = DB::table('tap')->where([
                         ['phim_id', Input::get('pid')],
                         ['tap_tapso', Input::get('t')]
-                    ])->get();
-            if(count($tap_current)>0){
-                if(!empty($tap_current[0]->tap_googlelink)){
-                    $tap_current[0]->googleRedirectLink =  $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
-                }
-            } else {
-                $check = false;
-            }              
+                ])->get();        
+        if (count($tap_current) > 0) {
+            if (!empty($tap_current[0]->tap_googlelink)) {
+                $tap_current[0]->googleRedirectLink = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
+            }
         } else {
             $check = false;
-        }
+        }        
+        $star = ClassCommon::getStar(Input::get('pid'));
+        
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
             $data['listTap'] = $listTap;
             $data['tap'] = $tap_current;
+            $data['star'] = $star;
             return view('xemphim', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
@@ -69,6 +70,26 @@ class XemPhimController extends Controller{
                         ['tap_tapso', Input::get('t')]
                 ])->get();
             return $luotxem[0]->tap_luotxem;
+        }
+    }
+    
+    public function addDanhGia(){
+        if(strcmp(Session::token(), Input::get('token')) == 0){
+            if (Auth::check()) {
+                $user = Auth::user();
+                DB::table('danhgia')->where('user_id', $user->id)->where('phim_id', Input::get('pid'))->delete();
+                DB::table('danhgia')->insert([
+                    'user_id' => $user->id,
+                    'phim_id' => Input::get('pid'),
+                    'danhgia_star' => floatval(Input::get('star')),
+                    'danhgia_ngay' => now()
+                ]);
+                return 1;
+            } else {
+                return -1;
+            }               
+        } else {
+            return 0;
         }
     }
     

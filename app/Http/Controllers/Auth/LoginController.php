@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Input;
 class LoginController extends Controller
 {
     /*
@@ -38,6 +39,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');        
+    }
+    
+    public function showLoginForm(){
+        if(Input::get('backURL') != null){
+            Session::put('backURL', url()->previous());
+        }        
+        return view('auth.login');
     }
     
     public function postLogin(Request $request){

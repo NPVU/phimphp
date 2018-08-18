@@ -120,11 +120,14 @@
     @include('layouts.nam')
     @yield('video')
     @include('layouts.footer')
-    
+    @if (session('backURL'))        
+        @include('layouts.backURL')
+        <?php Session::forget('backURL'); ?>
+    @endif
     <script type="text/javascript">
 	$(document).ready(function() {
             $().UItoTop({ easingType: 'easeOutQuart' });								
 	});        
-    </script>    
+    </script>        
 </body>
 </html>
