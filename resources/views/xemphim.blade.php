@@ -15,7 +15,7 @@
             <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11" style="padding-bottom: 5px;">
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                    @if(!empty($tap[0]->googleRedirectLink))
+                    @if(!empty($tap[0]->tap_googlelink))
                     <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{$_GET['token']}}">
                         <img class="npv-server-google {{strcmp($_GET['s'], md5('google'))==0?'npv-server-active':''}}" src="{{asset('public/img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
                     </a>

@@ -35,9 +35,7 @@ class XemPhimController extends Controller{
                         ['tap_tapso', Input::get('t')]
                 ])->get();        
         if (count($tap_current) > 0) {
-            if (!empty($tap_current[0]->tap_googlelink)) {
-                $tap_current[0]->googleRedirectLink = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
-            }
+            
         } else {
             $check = false;
         }        
@@ -60,7 +58,26 @@ class XemPhimController extends Controller{
             }
             return view('errors/index', $data);
         }
-    }        
+    }    
+
+    public function loadVideo(){
+        if(strcmp(Session::token(), Input::get('token')) == 0){
+            $tap_current = DB::table('tap')->where([
+                            ['phim_id', Input::get('pid')],
+                            ['tap_tapso', Input::get('t')]
+                    ])->get();
+            if (!empty($tap_current[0]->tap_googlelink)) {
+                return $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
+            } else {
+                return null;
+            }
+        } else {
+            $data['title'] = 'Không tìm thấy trang';
+            $data['page'] = 'errors.404';            
+            $data['backURL'] = URL::to('/');
+            return view('errors/index', $data);
+        }
+    }
     
     public function addLuotXem(){
         if(strcmp(Session::token(), Input::get('token')) == 0){
