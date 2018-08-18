@@ -625,6 +625,12 @@ table {
     .cd-tabs__navigation a {
         padding-top: 25px;
     }
+    .ls {
+        display:none;
+    }
+    .le {
+        width:80px !important;
+    }
 }
 @media(max-width: 414px){
     iframe.npv-youtube {

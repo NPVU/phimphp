@@ -39,10 +39,10 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
-                                <th scope="col" class="text-left" style="width: 30%">Tên phim</th>
-                                <th scope="col" class="text-center" style="width: 15%">Số tập</th>
-                                <th scope="col" class="text-left" style="width: 15%">Tag</th>                                                                
-                                <th scope="col" class="text-center" style="width: 20%">Lượt xem</th>                                
+                                <th scope="col" class="text-left" style="width: 25%">Tên phim</th>
+                                <th scope="col" class="text-center" style="width: 10%">Số tập</th>
+                                <th scope="col" class="text-left" style="width: 30%">Tag</th>                                                                
+                                <th scope="col" class="text-center" style="width: 15%">Lượt xem</th>                                
                                 <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
                         </thead>

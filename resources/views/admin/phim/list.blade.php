@@ -34,12 +34,26 @@
                 </div>                
                 <div class="box-body text-center">
                     @foreach ($list as $row)
-                    <div class="col-sm-6 col-md-3 ">
+                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
                         <div class="input-group">                    
-                            <span class="btn btn-primary " 
-                                  style="width:100px;margin-bottom: 5px;"
+                            <span class="btn btn-primary le" 
+                                  style="width:140px;margin-bottom: 5px;"
                                   onclick="preEditTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')">
                                 {{$row->tap_tapsohienthi}}
+                                <span class="ls">
+                                    (@if($row->tap_googlelink != '')
+                                       G
+                                    @endif
+                                    @if($row->tap_openloadlink != '')
+                                        O
+                                    @endif
+                                    @if($row->tap_youtubelink != '')
+                                        Y
+                                    @endif
+                                    @if($row->tap_localhostlink != '')
+                                        L
+                                    @endif)
+                                </span>
                             </span>
                             <span class="btn btn-danger " 
                                   style="width:50px;margin-bottom: 5px;"
@@ -396,7 +410,9 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                 success: function(data){
-                    console.log(data);                    
+                    console.log(data);
+                    showToast('success', '', 'Cập nhật thành công', true);
+                    $('title').html('Chỉnh Sửa '+data[0].tap_tapsohienthi+' - {{$phim[0]->phim_ten}}');
                     $('button > span').html('Kiểm tra');
                     $('button > i').removeClass('fa-check');
                     $('button > i').removeClass('fa-close');
