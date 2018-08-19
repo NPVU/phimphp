@@ -98,7 +98,7 @@
                     <li><a href="{{ route('login') }}" class="w3_facebook"><i class="fa fa-sign-in"></i></a></li>
                     <li><a href="{{ route('register') }}" class="w3_facebook"><i class="fa fa-registered"></i></a></li>
                     @else
-                    <li>
+                    <li onclick="$('.npv-user').toggle('fast');">
                         <a href="#" class="w3_facebook">
                             <i class="fa fa-user"></i>
                         </a>                        
@@ -139,6 +139,9 @@
     @include('layouts.tapmoi')
     @include('layouts.theloai')
     @include('layouts.nam')
+    @if (Auth::check())
+    @include('layouts.user')
+    @endif
     @yield('video')
     @include('layouts.footer')
     @if (session('backURL'))        
