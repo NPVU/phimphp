@@ -166,7 +166,7 @@
                                 </li>                                
                                 <li>
                                     <label>Lượt xem:</label>
-                                    <span class="npv-modal-view-times view-{{$phim[0]->phim_id}}">{{number_format($phim[0]->phim_luotxem)}}</span>
+                                    <span class="npv-modal-view-times modal-view-{{$phim[0]->phim_id}}">{{number_format($phim[0]->phim_luotxem)}}</span>
                                 </li>
                                 <li>
                                     <label>Đánh giá:</label>                                    

@@ -34,6 +34,7 @@
             if(data.message.event==='view'){
                 $('.view-'+data.message.content.phimid+'-'+data.message.content.tapid).html(data.message.content.tview+' lượt xem');
                 $('.view-'+data.message.content.phimid).html(data.message.content.pview+' lượt xem');
+                $('.modal-view-'+data.message.content.phimid).html(data.message.content.pview);
                 $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+ ' lượt xem');
                 $('.view-slider-'+data.message.content.phimid).html(data.message.content.pview);
                 $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+ ' lượt xem');
