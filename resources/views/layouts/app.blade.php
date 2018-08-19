@@ -21,7 +21,24 @@
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>   
+    <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
+    <script>        
+        var pusher = new Pusher('836033107e962f12f88f', {
+          cluster: 'ap1',
+          encrypted: true
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('App\\Events\\PusherEvent', function(data) {
+            if(data.message.event==='view'){
+                $('.npv-view-times').html(data.message.content.tap+' lượt xem');
+                $('.npv-modal-view-times').html(data.message.content.phim+' lượt xem');
+            }else if(data.message.event==='pnew'){
+                
+            }
+        });
+    </script>
     <script type="application/x-javascript"> 
         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
         function hideURLbar(){ window.scrollTo(0,1); } 

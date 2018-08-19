@@ -7,12 +7,12 @@
  */
 
 namespace App\Http\Controllers;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
+use App\Events\PusherEvent;
 /**
  * Description of XemPhimController
  *
@@ -86,7 +86,12 @@ class XemPhimController extends Controller{
                         ['phim_id', Input::get('pid')],
                         ['tap_tapso', Input::get('t')]
                 ])->get();
-            return $luotxem[0]->tap_luotxem;
+            $phim = DB::table('phim')->selectRaw('phim_luotxem')->where('phim_id', Input::get('pid'))->get();
+            $data['event'] = 'view';
+            $array['tap'] = $luotxem[0]->tap_luotxem;
+            $array['phim']  = $phim[0]->phim_luotxem;
+            $data['content'] = $array;
+            event(new PusherEvent($data));            
         }
     }
     
