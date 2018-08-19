@@ -88,6 +88,10 @@ class ClassCommon extends BaseController
         return $str;
     }
     
+    public static function formatLuotXem($n){
+        return number_format($n);
+    }
+    
     public static function getHTMLTapMoi($limit, $offset){
         $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
                 . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
@@ -114,7 +118,7 @@ class ClassCommon extends BaseController
                     $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                     $html .=                '<div class="box-text">';
-                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
                     $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
                     $html .=                '</div>';
                     $html .=            '</div>';
@@ -155,7 +159,7 @@ class ClassCommon extends BaseController
                     $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
                     $html .=                '<div class="box-text">';
-                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
                     $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
                     $html .=                '</div>';
                     $html .=            '</div>';
@@ -196,7 +200,7 @@ class ClassCommon extends BaseController
                     $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
                     $html .=                '<div class="box-text">';
-                    $html .=                    '<span style="float:left;">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
                     $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
                     $html .=                '</div>';
                     $html .=            '</div>';
@@ -244,7 +248,7 @@ class ClassCommon extends BaseController
                     $html .=    '<td data-title="Hạng" class="text-center npv-rank-number">#'.$rank.'</td>';
                     $html .=    '<td data-title="" class="npv-rank-td-image"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></a></td>';
                     $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
-                    $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view">'.$row->phim_luotxem.' lượt xem</td>';
+                    $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
                     $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia">';
                     for($i = 1; $i <= 5; $i++){
                         if($i <= intval($star)){

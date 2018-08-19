@@ -28,7 +28,7 @@
                     <span class="npv-title-video">
                         {{$phim[0]->phim_ten}} - {{$tap[0]->tap_tapsohienthi}}
                     </span>
-                    <span class="npv-view-times">{{$tap[0]->tap_luotxem}} lượt xem</span>
+                    <span class="npv-view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}} lượt xem</span>
                 </div>
             </div>
         </div>
@@ -166,7 +166,7 @@
                                 </li>                                
                                 <li>
                                     <label>Lượt xem:</label>
-                                    <span class="npv-modal-view-times">{{$phim[0]->phim_luotxem}}</span>
+                                    <span class="npv-modal-view-times view-{{$phim[0]->phim_id}}">{{number_format($phim[0]->phim_luotxem)}}</span>
                                 </li>
                                 <li>
                                     <label>Đánh giá:</label>                                    

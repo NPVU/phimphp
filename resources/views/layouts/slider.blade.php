@@ -42,7 +42,7 @@
                                     <div class="col-md-4">
                                         <div class="grid1">
                                             <i class="fa fa-eye" aria-hidden="true"> lượt xem</i>
-                                            <p>{{$phim->phim_luotxem}}</p>
+                                            <p class="view-slider-{{$phim->phim_id}}">{{number_format($phim->phim_luotxem)}}</p>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>

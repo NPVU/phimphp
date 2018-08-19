@@ -32,8 +32,10 @@
         var channel = pusher.subscribe('my-channel');
         channel.bind('App\\Events\\PusherEvent', function(data) {
             if(data.message.event==='view'){
-                $('.npv-view-times').html(data.message.content.tap+' lượt xem');
-                $('.npv-modal-view-times').html(data.message.content.phim+' lượt xem');
+                $('.view-'+data.message.content.phimid+'-'+data.message.content.tapid).html(data.message.content.tview+' lượt xem');
+                $('.view-'+data.message.content.phimid).html(data.message.content.pview+' lượt xem');
+                $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+ ' lượt xem');
+                $('.view-slider-'+data.message.content.phimid).html(data.message.content.pview);
             }else if(data.message.event==='pnew'){
                 
             }

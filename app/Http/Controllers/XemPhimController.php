@@ -82,15 +82,18 @@ class XemPhimController extends Controller{
     public function addLuotXem(){
         if(strcmp(Session::token(), Input::get('token')) == 0){
             ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));            
-            $luotxem = DB::table('tap')->selectRaw('tap_luotxem')->where([
+            $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
                         ['phim_id', Input::get('pid')],
                         ['tap_tapso', Input::get('t')]
                 ])->get();
             $phim = DB::table('phim')->selectRaw('phim_luotxem')->where('phim_id', Input::get('pid'))->get();
-            $data['event'] = 'view';
-            $array['tap'] = $luotxem[0]->tap_luotxem;
-            $array['phim']  = $phim[0]->phim_luotxem;
-            $data['content'] = $array;
+            $data['event']      = 'view';
+            $array['tapid']     = $luotxem[0]->tap_id;
+            $array['tview']     = ClassCommon::formatLuotXem($luotxem[0]->tap_luotxem);
+            $array['phimid']    = Input::get('pid');
+            $array['pview']     = ClassCommon::formatLuotXem($phim[0]->phim_luotxem);
+            $array['pstrview']  = ClassCommon::demLuotXem($phim[0]->phim_luotxem);
+            $data['content']    = $array;
             event(new PusherEvent($data));            
         }
     }
