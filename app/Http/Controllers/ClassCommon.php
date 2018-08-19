@@ -248,7 +248,13 @@ class ClassCommon extends BaseController
                     $html .=    '<td data-title="Hạng" class="text-center npv-rank-number">#'.$rank.'</td>';
                     $html .=    '<td data-title="" class="npv-rank-td-image"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></a></td>';
                     $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'&token='.Session::token().'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
-                    $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
+                    if(strcmp($time, 'week') == 0){
+                        $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-week-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
+                    } else if(strcmp($time, 'month') == 0){
+                        $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-month-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
+                    } else {
+                        $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
+                    }                    
                     $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia">';
                     for($i = 1; $i <= 5; $i++){
                         if($i <= intval($star)){

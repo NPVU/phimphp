@@ -86,12 +86,14 @@ class XemPhimController extends Controller{
                         ['phim_id', Input::get('pid')],
                         ['tap_tapso', Input::get('t')]
                 ])->get();
-            $phim = DB::table('phim')->selectRaw('phim_luotxem')->where('phim_id', Input::get('pid'))->get();
+            $phim = DB::table('phim')->selectRaw('phim_luotxem, phim_luotxem_tuan, phim_luotxem_thang')->where('phim_id', Input::get('pid'))->get();
             $data['event']      = 'view';
             $array['tapid']     = $luotxem[0]->tap_id;
             $array['tview']     = ClassCommon::formatLuotXem($luotxem[0]->tap_luotxem);
             $array['phimid']    = Input::get('pid');
             $array['pview']     = ClassCommon::formatLuotXem($phim[0]->phim_luotxem);
+            $array['pviewweek'] = ClassCommon::formatLuotXem($phim[0]->phim_luotxem_tuan);
+            $array['pviewmonth']= ClassCommon::formatLuotXem($phim[0]->phim_luotxem_thang);
             $array['pstrview']  = ClassCommon::demLuotXem($phim[0]->phim_luotxem);
             $data['content']    = $array;
             event(new PusherEvent($data));            

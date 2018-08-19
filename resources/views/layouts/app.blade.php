@@ -36,6 +36,8 @@
                 $('.view-'+data.message.content.phimid).html(data.message.content.pview+' lượt xem');
                 $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+ ' lượt xem');
                 $('.view-slider-'+data.message.content.phimid).html(data.message.content.pview);
+                $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+ ' lượt xem');
+                $('.view-month-'+data.message.content.phimid).html(data.message.content.pviewmonth+ ' lượt xem');                
             }else if(data.message.event==='pnew'){
                 
             }
