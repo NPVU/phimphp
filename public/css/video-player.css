@@ -11,8 +11,7 @@ and open the template in the editor.
     display: none;
 }
 
-#video-player {
-    cursor: pointer;
+#video-player {    
     border-radius: 5px;
     -webkit-box-shadow: 0px 0px 7px 0px;
 }

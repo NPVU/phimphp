@@ -77,7 +77,7 @@
             @foreach($listTap as $tap)            
             <div class="col-xs-4 col-sm-2 col-md-1">
                 @if($_GET['t'] != $tap->tap_tapso)
-                <a class="click-loading btn btn-primary" style="min-width: 80px;margin-bottom: 5px;"
+                <a class="click-loading btn btn-primary visit" style="min-width: 80px;margin-bottom: 5px;"
                    href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}&token={{$_GET['token']}}">
                     <span>{{$tap->tap_tapsohienthi}}</span>
                 </a>

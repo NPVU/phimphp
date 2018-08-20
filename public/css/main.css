@@ -307,7 +307,10 @@ table {
   -webkit-box-shadow: inset 0 -2px 3px rgba(203, 196, 130, 0.06);
           box-shadow: inset 0 -2px 3px rgba(203, 196, 130, 0.06);
 }
-
+a.visit:visited{
+    background: #738492;
+    border-color: #738492;
+}
 @media only screen and (min-width: 768px) {
   .cd-tabs::after {
     display: none;

@@ -121,7 +121,7 @@ class TaiKhoanController extends Controller{
             return $data;
         } else {
             $data['status'] = 0;
-            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại !';
+            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại ';
             return $data;
         }
     }
@@ -130,12 +130,12 @@ class TaiKhoanController extends Controller{
         if(strcmp(Session::token(), $token) == 0){
             if (!(Hash::check($oldPassword, Auth::user()->password))) {
                $data['status'] = 0;
-               $data['msg'] = 'Mật khẩu cũ không đúng !';
+               $data['msg'] = 'Mật khẩu cũ không đúng ';
                return $data;
             }     
             if(strcmp($oldPassword, $newPassword) == 0){ 
                $data['status'] = 0;
-               $data['msg'] = 'Mật khẩu cũ và mật khẩu mới không được giống nhau !';
+               $data['msg'] = 'Mật khẩu cũ và mật khẩu mới không được giống nhau ';
                return $data;
             }
             $user = Auth::user();
@@ -143,10 +143,11 @@ class TaiKhoanController extends Controller{
             $user->save();            
         } else {
             $data['status'] = 0;
-            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại !';
+            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại ';
             return $data;
         }
         $data['status'] = 1;
+        $data['msg'] = 'Thay đổi mật khẩu thành công';
         return $data;
     }
     
