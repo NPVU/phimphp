@@ -151,6 +151,50 @@ class TaiKhoanController extends Controller{
         return $data;
     }
     
+    public function changeBirthday($token, $newDate){
+        if(strcmp(Session::token(), $token) == 0){
+            $user = Auth::user();
+            $user->birthday = $newDate;
+            $user->save();
+            $data['status'] = 1;
+            $data['msg'] = date_format(date_create($newDate),"m/d/Y");
+            $data['value'] = date_format(date_create($newDate),"Y-m-d");
+            return $data;
+        } else {
+            $data['status'] = 0;
+            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại ';
+            return $data;
+        }
+    }
+    public function changeGender($token, $gender){
+        if(strcmp(Session::token(), $token) == 0){
+            $user = Auth::user();
+            $user->gender = $gender;
+            $user->save();
+            $data['status'] = 1;
+            $data['msg'] = $gender;
+            $data['text'] = $gender==1?'Nam':'Nữ';
+            return $data;
+        } else {
+            $data['status'] = 0;
+            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại ';
+            return $data;
+        }
+    }
+    public function changePhone($token, $phone){
+        if(strcmp(Session::token(), $token) == 0){
+            $user = Auth::user();
+            $user->phone = $phone;
+            $user->save();
+            $data['status'] = 1;
+            $data['msg'] = $phone;
+            return $data;
+        } else {
+            $data['status'] = 0;
+            $data['msg'] = 'token session không đúng, vui lòng đăng nhập lại ';
+            return $data;
+        }
+    }    
     public function uploadAvatar(Request $request) {
         if($request->hasFile('avatar')){
             // chuyển file về thư mục cần lưu trữ
@@ -166,6 +210,9 @@ class TaiKhoanController extends Controller{
             $path = ClassCommon::getPathUploadAvatar().Session::get('fileAvatarName');
             rename(ClassCommon::getPathUploadTemp().Session::get('fileAvatarName'), $path);
             $user = Auth::user();
+            if(file_exists($user->avatar)){
+                unlink($user->avatar);
+            }            
             $user->avatar = $path;
             $user->save();
             $data['status'] = 1;

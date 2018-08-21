@@ -38,6 +38,9 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/','TaiKhoanController@index')->name('listTaiKhoan');
     Route::get('/change-display-name/{token}/{displayUserName}','TaiKhoanController@changeDisplayUserName');
     Route::get('/change-password/{token}/{oldPassword}/{newPassword}','TaiKhoanController@changePassword');
+    Route::get('/change-birthday/{token}/{newDate}/','TaiKhoanController@changeBirthday');
+    Route::get('/change-gender/{token}/{gender}/','TaiKhoanController@changeGender');
+    Route::get('/change-phone/{token}/{phone}/','TaiKhoanController@changePhone');
     
     Route::post('/upload-avatar','TaiKhoanController@uploadAvatar');
     Route::get('/change-avatar/{token}','TaiKhoanController@updateAvatar'); 
