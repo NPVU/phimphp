@@ -6,7 +6,7 @@
                 <img src="{{ asset((Auth::user()->avatar)) }}" class="avatar img-circle" width="100%"/>                                
             </div>   
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <span style="font-size:18px;"><b>{{ Auth::user()->name }}</b></span>
+                <span style="font-size:18px;"><b class="username-popup">{{ Auth::user()->name }}</b></span>
                 <span style="font-size:14px;color:gray">{{ Auth::user()->email }}</span>
             </div>                        
         </div>
@@ -181,7 +181,7 @@
             url: "{{url('/quan-ly/tai-khoan/change-display-name')}}/{{csrf_token()}}/" + $('#username').val(),
             success: function (data) {
                 if (data.status === 1) {
-                    $('.username').html($('#username').val());$('#username').attr('name-before',$('#username').val());
+                    $('.username, .username-popup').html($('#username').val());$('#username').attr('name-before',$('#username').val());
                     $('#username, .u-s, .u-c').addClass('display-none');$('.username, .u-e').removeClass('display-none');
                 }
             }
@@ -251,7 +251,7 @@
             url: "{{url('/quan-ly/tai-khoan/change-avatar')}}/{{csrf_token()}}/",
             success: function (data) {
                if (data.status === 1) {
-                    $('#user-avatar').attr('src', '{{asset("")}}'+data.msg);
+                    $('#user-avatar, .avatar').attr('src', '{{asset("")}}'+data.msg);
                     $('.a-s, .a-c').addClass('display-none');$('#avatar-before').val('{{asset("")}}'+data.msg);
                 }
             }
