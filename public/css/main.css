@@ -5,6 +5,10 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
     background-color: #3c8dbc !important;
 }
+.no-padding {
+    padding-left:0px !important;
+    padding-right:0px !important;
+}
 .npv-page-loading {
     position: absolute;
     top: 0;

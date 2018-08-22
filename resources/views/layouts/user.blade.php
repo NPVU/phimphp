@@ -12,7 +12,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:20px;">
             <hr/>            
-            <button type="button" class="btn btn-primary" style="width: 120px; float: left" data-izimodal-open="#user-profile">Profile</button>
+            <button type="button" class="btn btn-primary" style="width: 120px; float: left" data-izimodal-open="#user-profile">Thông tin</button>
             <button type="button" class="btn btn-primary" style="width: 120px; float: right" data-izimodal-open="#user-password">Đổi mật khẩu</button>
         </div>
     </div>
