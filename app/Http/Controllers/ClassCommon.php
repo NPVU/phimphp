@@ -98,7 +98,7 @@ class ClassCommon extends BaseController
                 . ' ON phim.phim_id IN (tap.phim_id) ORDER BY phim.phim_id DESC'));            
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
                     ->where('phim_id', $listPhimToday[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
@@ -118,7 +118,7 @@ class ClassCommon extends BaseController
                     $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                     $html .=                '<div class="box-text">';
-                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
+                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
                     $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
                     $html .=                '</div>';
                     $html .=            '</div>';

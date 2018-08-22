@@ -43,11 +43,9 @@
                 
             }
         });
+        $(document).click(function(event) {var target = $(event.target);if (!target.parents().andSelf().is('.npv-user')&&!target.parents().andSelf().is('.open-popup-user')&&!target.parents().andSelf().is('#user-password')&&!target.parents().andSelf().is('#user-profile')) {$('.npv-user').hide('slow');}});
     </script>
-    <script type="application/x-javascript"> 
-        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-        function hideURLbar(){ window.scrollTo(0,1); } 
-    </script>
+    <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>
     
     <!-- Fonts -->        
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet">
@@ -99,7 +97,7 @@
                     <li><a href="{{ route('login') }}" class="w3_facebook"><i class="fa fa-sign-in"></i></a></li>
                     <li><a href="{{ route('register') }}" class="w3_facebook"><i class="fa fa-registered"></i></a></li>
                     @else
-                    <li onclick="$('.npv-user').toggle('fast');">
+                    <li class="open-popup-user" onclick="$('.npv-user').toggle('fast');">
                         <a href="#" class="w3_facebook">
                             <i class="fa fa-user"></i>
                         </a>                        
@@ -120,12 +118,11 @@
             <!-- navbar-header -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#tapmoi">TẬP MỚI</a></li>
-                    <li><a href="{{url('/')}}/#top" class="hvr-underline-from-center scroll">TOP</a></li>
+                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#tapmoi">TẬP MỚI</a></li>                    
                     <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#theloai">THỂ LOẠI</a></li>
                     <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#nam">NĂM</a></li>                                                          
                     @if(Session::has('roles'))                                
-                        <li><a href="{{ url('quan-ly') }}" class="hvr-underline-from-center scroll">Quản lý</a></li>
+                        <li><a href="{{ url('quan-ly') }}" class="hvr-underline-from-center scroll">QUẢN LÝ</a></li>
                     @endif
                 </ul>
             </div>
