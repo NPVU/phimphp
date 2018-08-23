@@ -356,6 +356,39 @@ class ClassCommon extends BaseController
         }        
     }
 
+    public static function getHTMLComment($phim_id, $limit, $offset){
+        $listComment = DB::select(DB::raw('SELECT users.name, users.avatar, binhluan.*, (SELECT count(1) FROM users_roles WHERE users_roles.user_id = binhluan.user_id) AS role FROM users, binhluan WHERE binhluan.user_id = users.id AND binhluan.phim_id ='.$phim_id.' AND binhluan_id_cha = 0 ORDER BY binhluan_id DESC LIMIT '.$limit.' OFFSET '.$offset));
+        $html = "";
+        if(count($listComment)>0){
+            foreach ($listComment as $row){
+                $subComment = DB::select(DB::raw('SELECT users.name, users.avatar, binhluan.*, (SELECT count(1) FROM users_roles WHERE users_roles.user_id = binhluan.user_id) AS role FROM users, binhluan WHERE binhluan.user_id = users.id AND binhluan.phim_id ='.$phim_id.' AND binhluan_id_cha = '.$row->binhluan_id.' ORDER BY binhluan_id DESC'));
+                $subHTML = '';
+                $html   .= '<tr><td style="width:60px; height:60px;vertical-align:top">';
+                $html   .=      '<img src="'.URL('/').'/'.$row->avatar.'" class="avatar img-circle" width="100%"/>';
+                $html   .=      '</td><td class="text-left">';                                        
+                $html   .=      '<div><span class="username-comment '.($row->role>0?'color-name-admin':'').'" style="font-weight: 700;">'.$row->name.'</span><span style="float:right;">'.self::getStrSoNgayDaQua($row->binhluan_ngaycapnhat).'</span></div>';
+                $html   .=      '<div class="content-comment '.($row->role>0?'color-comment-admin':'').'">'.$row->binhluan_noidung.'</div>';
+                if(count($subComment)>0){
+                    $subHTML = '<table class="table">';
+                    foreach($subComment as $sub){
+                        $subHTML   .= '<tr><td style="width:60px; height:60px;">';
+                        $subHTML   .=      '<img src="'.URL('/').'/'.$sub->avatar.'" class="avatar img-circle" width="100%"/>';
+                        $subHTML   .=      '</td><td class="text-left">';                                        
+                        $subHTML   .=      '<div><span class="username-comment '.($sub->role>0?'color-name-admin':'').'" style="font-weight: 700;">'.$sub->name.'</span><span style="float:right;">'.self::getStrSoNgayDaQua($sub->binhluan_ngaycapnhat).'</span></div>';
+                        $subHTML   .=      '<div class="content-comment '.($sub->role>0?'color-comment-admin':'').'">'.$sub->binhluan_noidung.'</div>';
+                        $subHTML   .= '</td></tr>';   
+                    }
+                    $subHTML .= '</table>';
+                }
+                $html   .= $subHTML;
+                $html   .= '</td></tr>';            
+            }
+            return $html;
+        }else {
+            return '<tr><td colspan="2" class="text-center"><i style="color:gray">Không tìm thấy dữ liệu</i></td></tr>';
+        }        
+    }
+
     public static function removeVietnamese($str){
         $unicode = array(
             'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',

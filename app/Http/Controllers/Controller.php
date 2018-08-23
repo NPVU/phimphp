@@ -16,6 +16,7 @@ class Controller extends BaseController
     {
         $config = DB::table('config')->get();
         session(['PhimPerPage' => $config[0]->config_phim_per_page]);
+        session(['CommentPerPage' => $config[0]->config_comment_per_page]);
     }
     public function getDataHeader(){
         $listTheLoai = DB::table('theloai')->get();

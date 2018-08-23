@@ -40,13 +40,14 @@ class XemPhimController extends Controller{
             $check = false;
         }        
         $star = ClassCommon::getStar(Input::get('pid'));
-        
+        $comment = ClassCommon::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
             $data['listTap'] = $listTap;
             $data['tap'] = $tap_current;
             $data['star'] = $star;
+            $data['comment'] = $comment;
             return view('xemphim', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
@@ -118,6 +119,37 @@ class XemPhimController extends Controller{
         } else {
             return 0;
         }
+    }
+
+    public function comment($token, $phim_id, $content){
+        if(strcmp(Session::token(), $token) == 0){
+            if (Auth::check()) {
+                $user = Auth::user();                
+                DB::table('binhluan')->insert([
+                    'binhluan_noidung' => $content,
+                    'phim_id' => $phim_id,
+                    'user_id' => $user->id,
+                    'binhluan_ngaycapnhat' => now()
+                ]);
+                return ClassCommon::getHTMLComment($phim_id, Session::get('CommentPerPage'), 0);
+            } else {
+                return -1;
+            }               
+        } else {
+            return 0;
+        }
+    }
+
+    public function xemThemComment(){
+        $comment_per_page = Session::get('CommentPerPage');
+        if(Input::get('page') != null){
+            $page  = Input::get('page')==0?1:Input::get('page');
+            $offset = ($page-1) * $comment_per_page;            
+            $comment = ClassCommon::getHTMLComment(Input::get('pid'),$comment_per_page,$offset);
+        } else {
+            $comment = ClassCommon::getHTMLComment(Input::get('pid'),$comment_per_page,0);
+        }   
+        return $comment;
     }
     
     function curl($url) {

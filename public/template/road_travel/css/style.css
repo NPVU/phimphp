@@ -1522,7 +1522,7 @@ h3.heading {
 }
 h3.heading:before {
     content: '';
-    background: #da9d40;
+    background: #3c8dbc;
     height: 3px;
     width: 100%;
     bottom: -15%;

@@ -9,6 +9,17 @@ body::-webkit-scrollbar-thumb {
     padding-left:0px !important;
     padding-right:0px !important;
 }
+
+.themes-color {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+.themes-color:hover{
+    color:white;
+}
+
 .npv-page-loading {
     position: absolute;
     top: 0;
@@ -57,7 +68,8 @@ body::-webkit-scrollbar-thumb {
     border-left: none;
     border-right: none;
 }
-.text-light-red{color:#ff2f00 !important}
+.text-light-red, .color-name-admin{color:#ff2f00 !important}
+.color-comment-admin{color:#9c0730 !important}
 .box-body-title{
     text-align: center;
     font-size: 1.5em;

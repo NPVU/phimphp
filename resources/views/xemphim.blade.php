@@ -8,7 +8,7 @@
         <div style="background: url({{$phim[0]->phim_hinhnen}}) no-repeat 0px 0px;background-size: 100%;">            
             <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1"></div>
             <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
-                @include('plugin.video')
+                @include('layouts.video')
             </div>            
         </div>  
         <div>
@@ -92,14 +92,7 @@
         </div>        
     </div>
 </section>
-<section style="padding: 5em 0;">
-    <div class="container">
-        <h3 class="heading">Bình luận</h3>        
-        <div id="binhluan" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            
-        </div>
-    </div>
-</section>
+@include('layouts.comment')
 <section class="npv-icon-right">      
     <ul>
         <li>
