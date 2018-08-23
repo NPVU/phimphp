@@ -6,8 +6,8 @@
                 <img src="{{ asset((Auth::user()->avatar)) }}" class="avatar img-circle" width="100%"/>                                
             </div>   
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <span style="font-size:18px;"><b class="username-popup">{{ Auth::user()->name }}</b></span>
-                <span style="font-size:14px;color:gray">{{ Auth::user()->email }}</span>
+                <div style="font-size:18px;"><b class="username-popup">{{ Auth::user()->name }}</b></div>
+                <div style="font-size:14px;color:gray">{{ Auth::user()->email }}</div>
             </div>                        
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:20px;">
