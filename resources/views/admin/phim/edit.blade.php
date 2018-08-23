@@ -117,6 +117,18 @@
                                 <span class="help-block"><?php echo isset($edit_phim_season_error)?$edit_phim_season_error:''; ?></span>
                             </div>
                             
+                            <div class="form-group <?php echo isset($edit_phim_kieu_error)?'has-error':''; ?>">
+                                <label class="control-label" for="edit_phim_kieu">Dạng anime</label>
+                                <select id="edit_phim_kieu" name="edit_phim_kieu" class="form-control"
+                                    value="<?php echo isset($_POST['edit_phim_kieu']) ? $_POST['edit_phim_kieu'] : $phim[0]->phim_kieu ?>">
+                                    <option value="TV Series" {{strcmp('TV Series',$phim[0]->phim_kieu)==0?'selected':''}}>TV Series</option>
+                                    <option value="Movie" {{strcmp('Movie',$phim[0]->phim_kieu)==0?'selected':''}}>Movie</option>
+                                    <option value="Ova" {{strcmp('Ova',$phim[0]->phim_kieu)==0?'selected':''}}>Ova</option>
+                                    <option value="Live Action" {{strcmp('Live Action',$phim[0]->phim_kieu)==0?'selected':''}}>Live Action</option>
+                                </select>                                
+                                <span class="help-block"><?php echo isset($edit_phim_kieu_error)?$edit_phim_kieu_error:''; ?></span>
+                            </div>
+
                             <div class="form-group <?php echo isset($edit_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="edit_phim_tenkhac">Tên phụ (tên khác)</label>
                                 <input type="text" id="edit_phim_tenkhac" name="edit_phim_tenkhac" 

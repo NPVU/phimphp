@@ -189,7 +189,8 @@ class PhimController extends Controller{
                         'phim_gioithieu'  => $request->add_phim_gioithieu,
                         'phim_sotap'      => $request->add_phim_sotap,
                         'phim_nam'        => $request->add_phim_nam,
-                        'phim_season'        => $request->add_phim_season,
+                        'phim_season'     => $request->add_phim_season,
+                        'phim_kieu'     => $request->add_phim_kieu,
                         'phim_tag'        => $request->add_phim_tag,
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
@@ -291,7 +292,8 @@ class PhimController extends Controller{
                         'phim_gioithieu'  => $request->edit_phim_gioithieu,
                         'phim_sotap'      => $request->edit_phim_sotap,
                         'phim_nam'        => $request->edit_phim_nam,
-                        'phim_season'        => $request->edit_phim_season,
+                        'phim_season'     => $request->edit_phim_season,
+                        'phim_kieu'       => $request->edit_phim_kieu,
                         'phim_tag'        => $request->edit_phim_tag,
                         'phim_nguon'      => $request->edit_phim_nguon
                     ]

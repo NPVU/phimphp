@@ -105,7 +105,19 @@
                                        placeholder="VD: 1"/>
                                 <span class="help-block"><?php echo isset($add_phim_season_error)?$add_phim_season_error:''; ?></span>
                             </div>
-                                                       
+
+                            <div class="form-group <?php echo isset($add_phim_kieu_error)?'has-error':''; ?>">
+                                <label class="control-label" for="add_phim_kieu">Dạng anime</label>
+                                <select id="add_phim_kieu" name="add_phim_kieu" class="form-control"
+                                    value="<?php echo isset($_POST['add_phim_kieu']) ? $_POST['add_phim_kieu'] : 'TV Series' ?>">
+                                    <option value="TV Series">TV Series</option>
+                                    <option value="Movie">Movie</option>
+                                    <option value="Ova">Ova</option>
+                                    <option value="Live Action">Live Action</option>
+                                </select>                                
+                                <span class="help-block"><?php echo isset($add_phim_kieu_error)?$add_phim_kieu_error:''; ?></span>
+                            </div>
+
                             <div class="form-group <?php echo isset($add_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="add_phim_tenkhac">Tên phụ (tên khác)</label>
                                 <input type="text" id="add_phim_tenkhac" name="add_phim_tenkhac" 
