@@ -118,7 +118,7 @@
         </li>
     </ul>    
 </section>
-<section>    
+<section id="modal-phim">    
     <div id="modal-info-phim" data-izimodal-transitionin="comingInDown">
         <div class="modal-body" style="padding-bottom: 20px">        
             <div class="row">                
@@ -211,7 +211,7 @@
     </div>    
     <script>
         $('#modal-info-phim').iziModal({
-                title: 'Thông tin phim {{$phim[0]->phim_ten}}',
+                title: 'Thông tin phim',
                 top: 100,
                 overlayClose: true,                
                 width: 600,
@@ -221,7 +221,7 @@
                 iconColor: 'white'
             }); 
         $('#modal-vote-phim').iziModal({
-                title: 'Đánh giá phim {{$phim[0]->phim_ten}}',
+                title: 'Đánh giá phim',
                 top: 100,
                 overlayClose: true,                
                 width: 600,
@@ -247,14 +247,11 @@
                         var newElement = document.createElement('span');
                         newElement.className = 'fa fa-2x fa-check icon-voted';  
                         $('.danh-gia').html('<div>Cảm ơn bạn đã đánh giá !</div>');
-                        $('.danh-gia').append(newElement);
-                        
-                        
+                        $('.danh-gia').append(newElement);                                                
                     }                   
                 }
             });
         }
-    </script>
-    
+    </script>    
 </section>
 @endsection

@@ -137,9 +137,13 @@
     @include('layouts.tapmoi')
     @include('layouts.theloai')
     @include('layouts.nam')
-    @if (Auth::check())
-    @include('layouts.user')
+    <div id="modal-user">
+    @if (Auth::check())    
+    @include('layouts.user')    
+    @else
+    @include('layouts.login')
     @endif
+    </div>
     @yield('video')
     @include('layouts.footer')
     @if (session('backURL'))        

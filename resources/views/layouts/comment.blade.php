@@ -1,10 +1,10 @@
-<section style="padding: 5em 0;">
+<section style="padding: 5em 0;" id="comment">
     <div class="container">
         <h3 class="heading">Bình luận</h3>    
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="input-group">
-                <textarea id="input-comment" class="form-control" rows="3" style="resize:none"></textarea>     
-                <span class="btn input-group-addon themes-color" onclick="sendComment();">Gửi</span>
+                <textarea id="input-comment" class="form-control" rows="3" style="resize:none" {{Auth::check()?'':'disabled'}} >{{Auth::check()?'':'Vui lòng đăng nhập để bình luận'}}</textarea>     
+                <span class="btn input-group-addon themes-color" onclick="{{Auth::check()?'sendComment("'.csrf_token().'");':'openLogin();'}}">Gửi</span>
             </div>
         </div>    
         
@@ -23,26 +23,28 @@
     </div>    
 </section>
 <script>
-    function sendComment(){
-        $.ajax({
-            type: "GET",
-            url: "{{url('/comment/')}}/{{csrf_token()}}/"+{{$_GET['pid']}}+"/" + $('#input-comment').val(),
-            success: function (data) {
-                if (data !== 0 && data !== -1) {
-                    $('.list-comment').html('');
-                    var newPage = document.createElement('tbody');
-                    newPage.className = 'comment-page-1';
-                    $('.list-comment').append(newPage);
-                    $('.comment-page-1').html(data);
-                    newPage2 = document.createElement('tbody');
-                    newPage2.className = 'comment-page-2';
-                    $('.list-comment').append(newPage2);
-                    $('.xtc').attr('aria-page', 2);
-                    $('#input-comment').val('');
+    function sendComment(token){
+        if($('#input-comment').val().trim().length > 0){
+            $.ajax({
+                type: "GET",
+                url: "{{url('/comment/')}}/"+token+"/"+{{$_GET['pid']}}+"/" + $('#input-comment').val(),
+                success: function (data) {
+                    if (data !== 0 && data !== -1) {
+                        $('.list-comment').html('');
+                        var newPage = document.createElement('tbody');
+                        newPage.className = 'comment-page-1';
+                        $('.list-comment').append(newPage);
+                        $('.comment-page-1').html(data);
+                        newPage2 = document.createElement('tbody');
+                        newPage2.className = 'comment-page-2';
+                        $('.list-comment').append(newPage2);
+                        $('.xtc').attr('aria-page', 2);
+                        $('#input-comment').val('');
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
+    }    
     function xtc(){
         var page = $('.xtc').attr('aria-page');
         $.ajax({
