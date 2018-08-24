@@ -40,6 +40,15 @@
     }
     $('.user-login-btn').click(function(e){
         e.preventDefault();
+        login();
+    });
+    $('#user-login').keyup(function(e){
+        if(e.keyCode == 13)
+        {
+            login();
+        }
+    });
+    function login(){
         var e = $('#user-login-email').val();
         var p = $('#user-login-password').val();        
         $.ajax({
@@ -80,13 +89,18 @@
                         iconColor: 'white',
                         zindex: 1001
                     });
-                });                
-            },
+                });                         
+                $(".danh-gia").load(location.href+" .danh-gia>*",function() {                                        
+                    $('.rate').attr('data-rate-value',{{isset($star)?$star:3}});
+                    $('.rate-select-layer').css('width', 20*{{isset($star)?$star:3}}+'%');
+                    $(".rate").rate();                   
+                });    
+            },                                    
             error: function(XMLHttpRequest, textStatus, errorThrown) {                
                 var json = JSON.parse(XMLHttpRequest.responseText);                
                 $('.rs-login').css('color','red');
                 $('.rs-login').html(json.errors.email);
              }
         });
-    });
+    }
 </script>
