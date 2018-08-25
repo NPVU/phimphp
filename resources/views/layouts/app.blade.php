@@ -10,18 +10,19 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('public/template/road_travel/js/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/jquery.flexslider.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/owl.carousel.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/SmoothScroll.min.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/move-top.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/easing.js') }}"></script>
-    <script src="{{ asset('public/template/road_travel/js/responsiveslides.min.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/jquery.flexslider.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/owl.carousel.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/SmoothScroll.min.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/move-top.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/easing.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/responsiveslides.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>   
+    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>
+       
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>        
         var pusher = new Pusher('836033107e962f12f88f', {
@@ -53,12 +54,12 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('public/template/road_travel/css/owl.carousel.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/road_travel/css/owl.theme.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/road_travel/css/flexslider.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/road_travel/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/road_travel/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/road_travel/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/owl.theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/flexslider.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
