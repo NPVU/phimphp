@@ -41,7 +41,7 @@ class XemPhimController extends Controller{
             $check = false;
         }        
         $star = ClassCommon::getStar(Input::get('pid'));
-        $comment = ClassCommon::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
+        $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
@@ -132,7 +132,7 @@ class XemPhimController extends Controller{
                     'user_id' => $user->id,
                     'binhluan_ngaycapnhat' => now()
                 ]);
-                return ClassCommon::getHTMLComment($request->pid, Session::get('CommentPerPage'), 0);
+                return CommentUtils::getHTMLComment($request->pid, Session::get('CommentPerPage'), 0);
             } else {
                 return -1;
             }               
@@ -152,7 +152,7 @@ class XemPhimController extends Controller{
                 'binhluan_ngaycapnhat' => now()
             ]);
             $commentPerPage = Session::get('CommentPerPage') * ($request->page - 1);
-            return ClassCommon::getHTMLComment($binhluan[0]->phim_id, $commentPerPage, 0);
+            return CommentUtils::getHTMLComment($binhluan[0]->phim_id, $commentPerPage, 0);
         } else {
             return -1;
         }
@@ -163,9 +163,9 @@ class XemPhimController extends Controller{
         if(Input::get('page') != null){
             $page  = Input::get('page')==0?1:Input::get('page');
             $offset = ($page-1) * $comment_per_page;            
-            $comment = ClassCommon::getHTMLComment(Input::get('pid'),$comment_per_page,$offset);
+            $comment = CommentUtils::getHTMLComment(Input::get('pid'),$comment_per_page,$offset);
         } else {
-            $comment = ClassCommon::getHTMLComment(Input::get('pid'),$comment_per_page,0);
+            $comment = CommentUtils::getHTMLComment(Input::get('pid'),$comment_per_page,0);
         }   
         return $comment;
     }

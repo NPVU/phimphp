@@ -210,6 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'RoleUtils' => App\Http\Controllers\RoleUtils::class,
         'ClassCommon' => App\Http\Controllers\ClassCommon::class,
+        'CommentUtils' => App\Http\Controllers\CommentUtils::class,
         'Pusher'    =>  Pusher\Pusher::class,
     ],
 
