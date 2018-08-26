@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="img/ico" href="{{ asset('favicon.ico') }}">
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">    
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="url" content="{{ url('/') }}">
     <title>@yield('title')</title>
 
     <!-- Scripts -->

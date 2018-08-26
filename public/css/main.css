@@ -69,7 +69,15 @@ body::-webkit-scrollbar-thumb {
     border-right: none;
 }
 .text-light-red, .color-name-admin{color:#ff2f00 !important}
+
 .color-comment-admin{color:#9c0730 !important}
+
+.color-name-locked{color: #de7878 !important}
+
+.color-comment-locked{color:#e47878 !important}
+
+.content-comment{white-space: pre-wrap;}
+
 .box-body-title{
     text-align: center;
     font-size: 1.5em;
@@ -77,6 +85,7 @@ body::-webkit-scrollbar-thumb {
     font-weight: 700;
     color: #75b1d4;
 }
+
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     vertical-align: middle;
 }

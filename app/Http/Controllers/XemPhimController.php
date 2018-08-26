@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Events\PusherEvent;
 /**
  * Description of XemPhimController
@@ -121,22 +122,39 @@ class XemPhimController extends Controller{
         }
     }
 
-    public function comment($token, $phim_id, $content){
-        if(strcmp(Session::token(), $token) == 0){
+    public function comment(Request $request){
+        if(strcmp(Session::token(), $request->token) == 0){
             if (Auth::check()) {
                 $user = Auth::user();                
                 DB::table('binhluan')->insert([
-                    'binhluan_noidung' => $content,
-                    'phim_id' => $phim_id,
+                    'binhluan_noidung' => $request->content,
+                    'phim_id' => $request->pid,
                     'user_id' => $user->id,
                     'binhluan_ngaycapnhat' => now()
                 ]);
-                return ClassCommon::getHTMLComment($phim_id, Session::get('CommentPerPage'), 0);
+                return ClassCommon::getHTMLComment($request->pid, Session::get('CommentPerPage'), 0);
             } else {
                 return -1;
             }               
         } else {
             return 0;
+        }
+    }
+    public function replyComment(Request $request){
+        if (Auth::check()) {
+            $user = Auth::user();      
+            $binhluan = DB::table('binhluan')->where('binhluan_id', $request->cid)->get();          
+            DB::table('binhluan')->insert([
+                'binhluan_noidung' => $request->content,
+                'phim_id' => $binhluan[0]->phim_id,
+                'user_id' => $user->id,
+                'binhluan_id_cha' => $request->cid,
+                'binhluan_ngaycapnhat' => now()
+            ]);
+            $commentPerPage = Session::get('CommentPerPage') * ($request->page - 1);
+            return ClassCommon::getHTMLComment($binhluan[0]->phim_id, $commentPerPage, 0);
+        } else {
+            return -1;
         }
     }
 
