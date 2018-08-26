@@ -63,10 +63,16 @@
                         </div>  
                     </div>
                     @endforeach
-                </div>                              
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left" style="background:lightgrey; margin-top:20px">
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>G</b>: Server Google</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>O</b>: Server Openload</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>Y</b>: Server Youtube</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>L</b>: Server Local</div>
+                    </div>
+                </div>                                              
             </div>            
         </div>        
-    </div>    
+    </div>       
     <div id="modal-edit-tapphim" data-izimodal-transitionin="fadeInDown">
         <form id="fromEditTapPhim" method="POST">  
             {{csrf_field()}}
