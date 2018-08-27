@@ -95,7 +95,7 @@ class ClassCommon extends BaseController
     public static function getHTMLTapMoi($limit, $offset){
         $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
                 . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
-                . ' ON phim.phim_id IN (tap.phim_id) ORDER BY phim.phim_id DESC'));            
+                . ' ON phim.phim_id IN (tap.phim_id) WHERE phim_xuatban = 1 ORDER BY phim.phim_id DESC'));            
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
@@ -135,7 +135,7 @@ class ClassCommon extends BaseController
     
     public static function getHTMLTheLoai($theloai, $limit, $offset){
         $listPhimTheLoai = DB::select(DB::raw('SELECT * FROM phim '
-                . ' WHERE theloai_id like "%\"'.$theloai.'\"%" '
+                . ' WHERE theloai_id like "%\"'.$theloai.'\"%" AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));            
         for($i = 0; $i < count($listPhimTheLoai); $i++){
             $listPhimTheLoai[$i]->tap = DB::table('tap')
@@ -176,7 +176,7 @@ class ClassCommon extends BaseController
     
     public static function getHTMLNam($nam, $limit, $offset){
         $listPhimNam = DB::select(DB::raw('SELECT * FROM phim '
-                . ' WHERE phim_nam = ' .$nam
+                . ' WHERE phim_xuatban = 1 AND phim_nam = ' .$nam
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset)); 
         for($i = 0; $i < count($listPhimNam); $i++){
             $listPhimNam[$i]->tap = DB::table('tap')
@@ -219,15 +219,15 @@ class ClassCommon extends BaseController
         if(strcmp($time, 'week') == 0){
             $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
-                . ' WHERE phim_luotxem_tuan > 0 '
+                . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
-                . ' WHERE phim_luotxem_thang > 0 '
-                . 'ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
+                . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
+                . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
-            $listPhimXemHang = DB::select(DB::raw('SELECT * FROM phim '                
+            $listPhimXemHang = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
         }         
         for($i = 0; $i < count($listPhimXemHang); $i++){

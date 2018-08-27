@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index(){        
         $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
                 . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT 10) tap '
-                . ' ON phim.phim_id IN (tap.phim_id) ORDER BY phim.phim_id DESC'));            
+                . ' ON phim.phim_id IN (tap.phim_id) WHERE phim_xuatban = 1 ORDER BY phim.phim_id DESC'));            
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')

@@ -25,7 +25,7 @@
                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                 <div class="form-group">
                                     <label>Tên phim</label>
-                                    <input type="text" class="form-control" name="tenphim" value="{{isset($_GET['tenphim'])?$_GET['tenphim']:''}}" />
+                                    <input type="text" class="form-control" name="tenphim" value="{{isset($_GET['tenphim'])?$_GET['tenphim']:''}}" placeholder="Nhập tên phim cần tìm..."/>
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">

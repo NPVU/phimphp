@@ -35,7 +35,7 @@ class PhimController extends Controller{
         
         $where = ' 1 = 1 ';
         if($xuatBan != -1){
-            $where .= ' AND phim_hoanthanh = ' . $xuatBan;
+            $where .= ' AND phim_xuatban = ' . $xuatBan;
         }
         if ($tienDo != -1) {
             if ($tienDo == 1) {
@@ -67,7 +67,8 @@ class PhimController extends Controller{
         return view('admin/layout', $data);
     }
     
-    public function add(){  
+    public function add(){
+        session(['backURLAdmin' => url()->previous()]);
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
             $data['page'] = 'errors.401';
@@ -83,6 +84,7 @@ class PhimController extends Controller{
     }
     
     public function edit($phim_id, $token){
+        session(['backURLAdmin' => url()->previous()]);
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
             $data['page'] = 'errors.401';
@@ -207,7 +209,7 @@ class PhimController extends Controller{
                         'phim_ngaycapnhat'=> now()
                     ]
                 );
-            return redirect()->route('listPhim')->with('success', 'Cập nhật thành công !');
+            return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
         } else {
             $listTheLoai = DB::table('theloai')->get();
             $data['listTheLoai'] = $listTheLoai;
@@ -293,6 +295,10 @@ class PhimController extends Controller{
                     ]
                 );
             }
+            $xuatBan = 0;
+            if(isset($request->edit_phim_xuatban) && $request->edit_phim_xuatban == 1){
+                $xuatBan = 1;
+            }
             DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
                     [
                         'theloai_id'      => json_encode($request->edit_phim_theloai),
@@ -304,10 +310,11 @@ class PhimController extends Controller{
                         'phim_season'     => $request->edit_phim_season,
                         'phim_kieu'       => $request->edit_phim_kieu,
                         'phim_tag'        => $request->edit_phim_tag,
-                        'phim_nguon'      => $request->edit_phim_nguon
+                        'phim_nguon'      => $request->edit_phim_nguon,
+                        'phim_xuatban'    => $xuatBan
                     ]
                 );
-            return redirect()->route('listPhim')->with('success', 'Cập nhật thành công !');
+            return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
         } else {
            $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
             $listTheLoai = DB::table('theloai')->get();

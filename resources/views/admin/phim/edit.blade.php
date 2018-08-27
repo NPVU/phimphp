@@ -160,6 +160,13 @@
                                        placeholder="VD: anime47, phimmoi, vuighe ...."/>
                                 <span class="help-block"><?php echo isset($edit_phim_nguon_error)?$edit_phim_nguon_error:''; ?></span>
                             </div>
+
+                            <div class="form-group <?php echo isset($edit_phim_xuatban_error)?'has-error':''; ?>">
+                                <label>Xuất bản</label>
+                                <input type="checkbox" name="edit_phim_xuatban" 
+                                       value="1" <?php echo $phim[0]->phim_xuatban == 1?'checked':'' ?> />
+                                <span class="help-block"><?php echo isset($edit_phim_xuatban_error)?$edit_phim_xuatban_error:''; ?></span>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
@@ -192,7 +199,7 @@
                         
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-danger" name="btn" value="edit">Cập nhật</button>
-                            <a href="{{url('quan-ly/phim/')}}" class="btn btn-warning" ><i class="fa fa-backward"></i> Trở về</a>
+                            <a href="{{ session('backURLAdmin') }}" class="btn btn-warning" ><i class="fa fa-backward"></i> Trở về</a>
                         </div>
                     </form>
                 </div>                              
