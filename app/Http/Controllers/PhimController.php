@@ -21,38 +21,45 @@ class PhimController extends Controller{
         return $hasRole>0?true:false;
     }
     
-    public function index(){                
+    public function index(Request $request){                
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
             $data['page'] = 'errors.401';
             $data['backURL'] = URL::to('/');
             return view('errors/index', $data); 
         }
-        if(!is_null(Input::get('tukhoa'))){
-            $tuKhoa = Input::get('tukhoa');
-            $count = DB::table('phim')                    
-                    ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('phim_kieu', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('phim_sotap', $tuKhoa)
-                    ->count();
-            $listPhim = DB::table('phim')
-                    ->selectRaw('phim.*, (SELECT COUNT(1) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
-                            . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
-                    ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('phim_tag', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('phim_kieu', 'like', '%'.$tuKhoa.'%')
-                    ->orwhere('phim_sotap', $tuKhoa)
-                    ->paginate(10);
-            $listPhim->appends(['tukhoa' => $tuKhoa]);
-        } else {
-            $count = DB::table('phim')->count();
-            $listPhim = DB::table('phim')
-                    ->selectRaw('phim.*, (SELECT COUNT(1) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
-                            . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
-                    ->paginate(10);
-        }        
         
+        $tenPhim = is_null($request->tenphim)?'':$request->tenphim;
+        $tienDo = is_null($request->tiendo)?0:$request->tiendo; // mặc định chưa hoàn thành
+        $xuatBan = is_null($request->trangthai)?-1:$request->trangthai; // mặc định đã xuất bản
+        
+        $where = ' 1 = 1 ';
+        if($xuatBan != -1){
+            $where .= ' AND phim_hoanthanh = ' . $xuatBan;
+        }
+        if ($tienDo != -1) {
+            if ($tienDo == 1) {
+                $where .= ' AND phim_sotap = (SELECT MAX(tap_tapso) FROM tap WHERE tap.phim_id = phim.phim_id )';
+            } else {
+                $where .= ' AND (phim_sotap > (SELECT MAX(tap_tapso) FROM tap WHERE tap.phim_id = phim.phim_id ) OR (SELECT MAX(tap_tapso) FROM tap WHERE tap.phim_id = phim.phim_id ) is null)';
+            }
+        }
+        if (!is_null($request->tenphim)) {
+            $where .= ' AND (phim_ten like "%' . $request->tenphim . '%" OR phim_tenkhac like "%' . $request->tenphim . '%" )';
+        }
+        
+        $count = DB::table('phim')
+                ->whereRaw($where)
+                ->count();
+
+        $listPhim = DB::table('phim')
+                ->selectRaw('phim.*, (SELECT COUNT(1) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
+                        . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
+                ->whereRaw($where)
+                ->paginate(10);
+        $listPhim->appends(['tenphim' => $request->$tenPhim, 'tiendo' => $tienDo, 'trangthai' => $xuatBan]);
+
+
         $data['listPhim'] = $listPhim;
         $data['count'] = $count;        
         $data['title'] = 'Danh Sách Phim';

@@ -13,25 +13,48 @@
         <div class="col-md-12">            
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"></h3>
-                    <div class="box-btn-header" style="float:left;">
-                        <form method="GET">
-                        <div class="form-search-addon">
-                            <div class="input-group">
-                                <input type="search" name="tukhoa" value="<?php echo isset($_GET['tukhoa'])?$_GET['tukhoa']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
-                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-phim').click();"><i class="fa fa-search"></i></span>
-                                <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/phim')}}';"><i class="fa fa-refresh"></i></span>
-                                <button type="submit" id="btn-search-phim" class="display-none"></button>
-                            </div>         
-                        </div>
-                        </form>
-                    </div>
+                    <h3 class="box-title"></h3>                    
                     <div class="box-btn-header" style="float:right;">
                         <a href="{{url('quan-ly/phim/add')}}" class="btn btn-danger">Thêm mới</a>
                     </div>
                                         
                 </div>                
-                <div class="box-body">                    
+                <div class="box-body">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form method="GET">
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>Tên phim</label>
+                                    <input type="text" class="form-control" name="tenphim" value="{{isset($_GET['tenphim'])?$_GET['tenphim']:''}}" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>Tiến độ</label>
+                                    <select class="form-control" name="tiendo">
+                                        <option value="-1" <?php echo isset($_GET['tiendo'])?$_GET['tiendo']==-1?'selected':'':'' ?>>Tất cả</option>
+                                        <option value="0" <?php echo isset($_GET['tiendo'])?$_GET['tiendo']==0?'selected':'':'selected' ?>>Chưa hoàn thành</option>
+                                        <option value="1" <?php echo isset($_GET['tiendo'])?$_GET['tiendo']==1?'selected':'':'' ?>>Đã hoàn thành</option>                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <select class="form-control" name="trangthai">
+                                        <option value="-1" <?php echo isset($_GET['trangthai'])?$_GET['trangthai']==-1?'selected':'':'selected' ?>>Tất cả</option>
+                                        <option value="0" <?php echo isset($_GET['trangthai'])?$_GET['trangthai']==0?'selected':'':'' ?>>Chưa xuất bản</option>
+                                        <option value="1" <?php echo isset($_GET['trangthai'])?$_GET['trangthai']==1?'selected':'':'' ?>>Đã xuất bản</option>                                        
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                <button type="button" class="btn btn-default" onclick="window.location.href = '{{url('/quan-ly/phim')}}'"><i class="fa fa-refresh"></i></button>
+                            </div>
+                        </form>
+                        
+                    </div>
                     <table class="table table-hover">
                         <caption>
                             <span>Tổng: {{$count}}</span>
