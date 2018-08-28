@@ -33,7 +33,11 @@
         openFullscreen:false,
         headerColor: 'rgb(56, 98, 111)',
         icon: 'fa fa-sign-in',
-        iconColor: 'white'
+        iconColor: 'white',
+        onOpening: function(){
+            $('#user-login-email').val('');
+            $('#user-login-password').val('');
+        }
     });
     function openLogin(){
         $('#user-login').iziModal('open');
@@ -93,8 +97,8 @@
                 $(".danh-gia").load(location.href+" .danh-gia>*",function() {                                        
                     $('.rate').attr('data-rate-value',{{isset($star)?$star:3}});
                     $('.rate-select-layer').css('width', 20*{{isset($star)?$star:3}}+'%');
-                    $(".rate").rate();                   
-                });    
+                    $(".rate").rate();
+                });
             },                                    
             error: function(XMLHttpRequest, textStatus, errorThrown) {                
                 var json = JSON.parse(XMLHttpRequest.responseText);                

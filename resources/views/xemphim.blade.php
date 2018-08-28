@@ -198,7 +198,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center danh-gia">
                     @guest
                     <h5>Bạn cần phải đăng nhập để thực hiện đánh giá</h5>
-                    <a href="{{ route('login') }}?backURL=true">Bấm vào đây</a> để đăng nhập
+                    <a href="javascript:void(0);" onclick="openLogin()" data-izimodal-close="">Bấm vào đây</a> để đăng nhập
                     @else
                     <div class="text-center">
                         <p>Mỗi tài khoản có thể đánh giá nhiều lần, nhưng chỉ tính lần sau cùng.</p>
@@ -236,22 +236,7 @@
             }); 
         $(document).ready(function(){            
             $(".rate").rate();
-        });
-        function danhGia(value){
-            $.ajax({
-                url: '{{url("/danh-gia/")}}?pid={{$_GET['pid']}}&star='+value+'&token={{csrf_token()}}',
-                dataType: 'text',                    
-                type: 'get',                    
-                success: function (data) {
-                    if(data == 1){                        
-                        var newElement = document.createElement('span');
-                        newElement.className = 'fa fa-2x fa-check icon-voted';  
-                        $('.danh-gia').html('<div>Cảm ơn bạn đã đánh giá !</div>');
-                        $('.danh-gia').append(newElement);                                                
-                    }                   
-                }
-            });
-        }
+        });        
         $('.npv-page-loading').remove();
     </script>    
 </section>

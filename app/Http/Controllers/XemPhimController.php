@@ -108,23 +108,19 @@ class XemPhimController extends Controller{
         }
     }
     
-    public function addDanhGia(){
-        if(strcmp(Session::token(), Input::get('token')) == 0){
-            if (Auth::check()) {
-                $user = Auth::user();
-                DB::table('danhgia')->where('user_id', $user->id)->where('phim_id', Input::get('pid'))->delete();
-                DB::table('danhgia')->insert([
-                    'user_id' => $user->id,
-                    'phim_id' => Input::get('pid'),
-                    'danhgia_star' => floatval(Input::get('star')),
-                    'danhgia_ngay' => now()
-                ]);
-                return 1;
-            } else {
-                return -1;
-            }               
+    public function addDanhGia() {
+        if (Auth::check()) {
+            $user = Auth::user();
+            DB::table('danhgia')->where('user_id', $user->id)->where('phim_id', Input::get('pid'))->delete();
+            DB::table('danhgia')->insert([
+                'user_id' => $user->id,
+                'phim_id' => Input::get('pid'),
+                'danhgia_star' => floatval(Input::get('star')),
+                'danhgia_ngay' => now()
+            ]);
+            return 1;
         } else {
-            return 0;
+            return -1;
         }
     }
 

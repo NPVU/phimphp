@@ -41,8 +41,31 @@ $(document).ready(function(){
 window.onload = function(){
     $('.npv-page-loading').remove();  
 };
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 function showToast(type, content, title, close){switch(type){case 'success': toastr.options.closeButton = close; toastr.success(content, title); break;case 'error': toastr.options.closeButton = close; toastr.error(content, title); break;}}(function ($){"use strict";var input = $('.validate-input .input100');$('.validate-form').on('submit',function(){var check = true;for(var i=0; i<input.length; i++) {if(validate(input[i]) == false){showValidate(input[i]);check=false;}}return check;});$('.validate-form .input100').each(function(){$(this).focus(function(){hideValidate(this);});});function validate (input) {if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {return false;}}else {if($(input).val().trim() == ''){return false;}}}function showValidate(input) {var thisAlert = $(input).parent();$(thisAlert).addClass('alert-validate');}function hideValidate(input) {var thisAlert = $(input).parent();$(thisAlert).removeClass('alert-validate');}})(jQuery);function viewTimes(link){$.ajax({url:link,dataType:'text',type:'GET',success:function(data){}});}
-
+function danhGia(value) {    
+    $.ajax({
+        url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value,
+        dataType: 'text',
+        type: 'get',
+        success: function (data) {
+            if (data == 1) {
+                var newElement = document.createElement('span');
+                newElement.className = 'fa fa-2x fa-check icon-voted';
+                $('.danh-gia').html('<div>Cảm ơn bạn đã đánh giá !</div>');
+                $('.danh-gia').append(newElement);
+            }
+        }
+    });
+}
 function sendComment(pid, token){
     if($('#input-comment').val().trim().length > 0){
         $.ajax({
