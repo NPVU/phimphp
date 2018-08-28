@@ -34,13 +34,14 @@
         var channel = pusher.subscribe('my-channel');
         channel.bind('App\\Events\\PusherEvent', function(data) {
             if(data.message.event==='view'){
+                var lx = ' lượt xem';
                 $('.view-'+data.message.content.phimid+'-'+data.message.content.tapid).html(data.message.content.tview+' lượt xem');
-                $('.view-'+data.message.content.phimid).html(data.message.content.pview+' lượt xem');
+                $('.view-'+data.message.content.phimid).html(data.message.content.pview+lx);
                 $('.modal-view-'+data.message.content.phimid).html(data.message.content.pview);
-                $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+ ' lượt xem');
+                $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+lx);
                 $('.view-slider-'+data.message.content.phimid).html(data.message.content.pview);
-                $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+ ' lượt xem');
-                $('.view-month-'+data.message.content.phimid).html(data.message.content.pviewmonth+ ' lượt xem');                
+                $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+lx);
+                $('.view-month-'+data.message.content.phimid).html(data.message.content.pviewmonth+lx);                
             }else if(data.message.event==='pnew'){
                 
             }

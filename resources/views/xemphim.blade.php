@@ -252,6 +252,7 @@
                 }
             });
         }
+        $('.npv-page-loading').remove();
     </script>    
 </section>
 @endsection

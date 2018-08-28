@@ -7,20 +7,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class CommentUtils extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    public static function getListCommentByUser($user_id){
-        $listComment = DB::table('binhluan')->where('user_id', $user_id)->get();
-        $html = '<table class="table">';
-        foreach ($listComment as $row){
-
-        }
-    }
 
     public static function getHTMLComment($phim_id, $limit, $offset){
         $listComment = DB::select(DB::raw('SELECT users.name, users.email, users.avatar, users.active, users.locked_at, binhluan.*, (SELECT count(1) FROM users_roles WHERE users_roles.user_id = binhluan.user_id) AS role FROM users, binhluan WHERE binhluan.user_id = users.id AND binhluan.phim_id ='.$phim_id.' AND binhluan_id_cha = 0 ORDER BY binhluan_id DESC LIMIT '.$limit.' OFFSET '.$offset));
