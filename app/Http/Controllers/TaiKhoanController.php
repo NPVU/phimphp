@@ -79,6 +79,18 @@ class TaiKhoanController extends Controller{
         return redirect()->route('listTaiKhoan')->with('success', 'Khóa tài khoản '.$request->email.' thành công!');
     }
     
+    public function lockComment(Request $request){
+        $user = DB::table('binhluan')->where('binhluan_id', $request->cid)->get();
+        DB::table('users')->where('id', $user[0]->user_id)->update(
+            [                        
+                'active'        => 0,
+                'reason'        => 'Khóa vì bình luận vi phạm qui định của website',
+                'locked_at'     => now()
+            ]
+        );
+        return 1;
+    }
+    
     public function unlock(Request $request){
         DB::table('users')->where('id', $request->user_id)->update(
             [                        

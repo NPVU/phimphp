@@ -22,6 +22,12 @@ use App\Events\PusherEvent;
 class XemPhimController extends Controller{
     //put your code here        
     
+    function hasRole(){
+        $user = Auth::user();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_code = '.RoleUtils::getRoleSuperAdmin().' OR role_code = '.RoleUtils::getRoleAdminPhim().')')->count();
+        return $hasRole>0?true:false;
+    }
+    
     function xemPhim(){
         $check = true;
 
@@ -155,6 +161,12 @@ class XemPhimController extends Controller{
             return CommentUtils::getHTMLComment($binhluan[0]->phim_id, $commentPerPage, 0);
         } else {
             return -1;
+        }
+    }
+    
+    public function deleteComment(Request $request){
+        if($this->hasRole()){
+            DB::table('binhluan')->where('binhluan_id', $request->cid)->delete();
         }
     }
 

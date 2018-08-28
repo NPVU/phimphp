@@ -46,6 +46,7 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/change-avatar/{token}','TaiKhoanController@updateAvatar'); 
     
     Route::post('/lock','TaiKhoanController@lock');
+    Route::get('/lock/comment','TaiKhoanController@lockComment');
     Route::post('/unlock','TaiKhoanController@unlock');
     
     Route::post('/get-role','TaiKhoanController@getRole');
@@ -74,6 +75,7 @@ Route::get('/update/{str}', 'XemPhimController@addLuotXem');
 Route::get('/danh-gia/', 'XemPhimController@addDanhGia');
 Route::get('/add-comment/', 'XemPhimController@comment');
 Route::get('/reply-comment/', 'XemPhimController@replyComment');
+Route::get('/delete-comment/', 'XemPhimController@deleteComment');
 Route::get('/comment/', 'XemPhimController@xemThemComment');
 Route::get('/tap-moi/', 'HomeController@xemThemTapMoi');
 Route::get('/the-loai/', 'HomeController@xemThemTheLoai');
