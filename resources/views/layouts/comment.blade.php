@@ -1,4 +1,4 @@
-<section style="padding: 5em 0;" id="comment" aria-token="{{csrf_token()}}">
+<section style="padding: 5em 0;" id="comment">
     <div class="container">
         <h3 class="heading">Bình luận</h3>    
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

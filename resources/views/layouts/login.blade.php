@@ -99,6 +99,7 @@
                     $('.rate-select-layer').css('width', 20*{{isset($star)?$star:3}}+'%');
                     $(".rate").rate();
                 });
+                $("meta[name='csrf-token']").load(location.href+" meta[name='csrf-token']>*",function() {});
             },                                    
             error: function(XMLHttpRequest, textStatus, errorThrown) {                
                 var json = JSON.parse(XMLHttpRequest.responseText);                

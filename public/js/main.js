@@ -23,7 +23,7 @@ $(document).ready(function(){
         });
     });
     $('.btn-delete-comment').click(function(){        
-        var token = $('#comment').attr('aria-token');
+        var token = $('#current-token').val();
         $.ajax({
             type: 'get',           
             url: $('meta[name="url"').attr('content')+'/delete-comment/',
@@ -123,7 +123,7 @@ function replyComment(cid){
         url: $('meta[name="url"').attr('content')+'/reply-comment/',
         data: {'cid':cid, 'content':content, 'page':page},        
         headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            'X-CSRF-TOKEN': $('#current-token').val()
         },
         success: function (data) {
             if (data !== 0 && data !== -1) {

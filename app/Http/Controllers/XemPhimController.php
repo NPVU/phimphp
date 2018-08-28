@@ -162,7 +162,10 @@ class XemPhimController extends Controller{
     
     public function deleteComment(Request $request){
         if($this->hasRole()){
-            DB::table('binhluan')->where('binhluan_id', $request->cid)->delete();
+            if($request->cid != 0){
+                DB::table('binhluan')->where('binhluan_id_cha', $request->cid)->delete();
+                DB::table('binhluan')->where('binhluan_id', $request->cid)->delete();
+            }
         }
     }
 
