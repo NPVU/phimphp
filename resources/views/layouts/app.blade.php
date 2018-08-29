@@ -43,7 +43,8 @@
                 $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+lx);
                 $('.view-month-'+data.message.content.phimid).html(data.message.content.pviewmonth+lx);                
             }else if(data.message.event==='pnew'){
-                
+                console.log(data);
+                showToast('success','Vừa được cập nhật', data.message.content.tenphim+': '+data.message.content.tap+ (data.message.content.tentap!==null?' - '+data.message.content.tentap:''),true);
             }
         });
         $(document).click(function(event) {var target = $(event.target);if (!target.parents().andSelf().is('.npv-user')&&!target.parents().andSelf().is('.open-popup-user')&&!target.parents().andSelf().is('#user-password')&&!target.parents().andSelf().is('#user-profile')) {$('.npv-user').hide('slow');}});

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Events\PusherEvent;
 class ClassCommon extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -337,6 +338,19 @@ class ClassCommon extends BaseController
         }
     }
     
+    public static function sendPusher($phim_id, $tapso) {
+        $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
+        $tap = DB::table('tap')->where([['tap_tapso', $tapso],['phim_id', $phim_id]])->get();
+        $data['event'] = 'pnew';
+        $array['icon'] = $phim[0]->phim_hinhanh;
+        $array['tenphim'] = $phim[0]->phim_ten;
+        $array['tap'] = $tap[0]->tap_tapsohienthi;
+        $array['tentap'] = $tap[0]->tap_ten;
+        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace(' ', '-', ClassCommon::removeVietnamese($phim[0]->phim_ten))) . '/' . $tap[0]->tap_id;
+        $data['content'] = $array;
+        event(new PusherEvent($data));
+    }
+
     public static function getStar($phim_id) {
         $danhGia = DB::table('danhgia')->selectRaw('SUM(danhgia_star) as sumStar, count(1) as countLuot')->where('phim_id', $phim_id)->get();
         if($danhGia[0]->sumStar > 0){

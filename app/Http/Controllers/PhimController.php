@@ -112,6 +112,7 @@ class PhimController extends Controller{
     }
     
     public function listTap($phim_id, $token){
+        session(['backURLAdmin' => url()->previous()]);
         if(!$this->hasRole()){
             $data['title'] = 'Không có quyền truy cập';
             $data['page'] = 'errors.401';
@@ -313,7 +314,7 @@ class PhimController extends Controller{
                         'phim_nguon'      => $request->edit_phim_nguon,
                         'phim_xuatban'    => $xuatBan
                     ]
-                );
+                );            
             return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
         } else {
            $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
@@ -370,7 +371,10 @@ class PhimController extends Controller{
                         'tap_ngaycapnhat'   => now()
                     ]
                 );
-        ClassCommon::updateLuotXem($request->add_phim_id);
+        ClassCommon::updateLuotXem($request->add_phim_id);     
+        if($request->thongbao){
+            ClassCommon::sendPusher($request->add_phim_id, $request->add_tapphim_tap);
+        }
         $data['status'] = 1;
         return $data;
     }
@@ -409,7 +413,11 @@ class PhimController extends Controller{
                     ]
         );
         ClassCommon::updateLuotXem($request->edit_phim_id);
-        return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Cập nhật '.$request->tapphim_tap.' thành công !');        
+        
+        if($request->thongbao){
+            ClassCommon::sendPusher($request->edit_phim_id, $request->tapphim_tap);
+        }
+        return redirect()->route('listTap', ['phimID' => $phim_id, 'token' => $token])->with('success', 'Cập nhật '.$request->tapphim_taphienthi.' thành công !');        
     }
     
     public function editTapAndNext($phim_id, $token,Request $request) {
@@ -428,6 +436,10 @@ class PhimController extends Controller{
                 ['phim_id', $phim_id],
                 ['tap_tapso', ($request->tapphim_tap+1)]
             ])->get();
+        
+        if($request->thongbao){
+            ClassCommon::sendPusher($request->edit_phim_id, $request->tapphim_tap);
+        }
         return $tap;        
     }
     

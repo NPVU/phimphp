@@ -27,7 +27,7 @@
                             Thêm tập
                         </button>
                         @endif
-                        <a href="{{ url('/quan-ly/phim/') }}" class="btn btn-warning">
+                        <a href="{{ session('backURLAdmin') }}" class="btn btn-warning">
                             <i class="fa fa-backward"></i> Trở về
                         </a>
                     </div>
@@ -106,6 +106,10 @@
                             <label>Lượt xem</label>
                             <input type="number" id="tapphim_luotxem" name="tapphim_luotxem" class="form-control" value="" placeholder=""/>
                             <span class="help-block tapphim_luotxem_error"></span>
+                        </div>
+                        <div class="form-group">                            
+                            <input type="checkbox" name="thongbao" class="flat-red" value="true" />
+                            <label>Thông báo</label>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -434,5 +438,22 @@
                 }
             })
         }
+        $(function () {
+            //iCheck for checkbox and radio inputs
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass: 'iradio_minimal-blue'
+            });
+            //Red color scheme for iCheck
+            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass: 'iradio_minimal-red'
+            });
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            });
+        });
     </script>
 </section>
