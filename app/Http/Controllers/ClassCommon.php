@@ -95,8 +95,8 @@ class ClassCommon extends BaseController
     
     public static function getHTMLTapMoi($limit, $offset){
         $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
-                . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
-                . ' ON phim.phim_id IN (tap.phim_id) WHERE phim_xuatban = 1 ORDER BY phim.phim_id DESC'));            
+                . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC) tap '
+                . ' ON phim.phim_id IN (tap.phim_id) WHERE phim_xuatban = 1 ORDER BY phim.phim_id DESC LIMIT '.$limit.' OFFSET '.$offset));            
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
