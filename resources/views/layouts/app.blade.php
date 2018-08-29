@@ -134,7 +134,7 @@
             <div class="clearfix"> </div>	
         </nav>
     </div>
-    
+    @include('layouts.message')
     @yield('slider')    
     @yield('tapmoi')
     @yield('bangxephang')
@@ -149,7 +149,7 @@
         @include('layouts.login')
         @endif
     </div>
-    @yield('video')
+    @yield('video')    
     @include('layouts.footer')
     @if (session('backURL'))        
         @include('layouts.backURL')

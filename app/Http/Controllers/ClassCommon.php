@@ -345,7 +345,7 @@ class ClassCommon extends BaseController
         $array['icon'] = $phim[0]->phim_hinhanh;
         $array['tenphim'] = $phim[0]->phim_ten;
         $array['tap'] = $tap[0]->tap_tapsohienthi;
-        $array['tentap'] = $tap[0]->tap_ten;
+        $array['tentap'] = strcmp($tap[0]->tap_ten, '')==0?null:$tap[0]->tap_ten;
         $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace(' ', '-', ClassCommon::removeVietnamese($phim[0]->phim_ten))) . '/' . $tap[0]->tap_id;
         $data['content'] = $array;
         event(new PusherEvent($data));
