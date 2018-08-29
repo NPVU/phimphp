@@ -18,7 +18,7 @@
     <script src="{{ asset('public/template/version_1/js/SmoothScroll.min.js') }}"></script>
     <script src="{{ asset('public/template/version_1/js/move-top.js') }}"></script>
     <script src="{{ asset('public/template/version_1/js/easing.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/responsiveslides.min.js') }}"></script>
+    <script src="{{ asset('public/template/version_1/js/responsiveslides.min.js') }}"></script>    
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
@@ -42,11 +42,9 @@
                 $('.view-slider-'+data.message.content.phimid).html(data.message.content.pview);
                 $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+lx);
                 $('.view-month-'+data.message.content.phimid).html(data.message.content.pviewmonth+lx);                
-            }else if(data.message.event==='pnew'){
-                console.log(data);
-                showToast('success','Vừa được cập nhật', data.message.content.tenphim+': '+data.message.content.tap+ (data.message.content.tentap!==null?' - '+data.message.content.tentap:''),true);
-            }
-        });
+            }else if(data.message.event==='pnew'){                       
+                VanillaToasts.create({title: data.message.content.tenphim,text: data.message.content.tap+ (data.message.content.tentap!==null?' - '+data.message.content.tentap:'')+' mới được cập nhật',type: 'info',icon: data.message.content.icon,timeout: 10000,callback: function() {window.location.href = data.message.content.link;}});
+            }});
         $(document).click(function(event) {var target = $(event.target);if (!target.parents().andSelf().is('.npv-user')&&!target.parents().andSelf().is('.open-popup-user')&&!target.parents().andSelf().is('#user-password')&&!target.parents().andSelf().is('#user-profile')) {$('.npv-user').hide('slow');}});
     </script>
     <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>
@@ -62,7 +60,7 @@
     <link href="{{ asset('public/template/version_1/css/flexslider.css') }}" rel="stylesheet">
     <link href="{{ asset('public/template/version_1/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('public/template/version_1/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/version_1/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/template/version_1/css/font-awesome.css') }}" rel="stylesheet">    
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
@@ -133,8 +131,7 @@
 
             <div class="clearfix"> </div>	
         </nav>
-    </div>
-    @include('layouts.message')
+    </div>    
     @yield('slider')    
     @yield('tapmoi')
     @yield('bangxephang')
