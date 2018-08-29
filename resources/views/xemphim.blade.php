@@ -16,12 +16,12 @@
             <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11" style="padding-bottom: 5px;">
                 <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                     @if(!empty($tap[0]->tap_googlelink))
-                    <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}">
+                    <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}">
                         <img class="npv-server-google {{strcmp($_GET['s'], md5('google'))==0?'npv-server-active':''}}" src="{{asset('public/img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
                     </a>
                     @endif                    
                     @if(!empty($tap[0]->tap_youtubelink))
-                    <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}">
+                    <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}">
                         <img class="npv-server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?'npv-server-active':''}}" src="{{asset('public/img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
                     </a>
                     @endif
@@ -66,7 +66,7 @@
                             $('#toTap').val(t);
                             $('.totap').removeClass('has-error');                          
                             $('#hrefToTap').click();
-                            window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t="+t+"&s={{md5('google')}}";                   
+                            window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t="+t+"&s={{md5('google')}}";                   
                        }                       
                     }                   
                 });
@@ -78,7 +78,7 @@
             <div class="col-xs-4 col-sm-2 col-md-1 no-padding">
                 @if($_GET['t'] != $tap->tap_tapso)
                 <a class="click-loading btn btn-primary visit" style="min-width: 80px;margin-bottom: 5px;"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}">
+                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}">
                     <span>{{$tap->tap_tapsohienthi}}</span>
                 </a>
                 @else

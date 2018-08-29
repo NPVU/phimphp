@@ -32,13 +32,13 @@
                 type: 'get',
                 success:function(data){
                     if(data!=null){
-                        data = JSON.parse(data);                    
+                        data = JSON.parse(data);                                   
                         $('#google360p').attr('src', data['360p']);
                         if(data['720p']!=null){
                             $('#video-player').attr('src', data['720p']);                                                   
                             $('.npv-quality').css('color','white');
                             $('.npv-quality').attr('quality', "720");
-                            video.onerror = function(){
+                            video.onerror = function(){                                
                                 video.setAttribute('src', $('#google360p').attr('src'));                                
                                 video.play();
                             };
@@ -90,7 +90,7 @@
         video.onplaying = function(){
             $('.npv-play > i').addClass('fa-pause');
             $('.npv-play > i').removeClass('fa-play');
-            if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{csrf_token()}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');nextVideo();};function nextVideo(){var v = document.getElementById('video-player');if(v.duration - v.currentTime === 0){setTimeout(() => {window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";}, 3000);}}
+            if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{csrf_token()}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');nextVideo();};function nextVideo(){var v = document.getElementById('video-player');if(v.duration - v.currentTime === 0){setTimeout(() => {window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";}, 3000);}}
     </script>    
 </div>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
@@ -100,7 +100,7 @@
     </div>
     @else    
     <script>
-        window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}";
+        window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}";
     </script>
     @endif
 @else

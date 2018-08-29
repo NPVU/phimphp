@@ -110,7 +110,7 @@ class ClassCommon extends BaseController
             foreach ($listPhimToday as $row){
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="npv-box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
@@ -151,7 +151,7 @@ class ClassCommon extends BaseController
             foreach ($listPhimTheLoai as $row){
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="modal" data-target="">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="npv-box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
@@ -192,7 +192,7 @@ class ClassCommon extends BaseController
             foreach ($listPhimNam as $row){
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="modal" data-target="">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="npv-box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
@@ -247,8 +247,8 @@ class ClassCommon extends BaseController
                     $star = ClassCommon::getStar($row->phim_id);
                     $html .= '<tr>';
                     $html .=    '<td data-title="Hạng" class="text-center npv-rank-number">#'.$rank.'</td>';
-                    $html .=    '<td data-title="" class="npv-rank-td-image"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></a></td>';
-                    $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
+                    $html .=    '<td data-title="" class="npv-rank-td-image"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></a></td>';
+                    $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
                     if(strcmp($time, 'week') == 0){
                         $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-week-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
                     } else if(strcmp($time, 'month') == 0){
@@ -346,7 +346,7 @@ class ClassCommon extends BaseController
         $array['tenphim'] = $phim[0]->phim_ten;
         $array['tap'] = $tap[0]->tap_tapsohienthi;
         $array['tentap'] = strcmp($tap[0]->tap_ten, '')==0?null:$tap[0]->tap_ten;
-        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace(' ', '-', ClassCommon::removeVietnamese($phim[0]->phim_ten))) . '/' . $tap[0]->tap_id;
+        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))) . '/?pid=' . $phim_id . '&t=' . $tapso . '&s='.md5('google');
         $data['content'] = $array;
         event(new PusherEvent($data));
     }
