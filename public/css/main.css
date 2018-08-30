@@ -6,6 +6,9 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
     background-color: #3c8dbc !important;
 }
+body{
+    min-width: 414px;
+}
 .no-padding {
     padding-left:0px !important;
     padding-right:0px !important;
@@ -221,10 +224,12 @@ iframe.npv-youtube {
     margin-top: 5px;
     margin-bottom: 5px;
     height: 270px;
+    border: 2px solid #3c8dbc;
 }
 
 .npv-box-phim:hover {
     color: red;
+    border-color: red;
 }
 
 .npv-box-phim > .box-image {
@@ -233,6 +238,7 @@ iframe.npv-youtube {
 
 .npv-box-phim > .box-info {
     height: 70px;
+    padding: 5px;
 }
 
 .npv-box-phim > .box-info > .box-title{
@@ -659,6 +665,9 @@ a.visit:visited{
     }
     .le {
         width:80px !important;
+    }
+    .npv-box-phim > .box-info > .box-text{
+        font-size:0.7em;
     }
 }
 @media(max-width: 414px){

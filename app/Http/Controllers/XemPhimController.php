@@ -48,6 +48,7 @@ class XemPhimController extends Controller{
         }        
         $star = ClassCommon::getStar(Input::get('pid'));
         $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
+        $listSeason = DB::table('phim')->where([['phim_tag', 'like', $phim[0]->phim_tag],['phim_id', '!=', $phim[0]->phim_id]])->orderBy('phim_season')->get();
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
@@ -55,6 +56,7 @@ class XemPhimController extends Controller{
             $data['tap'] = $tap_current;
             $data['star'] = $star;
             $data['comment'] = $comment;
+            $data['listSeason'] = $listSeason;
             return view('xemphim', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';

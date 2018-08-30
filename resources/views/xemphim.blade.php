@@ -93,6 +93,31 @@
     </div>
 </section>
 @include('layouts.comment')
+<section class="special">
+    <div class="container">        
+        <h3 class="heading">Phần Khác </h3>  
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            @foreach($listSeason as $season)
+                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                    <a class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
+                        <div class="npv-box-phim">
+                            <div class="box-image">
+                                <img src="{{$season->phim_hinhnen}}" width="100%" height="100%" />
+                            </div>
+                            <div class="box-info">
+                                <div class="box-title">{{$season->phim_ten}}</div>
+                                <div class="box-text">{{$season->phim_sotap}}</div>
+                                <div class="box-text">
+                                    <span style="float:left;" class="view-str-'.$season->phim_id.'">{{ClassCommon::demLuotXem($season->phim_luotxem)}} lượt xem</span>                    
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>        
+    </div>
+</section>
 <section class="npv-icon-right">      
     <ul>
         <li>
