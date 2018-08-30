@@ -20,6 +20,7 @@
     <script src="{{ asset('public/template/version_1/js/easing.js') }}"></script>
     <script src="{{ asset('public/template/version_1/js/responsiveslides.min.js') }}"></script>    
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/iziToast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>
@@ -57,6 +58,7 @@
     <link href="{{ asset('public/template/version_1/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('public/template/version_1/css/font-awesome.css') }}" rel="stylesheet">    
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />    

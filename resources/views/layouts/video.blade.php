@@ -23,7 +23,8 @@
         </li>        
     </ul>
     <script type="text/javascript">    
-        var sotap = {{$phim[0]->phim_sotap}};        
+        var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};        
+        var auto;
         var video = document.getElementById('video-player');
         $(document).ready(function(){
             $('#video-player').load();
@@ -92,7 +93,46 @@
             $('.npv-play > i').addClass('fa-pause');
             $('.npv-play > i').removeClass('fa-play');
             if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{csrf_token()}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');nextVideo();};function nextVideo(){var v = document.getElementById('video-player');if(v.duration - v.currentTime === 0){
-                if(getParameterByName('t','') < sotap){setTimeout(() => {window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";}, 3000);}}}
+                if(getParameterByName('t','') < sotap){
+                    iziToast.show({
+                        timeout: 10000,
+                        theme: 'dark',
+                        icon: 'fa fa-play',
+                        title: 'Chuyển tập trong 5s',                        
+                        position: 'center', 
+                        progressBarColor: '#27ABDB',
+                        buttons: [
+                            ['<button>Chuyển ngay</button>', function (instance, toast) {
+                                window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";
+                            }, true], 
+                            ['<button>Hủy</button>', function (instance, toast) {
+                                instance.hide({
+                                    transitionOut: 'fadeOutUp',
+                                    onClosing: function(instance, toast, closedBy){
+                                        clearTimeout(auto);
+                                    }
+                                }, toast, 'buttonName');
+                            }]
+                        ],
+                        onClosing: function(instance, toast, closedBy){
+                            clearTimeout(auto);
+                        }
+                    });
+                    confirmAutoNext(10);
+                   // setTimeout(() => {window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";}, 5000);
+                    
+                }
+            }}
+            function confirmAutoNext(i){         
+                if(i <= 0){
+                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";
+                } else {    
+                    $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
+                    auto = setTimeout(() => {
+                        confirmAutoNext(i-1);
+                    }, 1000);
+                }
+            }
     </script>    
 </div>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
