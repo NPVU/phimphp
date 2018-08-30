@@ -4,7 +4,7 @@
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li> 
+        <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li> 
         <li><a href="{{ url('/quan-ly/phim') }}"> Quản lý phim</a></li>
         <li class="active"><a href="{{ url('/quan-ly/phim/them') }}">Thêm</a></li>
     </ol>

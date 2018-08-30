@@ -21,7 +21,7 @@
                 @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1)
                 <li>
                     <a href="{{ url('/quan-ly/') }}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-tachometer-alt"></i>
                         <span>Dashboard</span>                    
                     </a>                
                 </li>

@@ -24,7 +24,7 @@
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>        
+        <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>        
         <li class="active"><a href="{{ url('/quan-ly/tai-khoan') }}">Quản lý tài khoản</a></li>
     </ol>
 </section>
@@ -58,8 +58,7 @@
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
                                 <th scope="col" class="text-left" style="width: 25%">Email</th>
                                 <th scope="col" class="text-left" style="width: 25%">Tên hiển thị</th>
-                                <th scope="col" class="text-center" style="width: 10%">Ngày tạo</th>
-                                <th scope="col" class="text-center" style="width: 15%">Ngày cập nhật</th>
+                                <th scope="col" class="text-center" style="width: 10%">Ngày tạo</th>                                
                                 <th scope="col" class="text-center" style="width: 10%">Trạng thái</th>
                                 <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
@@ -84,17 +83,9 @@
                                         $date = date_create($row->created_at);
                                         echo date_format($date, 'd-m-Y');
                                     ?>
-                                </td>
+                                </td>                                
                                 <td class="text-center">
-                                    <?php 
-                                        $date = date_create($row->updated_at);
-                                        echo date_format($date, 'd-m-Y');
-                                    ?>
-                                </td>
-                                <td class="text-center">
-                                    <?php 
-                                        echo $row->active==1?'Hoạt động':'Bị khóa';
-                                    ?>
+                                    <i class="fas <?php echo $row->active==1?'fa-user-check':'fa-user-lock';?>"></i>
                                 </td>
                                 <td class="text-center">
                                     @if($row->role_code != RoleUtils::getRoleSuperAdmin())
