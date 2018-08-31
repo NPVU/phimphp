@@ -125,63 +125,6 @@ class XemPhimController extends Controller{
             return -1;
         }
     }
-
-    public function comment(Request $request){
-        if(strcmp(Session::token(), $request->token) == 0){
-            if (Auth::check()) {
-                $user = Auth::user();                
-                DB::table('binhluan')->insert([
-                    'binhluan_noidung' => $request->content,
-                    'phim_id' => $request->pid,
-                    'user_id' => $user->id,
-                    'binhluan_ngaycapnhat' => now()
-                ]);
-                return CommentUtils::getHTMLComment($request->pid, Session::get('CommentPerPage'), 0);
-            } else {
-                return -1;
-            }               
-        } else {
-            return 0;
-        }
-    }
-    public function replyComment(Request $request){
-        if (Auth::check()) {
-            $user = Auth::user();      
-            $binhluan = DB::table('binhluan')->where('binhluan_id', $request->cid)->get();          
-            DB::table('binhluan')->insert([
-                'binhluan_noidung' => $request->content,
-                'phim_id' => $binhluan[0]->phim_id,
-                'user_id' => $user->id,
-                'binhluan_id_cha' => $request->cid,
-                'binhluan_ngaycapnhat' => now()
-            ]);
-            $commentPerPage = Session::get('CommentPerPage') * ($request->page - 1);
-            return CommentUtils::getHTMLComment($binhluan[0]->phim_id, $commentPerPage, 0);
-        } else {
-            return -1;
-        }
-    }
-    
-    public function deleteComment(Request $request){
-        if($this->hasRole()){
-            if($request->cid != 0){
-                DB::table('binhluan')->where('binhluan_id_cha', $request->cid)->delete();
-                DB::table('binhluan')->where('binhluan_id', $request->cid)->delete();
-            }
-        }
-    }
-
-    public function xemThemComment(){
-        $comment_per_page = Session::get('CommentPerPage');
-        if(Input::get('page') != null){
-            $page  = Input::get('page')==0?1:Input::get('page');
-            $offset = ($page-1) * $comment_per_page;            
-            $comment = CommentUtils::getHTMLComment(Input::get('pid'),$comment_per_page,$offset);
-        } else {
-            $comment = CommentUtils::getHTMLComment(Input::get('pid'),$comment_per_page,0);
-        }   
-        return $comment;
-    }
     
     function curl($url) {
         $ch = @curl_init();

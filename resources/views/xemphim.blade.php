@@ -93,6 +93,7 @@
     </div>
 </section>
 @include('layouts.comment')
+@if(count($listSeason)>0)
 <section class="special">
     <div class="container">        
         <h3 class="heading">Phần Khác </h3>  
@@ -118,6 +119,7 @@
         </div>        
     </div>
 </section>
+@endif
 <section class="npv-icon-right">      
     <ul>
         <li>

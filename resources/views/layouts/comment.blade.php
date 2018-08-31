@@ -26,7 +26,7 @@
     <div class="modal-body" style="padding: 20px">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <table class="table">
+                <table class="table no-border" style="margin-bottom:0px">
                     <tr>
                         <td style="width:120px;" class="text-center">
                             <img class="action-comment-avatar avatar img-circle" src="" width="100%" />
@@ -46,13 +46,45 @@
         </div>
     </div>        
 </div>
+<div id="report-comment" data-izimodal-transitionin="fadeInDown">
+    <div class="modal-body" style="padding: 20px">
+        <div class="row report-body">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table class="table no-border" style="margin-bottom:0px">
+                    <tr>
+                        <td style="width:120px;" class="text-center">
+                            <img class="report-comment-avatar avatar img-circle" src="" width="100%" />
+                        </td>
+                        <td class="text-left">
+                            <div class="report-comment-username" style="font-weight: 700"></div>
+                            <div class="report-comment-content"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                    <label>Nội dung report</label>
+                    <textarea class="form-control" id="input-report-comment" ></textarea>
+                    <i style="color:gray" class="help-report-comment">Nội dung report phải có độ dài lớn hơn 10 ký tự</i>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                <button class="btn btn-danger btn-report-comment">Gửi</button>                
+                <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+            </div>
+        </div>
+        <div class="row report-result">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                <span class="fa fa-2x fa-check icon-voted"></span>
+                <div class="content-report-result"></div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                
+                <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+            </div>
+        </div>
+    </div>        
+</div>
 <script>
-    $('#action-comment').iziModal({
-        title: 'Bình luận',        
-        overlayClose: true,
-        width:600,
-        openFullscreen:false,
-        bodyOverflow:true,
-        headerColor: 'rgb(56, 98, 111)'            
-    });
+    $("#action-comment").iziModal({title:"Bình luận",overlayClose:!0,width:600,openFullscreen:!1,bodyOverflow:!0,headerColor:"rgb(56, 98, 111)"}),$("#report-comment").iziModal({title:"Report bình luận",overlayClose:!0,width:600,openFullscreen:!1,bodyOverflow:!0,icon:"fa fa-exclamation-triangle",headerColor:"rgb(56, 98, 111)",onOpening:function(){$(".report-result").addClass("display-none"),$(".report-body").removeClass("display-none"),$("#input-report-comment").val("")}});
 </script>

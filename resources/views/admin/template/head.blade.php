@@ -15,6 +15,7 @@
     <link href="{{ asset('public/template/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css" />
@@ -22,6 +23,6 @@
     <link href="{{ asset('public/template/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />   
     <link href="{{ asset('public/css/dropzone.css') }}" rel="stylesheet" type="text/css" /> 
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />    
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
     <title><?php echo $title ?></title>
 </head>

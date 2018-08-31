@@ -1,13 +1,13 @@
+//VanillaToasts
 !function(t,e){try{"object"==typeof exports?module.exports=e():t.VanillaToasts=e()}catch(t){console.log("Isomorphic compatibility is not supported at this time for VanillaToasts.")}}(this,function(){"complete"===document.readyState?e():window.addEventListener("DOMContentLoaded",e),VanillaToasts={create:function(){console.error(["DOM has not finished loading.","\tInvoke create method when DOMs readyState is complete"].join("\n"))},setTimeout:function(){console.error(["DOM has not finished loading.","\tInvoke create method when DOMs readyState is complete"].join("\n"))},toasts:{}};var t=0;function e(){var e=document.createElement("div");e.id="vanillatoasts-container",document.body.appendChild(e),$("#vanillatoasts-container").css("z-index",999999),VanillaToasts.create=function(e){var a=document.createElement("div");if(a.id=++t,a.id="toast-"+a.id,a.className="vanillatoasts-toast",e.title){var n=document.createElement("h4");n.className="vanillatoasts-title",n.innerHTML=e.title,a.appendChild(n)}if(e.text){var o=document.createElement("p");o.className="vanillatoasts-text",o.innerHTML=e.text,a.appendChild(o)}if(e.icon){var i=document.createElement("img");i.src=e.icon,i.className="vanillatoasts-icon",a.appendChild(i)}function s(){document.getElementById("vanillatoasts-container").removeChild(a),delete VanillaToasts.toasts[a.id]}return"function"==typeof e.callback&&a.addEventListener("click",e.callback),a.hide=function(){a.className+=" vanillatoasts-fadeOut",a.addEventListener("animationend",s,!1)},e.timeout&&setTimeout(a.hide,e.timeout),e.type&&(a.className+=" vanillatoasts-"+e.type),a.addEventListener("click",a.hide),document.getElementById("vanillatoasts-container").appendChild(a),VanillaToasts.toasts[a.id]=a,a},VanillaToasts.setTimeout=function(t,e){VanillaToasts.toasts[t]&&setTimeout(VanillaToasts.toasts[t].hide,e)}}return VanillaToasts});
+
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();  
     $('a.click-loading').click(function(){
       $('.npv-progress').css('display','block');
       $('.npv-progress-bar').animate({width:'30%'});      
       $('.npv-progress-bar').animate({width:'95%'});
-    });
-    
-    $('table td').bind('contextmenu', function(){return false;});
+    });        
     $('.btn-lock-account').click(function(){        
         var token = $('#comment').attr('aria-token');
         $.ajax({
@@ -37,6 +37,28 @@ $(document).ready(function(){
                 $("#comment").load(location.href+" #comment>*","");
             }
         });
+    });
+    $('.btn-report-comment').click(function(){        
+        var token = $('#current-token').val();
+        var reportContent = $('#input-report-comment').val();
+        if(reportContent.trim().length >= 10){        
+            $('.help-report-comment').css('color','gray');
+            $.ajax({
+                type: 'get',           
+                url: $('meta[name="url"').attr('content')+'/report-comment/',
+                data: {'_token':token,'cid':$('#report-comment').attr('cid'), 'content': reportContent},        
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function (data) {
+                    $('.report-result').removeClass('display-none');
+                    $('.report-body').addClass('display-none');
+                    $('.content-report-result').html(data);
+                    }
+            });
+        } else {
+            $('.help-report-comment').css('color','red');
+        }
     });
 });
 window.onload = function(){
@@ -147,4 +169,11 @@ function openContextMenu(cid){
     $('.action-comment-avatar').attr('src',$('.avatar.'+cid).attr('src'));
     $('.action-comment-username').html($('.username-comment.'+cid).html());
     $('.action-comment-content').html($('.content-comment.'+cid).html());    
+}
+function openReport(cid){    
+    $('#report-comment').iziModal('open');
+    $('#report-comment').attr('cid', cid);
+    $('.report-comment-avatar').attr('src',$('.avatar.'+cid).attr('src'));
+    $('.report-comment-username').html($('.username-comment.'+cid).html());
+    $('.report-comment-content').html($('.content-comment.'+cid).html());    
 }
