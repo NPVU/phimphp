@@ -49,6 +49,7 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::get('/lock/comment','TaiKhoanController@lockComment');
     Route::post('/unlock','TaiKhoanController@unlock');
     Route::post('/delete-report','TaiKhoanController@deleteReport');
+    Route::post('/delete-comment','TaiKhoanController@deleteComment');
     
     Route::post('/get-role','TaiKhoanController@getRole');
     Route::post('/add-remove-role','TaiKhoanController@addRemoveRole');

@@ -56,11 +56,15 @@ class TaiKhoanController extends Controller{
 //                    ->orwhere('users_roles.role_id', null)                   
                     ->paginate(10);                    
         }
-        $countReport = DB::table('binhluan_report')->count();
-        $listReport = DB::select(DB::raw('SELECT report.*, name, email, phim_ten FROM binhluan_report report '
+        $countReport = DB::select(DB::raw('SELECT count(1) as tong FROM binhluan_report report '
+                                            .   ' LEFT JOIN binhluan ON binhluan.binhluan_id = report.binhluan_id '
+                                            .   ' LEFT JOIN users ON users.id = binhluan.user_id '                                            
+                                            .   ' WHERE users.active = 1 '));
+        $listReport = DB::select(DB::raw('SELECT report.*, users.id, avatar, name, email, phim_ten, binhluan_noidung FROM binhluan_report report '
                                             .   ' LEFT JOIN binhluan ON binhluan.binhluan_id = report.binhluan_id '
                                             .   ' LEFT JOIN users ON users.id = binhluan.user_id '
-                                            .   ' LEFT JOIN phim ON phim.phim_id = binhluan.phim_id '));
+                                            .   ' LEFT JOIN phim ON phim.phim_id = binhluan.phim_id '
+                                            .   ' WHERE users.active = 1 '));
         $listRole = DB::table('roles')->get();
         
         $data['listUser'] = $listUser;
@@ -126,6 +130,17 @@ class TaiKhoanController extends Controller{
             ]
         );
         return 1;
+    }
+
+    public function deleteComment(Request $request){
+        if($this->hasRole()){
+            if($request->cid != 0){
+                DB::table('binhluan')->where('binhluan_id_cha', $request->cid)->delete();
+                DB::table('binhluan')->where('binhluan_id', $request->cid)->delete();
+                DB::table('binhluan_report')->where('binhluan_id', $request->cid)->delete();
+            }
+        }
+        return redirect()->route('listTaiKhoan')->with('success', 'Xóa bình luận thành công!');   
     }
 
     public function deleteReport(Request $request){

@@ -24,7 +24,7 @@
         <small></small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>        
+        <li><a href="{{ url('/quan-ly/') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>        
         <li class="active"><a href="{{ url('/quan-ly/tai-khoan') }}">Quản lý tài khoản</a></li>
     </ol>
 </section>
@@ -86,13 +86,16 @@
                                     ?>
                                 </td>                                
                                 <td class="text-center">
-                                    <i class="fas <?php echo $row->active==1?'fa-user-check':'fa-user-lock';?>"></i>
+                                    <?php echo $row->active==1?'Hoạt động':'Bị khóa';?>
                                 </td>
                                 <td class="text-center">
                                     @if($row->role_code != RoleUtils::getRoleSuperAdmin())
                                     <div class="list-action-icon"> 
                                         <span data-toggle="tooltip" title="Quyền truy cập" onclick="preActionRole({{$row->id}}, '{{$row->email}}')">
                                             <i class="fa fa-user-secret text-light-blue"></i>
+                                        </span>
+                                        <span data-toggle="tooltip" title="Xem tất cả bình luận của tài khoản này" onclick="showAllComment({{$row->id}})">
+                                            <i class="fa fa-comments text-light-blue"></i>
                                         </span>
                                         @if ($row->active==1)
                                         <span data-toggle="tooltip" title="Khóa" onclick="preLock({{$row->id}}, '{{$row->email}}')">
@@ -191,6 +194,32 @@
             </div>
         </form>        
     </div>
+    <div id="modal-all-comment" data-izimodal-transitionin="fadeInDown">
+        <form method="POST" action="{{url('quan-ly/tai-khoan/delete-comment')}}">
+            {{csrf_field()}}
+            <input type="hidden" id="cid" name="cid" value="" />                    
+            <div class="modal-body" style="padding: 20px">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="table no-border" style="margin-bottom:0px">
+                            <tr>
+                                <td style="width:120px;" class="text-center">
+                                    <img class="action-comment-avatar avatar img-circle" src="" width="100%" />
+                                </td>
+                                <td class="text-left">
+                                    <div class="action-comment-username" style="font-weight: 700"></div>
+                                    <div class="action-comment-content content-comment"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                                                
+                        <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>        
+    </div>
     <script>        
         $('#modal-verify').iziModal({
             title: 'Xác nhận',
@@ -240,6 +269,15 @@
                 $("#body-role").load(location.href+" #body-role>*","");
                 $("#body-table").load(location.href+" #body-table>*","");
             }
+        });
+        $('#modal-all-comment').iziModal({
+            title: 'Tất cả bình luận',
+            top: 100,
+            overlayClose: false,
+            width: 600,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-comments',
+            iconColor: 'white'
         });
         
         function preActionRole(userid, email){            
@@ -310,7 +348,10 @@
                         }
                     }
             });
-        }     
+        }
+        function showAllComment(uid){
+            $('#modal-all-comment').iziModal('open');
+        }
     </script>
 </section>
 <section class="content">
@@ -326,15 +367,15 @@
                 <div class="box-body">                    
                     <table class="table table-hover">
                         <caption>
-                            <span>Tổng: {{$countReport}}</span>
+                            <span>Tổng: {{$countReport[0]->tong}}</span>
                         </caption>
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
-                                <th scope="col" class="text-left" style="width: 20%">Email</th>
+                                <th scope="col" class="text-left" style="width: 20%">Email bị report</th>
                                 <th scope="col" class="text-left" style="width: 20%">Phim</th>
-                                <th scope="col" class="text-left" style="width: 35%">Nội dung report</th>                                
-                                <th scope="col" class="text-center" style="width: 10%">Ngày report</th>                                
+                                <th scope="col" class="text-left" style="width: 25%">Nội dung report</th>                                
+                                <th scope="col" class="text-center" style="width: 20%">Ngày report</th>                                
                                 <th scope="col" class="text-center" style="width: 10%"></th>
                             </tr>
                         </thead>
@@ -346,6 +387,11 @@
                             <tr>
                                 <td class="text-center" style="cursor:pointer;">
                                     <?php $rowIndex++; echo $rowIndex ?>
+                                    <input type="hidden" class="avatar-{{$row->cr_id}}" value="{{$row->avatar}}" />
+                                    <input type="hidden" class="content-{{$row->cr_id}}" value="{{$row->binhluan_noidung}}" />
+                                    <input type="hidden" class="name-{{$row->cr_id}}" value="{{$row->name}}" />
+                                    <input type="hidden" class="email-{{$row->cr_id}}" value="{{$row->email}}" />
+                                    <input type="hidden" class="cid-{{$row->cr_id}}" value="{{$row->binhluan_id}}" />
                                 </td>                                
                                 <td>
                                     {{$row->email}}
@@ -359,17 +405,14 @@
                                 <td class="text-center">
                                     <?php 
                                         $date = date_create($row->cr_ngaycapnhat);
-                                        echo date_format($date, 'd-m-Y');
+                                        echo date_format($date, 'H:i:s d-m-Y');
                                     ?>
                                 </td>
                                 <td class="text-center">
                                     <div class="list-action-icon"> 
-                                        <span data-toggle="tooltip" title="Xem bình luận bị report" onclick="preDeleteReport({{$row->cr_id}}, '{{$row->cr_content}}')">
+                                        <span data-toggle="tooltip" title="Xem bình luận bị report" onclick="preDeleteComment({{$row->cr_id}})">
                                             <i class="fa fa-comment text-light-blue"></i>
-                                        </span>
-                                        <span data-toggle="tooltip" title="Xem tất cả bình luận của tài khoản này" onclick="preDeleteReport({{$row->cr_id}}, '{{$row->cr_content}}')">
-                                            <i class="fa fa-comments text-light-blue"></i>
-                                        </span>
+                                        </span>                                        
                                         <span data-toggle="tooltip" title="Xóa report" onclick="preDeleteReport({{$row->cr_id}}, '{{$row->cr_content}}')">
                                             <i class="fa fa-close text-light-red"></i>
                                         </span>
@@ -409,7 +452,34 @@
                 </div>        
             </div>
         </form>        
-    </div>   
+    </div>
+    <div id="modal-comment" data-izimodal-transitionin="fadeInDown">
+        <form method="POST" action="{{url('quan-ly/tai-khoan/delete-comment')}}">
+            {{csrf_field()}}
+            <input type="hidden" id="cid" name="cid" value="" />                    
+            <div class="modal-body" style="padding: 20px">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <table class="table no-border" style="margin-bottom:0px">
+                            <tr>
+                                <td style="width:120px;" class="text-center">
+                                    <img class="action-comment-avatar avatar img-circle" src="" width="100%" />
+                                </td>
+                                <td class="text-left">
+                                    <div class="action-comment-username" style="font-weight: 700"></div>
+                                    <div class="action-comment-content content-comment"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                        
+                        <button class="btn btn-danger">Xóa bình luận</button>
+                        <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </form>        
+    </div>       
     <script>        
         $('#modal-verify-report').iziModal({
             title: 'Xác nhận',
@@ -420,11 +490,27 @@
             icon: 'fa fa-check',
             iconColor: 'white'
         });
+        $('#modal-comment').iziModal({
+            title: 'Bình luận',
+            top: 100,
+            overlayClose: false,
+            width: 600,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-comment',
+            iconColor: 'white'
+        });        
         
         function preDeleteReport(crid, crcontent){
             $('#verify_cr_id').val(crid);
             $('#verify_cr_content').html(crcontent);           
             $('#modal-verify-report').iziModal('open');
-        }                     
+        }               
+        function preDeleteComment(crid){
+            $('.action-comment-avatar').attr('src','{{asset('/')}}'+$('.avatar-'+crid).val());
+            $('.action-comment-username').html($('.name-'+crid).val());
+            $('.action-comment-content').html($('.content-'+crid).val());
+            $('#cid').val($('.cid-'+crid).val());
+            $('#modal-comment').iziModal('open');
+        }          
     </script>     
 </section>

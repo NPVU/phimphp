@@ -14,8 +14,7 @@
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script> 
     <link href="{{ asset('public/template/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="{{ asset('public/template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/template/plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css" />

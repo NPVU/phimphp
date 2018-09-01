@@ -33,7 +33,7 @@
                         </td>
                         <td class="text-left">
                             <div class="action-comment-username" style="font-weight: 700"></div>
-                            <div class="action-comment-content"></div>
+                            <div class="action-comment-content content-comment"></div>
                         </td>
                     </tr>
                 </table>
@@ -57,7 +57,7 @@
                         </td>
                         <td class="text-left">
                             <div class="report-comment-username" style="font-weight: 700"></div>
-                            <div class="report-comment-content"></div>
+                            <div class="report-comment-content content-comment"></div>
                         </td>
                     </tr>
                 </table>
