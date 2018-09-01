@@ -54,16 +54,21 @@ class TaiKhoanController extends Controller{
                     ->selectRaw('users.*, (SELECT MIN(role_code) FROM users_roles WHERE user_id = id) AS role_code')
 //                    ->where('users_roles.role_id', '<>', RoleUtils::getRoleSuperAdmin())
 //                    ->orwhere('users_roles.role_id', null)                   
-                    ->paginate(10);
-        
-            
+                    ->paginate(10);                    
         }
+        $countReport = DB::table('binhluan_report')->count();
+        $listReport = DB::select(DB::raw('SELECT report.*, name, email, phim_ten FROM binhluan_report report '
+                                            .   ' LEFT JOIN binhluan ON binhluan.binhluan_id = report.binhluan_id '
+                                            .   ' LEFT JOIN users ON users.id = binhluan.user_id '
+                                            .   ' LEFT JOIN phim ON phim.phim_id = binhluan.phim_id '));
         $listRole = DB::table('roles')->get();
         
         $data['listUser'] = $listUser;
-        $data['count']    = $count;
+        $data['count']    = $count;        
         $data['listRole'] = $listRole;
-        $data['title'] = 'Danh Sách Tài khoản';
+        $data['countReport'] = $countReport;
+        $data['listReport'] = $listReport;
+        $data['title'] = 'Quản Lý Tài Khoản';
         $data['page'] = 'admin.taikhoan.index';
         return view('admin/layout', $data);
     }
@@ -78,19 +83,7 @@ class TaiKhoanController extends Controller{
         );
         return redirect()->route('listTaiKhoan')->with('success', 'Khóa tài khoản '.$request->email.' thành công!');
     }
-    
-    public function lockComment(Request $request){
-        $user = DB::table('binhluan')->where('binhluan_id', $request->cid)->get();
-        DB::table('users')->where('id', $user[0]->user_id)->update(
-            [                        
-                'active'        => 0,
-                'reason'        => 'Khóa vì bình luận vi phạm qui định của website',
-                'locked_at'     => now()
-            ]
-        );
-        return 1;
-    }
-    
+        
     public function unlock(Request $request){
         DB::table('users')->where('id', $request->user_id)->update(
             [                        
@@ -122,6 +115,24 @@ class TaiKhoanController extends Controller{
            return 'deleted';
         }            
     }
+
+    public function lockComment(Request $request){
+        $user = DB::table('binhluan')->where('binhluan_id', $request->cid)->get();
+        DB::table('users')->where('id', $user[0]->user_id)->update(
+            [                        
+                'active'        => 0,
+                'reason'        => 'Khóa vì bình luận vi phạm qui định của website',
+                'locked_at'     => now()
+            ]
+        );
+        return 1;
+    }
+
+    public function deleteReport(Request $request){
+        DB::table('binhluan_report')->where('cr_id', $request->cr_id)->delete();
+        return redirect()->route('listTaiKhoan')->with('success', 'Xóa report thành công!');       
+    }
+    
     
     public function changeDisplayUserName($token, $displayUserName){
         if(strcmp(Session::token(), $token) == 0){

@@ -20,7 +20,7 @@
 </style>
 <section class="content-header">
     <h1>
-        DANH SÁCH TÀI KHOẢN
+        QUẢN LÝ TÀI KHOẢN
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -30,25 +30,26 @@
 </section>
 <section class="content">
     <div class="row">        
-        <div class="col-md-12">            
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">            
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"></h3>
-                    <div class="box-btn-header" style="float:right;">
-                        <form method="GET">
-                        <div class="form-search-addon">
-                            <div class="input-group">
-                                <input type="search" name="tukhoa" value="<?php echo isset($_GET['tukhoa'])?$_GET['tukhoa']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
-                                <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-taikhoan').click();"><i class="fa fa-search"></i></span>
-                                <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/tai-khoan')}}';"><i class="fa fa-refresh"></i></span>
-                                <button type="submit" id="btn-search-taikhoan" class="display-none"></button>
-                            </div>         
-                        </div>
-                        </form>
-                    </div>                   
-                                        
+                    <h3 class="box-title">Danh sách tài khoản</h3>                                                                          
                 </div>                
-                <div class="box-body">                    
+                <div class="box-body">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                        <div class="box-btn-header" style="float:right;">
+                            <form method="GET">
+                            <div class="form-search-addon">
+                                <div class="input-group">
+                                    <input type="search" name="tukhoa" value="<?php echo isset($_GET['tukhoa'])?$_GET['tukhoa']:''; ?>" placeholder="Nhập từ khóa cần tìm ..." class="form-control" />
+                                    <span class="input-group-addon" style="cursor: pointer" onclick="$('#btn-search-taikhoan').click();"><i class="fa fa-search"></i></span>
+                                    <span class="input-group-addon" style="cursor: pointer" onclick="window.location.href = '{{url('/quan-ly/tai-khoan')}}';"><i class="fa fa-refresh"></i></span>
+                                    <button type="submit" id="btn-search-taikhoan" class="display-none"></button>
+                                </div>         
+                            </div>
+                            </form>
+                        </div>     
+                    </div>                
                     <table class="table table-hover">
                         <caption>
                             <span>Tổng: {{$count}}</span>
@@ -311,4 +312,119 @@
             });
         }     
     </script>
+</section>
+<section class="content">
+    <div class="row">        
+        <div class="col-md-12">            
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Report bình luận</h3>
+                    <div class="box-btn-header" style="float:right;">                        
+                    </div>                   
+                                        
+                </div>                
+                <div class="box-body">                    
+                    <table class="table table-hover">
+                        <caption>
+                            <span>Tổng: {{$countReport}}</span>
+                        </caption>
+                        <thead>
+                            <tr class="bg-primary">
+                                <th scope="col" class="text-center" style="width: 5%">#</th>                                
+                                <th scope="col" class="text-left" style="width: 20%">Email</th>
+                                <th scope="col" class="text-left" style="width: 20%">Phim</th>
+                                <th scope="col" class="text-left" style="width: 35%">Nội dung report</th>                                
+                                <th scope="col" class="text-center" style="width: 10%">Ngày report</th>                                
+                                <th scope="col" class="text-center" style="width: 10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                $rowIndex = 0;                                
+                            ?>
+                            @foreach ($listReport as $row)
+                            <tr>
+                                <td class="text-center" style="cursor:pointer;">
+                                    <?php $rowIndex++; echo $rowIndex ?>
+                                </td>                                
+                                <td>
+                                    {{$row->email}}
+                                </td>                                
+                                <td>
+                                    {{$row->phim_ten}}
+                                </td> 
+                                <td>
+                                    {{$row->cr_content}}
+                                </td>                                                                                                                             
+                                <td class="text-center">
+                                    <?php 
+                                        $date = date_create($row->cr_ngaycapnhat);
+                                        echo date_format($date, 'd-m-Y');
+                                    ?>
+                                </td>
+                                <td class="text-center">
+                                    <div class="list-action-icon"> 
+                                        <span data-toggle="tooltip" title="Xem bình luận bị report" onclick="preDeleteReport({{$row->cr_id}}, '{{$row->cr_content}}')">
+                                            <i class="fa fa-comment text-light-blue"></i>
+                                        </span>
+                                        <span data-toggle="tooltip" title="Xem tất cả bình luận của tài khoản này" onclick="preDeleteReport({{$row->cr_id}}, '{{$row->cr_content}}')">
+                                            <i class="fa fa-comments text-light-blue"></i>
+                                        </span>
+                                        <span data-toggle="tooltip" title="Xóa report" onclick="preDeleteReport({{$row->cr_id}}, '{{$row->cr_content}}')">
+                                            <i class="fa fa-close text-light-red"></i>
+                                        </span>
+                                    </div>
+                                </td>                                                                                     
+                            </tr>
+                            @endforeach
+                            <?php if($rowIndex == 0) :?>
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    Không tìm thấy dữ liệu
+                                </td>
+                            </tr>
+                            <?php endif; ?>
+                        </tbody>                        
+                    </table>
+                </div>                              
+            </div>            
+        </div>        
+    </div>    
+    <div id="modal-verify-report" data-izimodal-transitionin="fadeInDown">
+        <form method="POST" action="{{url('quan-ly/tai-khoan/delete-report')}}">
+            {{csrf_field()}}
+            <input type="hidden" id="verify_cr_id" name="cr_id" value="" />                    
+            <div class="modal-body">        
+                <div class="row">                
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        Bạn có đồng ý xóa report này không?
+                    </div>                    
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                        <pre id="verify_cr_content"></pre>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top:20px">
+                        <button type="submit" class="btn btn-danger">Đồng ý</button>
+                        <button type="button" class="btn btn-default" data-izimodal-close="">Hủy bỏ</button>
+                    </div>
+                </div>        
+            </div>
+        </form>        
+    </div>   
+    <script>        
+        $('#modal-verify-report').iziModal({
+            title: 'Xác nhận',
+            top: 100,
+            overlayClose: false,
+            width: 600,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-check',
+            iconColor: 'white'
+        });
+        
+        function preDeleteReport(crid, crcontent){
+            $('#verify_cr_id').val(crid);
+            $('#verify_cr_content').html(crcontent);           
+            $('#modal-verify-report').iziModal('open');
+        }                     
+    </script>     
 </section>

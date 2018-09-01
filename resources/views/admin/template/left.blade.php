@@ -32,7 +32,7 @@
                         <i class="fa fa-users"></i>
                         <span>Quản lý tài khoản</span>                    
                     </a>                
-                </li>
+                </li>                
                 @endif
                 @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1 || count(explode(RoleUtils::getRoleAdminPhim(),Auth::user()->getRoles())) > 1)
                 <li>

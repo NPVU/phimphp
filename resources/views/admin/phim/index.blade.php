@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        DANH SÁCH PHIM
+        QUẢN LÝ PHIM
         <small></small>
     </h1>
     <ol class="breadcrumb">
@@ -13,11 +13,7 @@
         <div class="col-md-12">            
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"></h3>                    
-                    <div class="box-btn-header" style="float:right;">
-                        <a href="{{url('quan-ly/phim/add')}}" class="btn btn-danger">Thêm mới</a>
-                    </div>
-                                        
+                    <h3 class="box-title">Danh sách phim</h3>                                        
                 </div>                
                 <div class="box-body">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -58,6 +54,9 @@
                     <table class="table table-hover">
                         <caption>
                             <span>Tổng: {{$count}}</span>
+                            <span class="box-btn-header" style="float:right;">
+                                <a href="{{url('quan-ly/phim/add')}}" class="btn btn-danger">Thêm mới</a>
+                            </span>                           
                         </caption>
                         <thead>
                             <tr class="bg-primary">

@@ -58,6 +58,7 @@ class CommentUtils extends BaseController
             if($request->cid != 0){
                 DB::table('binhluan')->where('binhluan_id_cha', $request->cid)->delete();
                 DB::table('binhluan')->where('binhluan_id', $request->cid)->delete();
+                DB::table('binhluan_report')->where('binhluan_id', $request->cid)->delete();
             }
         }
     }

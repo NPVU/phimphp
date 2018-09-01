@@ -62,7 +62,7 @@ class PhimController extends Controller{
 
         $data['listPhim'] = $listPhim;
         $data['count'] = $count;        
-        $data['title'] = 'Danh Sách Phim';
+        $data['title'] = 'Quản Lý Phim';
         $data['page'] = 'admin.phim.index';
         return view('admin/layout', $data);
     }

@@ -14,7 +14,9 @@
         <div class="col-md-12">            
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"></h3>
+                    <h3 class="box-title"></h3>                               
+                </div>                
+                <div class="box-body">     
                     <div class="box-btn-header" style="float:right;">
                         <form method="POST">
                             <div class="form-add-addon">
@@ -28,7 +30,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="box-btn-header" style="float:left;">
+                    <div class="box-btn-header" style="float:right;">
                         <form method="GET">
                         <div class="form-search-addon">
                             <div class="input-group">
@@ -39,9 +41,7 @@
                             </div>         
                         </div>
                         </form>
-                    </div>                    
-                </div>                
-                <div class="box-body">                    
+                    </div>                        
                     <table class="table table-hover">
                         <caption>
                             <span>Tổng: <?php echo count($listTheLoai); ?></span>
