@@ -6,7 +6,7 @@ body {
     background: rgba(0, 0, 0, .6);
 }
 .nav>li {
-    max-width: 400px;
+    max-width: 300px;
 }
 .nav>li>a {
     padding: 10px 10px;
@@ -21,13 +21,13 @@ body {
     border-color: red;
 }
 button.navbar-toggle {
-    background: red;
+    background: #8e2323;
 }
 button>.icon-bar{
     background:white;
 }
 .search-addon {
-    max-width: 400px;
+    max-width: 300px;
 }
 .search-addon .input-group-addon {
     background: transparent;
