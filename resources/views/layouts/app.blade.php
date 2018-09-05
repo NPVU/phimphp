@@ -11,14 +11,8 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('public/template/version_1/js/jquery-2.1.4.min.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/bootstrap.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/jquery.flexslider.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/owl.carousel.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/SmoothScroll.min.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/move-top.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/easing.js') }}"></script>
-    <script src="{{ asset('public/template/version_1/js/responsiveslides.min.js') }}"></script>    
+    <script src="{{ asset('public/js/jquery-2.2.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/bootstrap-3.3.7/dist/js/bootstrap.min.js') }}"></script>        
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziToast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
@@ -50,91 +44,64 @@
     </script>
     <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>        
 
-    <!-- Styles -->
-    <link href="{{ asset('public/template/version_1/css/owl.carousel.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/version_1/css/owl.theme.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/version_1/css/flexslider.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/version_1/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/version_1/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/version_1/css/font-awesome.css') }}" rel="stylesheet">    
+    <!-- Styles -->    
+    <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/main.css') }}" rel="stylesheet" type="text/css" />    
+    <link href="{{ asset('public/css/mainv2.css') }}" rel="stylesheet" type="text/css" />     
 </head>
 <body>    
-    <div class="npv-page-loading">        
-    </div>
-    <div class="progress sm npv-progress">
-        <div class="progress-bar progress-bar-aqua npv-progress-bar" style="width: 10%"></div>
-    </div>
     <div class="header">
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <h1>
-                    <a href="{{ url('/') }}" class="click-loading">
-                        {{ config('app.name') }}
-                    </a>
-                </h1>
-            </div>
-            <div class="top-nav-text">
-<!--                <ul class="social_agileinfo">
-                    <li><a href="#" class="w3_facebook"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#" class="w3_twitter"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#" class="w3_instagram"><i class="fa fa-instagram"></i></a></li>
-                    <li><a href="#" class="w3_google"><i class="fa fa-google-plus"></i></a></li>
-                </ul>-->
-                <ul class="social_agileinfo">
-                    @guest
-                    <li><a href="{{ route('login') }}" class="w3_facebook"><i class="fa fa-sign-in"></i></a></li>
-                    <li><a href="{{ route('register') }}" class="w3_facebook"><i class="fa fa-registered"></i></a></li>
-                    @else
-                    <li class="open-popup-user" onclick="$('.npv-user').toggle('fast');">
-                        <a href="#" class="w3_facebook">
-                            <i class="fa fa-user"></i>
-                        </a>                        
-                    </li>
-                    <li>
-                        <a href="#" class="w3_facebook"
-                           onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                            <i class="fa fa-sign-out"></i>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
-                    @endguest
-                </ul>
-            </div>
-            <!-- navbar-header -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#tapmoi">TẬP MỚI</a></li>                    
-                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#theloai">THỂ LOẠI</a></li>
-                    <li><a href="#" class="hvr-underline-from-center scroll" data-izimodal-open="#nam">NĂM</a></li>                                                          
-                    @if(Session::has('roles'))                                
-                        <li><a href="{{ url('quan-ly') }}" class="hvr-underline-from-center scroll">QUẢN LÝ</a></li>
-                    @endif
-                </ul>
-            </div>
-
-            <div class="clearfix"> </div>	
-        </nav>
-    </div>    
-    @yield('slider')    
-    @yield('tapmoi')
-    @yield('bangxephang')
-    @include('layouts.tapmoi')
-    @include('layouts.theloai')
-    @include('layouts.nam')
+        <div class="container">
+            <!-- Static navbar -->
+            <nav class="navbar" style="margin-bottom: unset">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">HoatHinh24h</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            
+                            <!--              <li><a href="#">Home</a></li>
+                                          <li><a href="#">About</a></li>
+                                          <li><a href="#">Contact</a></li>
+                                          <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                              <li><a href="#">Action</a></li>
+                                              <li><a href="#">Another action</a></li>
+                                              <li><a href="#">Something else here</a></li>
+                                              <li role="separator" class="divider"></li>
+                                              <li class="dropdown-header">Nav header</li>
+                                              <li><a href="#">Separated link</a></li>
+                                              <li><a href="#">One more separated link</a></li>
+                                            </ul>
+                                          </li>-->
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="search-addon">
+                                <div class="input-group" style="padding:10px 10px;">
+                                    <span class="input-group-addon btn-search"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input type="text" class="form-control input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
+                                </div>
+                            </li>
+                            <li><a href="">Đăng nhập</a></li>
+                            <li><a href="">Đăng ký</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container-fluid -->
+            </nav>    
+        </div>
+    </div>
     <div id="modal-user">
         <input type="hidden" id="current-token" value="{{csrf_token()}}"/>
         @if (Auth::check())    
@@ -144,15 +111,14 @@
         @endif
     </div>
     @yield('video')    
-    @include('layouts.footer')
     @if (session('backURL'))        
         @include('layouts.backURL')
         <?php Session::forget('backURL'); ?>
     @endif
     <script type="text/javascript">
-	$(document).ready(function() {
-            $().UItoTop({ easingType: 'easeOutQuart' });								
-	});       
+//	$(document).ready(function() {
+//            $().UItoTop({ easingType: 'easeOutQuart' });								
+//	});       
             
         function changePassword(){var pw1 = $('#pw1').val();var pw2 = $('#pw2').val();var repw2 = $('#re-pw2').val();var valid = true;if(pw1===""){$('.pw1').addClass('has-error');$('.pw1-error').html('Mật khẩu cũ không được bỏ trống');valid = false;}else if(pw1.length < 6){$('.pw1').addClass('has-error');$('.pw1-error').html('Mật khẩu có ít nhất 6 ký tự');valid = false;}else{$('.pw1').removeClass('has-error');$('.pw1-error').html('');}if(pw2===""){$('.pw2').addClass('has-error');$('.pw2-error').html('Mật khẩu mới không được bỏ trống');valid = false;}else if(pw2.length < 6){$('.pw2').addClass('has-error');$('.pw2-error').html('Mật khẩu có ít nhất 6 ký tự');valid = false;}else{$('.pw2').removeClass('has-error');$('.pw2-error').html('');}if(repw2===""){$('.re-pw2').addClass('has-error');$('.re-pw2-error').html('Xác nhận mật khẩu không được bỏ trống');valid = false;}else if(repw2.length < 6){$('.re-pw2').addClass('has-error');$('.re-pw2-error').html('Mật khẩu có ít nhất 6 ký tự');valid = false;}else{$('.re-pw2').removeClass('has-error');$('.re-pw2-error').html('');}if(valid){if(pw2!==repw2){$('.re-pw2').addClass('has-error');$('.re-pw2-error').html('Xác nhận mật khẩu không trùng khớp');valid = false;}else{$('.re-pw2').removeClass('has-error');$('.re-pw2-error').html('');}}if(valid){$.ajax({type: "GET",url: "{{url('/quan-ly/tai-khoan/change-password')}}/"+$('#current-token').val()+"/" + pw1 + "/" + pw2,success: function (data) {if (data.status === 1) {$('.rs-pw').css('color','green');$('.rs-pw').removeClass('fa fa-close');$('.rs-pw').addClass('fa fa-check');$('.rs-pw').html(' '+data.msg);$('#pw1').val('');$('#pw2').val('');$('#re-pw2').val('');} else if (data.status === 0) {$('.rs-pw').css('color','red');$('.rs-pw').addClass('fa fa-close');$('.rs-pw').html(' '+data.msg);}}});}}    
         function changeUsername() {

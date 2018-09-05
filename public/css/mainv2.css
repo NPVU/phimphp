@@ -1,0 +1,39 @@
+body {
+    background: #263238;
+    color: #fff;
+}
+.header,.body.container {
+    background: rgba(0, 0, 0, .6);
+}
+.nav>li {
+    max-width: 400px;
+}
+.nav>li>a {
+    padding: 10px 10px;
+}
+.nav>li>a{        
+    -webkit-transition: border-color 0.5s;
+    transition: border-color 0.5s;
+}
+.nav>li>a:hover, .nav>li>a:active{
+    background: none;
+    border-bottom: 2px solid;
+    border-color: red;
+}
+button.navbar-toggle {
+    background: red;
+}
+button>.icon-bar{
+    background:white;
+}
+.search-addon {
+    max-width: 400px;
+}
+.search-addon .input-group-addon {
+    background: transparent;
+    border-right:none !important;
+}
+.input-search, .btn-search {
+    background: transparent;
+    color:white;
+}

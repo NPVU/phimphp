@@ -1,9 +1,9 @@
 <html lang="{{ app()->getLocale() }}">
-    @include('admin.template.head')
+    @include('admin.layouts.head')
     <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
         <div class="wrapper" style="height: auto; min-height: 100%;">
-            @include('admin.template.header')
-            @include('admin.template.left')
+            @include('admin.layouts.header')
+            @include('admin.layouts.left')
             
             <div class="content-wrapper" style="min-height: 946px;">
                                 
@@ -11,11 +11,11 @@
                 
             </div>
             
-            @include('admin.template.footer')
+            @include('admin.layouts.footer')
 
-            @include('admin.template.setting')
+            @include('admin.layouts.setting')
         </div>
-        @include('admin.template.user')
+        @include('admin.layouts.user')
         <script>
             <?php if(isset($showToast) && !empty($showToast)){ echo $showToast;} ?>
         </script>
