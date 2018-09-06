@@ -66,7 +66,10 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">HoatHinh24h</a>
+                        <a class="navbar-brand" href="#">
+                            <img src="https://vignette.wikia.nocookie.net/amuniverse/images/f/f1/Anime_Logo_%28By-AnimeGuy124%29.png/revision/latest?cb=20111213002634" width="100"/>
+                            
+                        </a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -90,8 +93,8 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="search-addon">
                                 <div class="input-group" style="padding:10px 10px;">
-                                    <span class="input-group-addon btn-search"><span class="glyphicon glyphicon-search"></span></span>
-                                    <input type="text" class="form-control input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
+                                    <span class="input-group-addon btn-search" id="btn-search"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input type="text" class="form-control input-search" id="input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
                                 </div>
                             </li>
                             <li><a href="">Đăng nhập</a></li>

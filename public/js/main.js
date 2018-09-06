@@ -60,6 +60,11 @@ $(document).ready(function(){
             $('.help-report-comment').css('color','red');
         }
     });
+    $('#btn-search').click(function(){
+       if($('#input-search').val().trim().length < 3){
+           showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
+       }
+    });
 });
 window.onload = function(){
     $('.npv-page-loading').remove();  
