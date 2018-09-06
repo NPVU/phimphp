@@ -55,8 +55,7 @@
 </head>
 <body>    
     <div class="header">
-        <div class="container">
-            <!-- Static navbar -->
+        <div class="container">            
             <nav class="navbar" style="margin-bottom: unset">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -73,22 +72,21 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            
-                            <!--              <li><a href="#">Home</a></li>
-                                          <li><a href="#">About</a></li>
-                                          <li><a href="#">Contact</a></li>
-                                          <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                              <li><a href="#">Action</a></li>
-                                              <li><a href="#">Another action</a></li>
-                                              <li><a href="#">Something else here</a></li>
-                                              <li role="separator" class="divider"></li>
-                                              <li class="dropdown-header">Nav header</li>
-                                              <li><a href="#">Separated link</a></li>
-                                              <li><a href="#">One more separated link</a></li>
-                                            </ul>
-                                          </li>-->
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="">Contact</a></li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Nav header</li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="search-addon">
@@ -100,27 +98,19 @@
                             <li><a href="">Đăng nhập</a></li>
                             <li><a href="">Đăng ký</a></li>
                         </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
+                    </div>
+                </div>
             </nav>    
         </div>
     </div>
     <div class="container">
         <div class="content col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="content-left col-xs-12 col-sm-12 col-md-8 col-lg-9">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 listTapMoi">
-                    <span class="tapmoi-page-1">
-                        <?php echo $htmlTapMoi ?>     
-                    </span>
-                    <span class="tapmoi-page-2"></span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                    <i onclick="xt()" aria-page="2" class="xttm npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
-                </div>
+                @yield('contentLeft')                
             </div>
 
             <div class="content-right col-xs-12 col-sm-12 col-md-4 col-lg-3">
-                ga
+                @yield('contentRight')
             </div>
         </div>
     </div>
@@ -141,102 +131,7 @@
 //	$(document).ready(function() {
 //            $().UItoTop({ easingType: 'easeOutQuart' });								
 //	});       
-            
-        function changePassword(){var pw1 = $('#pw1').val();var pw2 = $('#pw2').val();var repw2 = $('#re-pw2').val();var valid = true;if(pw1===""){$('.pw1').addClass('has-error');$('.pw1-error').html('Mật khẩu cũ không được bỏ trống');valid = false;}else if(pw1.length < 6){$('.pw1').addClass('has-error');$('.pw1-error').html('Mật khẩu có ít nhất 6 ký tự');valid = false;}else{$('.pw1').removeClass('has-error');$('.pw1-error').html('');}if(pw2===""){$('.pw2').addClass('has-error');$('.pw2-error').html('Mật khẩu mới không được bỏ trống');valid = false;}else if(pw2.length < 6){$('.pw2').addClass('has-error');$('.pw2-error').html('Mật khẩu có ít nhất 6 ký tự');valid = false;}else{$('.pw2').removeClass('has-error');$('.pw2-error').html('');}if(repw2===""){$('.re-pw2').addClass('has-error');$('.re-pw2-error').html('Xác nhận mật khẩu không được bỏ trống');valid = false;}else if(repw2.length < 6){$('.re-pw2').addClass('has-error');$('.re-pw2-error').html('Mật khẩu có ít nhất 6 ký tự');valid = false;}else{$('.re-pw2').removeClass('has-error');$('.re-pw2-error').html('');}if(valid){if(pw2!==repw2){$('.re-pw2').addClass('has-error');$('.re-pw2-error').html('Xác nhận mật khẩu không trùng khớp');valid = false;}else{$('.re-pw2').removeClass('has-error');$('.re-pw2-error').html('');}}if(valid){$.ajax({type: "GET",url: "{{url('/quan-ly/tai-khoan/change-password')}}/"+$('#current-token').val()+"/" + pw1 + "/" + pw2,success: function (data) {if (data.status === 1) {$('.rs-pw').css('color','green');$('.rs-pw').removeClass('fa fa-close');$('.rs-pw').addClass('fa fa-check');$('.rs-pw').html(' '+data.msg);$('#pw1').val('');$('#pw2').val('');$('#re-pw2').val('');} else if (data.status === 0) {$('.rs-pw').css('color','red');$('.rs-pw').addClass('fa fa-close');$('.rs-pw').html(' '+data.msg);}}});}}    
-        function changeUsername() {
-            $.ajax({
-                type: "GET",
-                url: "{{url('/quan-ly/tai-khoan/change-display-name')}}/"+$('#current-token').val()+"/" + $('#username').val(),
-                success: function (data) {
-                    if (data.status === 1) {
-                        $('.username').html($('#username').val());$('#username').attr('name-before',$('#username').val());
-                        $('#username, .u-s, .u-c').addClass('display-none');$('.username, .u-e').removeClass('display-none');
-                    }
-                }
-            });
-        }
-        function changeUsername() {
-            $.ajax({
-                type: "GET",
-                url: "{{url('/quan-ly/tai-khoan/change-display-name')}}/"+$('#current-token').val()+"/" + $('#username').val(),
-                success: function (data) {
-                    if (data.status === 1) {
-                        $('.username, .username-popup').html($('#username').val());$('#username').attr('name-before',$('#username').val());
-                        $('#username, .u-s, .u-c').addClass('display-none');$('.username, .u-e').removeClass('display-none');
-                    }
-                }
-            });
-        }function changeBirthday() {
-            $.ajax({
-                type: "GET",
-                url: "{{url('/quan-ly/tai-khoan/change-birthday')}}/"+$('#current-token').val()+"/" + $('#ns').val(),
-                success: function (data) {
-                    if (data.status === 1) {
-                        $('.ns').html(data.msg);$('#ns').attr('ns-before',data.msg);$('#ns').attr('ns-value-before',data.value);
-                        $('#ns, .ns-s, .ns-c').addClass('display-none');$('.ns, .ns-e').removeClass('display-none');
-                    }
-                }
-            });
-        }function changeGender() {
-            $.ajax({
-                type: "GET",
-                url: "{{url('/quan-ly/tai-khoan/change-gender')}}/"+$('#current-token').val()+"/" + $('#gender').val(),
-                success: function (data) {
-                    if (data.status === 1) {
-                        $('.gender').html(data.text);$('#gender').attr('gender-before',data.msg);$('#gender').attr('gender-text-before',data.text);
-                        $('#gender, .g-s, .g-c').addClass('display-none');$('.gender, .g-e').removeClass('display-none');
-                    }
-                }
-            });
-        }function changePhone() {
-            if($('#phone').val().length >= 10){
-                $('#phone').css('color','unset');
-                $.ajax({
-                    type: "GET",
-                    url: "{{url('/quan-ly/tai-khoan/change-phone')}}/"+$('#current-token').val()+"/" + $('#phone').val(),
-                    success: function (data) {
-                        if (data.status === 1) {
-                            $('.phone').html($('#phone').val());$('#phone').attr('phone-before',$('#phone').val());
-                            $('#phone, .p-s, .p-c').addClass('display-none');$('.phone, .p-e').removeClass('display-none');
-                        }
-                    }
-                });
-            }else{
-                $('#phone').css('color','red');
-            }
-        }
-        function autoUploadFile() {        
-            var file_data = $('#avatar-file').prop('files')[0];
-            var form_data = new FormData();
-            form_data.append('avatar', file_data);            
-            $.ajax({
-                    url: '{{url("quan-ly/tai-khoan/upload-avatar")}}',
-                    dataType: 'text',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    type: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': $('#current-token').val()
-                    },
-                    success: function (data) {                    
-                        $('#user-avatar').attr('src', '{{url("/")}}/'+data);                    
-                    }
-            });
-        }
-        function changeAvatar() {        
-            $.ajax({
-                type: "GET",
-                url: "{{url('/quan-ly/tai-khoan/change-avatar')}}/"+$('#current-token').val().attr('content')+"/",
-                success: function (data) {
-                   if (data.status === 1) {
-                        $('#user-avatar, .avatar').attr('src', '{{asset("")}}'+data.msg);
-                        $('.a-s, .a-c').addClass('display-none');$('#avatar-before').val('{{asset("")}}'+data.msg);
-                    }
-                }
-            });        
-        }
+        
     </script>        
 </body>
 </html>

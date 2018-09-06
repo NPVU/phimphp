@@ -25,7 +25,7 @@ class HomeController extends Controller
         }                     
                 
         $data['listPhimToday']  = $listPhimToday;        
-        return view('home', $data, parent::getDataHeader());
+        return view('homev2', $data, parent::getDataHeader());
     }
     
     public function xemThemTapMoi(){ 

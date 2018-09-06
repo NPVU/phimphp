@@ -182,3 +182,19 @@ function openReport(cid){
     $('.report-comment-username').html($('.username-comment.'+cid).html());
     $('.report-comment-content').html($('.content-comment.'+cid).html());    
 }
+function xt(){
+var page = $('.xttm').attr('aria-page');
+        $.ajax({
+        url: $('meta[name="url"').attr('content') + '/tap-moi?page=' + page,
+                dataType: 'text',
+                type: 'get',
+                success: function (data) {                
+                        $('.tapmoi-page-' + page).html(data);
+                        var nextPage = parseInt(page) + 1;
+                        $('.xttm').attr('aria-page', nextPage);
+                        var newPage = document.createElement('span');
+                        newPage.className = 'tapmoi-page-' + nextPage;
+                        $('.listTapMoi').append(newPage);
+                }
+        });
+}
