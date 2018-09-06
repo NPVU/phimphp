@@ -5,8 +5,21 @@ body {
     background: #263238;
     color: #fff;
 }
-.header,.body.container {
+.header,.content {
     background: rgba(0, 0, 0, .6);
+}
+.header {
+    margin-bottom: 20px;
+}
+.content {
+    padding: 15px;
+    border-radius: 3px;
+}
+.content-right{
+    background: #78909c;
+    border-radius: 3px;
+    -webkit-transition: width 0.3s;
+    transition: width 0.3s;
 }
 .nav>li {
     max-width: 300px;

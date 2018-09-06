@@ -105,6 +105,25 @@
             </nav>    
         </div>
     </div>
+    <div class="container">
+        <div class="content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="content-left col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 listTapMoi">
+                    <span class="tapmoi-page-1">
+                        <?php echo $htmlTapMoi ?>     
+                    </span>
+                    <span class="tapmoi-page-2"></span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                    <i onclick="xt()" aria-page="2" class="xttm npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
+                </div>
+            </div>
+
+            <div class="content-right col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                ga
+            </div>
+        </div>
+    </div>
     <div id="modal-user">
         <input type="hidden" id="current-token" value="{{csrf_token()}}"/>
         @if (Auth::check())    
