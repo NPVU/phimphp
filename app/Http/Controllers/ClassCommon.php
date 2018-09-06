@@ -115,9 +115,10 @@ class ClassCommon extends BaseController
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" />';
                     $html .=            '</div>';
+                    $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
                     $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
-                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapso.'</div>';
+                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
 //                    $html .=                '<div class="box-text">';
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
 //                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
@@ -218,31 +219,31 @@ class ClassCommon extends BaseController
     
     public static function getHTMLBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
-            $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
-            $listPhimXemHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
-            $listPhimXemHang = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
+            $listPhimXepHang = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
         }         
-        for($i = 0; $i < count($listPhimXemHang); $i++){
-            $listPhimXemHang[$i]->tap = DB::table('tap')
+        for($i = 0; $i < count($listPhimXepHang); $i++){
+            $listPhimXepHang[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhimXemHang[$i]->phim_id) 
+                    ->where('phim_id', $listPhimXepHang[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
         }
         
-        if(count($listPhimXemHang)>0){
+        if(count($listPhimXepHang)>0){
             $rank = 1+$offset;
             $html = '';
-            foreach ($listPhimXemHang as $row){
+            foreach ($listPhimXepHang as $row){
                 if(count($row->tap)>0){
                     $star = ClassCommon::getStar($row->phim_id);
                     $html .= '<tr>';
@@ -275,6 +276,30 @@ class ClassCommon extends BaseController
         } else {
             return '<tr><td colspan="5" class="text-center"><i style="color:gray">Không tìm thấy dữ liệu</i></td></tr>';
         }        
+    }
+    public static function getBangXepHang($time, $limit, $offset){
+        if(strcmp($time, 'week') == 0){
+            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
+                . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
+                . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
+        } else if(strcmp($time, 'month') == 0){
+            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
+                . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
+                . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
+        } else {
+            $listPhimXepHang = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
+                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
+        }         
+        for($i = 0; $i < count($listPhimXepHang); $i++){
+            $listPhimXepHang[$i]->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
+                    ->where('phim_id', $listPhimXepHang[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+        }
+        return $listPhimXepHang;
     }
                      
     public static function resetView(){

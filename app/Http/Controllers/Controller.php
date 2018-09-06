@@ -22,16 +22,14 @@ class Controller extends BaseController
         $listTheLoai = DB::table('theloai')->get();
         $listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->orderBy('phim_nam')->get();
         $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
-        $htmlPhimXepHangAll = ClassCommon::getHTMLBangXepHang('all', Session::get('PhimPerPage'), 0);
-        $htmlPhimXepHangThang = ClassCommon::getHTMLBangXepHang('month', Session::get('PhimPerPage'), 0);
-        $htmlPhimXepHangTuan = ClassCommon::getHTMLBangXepHang('week', Session::get('PhimPerPage'), 0);
+        $phimXepHangTuan = ClassCommon::getBangXepHang('week', 10, 0);
+        $phimXepHangThang = ClassCommon::getBangXepHang('month', 10, 0);
         
         $data['listTheLoai'] = $listTheLoai;
         $data['listNam']     = $listNam;
         $data['htmlTapMoi']     = $htmlTapMoi;
-        $data['htmlPhimXepHangAll']     = $htmlPhimXepHangAll;
-        $data['htmlPhimXepHangThang']     = $htmlPhimXepHangThang;
-        $data['htmlPhimXepHangTuan']     = $htmlPhimXepHangTuan;        
+        $data['phimXepHangTuan']     = $phimXepHangTuan;
+        $data['phimXepHangThang']     = $phimXepHangThang;
         return $data;
     }
 }

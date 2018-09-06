@@ -3,6 +3,9 @@
     Trang Chủ - {{ config('app.name') }}
 @endsection
 @section('contentLeft')
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2 class="content-left-title">TẬP MỚI</h2>
+</div>
 <div class="listTapMoi">
     <span class="tapmoi-page-1">
         <?php echo $htmlTapMoi ?>     
