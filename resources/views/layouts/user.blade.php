@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="col-xs-7 col-sm-9 col-md-9 col-lg-9">                
-                <table class="table">
+                <table class="table" style="background:white">
                     <tr>
                         <td class="text-left" style="width:20%"><label>Tài khoản</label></td>
                         <td class="text-left" style="width:60%"><label style="color:gray">{{Auth::user()->email}}</label></td>

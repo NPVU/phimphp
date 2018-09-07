@@ -16,7 +16,7 @@
             </table>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-            <i onclick="xtc({{$_GET['pid']}})" aria-page="2" class="xtc npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
+            <i onclick="xtc({{$_GET['pid']}})" aria-page="2" class="xtc npv-icon-xemthem glyphicon glyphicon-2x glyphicon-chevron-down" data-toggle="tooltip" title="Xem thêm"></i>
         </div>
 </div>
 <div id="action-comment" data-izimodal-transitionin="fadeInDown">
