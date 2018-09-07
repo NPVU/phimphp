@@ -39,6 +39,10 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
+    
+    public function showRegistrationForm(){               
+        return view('auth.register_min', parent::getDataHeader());
+    }
 
     /**
      * Get a validator for an incoming registration request.

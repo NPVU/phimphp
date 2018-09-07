@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('title')
-    Trang Chủ - {{ config('app.name') }}
-@endsection
+    Đăng Nhập 
+@endsection 
 @section('contentLeft')
 <div class="content-left-section">
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h2 class="content-left-title">ĐĂNG NHẬP</h2>
-</div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="content-left-title">ĐĂNG NHẬP</h2>
+    </div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form method="POST" action="{{ route('login') }}" class="col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
         @csrf
@@ -51,4 +51,4 @@
     </form>
 </div>
 </div>
-@endsection
+@endsection 

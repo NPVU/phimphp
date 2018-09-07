@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title')
-    Trang Chủ - {{ config('app.name') }}
+    Trang Chủ
 @endsection 
 @section('contentLeft')
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
