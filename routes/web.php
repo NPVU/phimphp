@@ -21,6 +21,7 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/add','PhimController@add');    
     Route::get('/edit/{phimID}/{token}','PhimController@edit');
     Route::get('/danh-sach-tap/{phimID}/{token}','PhimController@listTap')->name('listTap');    
+    Route::get('/comments/', 'PhimController@getComments');
     
     Route::post('/','PhimController@actionPhim');
     Route::post('/add','PhimController@addPhim'); 

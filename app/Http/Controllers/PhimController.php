@@ -457,6 +457,10 @@ class PhimController extends Controller{
         $tap = DB::table('tap')->where('phim_id', $request->phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get();
         return $tap[0]->tap_tapso;
     }
+    
+    public function getComments(){
+        return CommentUtils::getHTMLComments(Input::get('pid'));
+    }
             
     public function uploadImage(Request $request) {
         if($request->hasFile('image')){

@@ -105,7 +105,10 @@
                                         </a>
                                         <span data-toggle="tooltip" title="Chỉnh sửa phim">
                                             <a href="{{url('quan-ly/phim/edit')}}/{{$row->phim_id}}/{{csrf_token()}}"><i class="fa fa-edit text-light-blue"></i></a>
-                                        </span> 
+                                        </span>
+                                        <span onclick="openComment({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Tất cả bình luận">
+                                            <a><i class="fa fa-comments"></i></a>
+                                        </span>
                                         <span onclick="preDelPhim({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Xóa phim">
                                             <i class="fa fa-close text-light-red"></i>
                                         </span>
@@ -260,6 +263,17 @@
             </div>
         </form>        
     </div>
+    <div id="modal-comments" data-izimodal-transitionin="fadeInDown">        
+        <div class="modal-body">        
+            <div class="row">                
+                <table class="table">
+                    <tbody class="list-comment">
+                        
+                    </tbody>                    
+                </table>
+            </div>                 
+        </div>
+    </div>
     <div id="modal-message" data-izimodal-transitionin="fadeInDown">        
         <div class="modal-body">        
             <div class="row">                
@@ -301,6 +315,30 @@
                 $('.modal-send-message').html('');
             }
         });
+        $('#modal-comments').iziModal({
+            title: 'Tất cả bình luận',
+            top: 100,
+            bodyOverflow: true,
+            openFullscreen: true,
+            zindex: 1040,
+            overlayClose: false,
+            headerColor: 'rgb(56, 98, 111)',
+            icon: 'fa fa-comments',
+            iconColor: 'white'
+        });
+        
+        function openComment(id, ten){
+            $.ajax({
+                url: $('meta[name="url"').attr('content')+'/quan-ly/phim/comments?pid='+id,
+                dataType: 'text',                    
+                type: 'get',                    
+                success: function (data) {
+                    $('.iziModal-header-title').html('Tất cả bình luận '+'<span style="color:lightseagreen; font-size:1.5em">'+ten+'</span>');
+                    $('.list-comment').html(data);
+                }
+            });
+            $('#modal-comments').iziModal('open');
+        }        
         
         function preAddTapPhim(id, ten, maxtap, tap, taphientai){           
             $('#add_phim_id').val(id);
