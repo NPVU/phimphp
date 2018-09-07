@@ -16,6 +16,12 @@ class CommentUtils extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    function hasRole(){
+        $user = Auth::user();
+        $hasRole = DB::table('users_roles')->whereRaw('user_id = '.$user->id.' AND (role_code = '.RoleUtils::getRoleSuperAdmin().' OR role_code = '.RoleUtils::getRoleAdminPhim().')')->count();
+        return $hasRole>0?true:false;
+    }
+    
     public function comment(Request $request){
         if(strcmp(Session::token(), $request->token) == 0){
             if (Auth::check()) {

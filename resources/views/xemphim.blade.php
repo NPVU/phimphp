@@ -1,14 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.app') 
 @section('title')
     {{$phim[0]->phim_ten}} - {{$tap[0]->tap_tapsohienthi}}
-@endsection
+@endsection 
 @section('contentLeft')
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">{{$phim[0]->phim_ten}}</h2>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
-        @include('layouts.video')        
+        @include('layouts.video_min')        
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
@@ -55,9 +55,9 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">BÌNH LUẬN</h2>
     </div>
-    <div id="comment">
-    @include('layouts.comment')
+    <div>
+    @include('layouts.comment_min')
     </div>
 </div>
 
-@endsection
+@endsection 

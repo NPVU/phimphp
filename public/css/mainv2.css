@@ -28,7 +28,11 @@ a.visit:visited{
 .no-border {
     border: none !important;
 }
-.header,.content {
+.themes-color {
+    background-color: #337ab7;
+    color: white;
+}
+.header, .content {
     background: rgba(0, 0, 0, .6);
 }
 .header {
@@ -256,6 +260,15 @@ button>.icon-bar{
     background-image: none;
 }
 
+.text-light-red, .color-name-admin{color:#ff2f00 !important}
+
+.color-comment-admin{color:#9c0730 !important}
+
+.color-name-locked{color: #de7878 !important}
+
+.color-comment-locked{color:#e47878 !important}
+
+.content-comment{white-space: pre-wrap;}
 
 /* rewrite videojs */
 .video-js {
@@ -292,6 +305,10 @@ a.btn{
 
 label{
     color:gray;
+}
+
+.table {
+    background-color: white;
 }
 
 .table .table{

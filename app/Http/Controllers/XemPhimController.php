@@ -57,7 +57,7 @@ class XemPhimController extends Controller{
             $data['star'] = $star;
             $data['comment'] = $comment;
             $data['listSeason'] = $listSeason;
-            return view('xemphim', $data, parent::getDataHeader()); 
+            return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';

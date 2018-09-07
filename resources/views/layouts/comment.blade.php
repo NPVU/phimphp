@@ -1,4 +1,4 @@
-
+<div id="comment">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="input-group">
                 <textarea id="input-comment" class="form-control" rows="3" style="resize:none" {{Auth::check()?'':'disabled'}} >{{Auth::check()?'':'Vui lòng đăng nhập để bình luận'}}</textarea>     
@@ -18,6 +18,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
             <i onclick="xtc({{$_GET['pid']}})" aria-page="2" class="xtc npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
         </div>
+</div>
 <div id="action-comment" data-izimodal-transitionin="fadeInDown">
     <div class="modal-body" style="padding: 20px">
         <div class="row">

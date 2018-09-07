@@ -18,7 +18,7 @@
         $(document).ready(function(){
             $('#my-player').load();
             $.ajax({
-                url: '{{url("/autoload")}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&token={{Session::token()}}',
+                url: $('meta[name="url"]').attr('content')+'/autoload/?pid='+getParameterByName('pid','')+'&t='+getParameterByName('t','')+'&token={{Session::token()}}',
                 dataType: 'text',
                 type: 'get',
                 success:function(data){
@@ -77,11 +77,24 @@
         });
         video.onloadeddata = function(){
             video.play();
-        }
+        };
         video.onplaying = function(){
             $('.npv-play > i').addClass('fa-pause');
             $('.npv-play > i').removeClass('fa-play');
-            if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{csrf_token()}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');nextVideo();};function nextVideo(){var v = document.getElementById('my-player');if(v.duration - v.currentTime === 0){
+            if(v===0){
+                v=1;
+                setTimeout(function(){
+                    viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
+                }, 10000);
+            }
+        };
+        video.onpause = function(){
+            $('.npv-play > i').addClass('fa-play');
+            $('.npv-play > i').removeClass('fa-pause');nextVideo();
+        };
+        function nextVideo(){
+            var v = document.getElementById('my-player');
+            if(v.duration - v.currentTime === 0){
                 if(getParameterByName('t','') < sotap){
                     iziToast.show({
                         timeout: 10000,
@@ -92,7 +105,7 @@
                         progressBarColor: '#27ABDB',
                         buttons: [
                             ['<button>Chuyển ngay</button>', function (instance, toast) {
-                                window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";
+                                window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s={{md5('google')}}";
                             }, true], 
                             ['<button>Hủy</button>', function (instance, toast) {
                                 instance.hide({
@@ -109,10 +122,11 @@
                     });
                     confirmAutoNext(10);                    
                 }
-            }}
+            }
+        }
             function confirmAutoNext(i){         
                 if(i <= 0){
-                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";
+                    window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s={{md5('google')}}";
                 } else {    
                     $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
                     auto = setTimeout(() => {
@@ -128,7 +142,7 @@
     </div>
     @else    
     <script>
-        window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}";
+        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}";
     </script>
     @endif
 @else
