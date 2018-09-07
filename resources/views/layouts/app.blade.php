@@ -93,9 +93,12 @@
                                     <span class="input-group-addon btn-search" id="btn-search"><span class="glyphicon glyphicon-search"></span></span>
                                     <input type="text" class="form-control input-search" id="input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
                                 </div>
+                                <div class="result-search">
+                                    
+                                </div>
                             </li>
-                            <li><a href="">Đăng nhập</a></li>
-                            <li><a href="">Đăng ký</a></li>
+                            <li><a href="{{route('login')}}">Đăng nhập</a></li>
+                            <li><a href="{{route('register')}}">Đăng ký</a></li>
                         </ul>
                     </div>
                 </div>

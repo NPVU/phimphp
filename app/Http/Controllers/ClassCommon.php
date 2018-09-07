@@ -8,8 +8,6 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
 use App\Events\PusherEvent;
 class ClassCommon extends BaseController
 {
@@ -300,6 +298,38 @@ class ClassCommon extends BaseController
                     ->limit(1)->get();
         }
         return $listPhimXepHang;
+    }
+    
+    public static function getHTMLTimKiem($tukhoa){
+        $listResult = DB::table('phim')->where('phim_ten', 'like', '%'.$tukhoa.'%')
+                ->orwhere('phim_tenkhac', 'like', '%'.$tukhoa.'%')                
+                ->limit(20)->get();
+        $html = '<ul class="list-anime">';                                                                            
+        foreach ($listResult as $row){
+            $html .= '<li><a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'">';
+            $html .=    '<div style="float:left;">';
+            $html .=        '<img src="'.$row->phim_hinhnen.'" width="50" height="60" style="border-radius:3px;" />';
+            $html .=    '</div>';
+            $html .=    '<div style="float:left;padding-left:10px;" >';
+            $html .=        '<div><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
+            $html .=        '<div>Season '.$row->phim_season.'</div>';
+            $html .=        '<div>';
+                                $star = ClassCommon::getStar($row->phim_id); 
+                                for($i = 1; $i <= 5; $i++){
+                                    if($i <= intval($star)){
+                                        $html .= '<span class="glyphicon glyphicon-star star star-color"></span>';
+                                    } else if($i > $star && ($i-1) < $star){
+                                        $html .= '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
+                                    } else {
+                                        $html .= '<span class="glyphicon glyphicon-star-o star"></span>';
+                                    }
+                                }                         
+            $html .=        '</div>';
+            $html .=    '</div>';
+            $html .= '</a></li>';
+        }
+        $html .= '</ul>';
+        return $html;
     }
                      
     public static function resetView(){

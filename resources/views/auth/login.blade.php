@@ -1,103 +1,52 @@
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="img/ico" href="{{ asset('favicon.ico') }}">
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
+@section('title')
+    Trang Chủ - {{ config('app.name') }}
+@endsection
+@section('contentLeft')
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2 class="content-left-title">ĐĂNG NHẬP</h2>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form method="POST" action="{{ route('login') }}" class="col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        @csrf
+        <div class="form-group">
+            <label for="email">Tài khoản (Email)</label>
+            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+            @if ($errors->has('email'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+            @endif
+        </div>        
 
-    <title>Đăng nhập - {{ config('app.name') }}</title>
+        <div class="form-group">
+            <label for="password">Mật khẩu</label>
+            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-    <!-- Scripts -->    
+            @if ($errors->has('password'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+            @endif
+        </div>
 
-    <!-- Fonts -->      
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/template/login_version_1/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-
-    <!-- Styles -->
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/login_version_1/vendor/animate/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/login_version_1/vendor/css-hamburgers/hamburgers.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/login_version_1/vendor/select2/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/login_version_1/css/util.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/template/login_version_1/css/main.css') }}" rel="stylesheet">
-</head>
-
-<body>
-
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-pic js-tilt text-center" data-tilt>
-                    <img src="{{ asset('public/template/login_version_1/images/img-01.png') }}" alt="IMG">
-                </div>
-
-                <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
-                    <span class="login100-form-title">
-                        Đăng nhập
-                    </span>
-                    @csrf
-                        
-                    @if ($errors->has('email'))
-                            <span class="invalid-feedback" style="display:block;">
-                                <strong class="invalid-alert">{{ $errors->first('email') }}</strong>
-                            </span>
-                    @endif
-                    <div class="wrap-input100 validate-input" data-validate="Email có dạng: ex@abc.xyz">
-                        <input class="input100" id="email" type="email" value="{{ old('email') }}" autofocus name="email" placeholder="Email">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </span>                          
-                    </div>
-
-                    <div class="wrap-input100 validate-input" data-validate = "Mật khẩu là bắt buộc">
-                        <input class="input100" id="password" type="password" name="password" placeholder="Mật khẩu">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-                            <i class="fa fa-lock" aria-hidden="true"></i>
-                        </span>                          
-                    </div>
-
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
-                            Đăng nhập
-                        </button>
-                    </div>
-
-                    <div class="text-center p-t-12">                        
-                        <a class="txt2" href="{{ route('password.request') }}">
-                           Quên mật khẩu
-                        </a>
-                    </div>
-
-                    <div class="text-center p-t-136">
-                        <a class="txt2" href="{{ url('/') }}" style="margin-right: 15px;">
-                            <i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
-                            Quay về trang chủ                          
-                        </a>
-                        <a class="txt2" href="{{ route('register') }}">
-                            Đăng ký tài khoản
-                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </form>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Ghi nhớ
+                </label>
             </div>
         </div>
-    </div>
 
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-danger">
+                Đăng nhập
+            </button>
 
-    <script src="{{ asset('public/template/login_version_1/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('public/js/popper.min.js') }}"></script>
-    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/template/login_version_1/vendor/select2/select2.min.js') }}"></script>
-    <script src="{{ asset('public/template/login_version_1/vendor/tilt/tilt.jquery.min.js') }}"></script>
-    <script >
-            $('.js-tilt').tilt({
-                scale: 1.1
-            })
-    </script>
-    <script src="{{ asset('public/js/main.js') }}"></script>
-</body>
-</html>
-    
+            <a class="btn btn-link" href="{{ route('password.request') }}">
+                Quên mật khẩu
+            </a>
+        </div>
+    </form>
+</div>
+@endsection

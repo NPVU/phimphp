@@ -85,3 +85,4 @@ Route::get('/tap-moi/', 'HomeController@xemThemTapMoi');
 Route::get('/the-loai/', 'HomeController@xemThemTheLoai');
 Route::get('/nam/', 'HomeController@xemThemNam');
 Route::get('/bang-xep-hang/', 'HomeController@xemThemBangXepHang');
+Route::get('/tim-kiem/', 'HomeController@timKiem');

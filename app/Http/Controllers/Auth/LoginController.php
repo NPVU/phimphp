@@ -45,7 +45,7 @@ class LoginController extends Controller
         if(Input::get('backURL') != null){
             Session::put('backURL', url()->previous());
         }        
-        return view('auth.login');
+        return view('auth.login', parent::getDataHeader());
     }
     
     public function postLogin(Request $request){

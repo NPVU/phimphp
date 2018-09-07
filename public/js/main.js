@@ -65,6 +65,24 @@ $(document).ready(function(){
            showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
        }
     });
+    $('#input-search').keyup(function(){
+        console.log(this.value);
+        var tukhoa = this.value.trim();
+        if(tukhoa.length < 3){
+            $('.result-search').css('display','none');
+            $('.result-search').html('');            
+        }else{
+            $('.result-search').css('display','block'); 
+            $.ajax({
+                type: "GET",
+                url: $('meta[name="url"').attr('content')+'/tim-kiem/',
+                data: {'tukhoa': tukhoa},
+                success: function (data) {                    
+                    $('.result-search').html(data);
+                }
+            });                       
+        }
+    })
 });
 window.onload = function(){
     $('.npv-page-loading').remove();  
@@ -183,7 +201,7 @@ function openReport(cid){
     $('.report-comment-content').html($('.content-comment.'+cid).html());    
 }
 function xt(){
-var page = $('.xttm').attr('aria-page');
+    var page = $('.xttm').attr('aria-page');
         $.ajax({
         url: $('meta[name="url"').attr('content') + '/tap-moi?page=' + page,
                 dataType: 'text',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -74,5 +75,9 @@ class HomeController extends Controller
             $htmlTapMoi = ClassCommon::getHTMLBangXepHang(Input::get('time'),$phim_per_page,0);
         }   
         return $htmlTapMoi;
+    }
+    
+    public function timKiem(Request $request){
+        return ClassCommon::getHTMLTimKiem($request->tukhoa);
     }
 }
