@@ -101,7 +101,7 @@
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
                             @else
                             <li class="open-popup-user" onclick="$('.npv-user').toggle('fast');">
-                                <a href="javascript:void(0)" style="margin:0px 5px;width:55px; border-radius:100%; text-align:center; background-color:gray;">
+                                <a href="javascript:void(0)" style="margin:5px 5px;width:45px; height:45px; border-radius:100%; text-align:center; background-color:gray;">
                                     <i class="glyphicon glyphicon-user"></i>
                                 </a>                        
                             </li>
