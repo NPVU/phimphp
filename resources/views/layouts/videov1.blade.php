@@ -1,22 +1,33 @@
 @if(strcmp($_GET['s'], md5('google'))==0)
-<video id="my-player" class="video-js">
+<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+    <div class="video-player">        
+        <video id="video-player" autoplay="true" width="100%" poster="{{asset('public/img/themes/video-poster.gif')}}">            
             <source src="" id="google360p" type="video/mp4"/>
             <source src="" id="google720p" type="video/mp4"/>
             <source src="" id="google1080p" type="video/mp4"/>
-        <p class="vjs-no-js">
-            To view this video please enable JavaScript, and consider upgrading to a
-            web browser that
-            <a href="http://videojs.com/html5-video-support/" target="_blank">
-            supports HTML5 video
-            </a>
-        </p>
-</video>
-<script type="text/javascript">    
+            Máy chủ bị lỗi, vui lòng chọn máy chủ khác
+        </video>                   
+    </div>
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <ul class="npv-list-action">
+        <li>
+            <div class="npv-icon npv-play">
+                <i class="fa fa-play"></i>
+            </div>
+        </li>             
+        <li class="icon-quality display-none">
+            <div class="npv-icon">
+                <b class="npv-quality" quality="360">HD</b>
+            </div>
+        </li>        
+    </ul>
+    <script type="text/javascript">    
         var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};        
         var auto;
-        var video = document.getElementById('my-player');
+        var video = document.getElementById('video-player');
         $(document).ready(function(){
-            $('#my-player').load();
+            $('#video-player').load();
             $.ajax({
                 url: '{{url("/autoload")}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&token={{Session::token()}}',
                 dataType: 'text',
@@ -26,7 +37,7 @@
                         data = JSON.parse(data);                                   
                         $('#google360p').attr('src', data['360p']);
                         if(data['720p']!=null){
-                            $('#my-player').attr('src', data['720p']);                                                   
+                            $('#video-player').attr('src', data['720p']);                                                   
                             $('.npv-quality').css('color','white');
                             $('.npv-quality').attr('quality', "720");
                             video.onerror = function(){                                
@@ -36,14 +47,14 @@
                             $('.icon-quality').removeClass('display-none');
                             $('#google720p').attr('src', data['720p']);
                         }else{
-                            $('#my-player').attr('src', data['360p']);                            
+                            $('#video-player').attr('src', data['360p']);                            
                         }
                         if(data['1080p']!=null){
                             $('#google1080p').attr('src', data['1080p']);
                         }
-                        $('#my-player').removeAttr('poster');
-                        $('#my-player').prop('controls',true);
-                    }                    
+                        $('#video-player').removeAttr('poster');
+                        $('#video-player').prop('controls',true);
+                    }
                 }
             });
         });        
@@ -81,7 +92,7 @@
         video.onplaying = function(){
             $('.npv-play > i').addClass('fa-pause');
             $('.npv-play > i').removeClass('fa-play');
-            if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{csrf_token()}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');nextVideo();};function nextVideo(){var v = document.getElementById('my-player');if(v.duration - v.currentTime === 0){
+            if(v===0){v=1;setTimeout(function(){viewTimes("{{url('update')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}&token={{csrf_token()}}");}, 10000);}};video.onpause = function(){$('.npv-play > i').addClass('fa-play');$('.npv-play > i').removeClass('fa-pause');nextVideo();};function nextVideo(){var v = document.getElementById('video-player');if(v.duration - v.currentTime === 0){
                 if(getParameterByName('t','') < sotap){
                     iziToast.show({
                         timeout: 10000,
@@ -107,7 +118,9 @@
                             clearTimeout(auto);
                         }
                     });
-                    confirmAutoNext(10);                    
+                    confirmAutoNext(10);
+                   // setTimeout(() => {window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']+1}}&s={{md5('google')}}";}, 5000);
+                    
                 }
             }}
             function confirmAutoNext(i){         
@@ -120,7 +133,8 @@
                     }, 1000);
                 }
             }
-    </script>
+    </script>    
+</div>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
     @if(!empty($tap[0]->tap_youtubelink))
     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">

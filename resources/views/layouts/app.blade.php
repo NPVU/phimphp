@@ -17,7 +17,7 @@
     <script type="text/javascript" src="{{ asset('public/js/iziToast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>    
        
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>        
@@ -44,13 +44,12 @@
     </script>
     <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>        
 
-    <!-- Styles -->    
+    <!-- Styles -->
     <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">    
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />    
-    <link href="{{ asset('public/css/video-player.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
     <link href="{{ asset('public/css/mainv2.css') }}" rel="stylesheet" type="text/css" />     
 </head>
 <body>    

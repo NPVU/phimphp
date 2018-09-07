@@ -57,7 +57,7 @@
         var p = $('#user-login-password').val();        
         $.ajax({
             type: "POST",
-            url: "{{url('/login')}}",
+            url: $('meta[name="url"]').attr('content')+'/login',
             data: {email: e, password: p, _token:$('meta[name="csrf-token"]').attr('content')},
             headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
