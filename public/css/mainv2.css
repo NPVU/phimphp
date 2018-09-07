@@ -260,15 +260,19 @@ button>.icon-bar{
     background-image: none;
 }
 
-.text-light-red, .color-name-admin{color:#ff2f00 !important}
+.text-light-red, .color-name-admin{color:rgb(208, 108, 85) !important}
 
-.color-comment-admin{color:#9c0730 !important}
+.content-comment, .color-comment-admin{color:rgb(204, 204, 204) !important}
 
 .color-name-locked{color: #de7878 !important}
 
 .color-comment-locked{color:#e47878 !important}
 
 .content-comment{white-space: pre-wrap;}
+
+.avatar {
+    background: white;
+}
 
 /* rewrite videojs */
 .video-js {
@@ -308,7 +312,8 @@ label{
 }
 
 .table {
-    background-color: white;
+    background-color: rgb(74, 92, 101);
+    border-radius: 3px;
 }
 
 .table .table{
