@@ -1,12 +1,12 @@
 <section class="npv-user" style="display: none;">
-    <div class="npv-user-popup" style="width:300px; position: absolute; top: 60px; right: 0px; z-index: 1000;background: white;
+    <div class="npv-user-popup" style="width:300px; position: absolute; top: 55px; right: 10px; z-index: 1000;background: white;
          border-radius: 3px;">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top:20px">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
                 <img src="{{ asset((Auth::user()->avatar)) }}" class="avatar img-circle" width="100%"/>                                
             </div>   
             <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                <div style="font-size:18px;"><b class="username-popup">{{ Auth::user()->name }}</b></div>
+                <div style="font-size:18px;"><b class="username-popup" style="color:#777;font-family:'-webkit-body'">{{ Auth::user()->name }}</b></div>
                 <div style="font-size:14px;color:gray">{{ Auth::user()->email }}</div>
             </div>                        
         </div>
@@ -57,13 +57,13 @@
             </div>
             <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">        
                 <input type="file" id="avatar-file" class="display-none" onchange="autoUploadFile();$('.a-s, .a-c').removeClass('display-none');" />
-                <a href="#" onclick="$('#avatar-file').click();">
+                <a href="javascript:void(0)" onclick="$('#avatar-file').click();">
                     <img id="user-avatar" src="{{ asset((Auth::user()->avatar)) }}" width="100%" style="min-width:60px;min-height: 60px;"/>
                     <input type="hidden" id="avatar-before" value="{{ asset((Auth::user()->avatar)) }}" />                    
                 </a>
                 <div class="text-center" style="margin-top:10px">
-                    <a href="#" class="a-s btn btn-primary display-none" onclick="changeAvatar();"><i class="fa fa-check"></i> </a>
-                    <a href="#" class="a-c btn btn-danger display-none" onclick="$('.a-s, .a-c').addClass('display-none');$('#user-avatar').attr('src',$('#avatar-before').val());$('#avatar-file').val('');"> <i class="fa fa-close"></i></a>
+                    <a href="javascript:void(0)" class="a-s btn btn-primary display-none" onclick="changeAvatar();" style="padding:6px 10px;"><i class="glyphicon glyphicon-check"></i> </a>
+                    <a href="javascript:void(0)" class="a-c btn btn-danger display-none" onclick="$('.a-s, .a-c').addClass('display-none');$('#user-avatar').attr('src',$('#avatar-before').val());$('#avatar-file').val('');" style="padding:6px 10px;"> <i class="glyphicon glyphicon-remove"></i></a>
                 </div>
             </div>
             <div class="col-xs-7 col-sm-9 col-md-9 col-lg-9">                
@@ -121,7 +121,7 @@
                         <td class="text-right" style="width:20%">
                             <a href="#" class="p-e btn" onclick="$('.p-s, .p-c, #phone').removeClass('display-none');$('.p-e, .phone').addClass('display-none')">Chỉnh sửa</a>
                             <a href="#" class="p-s btn display-none" onclick="changePhone()">Lưu </a>
-                            <a href="#" class="p-c btn display-none" onclick="$('.p-s, .p-c, #phone').addClass('display-none');$('.p-e, .phone').removeClass('display-none');$('.phone').html($('#phone').attr('phone-before'));$('#phone').val($('#phone').attr('phone-before'));$('#phone').css('color','unset');"> Hủy</a>
+                            <a href="#" class="p-c btn display-none" onclick="$('.p-s, .p-c, #phone').addClass('display-none');$('.p-e, .phone').removeClass('display-none');$('.phone').html($('#phone').attr('phone-before'));$('#phone').val($('#phone').attr('phone-before'));$('#phone').css('color','gray');"> Hủy</a>
                         </td>
                     </tr>
                 </table>
@@ -132,32 +132,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    $('#user-password').iziModal({
-            title: 'Đổi mật khẩu',
-            top: 100,
-            overlayClose: true,                
-            width: 600,
-            openFullscreen:false,
-            headerColor: 'rgb(56, 98, 111)',
-            icon: 'fa fa-password',
-            iconColor: 'white',
-            onOpening: function(){
-                $('#pw1').val('');$('.pw1').removeClass('has-error');$('.pw1-error').html('');
-                $('#pw2').val('');$('.pw2').removeClass('has-error');$('.pw2-error').html('');
-                $('#re-pw2').val('');$('.re-pw2').removeClass('has-error');$('.re-pw2-error').html('');
-                $('.rs-pw').html('');$('.rs-pw').removeClass('fa-check');$('.rs-pw').removeClass('fa-close');
-            }
-        });$('#user-profile').iziModal({
-            title: 'Thông tin tài khoản',
-            top: 100,
-            overlayClose: true,                
-            width: 800,
-            openFullscreen:false,
-            headerColor: 'rgb(56, 98, 111)',
-            icon: 'fa fa-user',
-            iconColor: 'white',
-            zindex: 1001
-        });
-</script>
+<script type="text/javascript" src="{{ asset('public/js/user.js') }}"></script>

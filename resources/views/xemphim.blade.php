@@ -30,7 +30,7 @@
 
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2 class="content-left-title">DANH SÁCH TẬP</h2>
+        <h2 class="content-left-title">TẬP</h2>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
         @foreach($listTap as $tap)            

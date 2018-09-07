@@ -3,6 +3,7 @@
     Trang Chủ - {{ config('app.name') }}
 @endsection
 @section('contentLeft')
+<div class="content-left-section">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <h2 class="content-left-title">ĐĂNG NHẬP</h2>
 </div>
@@ -48,5 +49,6 @@
             </a>
         </div>
     </form>
+</div>
 </div>
 @endsection

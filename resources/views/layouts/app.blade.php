@@ -17,7 +17,7 @@
     <script type="text/javascript" src="{{ asset('public/js/iziToast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/main.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>    
+    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>   
        
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>        
@@ -96,8 +96,26 @@
                                     
                                 </div>
                             </li>
+                            @guest
                             <li><a href="{{route('login')}}">Đăng nhập</a></li>
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
+                            @else
+                            <li class="open-popup-user" onclick="$('.npv-user').toggle('fast');">
+                                <a href="javascript:void(0)" style="margin:0px 5px;width:55px; border-radius:100%; text-align:center; background-color:gray;">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </a>                        
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    Thoát
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                            @endguest
                         </ul>
                     </div>
                 </div>
@@ -187,12 +205,6 @@
     @if (session('backURL'))        
         @include('layouts.backURL')
         <?php Session::forget('backURL'); ?>
-    @endif
-    <script type="text/javascript">
-//	$(document).ready(function() {
-//            $().UItoTop({ easingType: 'easeOutQuart' });								
-//	});       
-        
-    </script>        
+    @endif     
 </body>
 </html>
