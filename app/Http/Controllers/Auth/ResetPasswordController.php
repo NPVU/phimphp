@@ -41,13 +41,4 @@ class ResetPasswordController extends Controller
         $data['token'] = $token;             
         return view('auth.passwords.reset', $data, parent::getDataHeader());
     }
-
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-            ->subject('Yêu Cầu Lấy Lại Mật Khẩu')
-            ->line('Chúng tôi vừa nhận được yêu cầu tạo lại mật khẩu cho tài khoản e-mail này.')
-            ->action('Reset Password', url('password/reset', $this->token))
-            ->line('Nếu bạn không có yêu cầu này, xin vui lòng bỏ qua thư này.');
-    }
 }
