@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm');
 Route::get('/quan-ly/', 'QuanLyController@index');
 Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
     Route::get('/','TheLoaiController@index');

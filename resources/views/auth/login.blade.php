@@ -11,7 +11,7 @@
     <form method="POST" action="{{ route('login') }}" class="col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
         @csrf
         <div class="form-group">
-            <label for="email">Tài khoản (Email)</label>
+            <label for="email">Tài khoản (e-mail)</label>
             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
             @if ($errors->has('email'))
             <span class="invalid-feedback">
