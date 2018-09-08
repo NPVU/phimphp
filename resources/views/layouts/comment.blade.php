@@ -73,7 +73,7 @@
         </div>
         <div class="row report-result">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                <span class="fa fa-2x fa-check icon-voted"></span>
+                <span class="glyphicon glyphicon-2x glyphicon-ok-sign icon-voted"></span>
                 <div class="content-report-result"></div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                

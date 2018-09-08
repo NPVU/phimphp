@@ -108,13 +108,13 @@ class CommentUtils extends BaseController
                 if($row->active == 1){
                     $html   .=      '<img src="'.URL('/').'/'.$row->avatar.'" class="avatar img-circle '.$row->binhluan_id.'" width="60" height="60" />';
                     $html   .=      '</td><td class="text-left">'; 
-                    $html   .=      '<div><span class="username-comment '.$row->binhluan_id.($row->role>0?' color-name-admin':'').'" style="font-weight: 700;">'.($isAdmin?$row->name.' ('.$row->email.')':$row->name).'</span><span style="float:right;">'.ClassCommon::getStrSoNgayDaQua($row->binhluan_ngaycapnhat).'</span></div>';
+                    $html   .=      '<div><span class="username-comment '.$row->binhluan_id.($row->role>0?' color-name-admin':'').'" style="font-weight: 700;">'.($isAdmin?$row->name.' ('.$row->email.')':$row->name).'</span><span style="float:right; color:gray;">'.ClassCommon::getStrSoNgayDaQua($row->binhluan_ngaycapnhat).'</span></div>';
                     $html   .=      '<div><span class="content-comment '.$row->binhluan_id.($row->role>0?' color-comment-admin':'').'">'.$row->binhluan_noidung.'</span>';
                     if($hasLogin){
                         $html   .=      '<span class="icon-reply-'.$row->binhluan_id.'" style="float:right;" onclick="openReply('.$row->binhluan_id.');"><a href="javascript:void(0);">Trả lời</a></span>';
                     }
                     $html   .=      '</div>';
-                    $html   .=      '<div><a href="javascript:void(0);" title="Report" onclick="openReport('.$row->binhluan_id.')"><span class="fa fa-exclamation-triangle" style="color:red"></span></a></div>';                                       
+                    $html   .=      '<div><a href="javascript:void(0);" title="Report" onclick="openReport('.$row->binhluan_id.')"><span class="glyphicon glyphicon-warning-sign" style="color:rgb(222, 159, 63)"></span></a></div>';                                       
                     $reply   =      '<div class="reply-'.$row->binhluan_id.' input-group" style="display:none">';
                     $reply  .=      '<textarea class="input-reply form-control" rows="2"></textarea>';
                     $reply  .=      '<span class="input-group-addon btn btn-primary" style="color:#fff; background-color: #337ab7;" onclick="replyComment('.$row->binhluan_id.')" >Trả lời</span>';
@@ -128,9 +128,9 @@ class CommentUtils extends BaseController
                             if($sub->active == 1){
                                 $subHTML   .=      '<img src="'.URL('/').'/'.$sub->avatar.'" class="avatar img-circle '.$sub->binhluan_id.'" width="100%"/>';
                                 $subHTML   .=      '</td><td class="text-left">';                                        
-                                $subHTML   .=      '<div><span class="username-comment '.$sub->binhluan_id.($sub->role>0?' color-name-admin':'').'" style="font-weight: 700;">'.($isAdmin?$sub->name.' ('.$sub->email.')':$sub->name).'</span><span style="float:right;">'.ClassCommon::getStrSoNgayDaQua($sub->binhluan_ngaycapnhat).'</span></div>';
+                                $subHTML   .=      '<div><span class="username-comment '.$sub->binhluan_id.($sub->role>0?' color-name-admin':'').'" style="font-weight: 700;">'.($isAdmin?$sub->name.' ('.$sub->email.')':$sub->name).'</span><span style="float:right;color:gray;">'.ClassCommon::getStrSoNgayDaQua($sub->binhluan_ngaycapnhat).'</span></div>';
                                 $subHTML   .=      '<div class="content-comment '.$sub->binhluan_id.($sub->role>0?' color-comment-admin':'').'">'.$sub->binhluan_noidung.'</div>';
-                                $subHTML   .=      '<div><a href="javascript:void(0);" title="Report" onclick="openReport('.$sub->binhluan_id.')"><span class="fa fa-exclamation-triangle" style="color:red"></span></a></div>';                                       
+                                $subHTML   .=      '<div><a href="javascript:void(0);" title="Report" onclick="openReport('.$sub->binhluan_id.')"><span class="glyphicon glyphicon-warning-sign" style="color:rgb(222, 159, 63)"></span></a></div>';                                       
                                 $subHTML   .= '</td></tr>';   
                             }   else {
                                 $subHTML   .=      '<img src="'.asset('/public/img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';

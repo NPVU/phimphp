@@ -201,6 +201,7 @@
             <div class="modal-body" style="padding: 20px">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        Dang xay dung
                         <table class="table no-border" style="margin-bottom:0px">
                             <tr>
                                 <td style="width:120px;" class="text-center">

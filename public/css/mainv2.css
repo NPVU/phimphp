@@ -6,7 +6,7 @@
 }
 body {
     background: #263238;
-    color: #fff;
+    color: gray;
     min-width: 414px;
 }
 body::-webkit-scrollbar {
@@ -260,9 +260,10 @@ button>.icon-bar{
     background-image: none;
 }
 
+.username-comment,.report-comment-username{color:blue; font-weight: 700;}
 .text-light-red, .color-name-admin{color:rgb(208, 108, 85) !important}
 
-.content-comment, .color-comment-admin{color:rgb(204, 204, 204) !important}
+.content-comment, .color-comment-admin{color:darkgray !important}
 
 .color-name-locked{color: #de7878 !important}
 
@@ -271,7 +272,12 @@ button>.icon-bar{
 .content-comment{white-space: pre-wrap;}
 
 .avatar {
-    background: white;
+    background: rgba(128, 128, 128, 0.3);
+}
+
+.icon-voted {
+    font-size: 3em;
+    color: #008000;
 }
 
 .btn-refresh-captcha{
@@ -318,12 +324,12 @@ label{
 }
 
 .table {
-    background-color: rgb(74, 92, 101);
+    background-color:#fff;
     border-radius: 3px;
 }
 
 .table .table{
-    background-color: transparent;
+    background-color: #fff;
 }
 
 .display-none{
