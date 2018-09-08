@@ -109,18 +109,24 @@ class ClassCommon extends BaseController
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
                     $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
-                    $html .=        '<div class="npv-box-phim">';
+                    $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';                    
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
 //                    $html .=                '<div class="box-text">';
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
 //                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
 //                    $html .=                '</div>';
+                    $html .=            '</div>';                    
+                    $html .=        '</div>';
+                    $html .=        '<div class="phim-tip">';
+                    $html .=            '<div class="phim-tip-content">';
+                    $html .=                '<div class="phim-tip-ten">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-time"></span>&nbsp; Season '.$row->phim_season.' <span style="float:right"><span class="glyphicon glyphicon-calendar"></span>&nbsp; '.$row->phim_nam.'<span></div>';
                     $html .=            '</div>';
                     $html .=        '</div>';
                     $html .=    '</a>';
