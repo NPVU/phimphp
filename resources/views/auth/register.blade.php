@@ -29,7 +29,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="password" >{{ __('Password') }}</label>
+                <label for="password" >Mật khẩu</label>
                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                 @if ($errors->has('password'))
                     <span class="invalid-feedback">
@@ -38,13 +38,34 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="password-confirm" >{{ __('Confirm Password') }}</label>
+                <label for="password-confirm" >Xác nhận mật khẩu</label>
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>                
             </div>
+            <div class="form-group form-captcha">
+                <label for="captcha">Mã xác nhận</label>
+                <?php echo $captcha?> <span class="glyphicon glyphicon-refresh btn-refresh-captcha"></span>
+                <input type="text" class="form-control" name="captcha" style="margin-top:5px" required>
+                @if ($errors->has('captcha'))
+                    <span class="invalid-feedback">
+                        <strong>Mã xác nhận không đúng</strong>
+                    </span>
+                @endif          
+            </div>            
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-danger">Đăng ký</button>              
             </div>
         </form>
     </div>
 </div>
+<script>
+    $('.btn-refresh-captcha').click(function(){
+        $.ajax({
+            type: "GET",
+            url: $('meta[name="url"]').attr('content')+'/get-captcha',            
+            success: function(data) {
+                $('.form-captcha > img').attr('src', data);
+            }
+        });
+    });
+</script>
 @endsection 

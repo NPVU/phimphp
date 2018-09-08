@@ -40,8 +40,9 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
     
-    public function showRegistrationForm(){               
-        return view('auth.register_min', parent::getDataHeader());
+    public function showRegistrationForm(){
+        $data['captcha'] = captcha_img();      
+        return view('auth.register_min', $data, parent::getDataHeader());
     }
 
     /**
@@ -56,6 +57,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'captcha' => 'required|captcha',
         ]);
     }
 
@@ -71,6 +73,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'captcha' => $data['captcha'],
         ]);
     }
 }

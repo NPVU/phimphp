@@ -274,6 +274,12 @@ button>.icon-bar{
     background: white;
 }
 
+.btn-refresh-captcha{
+    color:gray;
+}
+.btn-refresh-captcha:hover{
+    color:white;
+}
 /* rewrite videojs */
 .video-js {
     display: block;
