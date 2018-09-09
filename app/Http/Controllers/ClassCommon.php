@@ -94,7 +94,8 @@ class ClassCommon extends BaseController
     public static function getHTMLTapMoi($limit, $offset){
         $listPhimToday = DB::select(DB::raw('SELECT *, (SELECT MAX(tap_ngaycapnhat) FROM tap WHERE tap.phim_id = phim.phim_id) AS ngaycapnhat FROM phim '
                 . ' JOIN (SELECT DISTINCT tap.phim_id FROM tap, phim p WHERE tap.phim_id = p.phim_id AND p.phim_xuatban = 1 ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
-                . ' ON phim.phim_id IN (tap.phim_id) ORDER BY ngaycapnhat DESC'));            
+                . ' ON phim.phim_id IN (tap.phim_id) '
+                . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id ORDER BY ngaycapnhat DESC'));            
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
@@ -126,7 +127,28 @@ class ClassCommon extends BaseController
                     $html .=        '<div class="phim-tip">';
                     $html .=            '<div class="phim-tip-content">';
                     $html .=                '<div class="phim-tip-ten">'.$row->phim_ten.'</div>';
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-time"></span>&nbsp; Season '.$row->phim_season.' <span style="float:right"><span class="glyphicon glyphicon-calendar"></span>&nbsp; '.$row->phim_nam.'<span></div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span> '.$row->phim_season.' <span style="float:right"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span> '.$row->phim_nam.'<span></div>';
+                    if(is_null($row->phim_gioithieu)){
+                        $html .=                '<div class="phim-tip-noidung">Đang cập nhật ...</div>';
+                    } else {
+                        $html .=                '<div class="phim-tip-noidung">'.(strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu).'</div>';
+                    }
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> '.$row->phim_kieu.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';
+                    $star = ClassCommon::getStar($row->phim_id); 
+                    for($i = 1; $i <= 5; $i++){
+                        if($i <= intval($star)){
+                            $html .= '<span class="glyphicon glyphicon-star star star-color"></span>';
+                        } else if($i > $star && ($i-1) < $star){
+                            $html .= '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
+                        } else {
+                            $html .= '<span class="glyphicon glyphicon-star-o star"></span>';
+                        }
+                    }        
+                    $html .=                '</div>';
                     $html .=            '</div>';
                     $html .=        '</div>';
                     $html .=    '</a>';

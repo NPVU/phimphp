@@ -24,7 +24,7 @@
         <span class="title-video">
             {{$tap[0]->tap_tapsohienthi}}
         </span>
-        <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}} lượt xem</span>
+        <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
     </div>
 </div>
 

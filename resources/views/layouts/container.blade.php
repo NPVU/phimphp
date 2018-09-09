@@ -15,7 +15,7 @@
                             </div>
                             <div style="float:left;padding-left:10px;">
                                 <div>{{strlen($tuan->phim_ten)>24?substr($tuan->phim_ten,0,24).'...':$tuan->phim_ten}}</div>
-                                <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{ClassCommon::formatLuotXem($tuan->phim_luotxem)}}</div>
+                                <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($tuan->phim_luotxem)}}</div>
                                 <div>
                                     <?php 
                                         $star = ClassCommon::getStar($tuan->phim_id); 
@@ -46,7 +46,7 @@
                             </div>
                             <div style="float:left;padding-left:10px;">
                                 <div>{{strlen($thang->phim_ten)>24?substr($thang->phim_ten,0,24).'...':$thang->phim_ten}}</div>
-                                <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{ClassCommon::formatLuotXem($thang->phim_luotxem)}}</div>
+                                <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($thang->phim_luotxem)}}</div>
                                 <div>
                                     <?php 
                                         $star = ClassCommon::getStar($thang->phim_id); 

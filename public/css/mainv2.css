@@ -177,10 +177,10 @@ button>.icon-bar{
     position:absolute;
     font-family: "-webkit-body";
     min-width:250px;
-    min-height: 280px;    
+    min-height: 180px;  
     left:200px;
     top: -30px;
-    background: white;    
+    background: rgb(237, 249, 238);    
     z-index: 2;
     border-radius: 3px;
     display:none;
@@ -193,7 +193,7 @@ button>.icon-bar{
     margin-top: -5px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent white transparent transparent;
+    border-color: transparent rgb(237, 249, 238) transparent transparent;
 }
 .phim-tip-content{
     padding: 15px;
@@ -201,17 +201,52 @@ button>.icon-bar{
 .phim-tip-content > .phim-tip-ten{
     font-size: 1.3em;    
     text-transform: uppercase;
-    color: black;
+    color: #00a5ad;
+    font-weight:700;
 }
-.phim-tip-content > .phim-tip-underten{
+.phim-tip-content > .phim-tip-underten, .phim-tip-content > .phim-tip-noidung{
     color:gray;
     font-size: 1.1em;
 }
-.phim-tip-content > .phim-tip-underten .glyphicon{
-    color:yellowgreen;
+.phim-tip-content > .phim-tip-underten .glyphicon, .phim-tip-content > .phim-tip-underten > .title{
+    color:#11c3cb;
+}
+.phim-tip-content > .phim-tip-noidung {
+    padding: 10px 0px;
 }
 .box-phim:hover ~ .phim-tip{
     display: block;
+}
+@media (max-width: 1199px) {
+    .phim-tip{           
+        min-width:250px;
+        min-height: 180px; 
+        left:150px;
+        top: -30px;       
+    }
+}
+@media (max-width: 991px) {
+    .phim-tip{           
+        min-width: 205px;
+        min-height: 120px;
+        left: 10px;
+        top: -160px;      
+    }
+    .phim-tip::after {        
+        top: 100%;
+        right: 50%;
+        margin-top:0px;
+        margin-right: -5px;
+        border-color: rgb(237, 249, 238) transparent transparent transparent;
+    }
+    .phim-tip-content > .phim-tip-noidung {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .box-phim:hover ~ .phim-tip{
+        display: none;
+    }    
 }
 @media (max-width: 480px) {
     .box-info>.box-text{
