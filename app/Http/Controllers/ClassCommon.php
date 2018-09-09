@@ -449,7 +449,7 @@ class ClassCommon extends BaseController
             }    
             return $star;
         } else {
-            return 3;
+            return 4;
         }        
     }
 
