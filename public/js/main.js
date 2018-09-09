@@ -102,11 +102,11 @@ function danhGia(value) {
         dataType: 'text',
         type: 'get',
         success: function (data) {
+            console.log('123');
             if (data == 1) {
-                var newElement = document.createElement('span');
-                newElement.className = 'fa fa-2x fa-check icon-voted';
-                $('.danh-gia').html('<div>Cảm ơn bạn đã đánh giá !</div>');
-                $('.danh-gia').append(newElement);
+                $('.vote-result').removeClass('display-none');
+                $('.vote-body').addClass('display-none');
+                $('.content-vote-result').html('Cảm ơn bạn đã đánh giá !');                                    
             }
         }
     });

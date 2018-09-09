@@ -28,6 +28,7 @@
                         if(data['720p']!=null){
                             $('#my-player').attr('src', data['720p']);                                                   
                             $('.npv-quality').css('color','white');
+                            $('.npv-quality').css('font-weight',700);
                             $('.npv-quality').attr('quality', "720");
                             video.onerror = function(){                                
                                 video.setAttribute('src', $('#google360p').attr('src'));                                
@@ -47,51 +48,10 @@
                 }
             });
         });        
-        var v = 0;
-        $('.npv-play').click(function(){
-            if(video.paused){
-                video.play();
-            }else{
-                video.pause();
-            }
-        });
-        $('.npv-quality').click(function(){
-            var currentTime = video.currentTime;
-            if($('.npv-quality').attr('quality') === "360"){
-                console.log('720');
-                video.setAttribute('src', $('#google720p').attr('src'));
-                $('.npv-quality').css('color','white');
-                $('.npv-quality').attr('quality', "720");
-                video.onerror = function(){
-                    video.setAttribute('src', $('#google360p').attr('src'));
-                    video.currentTime = currentTime;
-                    video.play();
-                };
-            }else{
-                console.log('360');
-                video.setAttribute('src', $('#google360p').attr('src'));
-                $('.npv-quality').css('color','gray');
-                $('.npv-quality').attr('quality', "360");
-            }
-            video.currentTime = currentTime;video.play();
-        });
+        var v = 0;        
         video.onloadeddata = function(){
             video.play();
-        };
-        video.onplaying = function(){
-            $('.npv-play > i').addClass('fa-pause');
-            $('.npv-play > i').removeClass('fa-play');
-            if(v===0){
-                v=1;
-                setTimeout(function(){
-                    viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
-                }, 10000);
-            }
-        };
-        video.onpause = function(){
-            $('.npv-play > i').addClass('fa-play');
-            $('.npv-play > i').removeClass('fa-pause');nextVideo();
-        };
+        };        
         function nextVideo(){
             var v = document.getElementById('my-player');
             if(v.duration - v.currentTime === 0){
@@ -137,9 +97,7 @@
     </script>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0)
     @if(!empty($tap[0]->tap_youtubelink))
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white"></iframe>
-    </div>
+    <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="380"></iframe>
     @else    
     <script>
         window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}";
