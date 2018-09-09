@@ -21,11 +21,11 @@
                                         $star = ClassCommon::getStar($tuan->phim_id); 
                                         for($i = 1; $i <= 5; $i++){
                                             if($i <= intval($star)){
-                                                echo '<span class="glyphicon glyphicon-star star star-color"></span>';
+                                                echo '<span class="fa fa-star star star-color"></span>';
                                             } else if($i > $star && ($i-1) < $star){
-                                                echo '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
+                                                echo '<span class="fa fa-star-half-alt star star-half-color"></span>';
                                             } else {
-                                                echo '<span class="glyphicon glyphicon-star-o star"></span>';
+                                                echo '<span class="fa fa-star star"></span>';
                                             }
                                         }
                                     ?>
@@ -52,11 +52,11 @@
                                         $star = ClassCommon::getStar($thang->phim_id); 
                                         for($i = 1; $i <= 5; $i++){
                                             if($i <= intval($star)){
-                                                echo '<span class="glyphicon glyphicon-star star star-color"></span>';
+                                                echo '<span class="fa fa-star star star-color"></span>';
                                             } else if($i > $star && ($i-1) < $star){
-                                                echo '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
+                                                echo '<span class="fa fa-star-half-alt star star-half-color"></span>';
                                             } else {
-                                                echo '<span class="glyphicon glyphicon-star-o star"></span>';
+                                                echo '<span class="fa fa-star star"></span>';
                                             }
                                         }
                                     ?>

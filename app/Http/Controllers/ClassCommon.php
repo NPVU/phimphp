@@ -141,11 +141,11 @@ class ClassCommon extends BaseController
                     $star = ClassCommon::getStar($row->phim_id); 
                     for($i = 1; $i <= 5; $i++){
                         if($i <= intval($star)){
-                            $html .= '<span class="glyphicon glyphicon-star star star-color"></span>';
+                            $html .= '<span class="glyphicon fa fa-star star star-color"></span>';
                         } else if($i > $star && ($i-1) < $star){
-                            $html .= '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
+                            $html .= '<span class="glyphicon fa fa-star-half-alt star star-half-color"></span>';
                         } else {
-                            $html .= '<span class="glyphicon glyphicon-star-o star"></span>';
+                            $html .= '<span class="fa fa-star star"></span>';
                         }
                     }        
                     $html .=                '</div>';
