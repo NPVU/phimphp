@@ -28,10 +28,7 @@
     </div>
 </div>
 
-<div class="content-left-section" >
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2 class="content-left-title">TIỆN ÍCH</h2>
-    </div>
+<div class="content-left-section">    
     <div>                                                    
         @if(strcmp($_GET['s'], md5('google'))==0)
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">                                    
@@ -149,7 +146,7 @@
                     <span>{{$tap->tap_tapsohienthi}}</span>
                 </a>
                 @else
-                <a class="btn btn-warning" style="min-width: 60px;margin-bottom: 5px;"
+                <a class="btn btn-success" style="min-width: 60px;margin-bottom: 5px;"
                    href="#">
                     <span>{{$tap->tap_tapsohienthi}}</span>
                 </a>

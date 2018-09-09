@@ -6,7 +6,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">  
-                    <label>Tài khoản (Email)</label>
+                    <label>Tài khoản (e-mail)</label>
                     <input type="email" id="user-login-email" class="form-control required" required="true"/>                                    
                     <span class="help-block"></span>
                 </div>
