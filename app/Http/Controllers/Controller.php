@@ -20,14 +20,12 @@ class Controller extends BaseController
     }
     public function getDataHeader(){
         $listTheLoai = DB::table('theloai')->get();
-        $listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->orderBy('phim_nam')->get();
-        $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
+        $listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->orderBy('phim_nam')->get();        
         $phimXepHangTuan = ClassCommon::getBangXepHang('week', 10, 0);
         $phimXepHangThang = ClassCommon::getBangXepHang('month', 10, 0);
         
         $data['listTheLoai'] = $listTheLoai;
-        $data['listNam']     = $listNam;
-        $data['htmlTapMoi']     = $htmlTapMoi;
+        $data['listNam']     = $listNam;        
         $data['phimXepHangTuan']     = $phimXepHangTuan;
         $data['phimXepHangThang']     = $phimXepHangThang;
         return $data;

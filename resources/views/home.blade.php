@@ -3,17 +3,16 @@
     Trang Chủ
 @endsection 
 @section('contentLeft')
-<div class="slider">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="slider">    
         <div class="owl-carousel owl-theme">
-            @foreach($phimXepHangTuan as $tuan)
+            @foreach($listRandom as $random)
             <div class="item">                
-                <img src="{{$tuan->phim_hinhnen}}" width="100%" height="450"/>
+                <img src="{{$random->phim_hinhnen}}" />
                 <div class="slider-info">
                     <div class="slider-info-inner">
-                        <div class="slider-name text-center">{{$tuan->phim_ten}}</div>
+                        <div class="slider-name text-center">{{$random->phim_ten}}</div>
                         <div class="slider-button text-center">
-                            <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}">
+                            <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($random->phim_ten)))).'/?pid='.$random->phim_id.'&t=1&s='.md5('google')}}">
                                 <button class="btn btn-danger">Xem ngay</button>
                             </a>
                         </div>
@@ -35,8 +34,7 @@
                     margin:10
                 });
             });
-        </script>
-    </div>
+        </script>    
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

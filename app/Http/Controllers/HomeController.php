@@ -11,21 +11,9 @@ class HomeController extends Controller
 {
     
     public function index(){        
-        $listPhimToday = DB::select(DB::raw('SELECT * FROM phim '
-                . ' JOIN (SELECT DISTINCT phim_id FROM tap ORDER BY tap_ngaycapnhat DESC LIMIT 10) tap '
-                . ' ON phim.phim_id IN (tap.phim_id) WHERE phim_xuatban = 1 ORDER BY phim.phim_id DESC'));            
-        for($i = 0; $i < count($listPhimToday); $i++){
-            $listPhimToday[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhimToday[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
-                    
-            $star = ClassCommon::getStar($listPhimToday[$i]->phim_id);
-            $listPhimToday[$i]->star = $star;
-        }                     
-                
-        $data['listPhimToday']  = $listPhimToday;        
+        $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
+        $data['htmlTapMoi']     = $htmlTapMoi;
+        $data['listRandom']  = $this->getPhimRandom();
         return view('home_min', $data, parent::getDataHeader());
     }
     
@@ -79,5 +67,21 @@ class HomeController extends Controller
     
     public function timKiem(Request $request){
         return ClassCommon::getHTMLTimKiem($request->tukhoa);
+    }
+
+    public function getPhimRandom(){
+        $limit = 10;
+        if(is_null(Session::get('sliderOffsets'))){
+            $count = DB::table('phim')->where('phim_xuatban', 1)->count();            
+            if($count > $limit){
+                $offset = rand(0, $count-$limit);
+            }else{
+                $offset = 0;
+            }
+            session(['sliderOffsets' => $offset]);
+        }
+                
+        $listRandom = DB::table('phim')->where('phim_xuatban', 1)->offset(Session::get('sliderOffsets'))->limit($limit)->get();
+        return $listRandom;
     }
 }
