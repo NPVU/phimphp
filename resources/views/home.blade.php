@@ -49,4 +49,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" style="margin-top: 10px;">
     <i onclick="xt()" aria-page="2" class="xttm npv-icon-xemthem glyphicon glyphicon-2x glyphicon-chevron-down" data-toggle="tooltip" title="Xem thêm"></i>
 </div>
-@endsection
+@endsection 
+@section('contentRight') 
+    @include('layouts.rank_min') 
+@endsection 

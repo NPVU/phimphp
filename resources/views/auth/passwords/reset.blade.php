@@ -40,4 +40,7 @@
             </div>
     </div>
 </div>
-@endsection
+@endsection 
+@section('contentRight') 
+    @include('layouts.rank_min') 
+@endsection 

@@ -1,202 +1,61 @@
-<section class="special">    
-    <div class="container">        
-        <h3 class="heading">Bảng Xếp Hạng</h3>  
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 listRanking">
-            <div class="cd-tabs js-cd-tabs">
-                <nav>
-                    <ul class="cd-tabs__navigation js-cd-navigation">
-                        <li><a data-content="week" class="cd-selected" href="javascript:void();">Tuần</a></li>
-                        <li><a data-content="month" href="javascript:void();">Tháng {{date('m')}}</a></li>
-                        <li><a data-content="all" href="javascript:void();">Tất cả</a></li>				
+				<div class="content-right-section">
+                    <h4 class="content-right-title">BẢNG XẾP HẠNG TUẦN</h4>
+                    <ul class="list-anime">
+                        @foreach($phimXepHangTuan as $tuan)
+                        <li><a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}">
+                            <div class="" style="float:left;">
+                                <img src="{{$tuan->phim_hinhnen}}" width="50" height="60" style="border-radius:3px;"/>                                
+                            </div>
+                            <div style="float:left;padding-left:10px;">
+                                <div>{{strlen($tuan->phim_ten)>24?substr($tuan->phim_ten,0,24).'...':$tuan->phim_ten}}</div>
+                                <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($tuan->phim_luotxem)}}</div>
+                                <div>
+                                    <?php 
+                                        $star = ClassCommon::getStar($tuan->phim_id); 
+                                        for($i = 1; $i <= 5; $i++){
+                                            if($i <= intval($star)){
+                                                echo '<span class="fa fa-star star star-color"></span>';
+                                            } else if($i > $star && ($i-1) < $star){
+                                                echo '<span class="fa fa-star-half-alt star star-half-color"></span>';
+                                            } else {
+                                                echo '<span class="fa fa-star star"></span>';
+                                            }
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </a></li>
+                        @endforeach                        
                     </ul>
-                </nav>
-                <ul class="cd-tabs__content js-cd-content" id="npv-responsive-table">
-                    <li data-content="week" class="cd-selected">                        
-                        <table class="col-md-12 table-striped table-condensed cf list-rank-week">
-                            <tbody class="rank-week-page-1">
-                                <?php echo $htmlPhimXepHangTuan ?>
-                            </tbody>
-                            <tbody class="rank-week-page-2">
-                                
-                            </tbody>
-                        </table>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <i onclick="xtrank('w','week')" aria-page="2" class="xtrw npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
-                        </div>
-                    </li>
+                </div>
 
-                    <li data-content="month">
-                        <table class="col-md-12 table-striped table-condensed cf list-rank-month">
-                            <tbody class="rank-month-page-1">
-                                <?php echo $htmlPhimXepHangThang ?>
-                            </tbody>
-                            <tbody class="rank-month-page-2">
-                                
-                            </tbody>
-                        </table>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <i onclick="xtrank('m','month')" aria-page="2" class="xtrm npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
-                        </div>
-                    </li>
-
-                    <li data-content="all">
-                        <table class="col-md-12 table-striped table-condensed cf list-rank-all">
-                            <tbody class="rank-all-page-1">
-                                <?php echo $htmlPhimXepHangAll ?>
-                            </tbody>
-                            <tbody class="rank-all-page-2">
-                                
-                            </tbody>
-                        </table>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <i onclick="xtrank('a','all')" aria-page="2" class="xtra npv-icon-xemthem fa fa-2x fa-angle-double-down" data-toggle="tooltip" title="Xem thêm"></i>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>        
-    </div>
-</section>
-<script>
-(function(){
-    // Responsive Tabbed Navigation - by CodyHouse.co
-	function TabbedNavigation( element ) {
-		this.element = element;
-		this.navigation = this.element.getElementsByTagName("nav")[0];
-		this.navigationElements = this.navigation.getElementsByClassName("js-cd-navigation")[0];
-		this.content = this.element.getElementsByClassName("js-cd-content")[0];
-		this.activeTab;
-		this.activeContent;
-		this.init();
-	};
-
-	TabbedNavigation.prototype.init = function() {
-		var self = this;
-		//listen for the click on the tabs navigation
-		this.navigation.addEventListener("click", function(event){
-			event.preventDefault();
-			if(event.target.tagName.toLowerCase() == "a" && !hasClass(event.target, "cd-selected")) {
-				self.activeTab = event.target;
-				self.activeContent = self.content.querySelectorAll("[data-content="+self.activeTab.getAttribute("data-content")+"]")[0];
-				self.updateContent();
-			}
-		});
-
-		//listen for the scroll in the tabs navigation 
-		this.navigation.addEventListener('scroll', function(event){
-			self.toggleNavShadow();
-		});
-	};
-
-	TabbedNavigation.prototype.updateContent = function() {
-		var actualHeight = this.content.offsetHeight;
-		//update navigation classes
-		removeClass(this.navigation.querySelectorAll("a.cd-selected")[0], "cd-selected");
-		addClass(this.activeTab, "cd-selected");
-		//update content classes
-		removeClass(this.content.querySelectorAll("li.cd-selected")[0], "cd-selected");
-		addClass(this.activeContent, "cd-selected");
-		//set new height for the content wrapper
-		(!window.requestAnimationFrame) 
-			? this.content.setAttribute("style", "height:"+this.activeContent.offsetHeight+"px;")
-			: setHeight(actualHeight, this.activeContent.offsetHeight, this.content, 200);
-	};
-
-	TabbedNavigation.prototype.toggleNavShadow = function() {
-		//show/hide tabs navigation gradient layer
-		this.content.removeAttribute("style");
-		var navigationWidth = Math.floor(this.navigationElements.getBoundingClientRect().width),
-			navigationViewport = Math.ceil(this.navigation.getBoundingClientRect().width);
-		( this.navigation.scrollLeft >= navigationWidth - navigationViewport )
-			? addClass(this.element, "cd-tabs--scroll-ended")
-			: removeClass(this.element, "cd-tabs--scroll-ended");
-	};
-
-	var tabs = document.getElementsByClassName("js-cd-tabs"),
-		tabsArray = [],
-		resizing = false;
-	if( tabs.length > 0 ) {
-		for( var i = 0; i < tabs.length; i++) {
-			(function(i){
-				tabsArray.push(new TabbedNavigation(tabs[i]));
-			})(i);
-		}
-
-		window.addEventListener("resize", function(event) {
-			if( !resizing ) {
-				resizing = true;
-				(!window.requestAnimationFrame) ? setTimeout(checkTabs, 250) : window.requestAnimationFrame(checkTabs);
-			}
-		});
-	}
-
-	function checkTabs() {
-		tabsArray.forEach(function(tab){
-			tab.toggleNavShadow();
-		});
-		resizing = false;
-	};
-
-	function setHeight(start, to, element, duration) {
-		var change = to - start,
-	        currentTime = null;
-	        
-	    var animateHeight = function(timestamp){  
-	    	if (!currentTime) currentTime = timestamp;         
-	        var progress = timestamp - currentTime;
-	        var val = Math.easeInOutQuad(progress, start, change, duration);
-	        element.setAttribute("style", "height:"+val+"px;");
-	        if(progress < duration) {
-	            window.requestAnimationFrame(animateHeight);
-	        }
-	    };
-	    
-	    window.requestAnimationFrame(animateHeight);
-	}
-
-	Math.easeInOutQuad = function (t, b, c, d) {
- 		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-	
-	//class manipulations - needed if classList is not supported
-	function hasClass(el, className) {
-	  	if (el.classList) return el.classList.contains(className);
-	  	else return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
-	}
-	function addClass(el, className) {
-		var classList = className.split(' ');
-	 	if (el.classList) el.classList.add(classList[0]);
-	 	else if (!hasClass(el, classList[0])) el.className += " " + classList[0];
-	 	if (classList.length > 1) addClass(el, classList.slice(1).join(' '));
-	}
-	function removeClass(el, className) {
-		var classList = className.split(' ');
-	  	if (el.classList) el.classList.remove(classList[0]);	
-	  	else if(hasClass(el, classList[0])) {
-	  		var reg = new RegExp('(\\s|^)' + classList[0] + '(\\s|$)');
-	  		el.className=el.className.replace(reg, ' ');
-	  	}
-	  	if (classList.length > 1) removeClass(el, classList.slice(1).join(' '));
-	}
-})();
-    function xtrank(i,j){
-        var page = $('.xtr'+i).attr('aria-page');
-        $.ajax({
-            url: '{{url("/bang-xep-hang/")}}?time='+j+'&page='+page,
-            dataType: 'text',                    
-            type: 'get',                    
-            success: function (data) {
-                console.log(data);  
-            $('.rank-'+j+'-page-'+page).html(data);
-            var nextPage = parseInt(page)+1;
-            $('.xtr'+i).attr('aria-page', nextPage);
-            var newPage = document.createElement('tbody');
-            newPage.className = 'rank-'+j+'-page-'+nextPage;
-            $('.list-rank-'+j).append(newPage);
-            }
-        });
-    }
-</script>
+                <div class="content-right-section">
+                    <h4 class="content-right-title">BẢNG XẾP HẠNG THÁNG</h4>
+                    <ul class="list-anime">
+                        @foreach($phimXepHangThang as $thang)
+                        <li><a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}">
+                            <div class="" style="float:left;">
+                                <img src="{{$thang->phim_hinhnen}}" width="50" height="60" style="border-radius:3px;"/>                                
+                            </div>
+                            <div style="float:left;padding-left:10px;">
+                                <div>{{strlen($thang->phim_ten)>24?substr($thang->phim_ten,0,24).'...':$thang->phim_ten}}</div>
+                                <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($thang->phim_luotxem)}}</div>
+                                <div>
+                                    <?php 
+                                        $star = ClassCommon::getStar($thang->phim_id); 
+                                        for($i = 1; $i <= 5; $i++){
+                                            if($i <= intval($star)){
+                                                echo '<span class="fa fa-star star star-color"></span>';
+                                            } else if($i > $star && ($i-1) < $star){
+                                                echo '<span class="fa fa-star-half-alt star star-half-color"></span>';
+                                            } else {
+                                                echo '<span class="fa fa-star star"></span>';
+                                            }
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </a></li>
+                        @endforeach                        
+                    </ul>
+                </div>

@@ -166,3 +166,6 @@
 </div>
 
 @endsection 
+@section('contentRight') 
+    @include('layouts.rank_min') 
+@endsection 
