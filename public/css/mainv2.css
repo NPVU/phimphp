@@ -53,7 +53,7 @@ a.visit:visited{
     -webkit-transition: width 0.3s;
     transition: width 0.3s;
 }
-.content-left-title{
+.content-left-title, .error-code, .error-name{
     text-transform: uppercase;
     color: #777;
     font-family: "-webkit-body";
@@ -410,30 +410,6 @@ button>.icon-bar{
 .btn-refresh-captcha:hover{
     color:white;
 }
-/* rewrite videojs */
-.video-js {
-    display: block;
-    vertical-align: top;
-    box-sizing: border-box;
-    color: #fff;
-    background-color: #000;
-    position: relative;
-    padding: 0;
-    font-size: 10px;
-    line-height: 1;
-    font-weight: normal;
-    font-style: normal;
-    font-family: Arial, Helvetica, sans-serif;
-    word-break: initial;
-    width: 100%;
-    height: 380px;
-    cursor: pointer;
-}
-@media (max-width: 480px) {
-    .video-js {
-        height: 300px;
-    }
-}
 
 .rate-base-layer
 {
@@ -450,6 +426,14 @@ button>.icon-bar{
 .rate {            
     font-size: 32px;
     left:35%;
+}
+.error-header-404 > .error-code, .error-header-404 > .error-name {
+    font-size: 2em;
+    color:#DB9215;
+}
+.error-header-401 > .error-code, .error-header-401 > .error-name{
+    font-size: 2em;
+    color: #DB2B1D;
 }
 
 /* rewrite bootstrap */
@@ -477,3 +461,29 @@ label{
 .display-none{
     display: none !important;
 }
+
+/* rewrite videojs */
+.video-js {
+    display: block;
+    vertical-align: top;
+    box-sizing: border-box;
+    color: #fff;
+    background-color: #000;
+    position: relative;
+    padding: 0;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: normal;
+    font-style: normal;
+    font-family: Arial, Helvetica, sans-serif;
+    word-break: initial;
+    width: 100%;
+    height: 380px;
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+    .video-js {
+        height: 300px;
+    }
+}
+/* end videojs */
