@@ -125,6 +125,24 @@ class XemPhimController extends Controller{
             return -1;
         }
     }
+
+    public function reportError(Request $request){
+        if(strcmp(Session::token(), $request->_token) == 0){
+            $tap = DB::table('tap')->where([
+                ['phim_id', $request->pid],
+                ['tap_tapso', $request->t]
+            ])->get();
+            if(count($tap)){
+                DB::table('error_report')->insert([
+                    'phim_id' => $request->pid,
+                    'tap_id' => $tap[0]->tap_id,
+                    'er_url' => '',
+                    'er_content' => $request->content,
+                    'er_create_at' => now()
+                ]);
+            }
+        }
+    }
     
     function curl($url) {
         $ch = @curl_init();

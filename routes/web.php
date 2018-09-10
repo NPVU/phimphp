@@ -76,17 +76,20 @@ Route::get('/xem-phim/{str}/', 'XemPhimController@xemPhim')->name('xemPhim');
 Route::get('/autoload/', 'XemPhimController@loadVideo');
 Route::get('/update/{str}', 'XemPhimController@addLuotXem');
 Route::get('/danh-gia/', 'XemPhimController@addDanhGia');
+
 Route::get('/add-comment/', 'CommentUtils@comment');
 Route::get('/reply-comment/', 'CommentUtils@replyComment');
 Route::get('/report-comment/', 'CommentUtils@reportComment');
 Route::get('/delete-comment/', 'CommentUtils@deleteComment');
 Route::get('/comment/', 'CommentUtils@xemThemComment');
+
 Route::get('/tap-moi/', 'HomeController@xemThemTapMoi');
 Route::get('/the-loai/', 'HomeController@xemThemTheLoai');
 Route::get('/nam/', 'HomeController@xemThemNam');
 Route::get('/bang-xep-hang/', 'HomeController@xemThemBangXepHang');
 Route::get('/tim-kiem/', 'HomeController@timKiem');
 
+Route::get('/report-error/', 'XemPhimController@reportError');
 Route::get('/get-captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
     return $captcha->src($config);
 });

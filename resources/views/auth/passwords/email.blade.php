@@ -23,8 +23,7 @@
                 @endif
             </div>
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-danger">
-                                        {{ __('Send Password Reset Link') }}
+                <button type="submit" class="btn btn-danger">Gửi link
                                     </button>
             </div>                   
 

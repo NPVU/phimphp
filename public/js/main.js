@@ -59,6 +59,28 @@ $(document).ready(function(){
             $('.help-report-comment').css('color','red');
         }
     });
+    $('.btn-report-error').click(function(){        
+        var token = $('#current-token').val();
+        var content = $('#input-report-error').val();
+        if(content.trim().length < 6){
+            $('.help-block-report-error').html('Vui lòng mô tả lỗi ít nhất 6 ký tự');
+            $('.help-block-report-error').css('color','#b92c28');
+        } else {
+            $('.help-block-report-error').html('');
+            $.ajax({
+                type: 'get',           
+                url: $('meta[name="url"').attr('content')+'/report-error/',
+                data: {'_token':token,'pid':getParameterByName('pid',''), 't':getParameterByName('t',''), 'content':content},        
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function (data) {
+                    $('#modal-report-error').iziModal('close');
+                    showToast('success','Cảm ơn bạn đã ủng hộ website','Báo lỗi thành công',true);
+                }
+            });
+        }        
+    });
     $('#btn-search').click(function(){
        if($('#input-search').val().trim().length < 3){
            showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
