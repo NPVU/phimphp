@@ -13,7 +13,10 @@
             <input type="hidden" name="token" value="{{ $token }}">
             <div class="form-group">
                 <label for="email">Tài khoản (e-mail)</label>
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus>
+                </div>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -22,7 +25,10 @@
             </div>
             <div class="form-group">
                 <label for="password">Mật khẩu mới</label>
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                </div>
                 @if ($errors->has('password'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -31,7 +37,10 @@
             </div>
             <div class="form-group">
                 <label for="password-confirm">Xác nhận mật khẩu mới</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>                
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required> 
+                </div>               
             </div>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-danger">

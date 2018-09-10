@@ -7,13 +7,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">  
                     <label>Tài khoản (e-mail)</label>
-                    <input type="email" id="user-login-email" class="form-control required" required="true"/>                                    
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                        <input type="email" id="user-login-email" class="form-control required" required="true"/>
+                    </div>                             
                     <span class="help-block"></span>
                 </div>
                 
                 <div class="form-group">  
                     <label>Mật khẩu</label>
-                    <input type="password" id="user-login-password" class="form-control required" required="true" />                                    
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                        <input type="password" id="user-login-password" class="form-control required" required="true" />                                    
+                    </div>
                     <span class="help-block"></span>
                 </div>                
             </div>

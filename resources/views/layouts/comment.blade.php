@@ -2,7 +2,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="input-group">
                 <textarea id="input-comment" class="form-control" rows="3" style="resize:none" {{Auth::check()?'':'disabled'}} >{{Auth::check()?'':'Vui lòng đăng nhập để bình luận'}}</textarea>     
-                <span class="btn input-group-addon themes-color" onclick="{{Auth::check()?'sendComment('.$phim[0]->phim_id.',"'.csrf_token().'");':'openLogin();'}}">Gửi</span>
+                <span class="input-group-addon" onclick="{{Auth::check()?'sendComment('.$phim[0]->phim_id.',"'.csrf_token().'");':'openLogin();'}}" style="cursor:pointer; color:#337ab7"><span class="glyphicon glyphicon-send"></span></span>
             </div>
         </div>    
         

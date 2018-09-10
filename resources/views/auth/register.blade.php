@@ -12,7 +12,10 @@
             @csrf
             <div class="form-group">
                 <label for="name" >Tên hiển thị</label>
-                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                    <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+                </div>
                 @if ($errors->has('name'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('name') }}</strong>
@@ -21,7 +24,10 @@
             </div>
             <div class="form-group">
                 <label for="email" >Tài khoản (e-mail)</label>
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                </div>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -30,7 +36,10 @@
             </div>
             <div class="form-group">
                 <label for="password" >Mật khẩu</label>
-                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                    <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                </div>
                 @if ($errors->has('password'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -39,12 +48,18 @@
             </div>
             <div class="form-group">
                 <label for="password-confirm" >Xác nhận mật khẩu</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>                
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>                
+                </div>
             </div>
             <div class="form-group form-captcha">
                 <label for="captcha">Mã xác nhận</label>
                 <?php echo $captcha?> <span class="glyphicon glyphicon-refresh btn-refresh-captcha"></span>
-                <input type="text" class="form-control" name="captcha" style="margin-top:5px" required>
+                <div class="input-group" style="margin-top:5px">
+                    <span class="input-group-addon"><span class="fa fa-shield-alt"></span></span>
+                    <input type="text" class="form-control" name="captcha" required>
+                </div>
                 @if ($errors->has('captcha'))
                     <span class="invalid-feedback">
                         <strong>Mã xác nhận không đúng</strong>

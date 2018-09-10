@@ -12,8 +12,10 @@
             @csrf
             <div class="form-group">
                 <label for="email">Tài khoản (e-mail)</label>
-                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                </div>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback">
                         <strong>{{ $errors->first('email') }}</strong>
