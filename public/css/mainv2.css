@@ -427,6 +427,9 @@ button>.icon-bar{
     font-size: 32px;
     left:35%;
 }
+.page-error{
+    text-align: center;
+}
 .error-header-404 > .error-code, .error-header-404 > .error-name {
     font-size: 2em;
     color:#DB9215;
