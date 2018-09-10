@@ -18,7 +18,7 @@
                 </div>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback">
-                        <strong>{{ $errors->first('email') }}</strong>
+                        <strong @if ($errors->has('success')) style="color:#56bf71" @endif >{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
             </div>
