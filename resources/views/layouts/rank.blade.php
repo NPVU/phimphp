@@ -1,6 +1,7 @@
 				<div class="content-right-section">
                     <h4 class="content-right-title">BẢNG XẾP HẠNG TUẦN</h4>
                     <ul class="list-anime">
+                        @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangTuan as $tuan)
                         <li><a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}">
                             <div class="" style="float:left;">
@@ -25,13 +26,17 @@
                                 </div>
                             </div>
                         </a></li>
-                        @endforeach                        
+                        @endforeach  
+                        @else
+                        <i class="text-center"><p>Chưa có dữ liệu</p></i>
+                        @endif
                     </ul>
                 </div>
 
                 <div class="content-right-section">
                     <h4 class="content-right-title">BẢNG XẾP HẠNG THÁNG</h4>
                     <ul class="list-anime">
+                        @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangThang as $thang)
                         <li><a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}">
                             <div class="" style="float:left;">
@@ -56,6 +61,9 @@
                                 </div>
                             </div>
                         </a></li>
-                        @endforeach                        
+                        @endforeach  
+                        @else
+                        <i class="text-center"><p>Chưa có dữ liệu</p></i>
+                        @endif                      
                     </ul>
                 </div>
