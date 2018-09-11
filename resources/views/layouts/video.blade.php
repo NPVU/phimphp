@@ -30,6 +30,7 @@
                             $('.npv-quality').css('color','white');
                             $('.npv-quality').css('font-weight',700);
                             $('.npv-quality').attr('quality', "720");
+                            $('.npv-quality').attr('title', "Tắt HD");
                             video.onerror = function(){                                
                                 video.setAttribute('src', $('#google360p').attr('src'));                                
                                 video.play();
@@ -37,7 +38,8 @@
                             $('.icon-quality').removeClass('display-none');
                             $('#google720p').attr('src', data['720p']);
                         }else{
-                            $('#my-player').attr('src', data['360p']);                            
+                            $('#my-player').attr('src', data['360p']);
+                            $('.npv-quality').css('display','none');                       
                         }
                         if(data['1080p']!=null){
                             $('#google1080p').attr('src', data['1080p']);

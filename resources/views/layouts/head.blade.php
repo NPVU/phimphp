@@ -11,6 +11,7 @@
     <!-- Scripts -->
     <script src="{{ asset('public/js/jquery-2.2.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/bootstrap-3.3.7/dist/js/bootstrap.min.js') }}"></script>        
+    <script type="text/javascript" src="{{ asset('public/js/jquery.qtip.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/iziToast.min.js') }}"></script>
@@ -47,6 +48,7 @@
     <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="{{ asset('public/css/jquery.qtip.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/owl.theme.default.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />

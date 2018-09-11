@@ -32,10 +32,10 @@
     <div>                                                    
         @if(strcmp($_GET['s'], md5('google'))==0)
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">                                    
-            <button class="btn btn-success npv-icon npv-play"><i class="fa fa-play"></i></button>
-            <button class="btn btn-success npv-quality" quality="360">HD</button>
-            <button class="btn btn-success pre-15s">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
-            <button class="btn btn-success next-15s"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
+            <button class="btn btn-success npv-icon npv-play" title="Xem"><i class="fa fa-play"></i></button>
+            <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>
+            <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
+            <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
         </div>
         <script>
             $('.npv-play').click(function(){
@@ -52,6 +52,7 @@
                     $('.npv-quality').css('color','white');
                     $('.npv-quality').css('font-weight',700);
                     $('.npv-quality').attr('quality', "720");
+                    $('.npv-quality').attr('title', "Tắt HD");
                     video.onerror = function(){
                         video.setAttribute('src', $('#google360p').attr('src'));
                         video.currentTime = currentTime;
@@ -62,6 +63,7 @@
                     $('.npv-quality').css('color','gray');
                     $('.npv-quality').css('font-weight',400);
                     $('.npv-quality').attr('quality', "360");
+                    $('.npv-quality').attr('title', "Bật HD");
                 }
                 video.currentTime = currentTime;video.play();
             });
@@ -74,6 +76,7 @@
             video.onplaying = function(){
                 $('.npv-play > i').addClass('fa-pause');
                 $('.npv-play > i').removeClass('fa-play');
+                $('.npv-play').attr('title','Tạm dừng');
                 if(v===0){
                     v=1;
                     setTimeout(function(){
@@ -84,12 +87,13 @@
             video.onpause = function(){
                 $('.npv-play > i').addClass('fa-play');
                 $('.npv-play > i').removeClass('fa-pause');nextVideo();
+                $('.npv-play').attr('title','Xem');
             };
         </script>
         @endif
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">                                    
-            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim"><i class="fa fa-star"></i></button>
-            <button class="btn btn-warning" data-izimodal-open="#modal-report-error"><i class="fa fa-exclamation-triangle"></i></button>
+            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star"></i></button>
+            <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle"></i></button>
 
             <div id="modal-vote-phim" data-izimodal-transitionin="comingInDown">
                 <div class="modal-body" style="padding: 20px">        
@@ -138,7 +142,15 @@
                     
                 </div>
             </div>
-            <script>               
+            <script>          
+                $(document).ready(function () {
+                    $('button[title]').qtip({
+                        position: {
+                                my: 'top center',
+                                at: 'bottom center'
+                            }
+                    });
+                });     
                 $('#modal-report-error').iziModal({
                         title: 'Báo lỗi',
                         top: 100,

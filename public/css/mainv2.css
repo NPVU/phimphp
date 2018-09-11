@@ -490,3 +490,11 @@ label{
     }
 }
 /* end videojs */
+
+/* rewrite qtip2 */
+.qtip-default {
+    border: 1px solid rgb(237, 249, 238);
+    background-color: rgb(237, 249, 238);
+    color: #00a5ad;
+}
+/* end qtip2 */
