@@ -16,6 +16,18 @@ class HomeController extends Controller
         $data['listRandom']  = $this->getPhimRandom();
         return view('home_min', $data, parent::getDataHeader());
     }
+
+    public function indexTheLoai($theloai){
+        $arrdata = explode('-', $theloai);
+        $theloaiID = $arrdata[count($arrdata)-1];
+        $theloai = DB::table('theloai')->where('theloai_id', $theloaiID)->get();
+        $listPhimTheloai = DB::table('phim')->where('theloai_id', 'like', '%"'.$theloaiID.'"%')
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(4);
+        $data['theloai'] = $theloai;
+        $data['listPhimTheloai'] = $listPhimTheloai;
+        return view('theloai_min', $data, parent::getDataHeader());
+    }
     
     public function xemThemTapMoi(){ 
         $phim_per_page = Session::get('PhimPerPage');

@@ -230,7 +230,7 @@ button>.icon-bar{
     left:200px;
     top: -30px;
     background: rgb(237, 249, 238);    
-    z-index: 2;
+    z-index: 10;
     border-radius: 3px;
     display:none;
 }
@@ -463,6 +463,23 @@ label{
 
 .display-none{
     display: none !important;
+}
+
+.dropdown-menu {
+    background-color: #000c;
+}
+
+.dropdown-menu>li, .dropdown-menu>li>a{
+    -webkit-transition: background-color 0.5s;
+    transition: background-color 0.5s;
+}
+
+.dropdown-menu>li:hover,.dropdown-menu>li>a:hover{
+    background: #00a5ad;
+}
+
+.dropdown-menu>li>a,.dropdown-menu>li>a:hover{
+    color:#fff;
 }
 
 /* rewrite videojs */

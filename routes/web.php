@@ -72,6 +72,7 @@ Auth::routes();
 Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/the-loai/{theloai}/', 'HomeController@indexTheLoai')->name('theloai');
 Route::get('/xem-phim/{str}/', 'XemPhimController@xemPhim')->name('xemPhim');
 Route::get('/autoload/', 'XemPhimController@loadVideo');
 Route::get('/update/{str}', 'XemPhimController@addLuotXem');

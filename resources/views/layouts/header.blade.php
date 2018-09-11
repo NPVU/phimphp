@@ -10,24 +10,27 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{url('/')}}">
-                            <img src="{{asset('public/img/themes/logo-1.png')}}" width="100"/>
+                            <img src="{{asset('public/img/themes/logo-2.png')}}" width="100"/>
                             
                         </a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">                          
                             <li><a href="#">About</a></li>
-                            <li><a href="">Contact</a></li>
                             <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    @foreach($listQuocGia as $quocgia)
+                                    <li><a href="#">{{$quocgia->quocgia_ten}}</a></li>                                    
+                                    @endforeach
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($listTheLoai as $theloai)
+                                    <li><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
