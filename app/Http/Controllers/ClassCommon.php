@@ -329,8 +329,8 @@ class ClassCommon extends BaseController
     }
     
     public static function getHTMLTimKiem($tukhoa){
-        $listResult = DB::table('phim')->where('phim_ten', 'like', '%'.$tukhoa.'%')
-                ->orwhere('phim_tenkhac', 'like', '%'.$tukhoa.'%')                
+        $listResult = DB::table('phim')->where([['phim_ten', 'like', '%'.$tukhoa.'%'], ['phim_xuatban', '=', 1]])
+                ->orwhere([['phim_tenkhac', 'like', '%'.$tukhoa.'%'], ['phim_xuatban', '=', 1]])                
                 ->limit(20)->get();
         $html = '<ul class="list-anime">';                                                                            
         foreach ($listResult as $row){

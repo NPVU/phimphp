@@ -157,7 +157,7 @@ class CommentUtils extends BaseController
     }
     public static function getHTMLComments($phim_id){
         $listComment = DB::select(DB::raw('SELECT users.name, users.email, users.avatar, users.active, users.locked_at, binhluan.*, (SELECT count(1) FROM users_roles WHERE users_roles.user_id = binhluan.user_id) AS role FROM users, binhluan WHERE binhluan.user_id = users.id AND binhluan.phim_id ='.$phim_id.' AND binhluan_id_cha = 0 ORDER BY binhluan_id DESC'));             
-        $hasLogin = Auth::check();               
+        $hasLogin = Auth::check();
         $html = "";
         if(count($listComment)>0){
             foreach ($listComment as $row){

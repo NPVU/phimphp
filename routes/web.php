@@ -11,7 +11,7 @@
 |
 */
 Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm');
-Route::get('/quan-ly/', 'QuanLyController@index');
+Route::get('/quan-ly', 'QuanLyController@index');
 Route::group(['prefix'=>'/quan-ly/danh-muc/the-loai'],function(){
     Route::get('/','TheLoaiController@index');
     Route::post('/','TheLoaiController@actionTheLoai');
@@ -21,7 +21,7 @@ Route::group(['prefix'=>'/quan-ly/phim'],function(){
     Route::get('/add','PhimController@add');    
     Route::get('/edit/{phimID}/{token}','PhimController@edit');
     Route::get('/danh-sach-tap/{phimID}/{token}','PhimController@listTap')->name('listTap');    
-    Route::get('/comments/', 'PhimController@getComments');
+    Route::get('/comments', 'PhimController@getComments');
     
     Route::post('/','PhimController@actionPhim');
     Route::post('/add','PhimController@addPhim'); 
@@ -72,24 +72,22 @@ Auth::routes();
 Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/xem-nhieu', 'HomeController@indexXemNhieu')->name('upPhim');
 Route::get('/quoc-gia/{quocgia}/', 'HomeController@indexQuocGia')->name('quocGia');
 Route::get('/the-loai/{theloai}/', 'HomeController@indexTheLoai')->name('theLoai');
 Route::get('/xem-phim/{str}/', 'XemPhimController@xemPhim')->name('xemPhim');
-Route::get('/autoload/', 'XemPhimController@loadVideo');
+Route::get('/autoload', 'XemPhimController@loadVideo');
 Route::get('/update/{str}', 'XemPhimController@addLuotXem');
-Route::get('/danh-gia/', 'XemPhimController@addDanhGia');
+Route::get('/danh-gia', 'XemPhimController@addDanhGia');
 
-Route::get('/add-comment/', 'CommentUtils@comment');
-Route::get('/reply-comment/', 'CommentUtils@replyComment');
-Route::get('/report-comment/', 'CommentUtils@reportComment');
-Route::get('/delete-comment/', 'CommentUtils@deleteComment');
-Route::get('/comment/', 'CommentUtils@xemThemComment');
+Route::get('/add-comment', 'CommentUtils@comment');
+Route::get('/reply-comment', 'CommentUtils@replyComment');
+Route::get('/report-comment', 'CommentUtils@reportComment');
+Route::get('/delete-comment', 'CommentUtils@deleteComment');
+Route::get('/comment', 'CommentUtils@xemThemComment');
 
-Route::get('/tap-moi/', 'HomeController@xemThemTapMoi');
-Route::get('/the-loai/', 'HomeController@xemThemTheLoai');
-Route::get('/nam/', 'HomeController@xemThemNam');
-Route::get('/bang-xep-hang/', 'HomeController@xemThemBangXepHang');
-Route::get('/tim-kiem/', 'HomeController@timKiem');
+Route::get('/tap-moi', 'HomeController@xemThemTapMoi');
+Route::get('/tim-kiem', 'HomeController@timKiem');
 
 Route::get('/report-error/', 'XemPhimController@reportError');
 Route::get('/get-captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
