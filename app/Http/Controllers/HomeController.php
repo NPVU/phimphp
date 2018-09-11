@@ -23,10 +23,22 @@ class HomeController extends Controller
         $theloai = DB::table('theloai')->where('theloai_id', $theloaiID)->get();
         $listPhimTheloai = DB::table('phim')->where('theloai_id', 'like', '%"'.$theloaiID.'"%')
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
-                                        ->paginate(4);
+                                        ->paginate(Session::get('PhimPerPage'));
         $data['theloai'] = $theloai;
         $data['listPhimTheloai'] = $listPhimTheloai;
         return view('theloai_min', $data, parent::getDataHeader());
+    }
+
+    public function indexQuocGia($quocgia){
+        $arrdata = explode('-', $quocgia);
+        $quocgiaID = $arrdata[count($arrdata)-1];
+        $quocgia = DB::table('quocgia')->where('quocgia_id', $quocgiaID)->get();
+        $listPhimQuocGia = DB::table('phim')->where('phim.quocgia_id', '=', $quocgiaID)
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(Session::get('PhimPerPage'));
+        $data['quocgia'] = $quocgia;
+        $data['listPhimQuocGia'] = $listPhimQuocGia;
+        return view('quocgia_min', $data, parent::getDataHeader());
     }
     
     public function xemThemTapMoi(){ 

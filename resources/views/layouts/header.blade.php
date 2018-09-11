@@ -21,7 +21,7 @@
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @foreach($listQuocGia as $quocgia)
-                                    <li><a href="#">{{$quocgia->quocgia_ten}}</a></li>                                    
+                                    <li><a href="{{URL::to('/quoc-gia').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($quocgia->quocgia_ten)))).'-'.$quocgia->quocgia_id}}">{{$quocgia->quocgia_ten}}</a></li>                                    
                                     @endforeach
                                 </ul>
                             </li>
