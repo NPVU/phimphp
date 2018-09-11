@@ -10,7 +10,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('public/js/jquery-2.2.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/bootstrap-3.3.7/dist/js/bootstrap.min.js') }}"></script>        
+    <script type="text/javascript" src="{{ asset('public/bootstrap-3.3.7/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/js/move-top.js') }}"></script>        
+    <script src="{{ asset('public/js/easing.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/jquery.qtip.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
@@ -33,14 +35,16 @@
                 $('.view-'+data.message.content.phimid+'-'+data.message.content.tapid).html(data.message.content.tview+' lượt xem');
                 $('.view-'+data.message.content.phimid).html(data.message.content.pview+lx);
                 $('.modal-view-'+data.message.content.phimid).html(data.message.content.pview);
-                $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+lx);
-                $('.view-slider-'+data.message.content.phimid).html(data.message.content.pview);
-                $('.view-week-'+data.message.content.phimid).html(data.message.content.pviewweek+lx);
-                $('.view-month-'+data.message.content.phimid).html(data.message.content.pviewmonth+lx);                
+                $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+lx);                                             
             }else if(data.message.event==='pnew'){                       
                 VanillaToasts.create({title: data.message.content.tenphim,text: data.message.content.tap+ (data.message.content.tentap!==null?' - '+data.message.content.tentap:'')+' mới được cập nhật',type: 'info',icon: data.message.content.icon,timeout: 10000,callback: function() {window.location.href = data.message.content.link;}});
             }});
         $(document).click(function(event) {var target = $(event.target);if (!target.parents().andSelf().is('.npv-user')&&!target.parents().andSelf().is('.open-popup-user')&&!target.parents().andSelf().is('#user-password')&&!target.parents().andSelf().is('#user-profile')) {$('.npv-user').hide('slow');}});
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+                $().UItoTop({ easingType: 'easeOutQuart' });								
+        });  
     </script>
     <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>        
 
