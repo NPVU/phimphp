@@ -124,7 +124,7 @@ button>.icon-bar{
     transition: display 1s ease-out;
 }
 .slider {
-    padding: 15px 10px;
+    padding: 15px 0px;
 }
 .slider img{
     width:100%;
