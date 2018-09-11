@@ -53,7 +53,7 @@
                                     <i class="glyphicon glyphicon-user"></i>
                                 </a>                        
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="javascript:void(0)"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -62,7 +62,7 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
-                            </li>
+                            </li>-->
                             @endguest
                         </ul>
                     </div>

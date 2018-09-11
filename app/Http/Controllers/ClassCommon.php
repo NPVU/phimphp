@@ -334,7 +334,7 @@ class ClassCommon extends BaseController
                 ->limit(20)->get();
         $html = '<ul class="list-anime">';                                                                            
         foreach ($listResult as $row){
-            $html .= '<li><a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'">';
+            $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'"><li>';
             $html .=    '<div style="float:left;">';
             $html .=        '<img src="'.$row->phim_hinhnen.'" width="50" height="60" style="border-radius:3px;" />';
             $html .=    '</div>';
@@ -354,7 +354,7 @@ class ClassCommon extends BaseController
                                 }                         
             $html .=        '</div>';
             $html .=    '</div>';
-            $html .= '</a></li>';
+            $html .= '</li></a>';
         }
         $html .= '</ul>';
         return $html;

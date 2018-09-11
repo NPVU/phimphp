@@ -3,7 +3,7 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangTuan as $tuan)
-                        <li><a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}">
+                        <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
                                 <img src="{{$tuan->phim_hinhnen}}" width="50" height="60" style="border-radius:3px;"/>                                
                             </div>
@@ -25,7 +25,7 @@
                                     ?>
                                 </div>
                             </div>
-                        </a></li>
+                        </li></a>
                         @endforeach  
                         @else
                         <i class="text-center"><p>Chưa có dữ liệu</p></i>
@@ -38,7 +38,7 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangThang as $thang)
-                        <li><a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}">
+                        <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
                                 <img src="{{$thang->phim_hinhnen}}" width="50" height="60" style="border-radius:3px;"/>                                
                             </div>
@@ -60,7 +60,7 @@
                                     ?>
                                 </div>
                             </div>
-                        </a></li>
+                        </li></a>
                         @endforeach  
                         @else
                         <i class="text-center"><p>Chưa có dữ liệu</p></i>

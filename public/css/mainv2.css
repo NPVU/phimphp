@@ -123,6 +123,25 @@ button>.icon-bar{
     -webkit-transition: display 1s ease-out;
     transition: display 1s ease-out;
 }
+ul.user-menu{
+    list-style: none;
+    padding: 5px 0px;
+    margin-bottom: 0px;
+}
+ul.user-menu a:hover, ul.user-menu a:active{
+    text-decoration: none;
+}
+ul.user-menu  li{
+    margin: 5px 0px;
+    padding: 5px 60px;
+    color: gray;    
+    -webkit-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
+}
+ul.user-menu  li:hover{
+    color:white;
+    background-color: #11c3cb;
+}
 .slider {
     padding: 15px 0px;
 }
@@ -320,17 +339,17 @@ button>.icon-bar{
     list-style: none;
     padding-left: 0px;
 }
-.list-anime>li {
+.list-anime>a>li {
     height: 70px;
     padding: 5px 5px;
     cursor: pointer;
     -webkit-transition: background-color 0.5s;
     transition: background-color 0.5s;
 }
-.list-anime>li>a{
+.list-anime>a{
     color: white;
 }
-.list-anime>li:hover{    
+.list-anime>a>li:hover{    
     background-color: #00a5ad;
 }
 .star-color {
@@ -484,6 +503,11 @@ label{
 
 .dropdown-menu>li>a,.dropdown-menu>li>a:hover{
     color:#fff;
+}
+
+hr{
+    margin-top:20px;
+    margin-bottom: 0px;
 }
 
 /* rewrite videojs */

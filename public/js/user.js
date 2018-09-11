@@ -7,6 +7,7 @@ $('#user-password').iziModal({
     headerColor: 'rgb(23, 30, 34)',
     icon: 'glyphicon glyphicon-password',
     iconColor: 'white',
+    zindex: 1001,
     onOpening: function(){
         $('#pw1').val('');$('.pw1').removeClass('has-error');$('.pw1-error').html('');
         $('#pw2').val('');$('.pw2').removeClass('has-error');$('.pw2-error').html('');

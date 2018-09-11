@@ -10,10 +10,27 @@
                 <div style="font-size:14px;color:gray">{{ Auth::user()->email }}</div>
             </div>                        
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-bottom:20px;">
-            <hr/>            
-            <button type="button" class="btn btn-primary" style="width: 120px; float: left" data-izimodal-open="#user-profile">Thông tin</button>
-            <button type="button" class="btn btn-primary" style="width: 120px; float: right" data-izimodal-open="#user-password">Đổi mật khẩu</button>
+        <div class="clearfix"></div>
+        <div>
+            <hr/> 
+            <ul class="user-menu">
+                <a href="javascript:void(0)" data-izimodal-open="#user-profile"><li>Thông tin cá nhân</li></a>                
+                <a href="javascript:void(0)" data-izimodal-open="#user-password"><li>Đổi mật khẩu</li></a>
+                @if(Session::has('roles')) 
+                <a href="{{url('/quan-ly')}}"><li>Quản lý</li></a>
+                @endif
+                @guest
+                @else
+                <a href="javascript:void(0)"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <li>Thoát</li>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                @endguest
+            </ul>            
         </div>
     </div>
 </section>
@@ -55,10 +72,10 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center " >
                 <span class="rs-profile" style="font-weight: 700;"></span>
             </div>
-            <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">        
+            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 text-center">        
                 <input type="file" id="avatar-file" class="display-none" onchange="autoUploadFile();$('.a-s, .a-c').removeClass('display-none');" />
                 <a href="javascript:void(0)" onclick="$('#avatar-file').click();">
-                    <img id="user-avatar" src="{{ asset((Auth::user()->avatar)) }}" width="100%" style="min-width:60px;min-height: 60px;"/>
+                    <img id="user-avatar" src="{{ asset((Auth::user()->avatar)) }}" width="100%" style="min-width:60px;min-height: 60px;max-width:120px"/>
                     <input type="hidden" id="avatar-before" value="{{ asset((Auth::user()->avatar)) }}" />                    
                 </a>
                 <div class="text-center" style="margin-top:10px">
@@ -66,7 +83,7 @@
                     <a href="javascript:void(0)" class="a-c btn btn-danger display-none" onclick="$('.a-s, .a-c').addClass('display-none');$('#user-avatar').attr('src',$('#avatar-before').val());$('#avatar-file').val('');" style="padding:6px 10px;"> <i class="glyphicon glyphicon-remove"></i></a>
                 </div>
             </div>
-            <div class="col-xs-7 col-sm-9 col-md-9 col-lg-9">                
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">                
                 <table class="table" style="background:white">
                     <tr>
                         <td class="text-left" style="width:20%"><label>Tài khoản</label></td>
