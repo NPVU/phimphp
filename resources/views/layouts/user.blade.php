@@ -1,5 +1,5 @@
 <section class="npv-user" style="display: none;">
-    <div class="npv-user-popup" style="width:300px; position: absolute; top: 55px; right: 10px; z-index: 1000;background: white;
+    <div class="npv-user-popup" style="width:300px; position: absolute; top: 55px; right: 10px; z-index: 1000;background: rgb(15, 20, 22);
          border-radius: 3px;">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top:20px">
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
