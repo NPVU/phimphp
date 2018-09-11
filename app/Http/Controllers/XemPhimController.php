@@ -48,7 +48,7 @@ class XemPhimController extends Controller{
         }        
         $star = ClassCommon::getStar(Input::get('pid'));
         $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
-        $listSeason = DB::table('phim')->where([['phim_tag', 'like', $phim[0]->phim_tag],['phim_id', '!=', $phim[0]->phim_id]])->orderBy('phim_season')->get();
+        $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
@@ -69,6 +69,14 @@ class XemPhimController extends Controller{
             return view('errors/index', $data);
         }
     }    
+
+    public function getListSeason($phimID, $phimTag){
+        $listSeason = DB::select(DB::raw('SELECT * FROM phim '
+                . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
+                . ' WHERE phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
+                . ' ORDER BY phim_season ASC')); 
+        return $listSeason;
+    }
 
     public function loadVideo(){
         if(strcmp(Session::token(), Input::get('token')) == 0){
