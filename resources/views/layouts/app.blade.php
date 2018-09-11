@@ -4,7 +4,6 @@
     @include('layouts.container_min')
     <div id="modal-user">
         <input type="hidden" id="current-token" value="{{csrf_token()}}"/>
-        @if (Auth::check())    
         @include('layouts.user_min')  
         @else
         @include('layouts.login_min')

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,7 @@ class HomeController extends Controller
         $arrdata = explode('-', $theloai);
         $theloaiID = $arrdata[count($arrdata)-1];
         $theloai = DB::table('theloai')->where('theloai_id', $theloaiID)->get();
-        $listPhimTheloai = DB::table('phim')->where('theloai_id', 'like', '%"'.$theloaiID.'"%')
+        $listPhimTheloai = DB::table('phim')->where([['theloai_id', 'like', '%"'.$theloaiID.'"%'], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));
         $data['theloai'] = $theloai;
@@ -33,12 +34,20 @@ class HomeController extends Controller
         $arrdata = explode('-', $quocgia);
         $quocgiaID = $arrdata[count($arrdata)-1];
         $quocgia = DB::table('quocgia')->where('quocgia_id', $quocgiaID)->get();
-        $listPhimQuocGia = DB::table('phim')->where('phim.quocgia_id', '=', $quocgiaID)
+        $listPhimQuocGia = DB::table('phim')->where([['phim.quocgia_id', '=', $quocgiaID], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));
         $data['quocgia'] = $quocgia;
         $data['listPhimQuocGia'] = $listPhimQuocGia;
         return view('quocgia_min', $data, parent::getDataHeader());
+    }
+
+    public function indexXemNhieu(){        
+        $listPhimXemNhieu = DB::table('phim')->where('phim_xuatban', 1)->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->orderByRaw('phim_luotxem DESC')
+                                        ->paginate(Session::get('PhimPerPage'));        
+        $data['listPhimXemNhieu'] = $listPhimXemNhieu;
+        return view('xemnhieu_min', $data, parent::getDataHeader());      
     }
     
     public function xemThemTapMoi(){ 
@@ -52,42 +61,7 @@ class HomeController extends Controller
         }   
         return $htmlTapMoi;
     }
-    
-    public function xemThemTheLoai(){ 
-        $phim_per_page = Session::get('PhimPerPage');
-        if(Input::get('page') != null){
-            $page  = Input::get('page')==0?1:Input::get('page');
-            $offset = ($page-1) * $phim_per_page;            
-            $htmlTapMoi = ClassCommon::getHTMLTheLoai(Input::get('theloai'),$phim_per_page,$offset);
-        } else {
-            $htmlTapMoi = ClassCommon::getHTMLTheLoai(Input::get('theloai'),$phim_per_page,0);
-        }   
-        return $htmlTapMoi;
-    }
-    
-    public function xemThemNam(){ 
-        $phim_per_page = Session::get('PhimPerPage');
-        if(Input::get('page') != null){
-            $page  = Input::get('page')==0?1:Input::get('page');
-            $offset = ($page-1) * $phim_per_page;            
-            $htmlTapMoi = ClassCommon::getHTMLNam(Input::get('nam'),$phim_per_page,$offset);
-        } else {
-            $htmlTapMoi = ClassCommon::getHTMLNam(Input::get('nam'),$phim_per_page,0);
-        }   
-        return $htmlTapMoi;
-    }
-    
-    public function xemThemBangXepHang(){ 
-        $phim_per_page = Session::get('PhimPerPage');
-        if(Input::get('page') != null){
-            $page  = Input::get('page')==0?1:Input::get('page');
-            $offset = ($page-1) * $phim_per_page;            
-            $htmlTapMoi = ClassCommon::getHTMLBangXepHang(Input::get('time'),$phim_per_page,$offset);
-        } else {
-            $htmlTapMoi = ClassCommon::getHTMLBangXepHang(Input::get('time'),$phim_per_page,0);
-        }   
-        return $htmlTapMoi;
-    }
+        
     
     public function timKiem(Request $request){
         return ClassCommon::getHTMLTimKiem($request->tukhoa);

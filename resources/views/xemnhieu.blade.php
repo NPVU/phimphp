@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title') 
-    Phim Xem Nhiều
+    Phim Xem Nhiều 
 @endsection 
 @section('contentLeft')
 <div class="content-left-section" >

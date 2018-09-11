@@ -32,7 +32,7 @@ a.visit:visited{
     background-color: #337ab7;
     color: white;
 }
-.header, .content {
+.header, .content, .footer {
     background: rgba(0, 0, 0, .6);
 }
 .header {
@@ -41,6 +41,10 @@ a.visit:visited{
 .content {
     padding: 15px;
     border-radius: 3px;
+}
+
+.footer{
+    margin-top: 20px;
 }
 .content-left{
     padding-left: 0px;
