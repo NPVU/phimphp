@@ -61,6 +61,23 @@
                 @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1)
                 <li class="treeview">
                     <a href="#">
+                        <i class="fa fa-share"></i> 
+                        <span>Hỗ trợ</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ url('/quan-ly/ho-tro/bao-loi') }}">
+                                <i class="fa fa-exclamation-circle"></i>
+                                <span>Báo lỗi</span>                    
+                            </a>                
+                        </li>                    
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="fa fa-gears"></i> 
                         <span>Cấu hình</span>
                         <span class="pull-right-container">

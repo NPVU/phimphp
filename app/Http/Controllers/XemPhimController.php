@@ -140,15 +140,18 @@ class XemPhimController extends Controller{
                 ['phim_id', $request->pid],
                 ['tap_tapso', $request->t]
             ])->get();
-            if(count($tap)){
-                DB::table('error_report')->insert([
-                    'phim_id' => $request->pid,
-                    'tap_id' => $tap[0]->tap_id,
-                    'er_url' => '',
-                    'er_content' => $request->content,
-                    'er_create_at' => now()
-                ]);
-            }
+            $countReport = DB::table('error_report')->where([['phim_id', '=', $request->pid], ['tap_id','=',$tap[0]->tap_id]])->count();
+            if($countReport < 5){
+                if(count($tap)){
+                    DB::table('error_report')->insert([
+                        'phim_id' => $request->pid,
+                        'tap_id' => $tap[0]->tap_id,
+                        'er_url' => '',
+                        'er_content' => $request->content,
+                        'er_create_at' => now()
+                    ]);
+                }
+            }            
         }
     }
     

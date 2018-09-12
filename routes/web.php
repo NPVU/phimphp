@@ -56,6 +56,11 @@ Route::group(['prefix'=>'/quan-ly/tai-khoan'],function(){
     Route::post('/add-remove-role','TaiKhoanController@addRemoveRole');
 });
 
+Route::group(['prefix'=>'/quan-ly/ho-tro'],function(){
+    Route::get('/bao-loi','HoTroController@indexError')->name('indexError'); 
+    Route::post('/bao-loi/delete', 'HoTroController@deleteError');
+});
+
 Route::group(['prefix'=>'/quan-ly/cau-hinh'],function(){
     Route::get('/he-thong','CauHinhController@indexHeThong')->name('indexHeThong');
     Route::get('/he-thong/reset-view','CauHinhController@resetView');
