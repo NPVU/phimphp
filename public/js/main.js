@@ -81,6 +81,48 @@ $(document).ready(function(){
             });
         }        
     });
+    $('.btn-follow-phim').click(function(){
+        var token = $('#current-token').val();
+        var follow = $('.btn-follow-phim').attr('follow');
+        if(follow == 0){
+            $.ajax({
+                type: 'get',           
+                url: $('meta[name="url"').attr('content')+'/follow-phim/',
+                data: {'_token':token,'pid':getParameterByName('pid','')},        
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function (data) {                
+                    if(data == '-1'){
+                        $('#user-login').iziModal('open');
+                    } else {
+                        $('.btn-follow-phim').attr('follow', 1);                        
+                        $('.btn-follow-phim').attr('title', 'Bỏ theo dõi');
+                        $('.btn-follow-phim > i').removeClass('fa-plus-circle');
+                        $('.btn-follow-phim > i').addClass('fa-minus-circle');  
+                        showToast('success','Chúc bạn xem phim vui vẻ','Đã thêm vào danh sách theo dõi',true);
+                    }                
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'get',           
+                url: $('meta[name="url"').attr('content')+'/unfollow-phim/',
+                data: {'_token':token,'pid':getParameterByName('pid','')},        
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                success: function (data) {               
+                    $('.btn-follow-phim').attr('follow', 0);  
+                    $('.btn-follow-phim').attr('title', 'Theo dõi'); 
+                    $('.btn-follow-phim > i').removeClass('fa-minus-circle');
+                    $('.btn-follow-phim > i').addClass('fa-plus-circle');  
+                    showToast('success','Chúc bạn xem phim vui vẻ','Đã bỏ theo dõi',true);
+                }
+            });
+        }
+        
+    });    
     $('#btn-search').click(function(){
        if($('#input-search').val().trim().length < 3){
            showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);

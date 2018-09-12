@@ -94,7 +94,9 @@ Route::get('/comment', 'CommentUtils@xemThemComment');
 Route::get('/tap-moi', 'HomeController@xemThemTapMoi');
 Route::get('/tim-kiem', 'HomeController@timKiem');
 
-Route::get('/report-error/', 'XemPhimController@reportError');
+Route::get('/report-error', 'XemPhimController@reportError');
+Route::get('/follow-phim', 'XemPhimController@followPhim');
+Route::get('/unfollow-phim', 'XemPhimController@unfollowPhim');
 Route::get('/get-captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
     return $captcha->src($config);
 });

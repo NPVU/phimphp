@@ -49,6 +49,10 @@ class XemPhimController extends Controller{
         $star = ClassCommon::getStar(Input::get('pid'));
         $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
         $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
+        $follow = 0;
+        if(Auth::check()){
+            $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
+        }
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
@@ -57,6 +61,7 @@ class XemPhimController extends Controller{
             $data['star'] = $star;
             $data['comment'] = $comment;
             $data['listSeason'] = $listSeason;
+            $data['follow_phim'] = $follow;
             return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
@@ -153,6 +158,25 @@ class XemPhimController extends Controller{
                 }
             }            
         }
+    }
+
+    public function followPhim(Request $request){
+        if (Auth::check()) {
+            $count = DB::table('follow_phim')->where([['phim_id','=',$request->pid], ['user_id','=',Auth::id()]])->count();
+            if($count == 0){
+                DB::table('follow_phim')->insert([
+                    'phim_id' => $request->pid,
+                    'user_id' => Auth::id(),
+                    'fp_flag' => 0
+                ]);
+            }            
+        } else {
+            return -1;
+        }
+    }
+
+    public function unfollowPhim(Request $request){
+        DB::table('follow_phim')->where([['phim_id','=',$request->pid], ['user_id','=',Auth::id()]])->delete();
     }
     
     function curl($url) {

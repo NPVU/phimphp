@@ -32,10 +32,10 @@
     <div>                                                    
         @if(strcmp($_GET['s'], md5('google'))==0)
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">                                    
-            <button class="btn btn-success npv-icon npv-play" title="Xem"><i class="fa fa-play"></i></button>
-            <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
+            <button class="btn btn-success npv-icon npv-play" title="Xem"><i class="fa fa-play"></i></button>
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
+            <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>                        
         </div>
         <script>
             $('.npv-play').click(function(){
@@ -91,7 +91,8 @@
             };
         </script>
         @endif
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">                                    
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
+            <button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}"><i class="{{$follow_phim == 0?'fa fa-plus-circle':'fa fa-minus-circle'}}"></i></button>
             <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star"></i></button>
             <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle"></i></button>
 

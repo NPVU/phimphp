@@ -43,19 +43,28 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group pw1">  
                     <label>Mật khẩu cũ</label>
-                    <input type="password" id="pw1" class="form-control required" />                                    
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                        <input type="password" id="pw1" class="form-control required" /> 
+                    </div>                                   
                     <span class="help-block pw1-error"></span>
                 </div>
                 
                 <div class="form-group pw2">  
                     <label>Mật khẩu mới</label>
-                    <input type="password" id="pw2" class="form-control required" />                                    
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                        <input type="password" id="pw2" class="form-control required" />  
+                    </div>                                  
                     <span class="help-block pw2-error"></span>
                 </div>
                 
                 <div class="form-group re-pw2">  
                     <label>Xác nhận mật khẩu</label>
-                    <input type="password" id="re-pw2" class="form-control required" />                                    
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="fa fa-key"></span></span>
+                        <input type="password" id="re-pw2" class="form-control required" />  
+                    </div>                                  
                     <span class="help-block re-pw2-error"></span>
                 </div>
             </div>
