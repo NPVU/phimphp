@@ -10,7 +10,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{url('/')}}">
-                            <img src="{{asset('public/img/themes/logo-2.png')}}" width="100"/>
+                            <img src="{{asset('img/themes/logo-2.png')}}" width="100"/>
                             
                         </a>
                     </div>

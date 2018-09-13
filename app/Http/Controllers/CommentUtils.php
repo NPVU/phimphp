@@ -133,7 +133,7 @@ class CommentUtils extends BaseController
                                 $subHTML   .=      '<div><a href="javascript:void(0);" title="Report" onclick="openReport('.$sub->binhluan_id.')"><span class="glyphicon glyphicon-warning-sign" style="color:rgb(222, 159, 63)"></span></a></div>';                                       
                                 $subHTML   .= '</td></tr>';   
                             }   else {
-                                $subHTML   .=      '<img src="'.asset('/public/img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
+                                $subHTML   .=      '<img src="'.asset('img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
                                 $subHTML   .=      '</td><td class="text-left">'; 
                                 $subHTML   .=      '<div><span class="username-comment color-name-locked" style="font-weight: 700;">Tài khoản bị khóa</span><span style="float:right;">'.ClassCommon::getStrSoNgayDaQua($sub->locked_at).'</span></div>';
                                 $subHTML   .=      '<div class="content-comment color-comment-locked">Nội dung không được phép hiển thị</div>';
@@ -143,7 +143,7 @@ class CommentUtils extends BaseController
                     }
                     $html   .= $subHTML;
                 } else {
-                    $html   .=      '<img src="'.asset('/public/img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
+                    $html   .=      '<img src="'.asset('img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
                     $html   .=      '</td><td class="text-left">'; 
                     $html   .=      '<div><span class="username-comment color-name-locked" style="font-weight: 700;">Tài khoản bị khóa</span><span style="float:right;">'.ClassCommon::getStrSoNgayDaQua($row->locked_at).'</span></div>';
                     $html   .=      '<div class="content-comment color-comment-locked">Nội dung không được phép hiển thị</div>';
@@ -187,7 +187,7 @@ class CommentUtils extends BaseController
                                 $subHTML   .=      '<div class="content-comment ">'.$sub->binhluan_noidung.'</div>';                                
                                 $subHTML   .= '</td></tr>';   
                             }   else {
-                                $subHTML   .=      '<img src="'.asset('/public/img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
+                                $subHTML   .=      '<img src="'.asset('img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
                                 $subHTML   .=      '</td><td class="text-left">'; 
                                 $subHTML   .=      '<div><span class="username-comment color-name-locked" style="font-weight: 700;">Tài khoản bị khóa</span><span style="float:right;">'.ClassCommon::getStrSoNgayDaQua($sub->locked_at).'</span></div>';
                                 $subHTML   .=      '<div class="content-comment color-comment-locked">Nội dung không được phép hiển thị</div>';
@@ -197,7 +197,7 @@ class CommentUtils extends BaseController
                     }
                     $html   .= $subHTML;
                 } else {
-                    $html   .=      '<img src="'.asset('/public/img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
+                    $html   .=      '<img src="'.asset('img/themes/avatar/user-locked.png').'" class="avatar img-circle" width="60" height="60" />';
                     $html   .=      '</td><td class="text-left">'; 
                     $html   .=      '<div><span class="username-comment color-name-locked" style="font-weight: 700;">Tài khoản bị khóa</span><span style="float:right;">'.ClassCommon::getStrSoNgayDaQua($row->locked_at).'</span></div>';
                     $html   .=      '<div class="content-comment color-comment-locked">Nội dung không được phép hiển thị</div>';

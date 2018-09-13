@@ -30,7 +30,7 @@
                                     <img src="<?php if(isset($_POST['add_phim_image']) && !empty($_POST['add_phim_image'])) :?>
                                          <?php echo $_POST['add_phim_image'] ?>
                                          <?php else :?>
-                                         {{asset('public/img/themes/jquery-file-upload-scripts.png')}}
+                                         {{asset('img/themes/jquery-file-upload-scripts.png')}}
                                          <?php endif; ?>"
                                          onclick="$('#selectFileImage').click()" 
                                          class="img-select-file npv-add-image" id="imgPhimDragDrop"/> 
@@ -54,7 +54,7 @@
                                     <img src="<?php if(isset($_POST['phim_background']) && !empty($_POST['phim_background'])) :?>
                                          <?php echo $_POST['phim_background'] ?>
                                          <?php else :?>
-                                         {{asset('public/img/themes/jquery-file-upload-scripts.png')}}
+                                         {{asset('img/themes/jquery-file-upload-scripts.png')}}
                                          <?php endif; ?>"
                                          onclick="$('#selectFileBackground').click()" 
                                          class="img-select-file npv-add-image" id="backgroundPhimDragDrop"/> 

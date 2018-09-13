@@ -37,11 +37,11 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
-                                <th scope="col" class="text-left" style="width: 15%">Phim</th>
-                                <th scope="col" class="text-left" style="width: 10%">Tập</th>
+                                <th scope="col" class="text-left" style="width: 25%">Phim</th>
+                                <th scope="col" class="text-left" style="width: 7%">Tập</th>
                                 <th scope="col" class="text-center" style="width: 20%">Nội dung</th>
-                                <th scope="col" class="text-center" style="width: 25%">URL lỗi</th>                             
-                                <th scope="col" class="text-center" style="width: 15%">Thời gian báo lỗi</th>
+                                <th scope="col" class="text-center" style="width: 23%">URL lỗi</th>                             
+                                <th scope="col" class="text-center" style="width: 10%">Thời gian</th>
                                 <th scope="col" class="text-center" style="width: 10%"></th>
                             </tr>
                         </thead>

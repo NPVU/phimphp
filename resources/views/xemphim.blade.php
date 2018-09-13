@@ -13,12 +13,12 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
         <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}">
-            <img class="server-google {{strcmp($_GET['s'], md5('google'))==0?'server-active':''}}" src="{{asset('public/img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
+            <img class="server-google {{strcmp($_GET['s'], md5('google'))==0?'server-active':''}}" src="{{asset('img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
         </a>
         @endif                    
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}">
-            <img class="server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?'server-active':''}}" src="{{asset('public/img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
+            <img class="server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?'server-active':''}}" src="{{asset('img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
         </a>
         @endif
         <span class="title-video">

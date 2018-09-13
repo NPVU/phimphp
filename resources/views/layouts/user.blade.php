@@ -158,4 +158,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="{{ asset('public/js/user.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/user.min.js') }}"></script>

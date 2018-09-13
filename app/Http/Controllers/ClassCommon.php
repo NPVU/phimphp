@@ -18,15 +18,15 @@ class ClassCommon extends BaseController
     }
     
     public static function getPathUploadAvatar(){
-        return 'public/upload/avatar/';
+        return 'upload/avatar/';
     }
     
     public static function getPathUploadImage(){
-        return 'public/upload/image/';
+        return 'upload/image/';
     }
     
     public static function getPathUploadTemp(){
-        return 'public/upload/temp/';
+        return 'upload/temp/';
     }
     
     public static function addLuotXem($phimID, $tap){

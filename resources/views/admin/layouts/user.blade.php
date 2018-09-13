@@ -10,7 +10,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                    
                 <input type="file" name="avatar" class="form-control display-none" id="selectFileAvatar" onchange="autoUploadFile()"/>
                 <div class="boxUpdateAvatar text-center">
-                    <img src="{{asset('public/img/themes/jquery-file-upload-scripts.png')}}" width="80%"
+                    <img src="{{asset('img/themes/jquery-file-upload-scripts.png')}}" width="80%"
                          onclick="$('#selectFileAvatar').click()" 
                          class="img-select-file" id="imgDragDrop"/>
                     <div class="box-avatar">
@@ -90,7 +90,7 @@
         </div>        
     </div>
 </div>
-<script type="text/javascript" src="{{ asset('public/js/userModal.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/userModal.js') }}"></script>
 <script>
     function updateDisplayUserName() {
         $.ajax({

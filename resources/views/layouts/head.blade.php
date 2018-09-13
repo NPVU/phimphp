@@ -2,24 +2,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="img/ico" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="img/ico" href="{{ asset('../favicon.ico') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="url" content="{{ url('/') }}">
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('public/js/jquery-2.2.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/bootstrap-3.3.7/dist/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/js/move-top.js') }}"></script>        
-    <script src="{{ asset('public/js/easing.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/jquery.qtip.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/toast.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/iziToast.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/iziModal.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/main.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/js/rater.min.js') }}"></script>   
+    <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bootstrap-3.3.7/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/move-top.js') }}"></script>        
+    <script src="{{ asset('js/easing.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.qtip.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/toast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/iziToast.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/iziModal.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/main.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/rater.min.js') }}"></script>   
        
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>        
@@ -49,14 +49,14 @@
     <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>        
 
     <!-- Styles -->
-    <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/bootstrap-3.3.7/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap-3.3.7/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link href="{{ asset('public/css/jquery.qtip.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/owl.theme.default.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/toast.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('public/css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
-    <link href="{{ asset('public/css/main.min.css') }}" rel="stylesheet" type="text/css" />     
+    <link href="{{ asset('css/jquery.qtip.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/owl.theme.default.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
+    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />     
 </head>
