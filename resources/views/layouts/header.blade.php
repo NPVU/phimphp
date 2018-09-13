@@ -48,6 +48,13 @@
                             <li><a href="{{route('login')}}">Đăng nhập</a></li>
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
                             @else
+                            <li>
+                                <a href="javascript:void(0)">
+                                    <i class="fa fa-bell" style="font-size:1.5em">
+                                        <sup class="notify-message">123</sup>
+                                    </i>
+                                </a>
+                            </li>
                             <li class="open-popup-user" onclick="$('.npv-user').toggle('fast');">
                                 <a href="javascript:void(0)" style="margin:5px 5px;width:45px; height:45px; border-radius:100%; text-align:center; background-color:gray;">
                                     <i class="glyphicon glyphicon-user"></i>

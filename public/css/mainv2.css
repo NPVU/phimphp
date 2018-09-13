@@ -28,6 +28,9 @@ a.visit:visited{
 .no-border {
     border: none !important;
 }
+.no-hover:hover{
+    border: none;
+}
 .themes-color {
     background-color: #337ab7;
     color: white;
@@ -88,6 +91,12 @@ a.visit:visited{
     background-color:transparent !important;
     border-bottom: 2px solid;
     border-color: red;
+}
+.nav>li>a>i>.notify-message{
+    font-size: 0.7em;
+    background: red;
+    padding: 3px;
+    border-radius: 3px;
 }
 button.navbar-toggle {
     background: #8e2323;
@@ -508,6 +517,11 @@ label{
 hr{
     margin-top:20px;
     margin-bottom: 0px;
+}
+
+.nav>li>a>i>sup{
+    top: -0.9em;
+    left: -12px;
 }
 
 /* rewrite videojs */
