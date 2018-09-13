@@ -8,7 +8,7 @@
                                 <img src="{{$tuan->phim_hinhnen}}" width="50" height="60" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div>{{strlen($tuan->phim_ten)>24?substr($tuan->phim_ten,0,24).'...':$tuan->phim_ten}}</div>
+                                <div>{{strlen($tuan->phim_ten)>20?substr($tuan->phim_ten,0,20).'...':$tuan->phim_ten}}</div>
                                 <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($tuan->phim_luotxem)}}</div>
                                 <div>
                                     <?php 
@@ -43,7 +43,7 @@
                                 <img src="{{$thang->phim_hinhnen}}" width="50" height="60" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div>{{strlen($thang->phim_ten)>24?substr($thang->phim_ten,0,24).'...':$thang->phim_ten}}</div>
+                                <div>{{strlen($thang->phim_ten)>20?substr($thang->phim_ten,0,20).'...':$thang->phim_ten}}</div>
                                 <div><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($thang->phim_luotxem)}}</div>
                                 <div>
                                     <?php 
