@@ -40,6 +40,10 @@
                                 @endif                            
                             </div>
                             <div class="phim-tip-underten">
+                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> 
+                                        {{$row->listTheLoai}}
+                            </div>
+                            <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$row->phim_sotap}}
                             </div>
                             <div class="phim-tip-underten">

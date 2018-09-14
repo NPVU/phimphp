@@ -33,7 +33,7 @@
         @if(strcmp($_GET['s'], md5('google'))==0)
         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">                                    
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
-            <button class="btn btn-success npv-icon npv-play" title="Xem"><i class="fa fa-play"></i></button>
+            <button class="btn btn-success npv-icon npv-play" title="Xem phim"><i class="fa fa-play"></i></button>
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
             <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>                        
         </div>
@@ -87,7 +87,7 @@
             video.onpause = function(){
                 $('.npv-play > i').addClass('fa-play');
                 $('.npv-play > i').removeClass('fa-pause');nextVideo();
-                $('.npv-play').attr('title','Xem');
+                $('.npv-play').attr('title','Xem phim');
             };
         </script>
         @endif
@@ -163,6 +163,7 @@
                         iconColor: 'white',
                         onOpening: function(){
                             $('#input-report-error').val('');
+                            $('.help-block-report-error').html('');
                         }
                     }); 
                 $(document).ready(function(){            
@@ -255,6 +256,10 @@
                                 @else
                                 {{strlen($season->phim_gioithieu)>255?substr($season->phim_gioithieu,0,strrpos(substr($season->phim_gioithieu,0,255),' ')).' ...':$season->phim_gioithieu}}
                                 @endif                            
+                            </div>
+                            <div class="phim-tip-underten">
+                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> 
+                                        {{$season->listTheLoai}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$season->phim_sotap}}

@@ -25,6 +25,15 @@ class HomeController extends Controller
         $listPhimTheloai = DB::table('phim')->where([['theloai_id', 'like', '%"'.$theloaiID.'"%'], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));
+        foreach($listPhimTheloai as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }                                        
         $data['theloai'] = $theloai;
         $data['listPhimTheloai'] = $listPhimTheloai;
         return view('theloai_min', $data, parent::getDataHeader());
@@ -37,6 +46,16 @@ class HomeController extends Controller
         $listPhimQuocGia = DB::table('phim')->where([['phim.quocgia_id', '=', $quocgiaID], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));
+        
+        foreach($listPhimQuocGia as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }    
         $data['quocgia'] = $quocgia;
         $data['listPhimQuocGia'] = $listPhimQuocGia;
         return view('quocgia_min', $data, parent::getDataHeader());
@@ -45,7 +64,17 @@ class HomeController extends Controller
     public function indexXemNhieu(){        
         $listPhimXemNhieu = DB::table('phim')->where('phim_xuatban', 1)->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->orderByRaw('phim_luotxem DESC')
-                                        ->paginate(Session::get('PhimPerPage'));        
+                                        ->paginate(Session::get('PhimPerPage'));     
+                                    
+        foreach($listPhimXemNhieu as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        } 
         $data['listPhimXemNhieu'] = $listPhimXemNhieu;
         return view('xemnhieu_min', $data, parent::getDataHeader());      
     }

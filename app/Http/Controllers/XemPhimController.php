@@ -49,6 +49,15 @@ class XemPhimController extends Controller{
         $star = ClassCommon::getStar(Input::get('pid'));
         $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
         $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
+        foreach($listSeason as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }   
         $follow = 0;
         if(Auth::check()){
             $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();

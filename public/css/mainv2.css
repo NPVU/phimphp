@@ -258,9 +258,9 @@ ul.user-menu  li:hover{
     position:absolute;
     font-family: "-webkit-body";
     min-width:250px;
-    min-height: 180px;  
+    min-height: 350px;  
     left:200px;
-    top: -30px;
+    top: -90px;
     background: rgb(237, 249, 238);    
     z-index: 10;
     border-radius: 3px;
@@ -294,6 +294,7 @@ ul.user-menu  li:hover{
 }
 .phim-tip-content > .phim-tip-noidung {
     padding: 10px 0px;
+    min-height: 130px;
 }
 .box-phim:hover ~ .phim-tip{
     display: block;

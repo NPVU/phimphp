@@ -107,6 +107,8 @@ class ClassCommon extends BaseController
         if(count($listPhimToday)>0){
             $html = '';
             foreach ($listPhimToday as $row){
+                $idTheLoai = json_decode($row->theloai_id);
+                $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
                     $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
@@ -133,6 +135,12 @@ class ClassCommon extends BaseController
                     } else {
                         $html .=                '<div class="phim-tip-noidung">'.(strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu).'</div>';
                     }
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> ';
+                                            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                                                $html .=  $listTheLoaiPhim[$i]->theloai_ten;
+                                                $html .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+                                            }
+                    $html .=                '</div>';                    
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> '.$row->phim_kieu.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
