@@ -98,10 +98,10 @@ $(document).ready(function(){
                     } else {
                         $('.btn-follow-phim').attr('follow', 1);                        
                         $('.btn-follow-phim').attr('title', 'Bỏ theo dõi');
-                        $('.btn-follow-phim > i > span').html('Bỏ theo dõi');
+                        $('.btn-follow-phim > i > span').html('Đã theo dõi');
                         $('.btn-follow-phim > i > sup').html(data);
-                        $('.btn-follow-phim > i').removeClass('fa-bell');
-                        $('.btn-follow-phim > i').addClass('fa-bell-slash');  
+                        $('.btn-follow-phim > i').removeClass('fa-bell-slash');
+                        $('.btn-follow-phim > i').addClass('fa-bell');  
                         showToast('success','Chúc bạn xem phim vui vẻ','Đã thêm vào danh sách theo dõi',true);
                     }                
                 }
@@ -117,10 +117,10 @@ $(document).ready(function(){
                 success: function (data) {               
                     $('.btn-follow-phim').attr('follow', 0);  
                     $('.btn-follow-phim').attr('title', 'Theo dõi'); 
-                    $('.btn-follow-phim > i > span').html('Theo dõi');
+                    $('.btn-follow-phim > i > span').html('Chưa Theo dõi');
                     $('.btn-follow-phim > i > sup').html(data);
-                    $('.btn-follow-phim > i').removeClass('fa-bell-slash');
-                    $('.btn-follow-phim > i').addClass('fa-bell');  
+                    $('.btn-follow-phim > i').removeClass('fa-bell');
+                    $('.btn-follow-phim > i').addClass('fa-bell-slash');  
                     showToast('success','Chúc bạn xem phim vui vẻ','Đã bỏ theo dõi',true);
                 }
             });

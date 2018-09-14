@@ -93,8 +93,8 @@
         @endif
         <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-right">
             <button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
-                <i class="{{$follow_phim == 0?'fa fa-bell':'fa fa-bell-slash'}}">
-                    <span>{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}</span>
+                <i class="{{$follow_phim == 0?'fa fa-bell-slash':'fa fa-bell'}}">
+                    <span>{{$follow_phim == 0?'Chưa theo dõi':'Đã theo dõi'}}</span>
                     <sup style="" class="follows-tip">{{$follows}}</sup>
                 </i>
             </button>
