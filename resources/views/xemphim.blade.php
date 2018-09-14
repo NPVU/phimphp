@@ -31,7 +31,7 @@
 <div class="content-left-section">    
     <div>                                                    
         @if(strcmp($_GET['s'], md5('google'))==0)
-        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">                                    
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">                                    
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
             <button class="btn btn-success npv-icon npv-play" title="Xem phim"><i class="fa fa-play"></i></button>
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
@@ -91,10 +91,15 @@
             };
         </script>
         @endif
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-right">
-            <button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}"><i class="{{$follow_phim == 0?'fa fa-plus-circle':'fa fa-minus-circle'}}"></i></button>
-            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star"></i></button>
-            <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle"></i></button>
+        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-right">
+            <button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
+                <i class="{{$follow_phim == 0?'fa fa-bell':'fa fa-bell-slash'}}">
+                    <span>{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}</span>
+                    <sup style="" class="follows-tip">{{$follows}}</sup>
+                </i>
+            </button>
+            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>
+            <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle">&nbsp;<span>Báo lỗi</span></i></button>
 
             <div id="modal-vote-phim" data-izimodal-transitionin="comingInDown">
                 <div class="modal-body" style="padding: 20px">        
@@ -176,7 +181,7 @@
                         width: 600,
                         openFullscreen:false,
                         headerColor: '#263238',
-                        icon: 'fa fa-star-half-o',
+                        icon: 'fa fa-star',
                         iconColor: 'white',
                         onOpening: function(){
                             $('.rate').attr('data-rate-value',{{$star}});

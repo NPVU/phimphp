@@ -416,7 +416,12 @@ ul.user-menu  li:hover{
 .btn-danger, .btn-default, .btn-info, .btn-primary, .btn-success, .btn-warning{
     background-image: none;
 }
-
+.follows-tip{
+    background: white;
+    padding: 3px;
+    color: #6b6b6b;
+    border-radius: 3px;
+}
 .username-comment,.report-comment-username{color:blue; font-weight: 700;}
 .text-light-red, .color-name-admin{color:rgb(208, 108, 85) !important}
 

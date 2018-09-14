@@ -98,8 +98,10 @@ $(document).ready(function(){
                     } else {
                         $('.btn-follow-phim').attr('follow', 1);                        
                         $('.btn-follow-phim').attr('title', 'Bỏ theo dõi');
-                        $('.btn-follow-phim > i').removeClass('fa-plus-circle');
-                        $('.btn-follow-phim > i').addClass('fa-minus-circle');  
+                        $('.btn-follow-phim > i > span').html('Bỏ theo dõi');
+                        $('.btn-follow-phim > i > sup').html(data);
+                        $('.btn-follow-phim > i').removeClass('fa-bell');
+                        $('.btn-follow-phim > i').addClass('fa-bell-slash');  
                         showToast('success','Chúc bạn xem phim vui vẻ','Đã thêm vào danh sách theo dõi',true);
                     }                
                 }
@@ -115,8 +117,10 @@ $(document).ready(function(){
                 success: function (data) {               
                     $('.btn-follow-phim').attr('follow', 0);  
                     $('.btn-follow-phim').attr('title', 'Theo dõi'); 
-                    $('.btn-follow-phim > i').removeClass('fa-minus-circle');
-                    $('.btn-follow-phim > i').addClass('fa-plus-circle');  
+                    $('.btn-follow-phim > i > span').html('Theo dõi');
+                    $('.btn-follow-phim > i > sup').html(data);
+                    $('.btn-follow-phim > i').removeClass('fa-bell-slash');
+                    $('.btn-follow-phim > i').addClass('fa-bell');  
                     showToast('success','Chúc bạn xem phim vui vẻ','Đã bỏ theo dõi',true);
                 }
             });
@@ -165,8 +169,7 @@ function danhGia(value) {
         url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value,
         dataType: 'text',
         type: 'get',
-        success: function (data) {
-            console.log('123');
+        success: function (data) {            
             if (data == 1) {
                 $('.vote-result').removeClass('display-none');
                 $('.vote-body').addClass('display-none');

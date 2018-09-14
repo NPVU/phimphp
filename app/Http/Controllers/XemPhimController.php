@@ -47,7 +47,7 @@ class XemPhimController extends Controller{
             $check = false;
         }        
         $star = ClassCommon::getStar(Input::get('pid'));
-        $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);
+        $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);        
         $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
         foreach($listSeason as $row){
             $row->listTheLoai = '';
@@ -62,6 +62,7 @@ class XemPhimController extends Controller{
         if(Auth::check()){
             $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
         }
+        $followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
@@ -71,6 +72,7 @@ class XemPhimController extends Controller{
             $data['comment'] = $comment;
             $data['listSeason'] = $listSeason;
             $data['follow_phim'] = $follow;
+            $data['follows'] = $followAmount;
             return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
@@ -178,7 +180,8 @@ class XemPhimController extends Controller{
                     'user_id' => Auth::id(),
                     'fp_flag' => 0
                 ]);
-            }            
+            } 
+            return DB::table('follow_phim')->where('phim_id', $request->pid)->count();          
         } else {
             return -1;
         }
@@ -186,6 +189,7 @@ class XemPhimController extends Controller{
 
     public function unfollowPhim(Request $request){
         DB::table('follow_phim')->where([['phim_id','=',$request->pid], ['user_id','=',Auth::id()]])->delete();
+        return DB::table('follow_phim')->where('phim_id', $request->pid)->count();
     }
     
     function curl($url) {

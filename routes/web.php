@@ -100,8 +100,3 @@ Route::get('/unfollow-phim', 'XemPhimController@unfollowPhim');
 Route::get('/get-captcha/{config?}', function (\Mews\Captcha\Captcha $captcha, $config = 'default') {
     return $captcha->src($config);
 });
-
-
-Route::get('/.env', function(){
-    return "";
-});

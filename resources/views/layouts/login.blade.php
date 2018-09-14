@@ -37,8 +37,8 @@
         overlayClose: true,                
         width: 600,
         openFullscreen:false,
-        headerColor: 'rgb(56, 98, 111)',
-        icon: 'fa fa-sign-in',
+        headerColor: '#263238',
+        icon: 'fa fa-sign-in-alt',
         iconColor: 'white',
         onOpening: function(){
             $('#user-login-email').val('');
