@@ -75,8 +75,11 @@ class PhimController extends Controller{
             $data['backURL'] = URL::to('/');
             return view('errors/index', $data); 
         }
-        $listTheLoai = DB::table('theloai')->get();
+        $listTheLoai = DB::table('theloai')->orderByRaw('theloai_ten')->get();
         $data['listTheLoai'] = $listTheLoai;
+
+        $listQuocGia = DB::table('quocgia')->get();
+        $data['listQuocGia'] = $listQuocGia;
         
         $data['title'] = 'Thêm Phim';
         $data['page'] = 'admin.phim.add';        
@@ -93,9 +96,11 @@ class PhimController extends Controller{
         }
         if(strcmp(Session::token(), $token) == 0){
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
-            $listTheLoai = DB::table('theloai')->get();
+            $listTheLoai = DB::table('theloai')->orderByRaw('theloai_ten')->get();
             session(['phim_hinhanh' => $phim[0]->phim_hinhanh]); 
             session(['phim_hinhnen' => $phim[0]->phim_hinhnen]); 
+            $listQuocGia = DB::table('quocgia')->get();
+            $data['listQuocGia'] = $listQuocGia;
             $data['phim'] = $phim;
             $data['listTheLoai'] = $listTheLoai;
             $data['token'] = $token;
@@ -202,7 +207,8 @@ class PhimController extends Controller{
                         'phim_sotap'      => $request->add_phim_sotap,
                         'phim_nam'        => $request->add_phim_nam,
                         'phim_season'     => $request->add_phim_season,
-                        'phim_kieu'     => $request->add_phim_kieu,
+                        'quocgia_id'      => $request->add_phim_quocgia,
+                        'phim_kieu'       => $request->add_phim_kieu,
                         'phim_tag'        => $request->add_phim_tag,
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
@@ -212,8 +218,10 @@ class PhimController extends Controller{
                 );
             return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
         } else {
-            $listTheLoai = DB::table('theloai')->get();
+            $listTheLoai = DB::table('theloai')->orderByRaw('theloai_ten')->get();
             $data['listTheLoai'] = $listTheLoai;
+            $listQuocGia = DB::table('quocgia')->get();
+            $data['listQuocGia'] = $listQuocGia;
             $data['title'] = 'Thêm Phim';
             $data['page'] = 'admin.phim.add';        
             return view('admin/layout', $data);
@@ -309,6 +317,7 @@ class PhimController extends Controller{
                         'phim_sotap'      => $request->edit_phim_sotap,
                         'phim_nam'        => $request->edit_phim_nam,
                         'phim_season'     => $request->edit_phim_season,
+                        'quocgia_id'      => $request->edit_phim_quocgia,
                         'phim_kieu'       => $request->edit_phim_kieu,
                         'phim_tag'        => $request->edit_phim_tag,
                         'phim_nguon'      => $request->edit_phim_nguon,
@@ -317,9 +326,10 @@ class PhimController extends Controller{
                 );            
             return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
         } else {
-           $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
-            $listTheLoai = DB::table('theloai')->get();
-
+            $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
+            $listTheLoai = DB::table('theloai')->orderByRaw('theloai_ten')->get();
+            $listQuocGia = DB::table('quocgia')->get();
+            $data['listQuocGia'] = $listQuocGia;
             $data['phim'] = $phim;
             $data['listTheLoai'] = $listTheLoai;
             $data['token'] = $request->_token;

@@ -117,6 +117,17 @@
                                 <span class="help-block"><?php echo isset($edit_phim_season_error)?$edit_phim_season_error:''; ?></span>
                             </div>
                             
+                            <div class="form-group <?php echo isset($edit_phim_quocgia_error)?'has-error':''; ?>">
+                                <label class="control-label" for="edit_phim_quocgia">Quốc gia</label>
+                                <select id="edit_phim_quocgia" name="edit_phim_quocgia" class="form-control"
+                                    value="<?php echo isset($_POST['edit_phim_quocgia']) ? $_POST['edit_phim_quocgia'] : $phim[0]->quocgia_id ?>">
+                                    @foreach($listQuocGia as $row)
+                                    <option value="{{$row->quocgia_id}}" {{$row->quocgia_id==$phim[0]->quocgia_id?'selected':''}}>{{$row->quocgia_ten}}</option>
+                                    @endforeach
+                                </select>                                
+                                <span class="help-block"><?php echo isset($edit_phim_quocgia_error)?$edit_phim_quocgia_error:''; ?></span>
+                            </div>
+
                             <div class="form-group <?php echo isset($edit_phim_kieu_error)?'has-error':''; ?>">
                                 <label class="control-label" for="edit_phim_kieu">Dạng anime</label>
                                 <select id="edit_phim_kieu" name="edit_phim_kieu" class="form-control"
