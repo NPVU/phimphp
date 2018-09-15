@@ -345,11 +345,11 @@ ul.user-menu  li:hover{
     }
 }
 
-.list-anime {
+.list-anime, .list-notification {
     list-style: none;
     padding-left: 0px;
 }
-.list-anime>a>li {
+.list-anime>a>li, .list-notification>a>li {
     height: 70px;
     padding: 5px 5px;
     cursor: pointer;
@@ -360,6 +360,13 @@ ul.user-menu  li:hover{
     color: white;
 }
 .list-anime>a>li:hover{    
+    background-color: #00a5ad;
+}
+.list-notification>a>li{
+    border-bottom: 1px solid;
+}
+.list-notification>a>li:hover{
+    color:white;
     background-color: #00a5ad;
 }
 .star-color {

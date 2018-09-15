@@ -27,7 +27,7 @@ class Controller extends BaseController
         $phimXepHangThang = ClassCommon::getBangXepHang('month', 10, 0);
 
         if(Auth::check()){
-            $notification = Notification::getNotificationForUser(Auth::id());
+            $notification = Notification::getNotificationForUser();
             $data['notification'] = $notification;
         }
         

@@ -61,6 +61,7 @@ class XemPhimController extends Controller{
         $follow = 0;
         if(Auth::check()){
             $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
+            Notification::removeNotificationForUserOfPhim(Input::get('pid'));
         }
         $followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
         if($check){            

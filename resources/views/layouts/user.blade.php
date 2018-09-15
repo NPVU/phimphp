@@ -38,9 +38,10 @@
     <div class="modal-body" style="padding: 20px">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-anime">
+                <ul class="list-notification">
+                @if(count($notification) > 0)
                     @foreach($notification as $row)
-                    <a href="{{$row->notify_url}}" style="color:black">
+                    <a href="{{$row->notify_url}}&nid={{$row->notify_id}}" >
                         <li>
                             <div style="float:left;">
                                 <img src="{{$row->notify_image}}" width="50" height="60" style="border-radius:3px;">
@@ -49,9 +50,15 @@
                                 <div><b>{{$row->notify_title}}</b></div>
                                 <div>{{$row->notify_content}}</div>                            
                             </div>
+                            <div style="float:right">
+                                {{date_format(date_create($row->notify_create_at),'H:i:s d-m-Y')}}
+                            </div>
                         </li>
-                    </a>
+                    </a>                    
                     @endforeach
+                @else
+                <i class="text-center"><p>Không có thông báo nào</p></i>
+                @endif
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                
