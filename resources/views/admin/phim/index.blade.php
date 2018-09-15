@@ -63,14 +63,19 @@
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
                                 <th scope="col" class="text-left" style="width: 25%">Tên phim</th>
                                 <th scope="col" class="text-center" style="width: 10%">Số tập</th>
-                                <th scope="col" class="text-left" style="width: 30%">Tag</th>                                                                
-                                <th scope="col" class="text-center" style="width: 15%">Lượt xem</th>                                
+                                <th scope="col" class="text-left" style="width: 20%">Tag</th>                                                                
+                                <th scope="col" class="text-center" style="width: 10%">Lượt xem</th>
+                                <th scope="col" class="text-center" style="width: 15%">Ngày cập nhật</th>
                                 <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
-                                $rowIndex = 0;                                
+                                if(isset($_GET['page'])){
+                                    $rowIndex = ($_GET['page']-1)*10;
+                                }else {
+                                    $rowIndex = 0;
+                                }                             
                             ?>
                             @foreach ($listPhim as $row)
                             <tr id="row{{$row->phim_id}}" >
@@ -89,12 +94,12 @@
                                 <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_luotxem}}
                                 </td>
-<!--                                <td class="text-center">
+                                <td class="text-center">
                                     <?php 
-//                                        $date = date_create($row->phim_ngaycapnhat);
-//                                        echo date_format($date, 'd-m-Y');
-                                        ?>
-                                </td>-->
+                                        $date = date_create($row->phim_ngaycapnhat);
+                                        echo date_format($date, 'd-m-Y');
+                                    ?>
+                                </td>
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">                                        
                                         <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" data-toggle="tooltip" title="Thêm tập">
@@ -115,7 +120,7 @@
                             @endforeach
                             <?php if($rowIndex == 0) :?>
                             <tr>
-                                <td colspan="6" class="text-center">
+                                <td colspan="7" class="text-center">
                                     Không tìm thấy dữ liệu
                                 </td>
                             </tr>
@@ -123,7 +128,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="text-center">
-                                <td colspan="6">
+                                <td colspan="7">
                                     {{ $listPhim->appends(['tukhoa' => Request::get('tukhoa')])->links() }}
                                 </td>
                             </tr>
