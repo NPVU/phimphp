@@ -137,7 +137,7 @@
                                 <label>Mô tả lỗi</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-exclamation-circle"></span></span>
-                                    <input type="text" class="form-control" id="input-report-error" placeholder="VD: tập này die" />
+                                    <input type="text" class="form-control" id="input-report-error" placeholder="Vui lòng mô tả lỗi ít nhất 6 ký tự" />
                                 </div>
                                 <span class="help-block help-block-report-error"></span>
                             </div>

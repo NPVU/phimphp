@@ -108,10 +108,7 @@
                                         </span>
                                         <span onclick="openComment({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Tất cả bình luận">
                                             <a><i class="fa fa-comments"></i></a>
-                                        </span>
-                                        <span onclick="preDelPhim({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Xóa phim">
-                                            <i class="fa fa-close text-light-red"></i>
-                                        </span>
+                                        </span>                                       
                                     </div>
                                 </td>
                             </tr>

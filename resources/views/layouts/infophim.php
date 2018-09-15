@@ -12,7 +12,7 @@
                                     </strong>                            
                                 </div>
                                 <div>
-                                    <ul class="">      
+                                    <ul style="list-style: none;padding-left: 0px;">      
                                         <li>
                                             <label>Season:</label>
                                             <span>{{$phim[0]->phim_season}}</span>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <ul>                            
+                                <ul style="list-style: none;padding-left: 0px;">                            
                                     <li>
                                         <label>Nguồn video:</label>
                                         <span>{{$phim[0]->phim_nguon}}</span>
