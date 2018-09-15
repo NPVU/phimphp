@@ -20,17 +20,21 @@
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    @if(!empty($listQuocGia))
                                     @foreach($listQuocGia as $quocgia)
                                     <li><a href="{{URL::to('/quoc-gia').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($quocgia->quocgia_ten)))).'-'.$quocgia->quocgia_id}}">{{$quocgia->quocgia_ten}}</a></li>                                    
                                     @endforeach
+                                    @endif
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    @if(!empty($listTheLoai))
                                     @foreach($listTheLoai as $theloai)
                                     <li><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
                                     @endforeach
+                                    @endif
                                 </ul>
                             </li>
                         </ul>
@@ -48,10 +52,12 @@
                             <li><a href="{{route('login')}}">Đăng nhập</a></li>
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
                             @else
-                            <li>
+                            <li data-izimodal-open="#user-notification">
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-bell" style="font-size:1.5em">
-                                        <sup class="notify-message">123</sup>
+                                        @if(count($notification)>0)
+                                        <sup class="notify-message">{{count($notification)}}</sup>
+                                        @endif
                                     </i>
                                 </a>
                             </li>

@@ -1,10 +1,21 @@
+$('#user-notification').iziModal({
+    title: 'Thông báo',
+    top: 100,
+    overlayClose: true,                
+    width: 600,
+    openFullscreen:false,
+    headerColor: '#263238',
+    icon: 'fa fa-bell',
+    iconColor: 'white',
+    zindex: 1001
+});
 $('#user-password').iziModal({
     title: 'Đổi mật khẩu',
     top: 100,
     overlayClose: true,                
     width: 600,
     openFullscreen:false,
-    headerColor: 'rgb(23, 30, 34)',
+    headerColor: '#263238',
     icon: 'glyphicon glyphicon-password',
     iconColor: 'white',
     zindex: 1001,
@@ -20,7 +31,7 @@ $('#user-password').iziModal({
     overlayClose: true,                
     width: 800,
     openFullscreen:false,
-    headerColor: 'rgb(23, 30, 34)',
+    headerColor: '#263238',
     icon: 'glyphicon glyphicon-user',
     iconColor: 'white',
     zindex: 1001

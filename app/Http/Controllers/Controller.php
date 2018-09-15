@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
@@ -24,6 +25,12 @@ class Controller extends BaseController
         //$listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->orderBy('phim_nam')->get();        
         $phimXepHangTuan = ClassCommon::getBangXepHang('week', 10, 0);
         $phimXepHangThang = ClassCommon::getBangXepHang('month', 10, 0);
+
+        if(Auth::check()){
+            $notification = Notification::getNotificationForUser(Auth::id());
+            $data['notification'] = $notification;
+        }
+        
         
         $data['listTheLoai'] = $listTheLoai;
         $data['listQuocGia'] = $listQuocGia;

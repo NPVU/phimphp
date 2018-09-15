@@ -34,6 +34,32 @@
         </div>
     </div>
 </section>
+<div id="user-notification" data-izimodal-transitionin="comingInDown">
+    <div class="modal-body" style="padding: 20px">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-anime">
+                    @foreach($notification as $row)
+                    <a href="{{$row->notify_url}}" style="color:black">
+                        <li>
+                            <div style="float:left;">
+                                <img src="{{$row->notify_image}}" width="50" height="60" style="border-radius:3px;">
+                            </div>
+                            <div style="float:left;padding-left:10px;">
+                                <div><b>{{$row->notify_title}}</b></div>
+                                <div>{{$row->notify_content}}</div>                            
+                            </div>
+                        </li>
+                    </a>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                
+                <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="user-password" data-izimodal-transitionin="comingInDown">
     <div class="modal-body" style="padding: 20px">
         <div class="row">
