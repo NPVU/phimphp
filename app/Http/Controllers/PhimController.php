@@ -55,7 +55,7 @@ class PhimController extends Controller{
         $listPhim = DB::table('phim')
                 ->selectRaw('phim.*, (SELECT COUNT(1) FROM tap AS tap where tap.phim_id = phim.phim_id) as tap,'
                         . '(SELECT MAX(tap.tap_tapso) FROM tap AS tap where tap.phim_id = phim.phim_id) as maxtap')
-                ->whereRaw($where)
+                ->whereRaw($where)->orderByRaw('phim_id DESC')
                 ->paginate(10);
         $listPhim->appends(['tenphim' => $request->$tenPhim, 'tiendo' => $tienDo, 'trangthai' => $xuatBan]);
 
