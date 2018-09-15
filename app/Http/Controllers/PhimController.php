@@ -377,9 +377,11 @@ class PhimController extends Controller{
         if($request->thongbao){
             ClassCommon::sendPusher($request->add_phim_id, $request->add_tapphim_tap);
         }
+        Notification::sendNotificationOfPhim($request->add_phim_id);
         $data['status'] = 1;
         return $data;
-    }
+    }    
+
     public function addTapPhimFromListTap(Request $request){
         $phim_id = $request->phim_id;
         $token = $request->_token;
