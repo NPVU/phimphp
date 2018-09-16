@@ -39,6 +39,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <ul class="list-notification">
+                @if(!empty($notification))
                 @if(count($notification) > 0)
                     @foreach($notification as $row)
                     <a href="{{$row->notify_url}}&nid={{$row->notify_id}}" >
@@ -58,6 +59,7 @@
                     @endforeach
                 @else
                 <i class="text-center"><p>Không có thông báo nào</p></i>
+                @endif
                 @endif
                 </ul>
             </div>

@@ -25,9 +25,9 @@
                             <div class="phim-tip-content">
                             <div class="phim-tip-ten">{{$row->phim_ten}}</div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span> {{$row->phim_season}}
+                                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span>&nbsp; {{$row->phim_season}}
                                 <span style="float:right">
-                                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span> {{$row->phim_nam}}
+                                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span>&nbsp; {{$row->phim_nam}}
                                     <span></span>
                                 </span>
                             </div>

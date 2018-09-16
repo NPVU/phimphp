@@ -29,10 +29,10 @@
                             </li>
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" style="min-width:370px">
                                     @if(!empty($listTheLoai))
                                     @foreach($listTheLoai as $theloai)
-                                    <li><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
+                                    <li style="float:left;width:120px"><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
                                     @endforeach
                                     @endif
                                 </ul>
@@ -52,6 +52,7 @@
                             <li><a href="{{route('login')}}">Đăng nhập</a></li>
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
                             @else
+                            @if(!empty($notification))
                             <li data-izimodal-open="#user-notification">
                                 <a href="javascript:void(0)">
                                     <i class="fa fa-bell" style="font-size:1.5em">
@@ -61,6 +62,7 @@
                                     </i>
                                 </a>
                             </li>
+                            @endif
                             <li class="open-popup-user" onclick="$('.npv-user').toggle('fast');">
                                 <a href="javascript:void(0)" style="margin:5px 5px;width:45px; height:45px; border-radius:100%; text-align:center; background-color:gray;">
                                     <i class="glyphicon glyphicon-user"></i>
