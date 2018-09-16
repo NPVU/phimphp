@@ -78,6 +78,78 @@ class HomeController extends Controller
         $data['listPhimXemNhieu'] = $listPhimXemNhieu;
         return view('xemnhieu_min', $data, parent::getDataHeader());      
     }
+
+    public function indexTvSeries(){
+        $listPhim = DB::table('phim')->where('phim_kieu', 'TV Series')
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(Session::get('PhimPerPage'));                
+        foreach($listPhim as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }           
+        $data['kieuphim'] = 'TV Series'; 
+        $data['listPhim'] = $listPhim;
+        return view('kieuphim_min', $data, parent::getDataHeader());
+    }
+
+    public function indexMovie(){
+        $listPhim = DB::table('phim')->where('phim_kieu', 'Movie')
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(Session::get('PhimPerPage'));                
+        foreach($listPhim as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }            
+        $data['kieuphim'] = 'Movie';
+        $data['listPhim'] = $listPhim;
+        return view('kieuphim_min', $data, parent::getDataHeader());
+    }
+
+    public function indexOva(){
+        $listPhim = DB::table('phim')->where('phim_kieu', 'Ova')
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(Session::get('PhimPerPage'));                
+        foreach($listPhim as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }            
+        $data['kieuphim'] = 'Ova';
+        $data['listPhim'] = $listPhim;
+        return view('kieuphim_min', $data, parent::getDataHeader());
+    }
+
+    public function indexLiveAction(){
+        $listPhim = DB::table('phim')->where('phim_kieu', 'Live Action')
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(Session::get('PhimPerPage'));                
+        foreach($listPhim as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }            
+        $data['kieuphim'] = 'Live Action';
+        $data['listPhim'] = $listPhim;
+        return view('kieuphim_min', $data, parent::getDataHeader());
+    }
     
     public function xemThemTapMoi(){ 
         $phim_per_page = Session::get('PhimPerPage');
