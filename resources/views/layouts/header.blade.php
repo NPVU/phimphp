@@ -2,7 +2,7 @@
         <div class="container">            
             <nav class="navbar" style="margin-bottom: unset">
                 <div class="container-fluid">
-                    <div class="navbar-header">
+                    <div class="navbar-header">                        
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -13,6 +13,15 @@
                             <img src="{{asset('img/themes/logo-2.png')}}" width="100"/>
                             
                         </a>
+                        <div class="search-addon search-mobile" style="max-width:unset">
+                                <div class="input-group" style="padding:8px 10px;">
+                                    <span class="input-group-addon btn-search"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input type="text" class="form-control input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
+                                </div>
+                                <div class="result-search">
+                                    
+                                </div>
+                        </div>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">                          
@@ -39,10 +48,10 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="search-addon">
+                            <li class="search-addon seach-pc">
                                 <div class="input-group" style="padding:10px 10px;">
-                                    <span class="input-group-addon btn-search" id="btn-search"><span class="glyphicon glyphicon-search"></span></span>
-                                    <input type="text" class="form-control input-search" id="input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
+                                    <span class="input-group-addon btn-search"><span class="glyphicon glyphicon-search"></span></span>
+                                    <input type="text" class="form-control input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
                                 </div>
                                 <div class="result-search">
                                     

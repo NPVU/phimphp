@@ -299,6 +299,9 @@ ul.user-menu  li:hover{
 .box-phim:hover ~ .phim-tip{
     display: block;
 }
+.search-mobile{
+    display: none !important;
+}
 @media (max-width: 1199px) {
     .phim-tip{           
         min-width:250px;
@@ -323,6 +326,19 @@ ul.user-menu  li:hover{
     }
     .phim-tip-content > .phim-tip-noidung {
         display: none;
+    }
+    .seach-pc{
+        display: none !important;
+    }
+    .search-mobile{
+        display: block !important;
+    }
+    .result-search{
+        left: 80px;
+        width: calc(100% - 120px);
+    }
+    .result-search > ul.list-anime{
+        margin-bottom:0px;
     }
 }
 @media (max-width: 767px) {

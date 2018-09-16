@@ -127,12 +127,12 @@ $(document).ready(function(){
         }
         
     });    
-    $('#btn-search').click(function(){
-       if($('#input-search').val().trim().length < 3){
+    $('.btn-search').click(function(){
+       if($('.input-search').val().trim().length < 3){
            showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
        }
     });
-    $('#input-search').keyup(function(){
+    $('.input-search').keyup(function(){
         console.log(this.value);
         var tukhoa = this.value.trim();
         if(tukhoa.length < 3){
