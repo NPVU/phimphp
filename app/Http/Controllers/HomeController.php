@@ -13,7 +13,9 @@ class HomeController extends Controller
     
     public function index(){        
         $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
+        $htmlMovieMoi = ClassCommon::getHTMLMovieMoi(Session::get('PhimPerPage'),0);
         $data['htmlTapMoi']     = $htmlTapMoi;
+        $data['htmlMovieMoi']     = $htmlMovieMoi;
         $data['listRandom']  = $this->getPhimRandom();
         return view('home_min', $data, parent::getDataHeader());
     }
@@ -161,6 +163,18 @@ class HomeController extends Controller
             $htmlTapMoi = ClassCommon::getHTMLTapMoi($phim_per_page,0);
         }   
         return $htmlTapMoi;
+    }
+
+    public function xemThemMovieMoi(){ 
+        $phim_per_page = Session::get('PhimPerPage');
+        if(Input::get('page') != null){
+            $page  = Input::get('page')==0?1:Input::get('page');
+            $offset = ($page-1) * $phim_per_page;            
+            $html = ClassCommon::getHTMLMovieMoi($phim_per_page,$offset);
+        } else {
+            $html = ClassCommon::getHTMLMovieMoi($phim_per_page,0);
+        }   
+        return $html;
     }
         
     

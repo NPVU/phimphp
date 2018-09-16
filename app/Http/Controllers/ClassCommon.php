@@ -93,7 +93,7 @@ class ClassCommon extends BaseController
     
     public static function getHTMLTapMoi($limit, $offset){
         $listPhimToday = DB::select(DB::raw('SELECT *, (SELECT MAX(tap_ngaycapnhat) FROM tap WHERE tap.phim_id = phim.phim_id) AS ngaycapnhat FROM phim '
-                . ' JOIN (SELECT DISTINCT tap.phim_id FROM tap, phim p WHERE tap.phim_id = p.phim_id AND p.phim_xuatban = 1 ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
+                . ' JOIN (SELECT DISTINCT tap.phim_id FROM tap, phim p WHERE tap.phim_id = p.phim_id AND p.phim_xuatban = 1 AND (p.phim_kieu = "TV Series" OR p.phim_kieu = "Ova") ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
                 . ' ON phim.phim_id IN (tap.phim_id) '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id ORDER BY ngaycapnhat DESC'));            
         for($i = 0; $i < count($listPhimToday); $i++){
@@ -124,6 +124,80 @@ class ClassCommon extends BaseController
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
 //                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
 //                    $html .=                '</div>';
+                    $html .=            '</div>';                    
+                    $html .=        '</div>';
+                    $html .=        '<div class="phim-tip">';
+                    $html .=            '<div class="phim-tip-content">';
+                    $html .=                '<div class="phim-tip-ten">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span> '.$row->phim_season.' <span style="float:right"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span> '.$row->phim_nam.'<span></div>';
+                    if(is_null($row->phim_gioithieu)){
+                        $html .=                '<div class="phim-tip-noidung">Đang cập nhật ...</div>';
+                    } else {
+                        $html .=                '<div class="phim-tip-noidung">'.(strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu).'</div>';
+                    }
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> ';
+                                            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                                                $html .=  $listTheLoaiPhim[$i]->theloai_ten;
+                                                $html .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+                                            }
+                    $html .=                '</div>';                    
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> '.$row->phim_kieu.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';
+                    $star = ClassCommon::getStar($row->phim_id); 
+                    for($i = 1; $i <= 5; $i++){
+                        if($i <= intval($star)){
+                            $html .= '<span class="glyphicon fa fa-star star star-color"></span>';
+                        } else if($i > $star && ($i-1) < $star){
+                            $html .= '<span class="glyphicon fa fa-star-half-alt star star-half-color"></span>';
+                        } else {
+                            $html .= '<span class="fa fa-star star"></span>';
+                        }
+                    }        
+                    $html .=                '</div>';
+                    $html .=            '</div>';
+                    $html .=        '</div>';
+                    $html .=    '</a>';
+                    $html .= '</div>';
+                }
+            }
+            return $html;
+        } else {
+            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
+        }        
+    }
+
+    public static function getHTMLMovieMoi($limit, $offset){
+        $listPhim = DB::select(DB::raw('SELECT *, (SELECT MAX(tap_ngaycapnhat) FROM tap WHERE tap.phim_id = phim.phim_id) AS ngaycapnhat  FROM phim '
+                . ' JOIN (SELECT DISTINCT tap.phim_id FROM tap, phim p WHERE tap.phim_id = p.phim_id AND p.phim_xuatban = 1 AND p.phim_kieu = "Movie" ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
+                . ' ON phim.phim_id IN (tap.phim_id) '
+                . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id ORDER BY ngaycapnhat DESC'));            
+        for($i = 0; $i < count($listPhim); $i++){
+            $listPhim[$i]->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $listPhim[$i]->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+        }
+        
+        if(count($listPhim)>0){
+            $html = '';
+            foreach ($listPhim as $row){
+                $idTheLoai = json_decode($row->theloai_id);
+                $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+                if(count($row->tap)>0){
+                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
+                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
+                    $html .=        '<div class="box-phim">';
+                    $html .=            '<div class="box-image">';
+                    $html .=                '<img src="'.$row->phim_hinhnen.'" />';
+                    $html .=            '</div>';
+                    $html .=            '<div class="box-overlay-rich"></div>';
+                    $html .=            '<div class="box-info">';
+                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';                    
+                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                     $html .=            '</div>';                    
                     $html .=        '</div>';
                     $html .=        '<div class="phim-tip">';

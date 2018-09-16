@@ -282,3 +282,19 @@ function xt(){
                 }
         });
 }
+function xtmv(){
+    var page = $('.xtmv').attr('aria-page');
+        $.ajax({
+        url: $('meta[name="url"').attr('content') + '/movie-moi?page=' + page,
+                dataType: 'text',
+                type: 'get',
+                success: function (data) {                
+                        $('.moviemoi-page-' + page).html(data);
+                        var nextPage = parseInt(page) + 1;
+                        $('.xtmv').attr('aria-page', nextPage);
+                        var newPage = document.createElement('span');
+                        newPage.className = 'moviemoi-page-' + nextPage;
+                        $('.listMovieMoi').append(newPage);
+                }
+        });
+}

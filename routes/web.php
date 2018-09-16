@@ -96,6 +96,7 @@ Route::get('/delete-comment', 'CommentUtils@deleteComment');
 Route::get('/comment', 'CommentUtils@xemThemComment');
 
 Route::get('/tap-moi', 'HomeController@xemThemTapMoi');
+Route::get('/movie-moi', 'HomeController@xemThemMovieMoi');
 Route::get('/tim-kiem', 'HomeController@timKiem');
 
 Route::get('/report-error', 'XemPhimController@reportError');
