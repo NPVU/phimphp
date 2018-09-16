@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller as Controller;
 
-class Notification extends Controller{       
+class NotificationUtils extends Controller{       
     public static function sendNotificationOfPhim($phimID, $tap, $taphienthi){
         $phim = DB::table('phim')->where('phim_id', $phimID)->get();        
         $listUserID = DB::table('follow_phim')->where('phim_id', $phimID)->get();

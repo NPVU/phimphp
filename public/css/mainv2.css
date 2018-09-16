@@ -530,7 +530,7 @@ label{
 }
 
 .dropdown-menu {
-    background-color: #000c;
+    background-color: rgb(38, 50, 56);
 }
 
 .dropdown-menu>li, .dropdown-menu>li>a{

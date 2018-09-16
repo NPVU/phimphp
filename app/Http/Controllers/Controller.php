@@ -19,22 +19,14 @@ class Controller extends BaseController
         session(['PhimPerPage' => $config[0]->config_phim_per_page]);
         session(['CommentPerPage' => $config[0]->config_comment_per_page]);
     }
-    public function getDataHeader(){
-        $listTheLoai = DB::table('theloai')->get();
-        $listQuocGia = DB::table('quocgia')->get();
-        //$listNam     = DB::table('phim')->selectRaw('phim_nam as nam')->distinct()->orderBy('phim_nam')->get();        
+    public function getDataHeader(){                      
         $phimXepHangTuan = ClassCommon::getBangXepHang('week', 10, 0);
         $phimXepHangThang = ClassCommon::getBangXepHang('month', 10, 0);
 
         if(Auth::check()){
-            $notification = Notification::getNotificationForUser();
+            $notification = NotificationUtils::getNotificationForUser();
             $data['notification'] = $notification;
-        }
-        
-        
-        $data['listTheLoai'] = $listTheLoai;
-        $data['listQuocGia'] = $listQuocGia;
-        //$data['listNam']     = $listNam;        
+        }                                
         $data['phimXepHangTuan']     = $phimXepHangTuan;
         $data['phimXepHangThang']     = $phimXepHangThang;
         return $data;

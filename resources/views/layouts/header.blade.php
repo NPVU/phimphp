@@ -27,23 +27,35 @@
                         <ul class="nav navbar-nav">                          
                             <li><a href="{{URL::to('xem-nhieu')}}">XEM NHIỀU</a></li>
                             <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kiểu phim <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{url('/tv-series')}}">TV Series</a></li>                                   
+                                    <li><a href="{{url('/movie')}}">Movie</a></li>
+                                    <li><a href="{{url('/ova')}}">Ova</a></li>
+                                    <li><a href="{{url('/live-action')}}">Live Action</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    @if(!empty($listQuocGia))
+                                    <?php 
+                                    $listQuocGia = DB::table('quocgia')->get(); 
+                                    ?>                                   
                                     @foreach($listQuocGia as $quocgia)
                                     <li><a href="{{URL::to('/quoc-gia').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($quocgia->quocgia_ten)))).'-'.$quocgia->quocgia_id}}">{{$quocgia->quocgia_ten}}</a></li>                                    
-                                    @endforeach
-                                    @endif
+                                    @endforeach                                    
+                                    
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
                                 <ul class="dropdown-menu" style="min-width:370px">
-                                    @if(!empty($listTheLoai))
+                                    <?php 
+                                    $listTheLoai = DB::table('theloai')->get(); 
+                                    ?>                                     
                                     @foreach($listTheLoai as $theloai)
                                     <li style="float:left;width:120px"><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
-                                    @endforeach
-                                    @endif
+                                    @endforeach                                    
                                 </ul>
                             </li>
                         </ul>
@@ -56,7 +68,7 @@
                                 <div class="result-search">
                                     
                                 </div>
-                            </li>
+                            </li>                           
                             @guest
                             <li><a href="{{route('login')}}">Đăng nhập</a></li>
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
