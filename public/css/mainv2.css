@@ -161,7 +161,7 @@ ul.user-menu  li:hover{
 @media (max-width: 1200px) {
     .slider img{        
         height: 350px;
-    }
+    }    
 }
 @media (max-width: 767px) {
     .slider img{        
@@ -307,16 +307,13 @@ ul.user-menu  li:hover{
         min-width:250px;
         min-height: 180px; 
         left:150px;
-        top: -30px;       
+        top: -80px;       
     }
 }
 @media (max-width: 991px) {
-    .phim-tip{           
-        min-width: 205px;
-        min-height: 120px;
-        left: 10px;
-        top: -160px;      
-    }
+    .box-phim:hover ~ .phim-tip{
+        display: none;
+    }   
     .phim-tip::after {        
         top: 100%;
         right: 50%;
@@ -347,6 +344,9 @@ ul.user-menu  li:hover{
     }    
 }
 @media (max-width: 480px) {
+    .box-phim {
+        height: 160px;
+    }
     .box-info>.box-text{
         top:-160px;
     }
@@ -358,6 +358,9 @@ ul.user-menu  li:hover{
     }
     .box-info>.box-title{
         font-size: 0.8em;
+    }
+    .box-overlay-rich{
+        top:-20px;
     }
 }
 
