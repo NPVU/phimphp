@@ -39,7 +39,7 @@
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 
-                                    $listQuocGia = DB::table('quocgia')->get(); 
+                                    $listQuocGia = DB::table('quocgia')->orderBy('quocgia_ten')->get(); 
                                     ?>                                   
                                     @foreach($listQuocGia as $quocgia)
                                     <li><a href="{{URL::to('/quoc-gia').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($quocgia->quocgia_ten)))).'-'.$quocgia->quocgia_id}}">{{$quocgia->quocgia_ten}}</a></li>                                    
@@ -51,7 +51,7 @@
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
                                 <ul class="dropdown-menu" style="min-width:370px">
                                     <?php 
-                                    $listTheLoai = DB::table('theloai')->get(); 
+                                    $listTheLoai = DB::table('theloai')->orderBy('theloai_ten')->get(); 
                                     ?>                                     
                                     @foreach($listTheLoai as $theloai)
                                     <li style="float:left;width:120px"><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    

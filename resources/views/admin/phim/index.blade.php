@@ -396,7 +396,7 @@
                 $('.add_tapphim_taphienthi').removeClass('has-error');
                 $('.add_tapphim_taphienthi_error').html('');
             }
-            if(parseInt(tap) == 0 || parseInt(tap) > $('#add_phim_maxtap').val()){
+            if(parseInt(tap) > $('#add_phim_maxtap').val()){
                 $('.add_tapphim_tap').addClass('has-error');
                 $('.add_tapphim_tap_error').html('Tập hợp lệ trong khoảng 1 - '+$('#add_phim_maxtap').val());
                 valid = false;
