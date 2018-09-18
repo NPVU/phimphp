@@ -132,8 +132,7 @@ $(document).ready(function(){
            showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
        }
     });
-    $('.input-search').keyup(function(){
-        console.log(this.value);
+    $('.input-search').keyup(function(){        
         var tukhoa = this.value.trim();
         if(tukhoa.length < 3){
             $('.result-search').css('display','none');

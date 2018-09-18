@@ -6,6 +6,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="url" content="{{ url('/') }}">
+    <meta property="og:title" content="XEM PHIM ANIME VIETSUB ONLINE | XEM PHIM ANIME MÙA | PHIM ANIME HAY | PHIM ANIME TOP | XEM ANIME ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
+    <meta property="og:description" content="Xem Phim Anime Vietsub Online, Xem phim anime, Anime Hành động, Anime Download, Anime HD, Anime Vietsub Online" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url('/') }}" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:site_name" content="XemPhimZero.com" />
     <title>@yield('title')</title>
 
     <!-- Scripts -->
