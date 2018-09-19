@@ -1,7 +1,16 @@
 /*VanillaToasts*/
 !function(t,e){try{"object"==typeof exports?module.exports=e():t.VanillaToasts=e()}catch(t){console.log("Isomorphic compatibility is not supported at this time for VanillaToasts.")}}(this,function(){"complete"===document.readyState?e():window.addEventListener("DOMContentLoaded",e),VanillaToasts={create:function(){console.error(["DOM has not finished loading.","\tInvoke create method when DOMs readyState is complete"].join("\n"))},setTimeout:function(){console.error(["DOM has not finished loading.","\tInvoke create method when DOMs readyState is complete"].join("\n"))},toasts:{}};var t=0;function e(){var e=document.createElement("div");e.id="vanillatoasts-container",document.body.appendChild(e),$("#vanillatoasts-container").css("z-index",999999),VanillaToasts.create=function(e){var a=document.createElement("div");if(a.id=++t,a.id="toast-"+a.id,a.className="vanillatoasts-toast",e.title){var n=document.createElement("h4");n.className="vanillatoasts-title",n.innerHTML=e.title,a.appendChild(n)}if(e.text){var o=document.createElement("p");o.className="vanillatoasts-text",o.innerHTML=e.text,a.appendChild(o)}if(e.icon){var i=document.createElement("img");i.src=e.icon,i.className="vanillatoasts-icon",a.appendChild(i)}function s(){document.getElementById("vanillatoasts-container").removeChild(a),delete VanillaToasts.toasts[a.id]}return"function"==typeof e.callback&&a.addEventListener("click",e.callback),a.hide=function(){a.className+=" vanillatoasts-fadeOut",a.addEventListener("animationend",s,!1)},e.timeout&&setTimeout(a.hide,e.timeout),e.type&&(a.className+=" vanillatoasts-"+e.type),a.addEventListener("click",a.hide),document.getElementById("vanillatoasts-container").appendChild(a),VanillaToasts.toasts[a.id]=a,a},VanillaToasts.setTimeout=function(t,e){VanillaToasts.toasts[t]&&setTimeout(VanillaToasts.toasts[t].hide,e)}}return VanillaToasts});
-
+$(window).load(function() {
+    closeWindowLoading();
+});
 $(document).ready(function(){
+    openWindowLoading();    
+    $(document).ajaxSend(function(e, xhr, opt){
+        openLoading();
+    });
+    $(document).ajaxStop(function(){
+        closeLoading();
+    });
     $('a.click-loading').click(function(){
       $('.npv-progress').css('display','block');
       $('.npv-progress-bar').animate({width:'30%'});      
@@ -81,10 +90,11 @@ $(document).ready(function(){
             });
         }        
     });
-    $('.btn-follow-phim').click(function(){
+    $('.btn-follow-phim').click(function(){        
+        setTimeout(function(){console.log(123)},10000);
         var token = $('#current-token').val();
         var follow = $('.btn-follow-phim').attr('follow');
-        if(follow == 0){
+        if(follow == 0){           
             $.ajax({
                 type: 'get',           
                 url: $('meta[name="url"').attr('content')+'/follow-phim/',
@@ -102,8 +112,8 @@ $(document).ready(function(){
                         $('.btn-follow-phim > i > sup').html(data);
                         $('.btn-follow-phim > i').removeClass('fa-bell-slash');
                         $('.btn-follow-phim > i').addClass('fa-bell');  
-                        showToast('success','Chúc bạn xem phim vui vẻ','Đã thêm vào danh sách theo dõi',true);
-                    }                
+                        showToast('success','Chúc bạn xem phim vui vẻ','Đã thêm vào danh sách theo dõi',true);                        
+                    }             
                 }
             });
         } else {
@@ -121,11 +131,10 @@ $(document).ready(function(){
                     $('.btn-follow-phim > i > sup').html(data);
                     $('.btn-follow-phim > i').removeClass('fa-bell');
                     $('.btn-follow-phim > i').addClass('fa-bell-slash');  
-                    showToast('success','Chúc bạn xem phim vui vẻ','Đã bỏ theo dõi',true);
+                    showToast('success','Chúc bạn xem phim vui vẻ','Đã bỏ theo dõi',true);                    
                 }
             });
-        }
-        
+        }                
     });    
     $('.btn-search').click(function(){
        if($('.input-search').val().trim().length < 3){
@@ -133,20 +142,20 @@ $(document).ready(function(){
        }
     });
     $('.input-search').keyup(function(){        
-        var tukhoa = this.value.trim();
+        var tukhoa = this.value.trim();        
         if(tukhoa.length < 3){
             $('.result-search').css('display','none');
-            $('.result-search').html('');            
-        }else{
+            $('.result-search').html('');                   
+        }else{            
             $('.result-search').css('display','block'); 
             $.ajax({
                 type: "GET",
                 url: $('meta[name="url"').attr('content')+'/tim-kiem/',
                 data: {'tukhoa': tukhoa},
                 success: function (data) {                    
-                    $('.result-search').html(data);
+                    $('.result-search').html(data);                    
                 }
-            });                       
+            });                  
         }
     })
 });
@@ -296,4 +305,16 @@ function xtmv(){
                         $('.listMovieMoi').append(newPage);
                 }
         });
+}
+function openLoading(){
+    $('#loading').fadeIn();
+}
+function closeLoading(){
+    $('#loading').fadeOut();
+}
+function openWindowLoading(){
+    $('#loadingWindow').fadeIn();
+}
+function closeWindowLoading(){
+    $('#loadingWindow').fadeOut();
 }
