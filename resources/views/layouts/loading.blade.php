@@ -46,7 +46,7 @@
     -moz-background-clip: padding;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.88);
     font-family: Tahoma;
     font-size: 12px;
     font-weight: bold;

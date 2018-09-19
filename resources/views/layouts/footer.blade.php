@@ -12,10 +12,10 @@
     <div class="container" style="padding: 15px;">        
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="" style="float:left;">
-                <span>© 2018 XemPhimZero.com. All rights reserved | xemphimzero@gmail.com</span>
+                <span>© 2018 &nbsp;{{session('website_name')}}. All rights reserved | &nbsp;{{session('website_email')}}</span>
             </div>
             <div class="" style="float:right;">
-                <span>Version 1.0 </span>
+                <span>Version &nbsp;{{session('website_version')}} </span>
             </div>
             <div class="clearfix"></div>
         </div>
