@@ -33,6 +33,14 @@
                                             <span>{{$phim[0]->phim_sotap}}</span>
                                         </li>
                                         <li>
+                                            <label>Dạng:</label>
+                                            <span>{{$phim[0]->phim_kieu}}</span>
+                                        </li>
+                                        <li>
+                                            <label>Quốc gia:</label>
+                                            <span>{{$phim[0]->quocgia_ten}}</span>
+                                        </li>
+                                        <li>
                                             <label>Năm phát hành:</label>
                                             <span>{{$phim[0]->phim_nam}}</span>
                                         </li>                                

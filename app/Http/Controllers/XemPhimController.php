@@ -31,7 +31,7 @@ class XemPhimController extends Controller{
     function xemPhim(){
         $check = true;
 
-        $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->get();
+        $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')->get();
         $idTheLoai = json_decode($phim[0]->theloai_id);
         $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
         $listTap = DB::table('tap')
