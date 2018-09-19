@@ -77,6 +77,7 @@ Auth::routes();
 Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/danh-sach/phim-theo-doi', 'HomeController@indexPhimTheoDoi');
 Route::get('/xem-nhieu', 'HomeController@indexXemNhieu')->name('upPhim');
 Route::get('/tv-series', 'HomeController@indexTvSeries');
 Route::get('/movie', 'HomeController@indexMovie');

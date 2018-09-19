@@ -1,15 +1,15 @@
 @extends('layouts.app') 
 @section('title') 
-    Thể Loại &nbsp;-&nbsp;{{$theloai[0]->theloai_ten}} 
+    Danh Sách Theo Dõi 
 @endsection 
 @section('contentLeft')
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2 class="content-left-title">THỂ LOẠI&nbsp;-&nbsp;{{$theloai[0]->theloai_ten}} </h2>
+        <h2 class="content-left-title">THEO DÕI</h2>
     </div>
         <div>
-        @if(count($listPhimTheloai) > 0)
-            @foreach($listPhimTheloai as $row)
+        @if(count($listPhim) > 0)
+            @foreach($listPhim as $row)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                     <a class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
@@ -19,7 +19,7 @@
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
                                 <div class="box-title">{{$row->phim_ten}}</div>
-                                <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /&nbsp;{{$row->phim_sotap}}</div>
+                                <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /{{$row->phim_sotap}}</div>
                             </div>
                         </div>
                         <div class="phim-tip">
@@ -53,7 +53,7 @@
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$row->phim_luotxem}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
@@ -76,10 +76,10 @@
             </div>
             @endforeach
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                {{$listPhimTheloai->links()}}
+                {{$listPhim->links()}}
             </div>
         @else
-            <div class="text-center"><i style="color:gray">Không tìm thấy phim của thể loại <b>{{$theloai[0]->theloai_ten}}</b></i></div>
+            <div class="text-center"><i style="color:gray">Bạn chưa theo dõi phim nào</i></div>
         @endif
     </div>
 </div>

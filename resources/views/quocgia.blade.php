@@ -5,7 +5,7 @@
 @section('contentLeft')
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2 class="content-left-title">QUỐC GIA</h2>
+        <h2 class="content-left-title">QUỐC GIA&nbsp;-&nbsp;{{$quocgia[0]->quocgia_ten}} </h2>
     </div>
         <div>
         @if(count($listPhimQuocGia) > 0)
@@ -19,7 +19,7 @@
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
                                 <div class="box-title">{{$row->phim_ten}}</div>
-                                <div class="box-text">{{$quocgia[0]->quocgia_ten}}</div>
+                                <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /&nbsp;{{$row->phim_sotap}}</div>
                             </div>
                         </div>
                         <div class="phim-tip">
@@ -53,7 +53,7 @@
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$row->phim_luotxem}}
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 

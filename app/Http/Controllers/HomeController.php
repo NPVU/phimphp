@@ -20,6 +20,36 @@ class HomeController extends Controller
         return view('home_min', $data, parent::getDataHeader());
     }
 
+    public function indexPhimTheoDoi(){
+        if(Auth::check()){
+            $listPhim = DB::table('phim')->whereRaw('phim_xuatban = 1 AND phim_id IN (SELECT phim_id FROM follow_phim WHERE user_id = '.Auth::id().')')
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->paginate(Session::get('PhimPerPage'));
+            foreach($listPhim as $row){
+                $row->listTheLoai = '';
+                $idTheLoai = json_decode($row->theloai_id);
+                $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+                for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                    $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                    $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+                }
+
+                $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
+            }                                                    
+            $data['listPhim'] = $listPhim;
+            return view('userphim_min', $data, parent::getDataHeader());
+        } else {
+            $data['title'] = 'Không tìm thấy trang';
+            $data['page'] = 'errors.404';
+            $data['backURL'] = URL::to('/');
+            return view('errors/index', $data);
+        }        
+    }
+
     public function indexTheLoai($theloai){
         $arrdata = explode('-', $theloai);
         $theloaiID = $arrdata[count($arrdata)-1];
@@ -35,6 +65,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }                                        
         $data['theloai'] = $theloai;
         $data['listPhimTheloai'] = $listPhimTheloai;
@@ -57,6 +93,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }    
         $data['quocgia'] = $quocgia;
         $data['listPhimQuocGia'] = $listPhimQuocGia;
@@ -76,6 +118,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         } 
         $data['listPhimXemNhieu'] = $listPhimXemNhieu;
         return view('xemnhieu_min', $data, parent::getDataHeader());      
@@ -93,6 +141,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }           
         $data['kieuphim'] = 'TV Series'; 
         $data['listPhim'] = $listPhim;
@@ -111,6 +165,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }            
         $data['kieuphim'] = 'Movie';
         $data['listPhim'] = $listPhim;
@@ -129,6 +189,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }            
         $data['kieuphim'] = 'Ova';
         $data['listPhim'] = $listPhim;
@@ -147,6 +213,12 @@ class HomeController extends Controller
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
+
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }            
         $data['kieuphim'] = 'Live Action';
         $data['listPhim'] = $listPhim;

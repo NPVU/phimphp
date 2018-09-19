@@ -16,6 +16,7 @@
             <ul class="user-menu">
                 <a href="javascript:void(0)" data-izimodal-open="#user-profile"><li>Thông tin cá nhân</li></a>                
                 <a href="javascript:void(0)" data-izimodal-open="#user-password"><li>Đổi mật khẩu</li></a>
+                <a href="{{url('danh-sach/phim-theo-doi')}}"><li>Danh sách phim theo dõi</li></a>
                 @if(Session::has('roles')) 
                 <a href="{{url('/quan-ly')}}"><li>Quản lý</li></a>
                 @endif

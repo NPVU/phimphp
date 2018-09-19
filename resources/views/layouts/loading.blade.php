@@ -70,9 +70,4 @@
     overflow: hidden;
     z-index: 99999;
 }
-#loading {
-    background-image: url(data:image/gif;base64,R0lGODlhIAAgAMQXAPT2+ejr89HY5qOxz5SkyJ2szJCixdve5p+uz…wYAAYACAAUAAAFKKBBVGRFiFaqjqpKtukLyy3tVrBlx/jc179bbqcL8obG4pCQO41KpxAAOw==);
-    background-position: center center;
-    background-repeat: no-repeat;
-}
 </style>

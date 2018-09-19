@@ -18,7 +18,7 @@
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
                                 <div class="box-title">{{$row->phim_ten}}</div>
-                                <div class="box-text">{{number_format($row->phim_luotxem)}}</div>
+                                <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /&nbsp;{{$row->phim_sotap}}</div>
                             </div>
                         </div>
                         <div class="phim-tip">
@@ -52,7 +52,7 @@
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$row->phim_luotxem}}
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
