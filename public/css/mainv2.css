@@ -167,6 +167,14 @@ ul.user-menu  li:hover{
     .slider img{        
         height: 300px;
     }
+    .btn-tap{
+        min-width:100px !important;
+    }
+}
+@media (max-width: 540px) {
+    .btn-tap{
+        min-width:60px !important;
+    }
 }
 @media (max-width: 480px) {
     .slider img{        
@@ -438,6 +446,10 @@ ul.user-menu  li:hover{
     float:right; 
     color:gray;
     line-height: 3;
+}
+.btn-tap{
+    min-width: 60px;
+    margin-bottom: 5px;
 }
 .btn-danger, .btn-default, .btn-info, .btn-primary, .btn-success, .btn-warning{
     background-image: none;

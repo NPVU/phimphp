@@ -36,7 +36,7 @@ class XemPhimController extends Controller{
         $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
         $listTap = DB::table('tap')
                         ->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
-                        ->where('phim_id', Input::get('pid'))->get();
+                        ->where('phim_id', Input::get('pid'))->orderBy('tap_tapso')->get();
         $tap_current = DB::table('tap')->where([
                         ['phim_id', Input::get('pid')],
                         ['tap_tapso', Input::get('t')]
