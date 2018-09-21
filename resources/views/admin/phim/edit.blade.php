@@ -139,7 +139,13 @@
                                 </select>                                
                                 <span class="help-block"><?php echo isset($edit_phim_kieu_error)?$edit_phim_kieu_error:''; ?></span>
                             </div>
-
+                            <div class="form-group <?php echo isset($edit_phim_dotuoi_error)?'has-error':''; ?>">
+                                <label>Độ tuổi</label>
+                                <input type="number" name="edit_phim_dotuoi" class="form-control" 
+                                       value="<?php echo isset($_POST['edit_phim_dotuoi']) ? $_POST['edit_phim_dotuoi'] : $phim[0]->phim_dotuoi ?>"
+                                       placeholder="VD: 16"/>
+                                <span class="help-block"><?php echo isset($edit_phim_dotuoi_error)?$edit_phim_dotuoi_error:''; ?></span>
+                            </div>
                             <div class="form-group <?php echo isset($edit_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="edit_phim_tenkhac">Tên phụ (tên khác)</label>
                                 <input type="text" id="edit_phim_tenkhac" name="edit_phim_tenkhac" 
@@ -183,9 +189,7 @@
                             <div class="col-md-12 box-body-title">
                                 Thông tin liên quan
                             </div>
-                            <div class="form-group">
-                                
-                            </div>                            
+                                                     
                             <div class="form-group <?php echo isset($edit_phim_theloai_error)?'has-error':''; ?>">
                                 <label>Thể loại</label>
                                     @foreach ($listTheLoai as $row)

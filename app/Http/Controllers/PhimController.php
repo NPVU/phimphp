@@ -209,6 +209,7 @@ class PhimController extends Controller{
                         'phim_season'     => $request->add_phim_season,
                         'quocgia_id'      => $request->add_phim_quocgia,
                         'phim_kieu'       => $request->add_phim_kieu,
+                        'phim_dotuoi'     => $request->add_phim_dotuoi,
                         'phim_tag'        => $request->add_phim_tag,
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
@@ -319,6 +320,7 @@ class PhimController extends Controller{
                         'phim_season'     => $request->edit_phim_season,
                         'quocgia_id'      => $request->edit_phim_quocgia,
                         'phim_kieu'       => $request->edit_phim_kieu,
+                        'phim_dotuoi'     => $request->edit_phim_dotuoi,
                         'phim_tag'        => $request->edit_phim_tag,
                         'phim_nguon'      => $request->edit_phim_nguon,
                         'phim_xuatban'    => $xuatBan
