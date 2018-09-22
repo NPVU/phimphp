@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title')
-    Báo Lỗi
+    Báo Lỗi 
 @endsection 
 @section('contentLeft')
 <div class="content-left-section">

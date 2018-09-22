@@ -65,7 +65,7 @@
                                 <td class="text-left">
                                     {{$row->tap_tapsohienthi}}
                                 </td>   
-                                <td class="text-left">
+                                <td class="text-left content-{{$row->er_id}}">
                                     <?php echo $row->er_content ?>
                                 </td>   
                                 <td class="text-left">
@@ -79,12 +79,20 @@
                                 </td>                                
                                 <td class="text-center">
                                     <div class="list-action-icon">
+                                        @if(empty($row->er_url))
                                         <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap_tapso.'&s='.md5('google')}}" target="_blank">
                                             <span data-toggle="tooltip" title="Đi đến">
                                                 <i class="fa fa-internet-explorer  text-light-blue"></i>
                                             </span>
                                         </a>
-                                        <span data-toggle="tooltip" title="Xóa" onclick="preDeleteReport({{$row->er_id}}, '{{$row->er_content}}')">
+                                        @else
+                                        <a href="{{$row->er_url}}" target="_blank">
+                                            <span data-toggle="tooltip" title="Đi đến">
+                                                <i class="fa fa-internet-explorer  text-light-blue"></i>
+                                            </span>
+                                        </a>
+                                        @endif
+                                        <span data-toggle="tooltip" title="Xóa" onclick="preDeleteReport({{$row->er_id}})">
                                             <i class="fa fa-close text-light-red"></i>
                                         </span>
                                     </div>
@@ -141,9 +149,9 @@
             icon: 'fa fa-check',
             iconColor: 'white'
         });
-        function preDeleteReport(erid, ercontent){
+        function preDeleteReport(erid){
             $('#verify_cr_id').val(erid);
-            $('#verify_cr_content').html(ercontent);           
+            $('#verify_cr_content').html($('.content-'+erid).html());
             $('#modal-verify-report').iziModal('open');
         }  
     </script>  

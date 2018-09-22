@@ -34,13 +34,13 @@ class HoTroController extends Controller{
         if(!is_null(Input::get('tukhoa'))){
             $tuKhoa = Input::get('tukhoa');
             $count  = DB::table('error_report')
-                    ->join('phim','phim.phim_id','=','error_report.phim_id')                   
+                    ->leftJoin('phim','phim.phim_id','=','error_report.phim_id')                   
                     ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('er_content', 'like', '%'.$tuKhoa.'%')                   
                     ->count();
             $report = DB::table('error_report')
-                    ->join('phim','phim.phim_id','=','error_report.phim_id')    
-                    ->join('tap','tap.tap_id', '=','error_report.tap_id')               
+                    ->leftJoin('phim','phim.phim_id','=','error_report.phim_id')    
+                    ->leftJoin('tap','tap.tap_id', '=','error_report.tap_id')               
                     ->where('phim_ten', 'like', '%'.$tuKhoa.'%')
                     ->orwhere('er_content', 'like', '%'.$tuKhoa.'%') 
                     ->paginate(10);
@@ -49,8 +49,8 @@ class HoTroController extends Controller{
             $count = DB::table('error_report')                    
                     ->count();
             $report = DB::table('error_report')
-                    ->join('phim','phim.phim_id','=','error_report.phim_id')
-                    ->join('tap','tap.tap_id', '=','error_report.tap_id')
+                    ->leftJoin('phim','phim.phim_id','=','error_report.phim_id')
+                    ->leftJoin('tap','tap.tap_id', '=','error_report.tap_id')
                     ->paginate(10);                    
         }
         
