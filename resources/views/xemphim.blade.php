@@ -7,8 +7,8 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">{{$phim[0]->phim_ten}}</h2>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
-        @include('layouts.video_min')
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                       
+        @include('layouts.video_min') 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
@@ -37,6 +37,92 @@
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
             <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>                        
         </div>
+        <script type="text/javascript">    
+            var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};        
+            var auto;
+            var video = document.getElementById('my-player');
+            $(document).ready(function(){
+                $('#my-player').load();
+                $.ajax({
+                    url: $('meta[name="url"]').attr('content')+'/autoload/?pid='+getParameterByName('pid','')+'&t='+getParameterByName('t','')+'&token={{Session::token()}}',
+                    dataType: 'text',
+                    type: 'get',
+                    success:function(data){
+                        if(data!=null){
+                            data = JSON.parse(data);                                   
+                            $('#google360p').attr('src', data['360p']);
+                            if(data['720p']!=null){
+                                $('#my-player').attr('src', data['720p']);                                                   
+                                $('.npv-quality').css('color','white');
+                                $('.npv-quality').css('font-weight',700);
+                                $('.npv-quality').attr('quality', "720");
+                                $('.npv-quality').attr('title', "Tắt HD");
+                                video.onerror = function(){                                
+                                    video.setAttribute('src', $('#google360p').attr('src'));                                
+                                    video.play();
+                                };
+                                $('.icon-quality').removeClass('display-none');
+                                $('#google720p').attr('src', data['720p']);
+                            }else{
+                                $('#my-player').attr('src', data['360p']);
+                                $('.npv-quality').css('display','none');                       
+                            }
+                            if(data['1080p']!=null){
+                                $('#google1080p').attr('src', data['1080p']);
+                            }
+                            $('#my-player').removeAttr('poster');
+                            $('#my-player').prop('controls',true);
+                        }                    
+                    }
+                });
+            });        
+            var v = 0;        
+            video.onloadeddata = function(){
+                video.play();
+            };        
+            function nextVideo(){
+                var v = document.getElementById('my-player');
+                if(v.duration - v.currentTime === 0){
+                    if(getParameterByName('t','') < sotap){
+                        iziToast.show({
+                            timeout: 10000,
+                            theme: 'dark',
+                            icon: 'fa fa-play',
+                            title: 'Chuyển tập trong 5s',                        
+                            position: 'center', 
+                            progressBarColor: '#27ABDB',
+                            buttons: [
+                                ['<button>Chuyển ngay</button>', function (instance, toast) {
+                                    window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s={{md5('google')}}";
+                                }, true], 
+                                ['<button>Hủy</button>', function (instance, toast) {
+                                    instance.hide({
+                                        transitionOut: 'fadeOutUp',
+                                        onClosing: function(instance, toast, closedBy){
+                                            clearTimeout(auto);
+                                        }
+                                    }, toast, 'buttonName');
+                                }]
+                            ],
+                            onClosing: function(instance, toast, closedBy){
+                                clearTimeout(auto);
+                            }
+                        });
+                        confirmAutoNext(10);                    
+                    }
+                }
+            }
+                function confirmAutoNext(i){         
+                    if(i <= 0){
+                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s={{md5('google')}}";
+                    } else {    
+                        $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
+                        auto = setTimeout(() => {
+                            confirmAutoNext(i-1);
+                        }, 1000);
+                    }
+                }
+        </script>
         <script>
             $('.npv-play').click(function(){
                 if(video.paused){
@@ -305,7 +391,6 @@
         @endif
     </div>
 </div>
-
 @endsection 
 @section('contentRight') 
     @include('layouts.rank_min') 

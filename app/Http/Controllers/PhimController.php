@@ -125,7 +125,7 @@ class PhimController extends Controller{
             return view('errors/index', $data); 
         }
         if(strcmp(Session::token(), $token) == 0){
-            $list = DB::table('tap')->where('phim_id', $phim_id)->get();
+            $list = DB::table('tap')->where('phim_id', $phim_id)->orderBy('tap_tapso')->get();
             $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
             $data['list'] = $list;
             $data['phim'] = $phim;
