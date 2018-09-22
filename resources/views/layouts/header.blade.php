@@ -24,8 +24,7 @@
                         </div>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">                          
-                            <li><a href="{{URL::to('xem-nhieu')}}">XEM NHIỀU</a></li>
+                        <ul class="nav navbar-nav">                                                      
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kiểu phim <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -58,6 +57,8 @@
                                     @endforeach                                    
                                 </ul>
                             </li>
+                            <li><a href="{{URL::to('xem-nhieu')}}">XEM NHIỀU</a></li>
+                            <li><a href="{{URL::to('bao-loi')}}">BÁO LỖI</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="search-addon seach-pc">

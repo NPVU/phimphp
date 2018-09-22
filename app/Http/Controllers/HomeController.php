@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,31 @@ class HomeController extends Controller
         $data['htmlMovieMoi']     = $htmlMovieMoi;
         $data['listRandom']  = $this->getPhimRandom();
         return view('home_min', $data, parent::getDataHeader());
+    }
+
+    public function getBaoLoi(){
+        $data['captcha'] = captcha_img();
+        return view('layouts.baoloi_min', $data,parent::getDataHeader());
+    }
+
+    public function postBaoLoi(Request $request){
+        $rules = ['captcha' => 'required|captcha'];
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            $data['errorCaptcha'] = true;
+            $data['captcha'] = captcha_img();
+            
+        }else{
+            DB::table('error_report')->insert([
+                'phim_id'       => 0,
+                'tap_id'        => 0,
+                'er_url'        => trim($request->url),
+                'er_content'    => trim($request->content),
+                'er_create_at'  => now()
+            ]);
+            $data['reported'] = true;
+        }
+        return view('layouts.baoloi_min', $data,parent::getDataHeader());
     }
 
     public function indexPhimTheoDoi(){
