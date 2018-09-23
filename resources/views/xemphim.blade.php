@@ -296,12 +296,12 @@
                 @if($_GET['t'] != $tap->tap_tapso)
                 <a class="click-loading btn btn-primary visit btn-tap"
                    href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}">
-                    <span>{{$tap->tap_tapsohienthi}}</span>
+                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
                 </a>
                 @else
                 <a class="btn btn-success btn-tap"
                    href="#">
-                    <span>{{$tap->tap_tapsohienthi}}</span>
+                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
                 </a>
                 @endif
             </div>               
