@@ -12,6 +12,7 @@
     <meta property="og:url" content="{{ url('/') }}" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="XemPhimZero.com" />
+    <meta property="fb:app_id" content="1228373097312732" />
     <title>@yield('title')</title>
 
     <!-- Scripts -->

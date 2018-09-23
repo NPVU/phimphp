@@ -309,8 +309,17 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">BÌNH LUẬN</h2>
     </div>
-    <div>
-    @include('layouts.comment_min')
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:#d2d7da; border-radius: 3px;">
+    <!-- @include('layouts.comment_min') -->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=1228373097312732&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+        <div class="fb-comments" data-href="{{url('xem-phim')}}/{{$phim[0]->phim_id}}" data-width="100%" data-numposts="10"></div>
     </div>
 </div>
 
