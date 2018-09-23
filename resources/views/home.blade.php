@@ -1,6 +1,9 @@
 @extends('layouts.app') 
 @section('title')
-    Trang Chủ
+    Trang Chủ 
+@endsection 
+@section('metaCEO')
+<meta property="og:description" content="Xem Phim Anime Vietsub Online, Xem phim anime, Anime Hành động, Anime Download, Anime HD, Anime Vietsub Online" /> 
 @endsection 
 @section('contentLeft')
 <div class="slider">    

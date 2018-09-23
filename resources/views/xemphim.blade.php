@@ -2,6 +2,10 @@
 @section('title')
     {{$phim[0]->phim_ten}}&nbsp;- &nbsp;{{$tap[0]->tap_tapsohienthi}}
 @endsection 
+@section('metaCEO') 
+<meta property="og:description" content="Download phim <?php echo $phim[0]->phim_ten ?>, Tải Phim <?php echo $phim[0]->phim_ten?>" /> 
+<meta property="og:description" content="Xem Phim <?php echo $phim[0]->phim_ten?>, Xem Phim <?php echo $phim[0]->phim_ten?> Online, Xem Phim <?php echo $phim[0]->phim_ten?> HD, Xem Phim <?php echo $phim[0]->phim_ten?> Miễn Phí, Xem Phim <?php echo $phim[0]->phim_ten?> Không Quảng Cáo" /> 
+@endsection 
 @section('contentLeft')
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -309,7 +313,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">BÌNH LUẬN</h2>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:#d2d7da; border-radius: 3px;">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:#f9fbfd; border-radius: 3px;">
     <!-- @include('layouts.comment_min') -->
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
