@@ -5,6 +5,9 @@
 @section('metaCEO') 
 <meta property="og:description" content="Download phim <?php echo $phim[0]->phim_ten ?>, Tải Phim <?php echo $phim[0]->phim_ten?>" /> 
 <meta property="og:description" content="Xem Phim <?php echo $phim[0]->phim_ten?>, Xem Phim <?php echo $phim[0]->phim_ten?> Online, Xem Phim <?php echo $phim[0]->phim_ten?> HD, Xem Phim <?php echo $phim[0]->phim_ten?> Miễn Phí, Xem Phim <?php echo $phim[0]->phim_ten?> Không Quảng Cáo" /> 
+<meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="850">
 @endsection 
 @section('contentLeft')
 <div class="content-left-section" >
