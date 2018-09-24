@@ -307,6 +307,11 @@
             </div>               
         @endforeach 
     </div>
+    <script>
+    $('a.click-loading').click(function(){
+        $("html,body").animate({scrollTop:$("#my-player").offset().top},"slow");
+    })
+    </script>
 </div>
 
 <div class="content-left-section" >
