@@ -21,6 +21,41 @@
             </a>
         </p>
 </video>
+<div id="modal-captcha" data-izimodal-transitionin="fadeInUp">            
+    <div class="modal-body">                
+        <div>
+            <img id="captcha" src="" alt="captcha" title="Mã xác nhận" width="25%"/> 
+                <i id="iconLoadingCaptcha" class="fa fa-sync-alt fa-spin display-none" title="Loading..."></i>                                                   
+                <label id="messageErrorCaptcha" class="text-danger display-none">Mã xác nhận không đúng, vui lòng nhập lại !</label>
+        </div>
+        <div class="input-group">
+            <input type="text" id="txtCaptcha" class="form-control" placeholder="Nhập mã xác nhận" aria-label="Nhập mã xác nhận" aria-describedby="basic-addon2">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-outline-secondary"                                
+                        title="Làm mới mã xác nhận" onclick="getTicket()">
+                    <span class="fa fa-x fa-redo-alt"></span>
+                </button>                                                    
+                <button type="button" class="btn btn-outline-secondary"title="Xác nhận" onclick="getVideo()">
+                    <span class="fa fa-x fa-check-circle btn-api-video" ></span>
+                </button>
+            </div>
+        </div>                         
+    </div>
+</div>
+<script>                        
+        $('#modal-captcha').iziModal({
+             title: 'Nhập captcha để xem video',
+             overlayClose:false,
+             headerColor: '#263238',
+             icon: 'fa fa-shield-alt',
+             onOpening: function(modal){
+                 modal.startLoading();                 
+             },
+             onOpened: function(modal){
+                 modal.stopLoading();                 
+             }
+         });                               
+</script>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0) 
     @if(!empty($tap[0]->tap_youtubelink))
     <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="380"></iframe>

@@ -94,7 +94,9 @@
             });     
             @endif
             @if(strcmp($_GET['s'], md5('openload'))==0)
-                getLinkOpenload('{{$tap[0]->tap_openloadlink}}');
+                $(window).load(function() {
+                    getLinkOpenload('{{$tap[0]->tap_openloadlink}}');
+                });                 
             @endif
             var v = 0;        
             video.onloadeddata = function(){

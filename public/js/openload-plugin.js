@@ -15,18 +15,26 @@ function getTicket(){
     var response = JSON.parse(xhttp.responseText);    
     /*console.log(response);*/
     if(response.result.captcha_url === false){
-    ticket = response.result.ticket;
+        ticket = response.result.ticket;
         getVideo();
-    } else if((captcha_url !== response.result.captcha_url)){            
-        captcha_url = response.result.captcha_url;            
-        ticket = response.result.ticket;           
-    } 
+    } else if((captcha_url !== response.result.captcha_url)){        
+        $('#modal-captcha').iziModal('open');        
+        captcha_url = response.result.captcha_url;
+        $("#captcha").attr("src", captcha_url);      
+        ticket = response.result.ticket;
+        $("#txtCaptcha").focus();
+        $("#iconLoadingCaptcha").addClass("display-none");      
+    } else {
+        $("#iconLoadingCaptcha").removeClass("display-none");
+        setTimeout(getTicket,1000);
+    }
 }
 
 function getVideo(){
+    $('#messageErrorCaptcha').addClass('display-none');
     var txtCaptcha = $("#txtCaptcha").val();
     if(!txtCaptcha){
-        /*console.log("txtCaptcha is null");*/
+        console.log("txtCaptcha is null");
         txtCaptcha = "null";
     }
     var xhttp = new XMLHttpRequest();
@@ -36,6 +44,9 @@ function getVideo(){
     /*console.log(response);*/
     if(response.status === 200){
         $('#my-player').attr('src', response.result.url);
+        $('#modal-captcha').iziModal('close');
+    } else if(response.status === 403){
+        $('#messageErrorCaptcha').removeClass('display-none');
     } else {
         return false;
     }  
