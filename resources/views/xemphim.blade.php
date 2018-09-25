@@ -258,7 +258,7 @@
             </div>
             <script>          
                 $(document).ready(function () {
-                    $('button[title]').qtip({
+                    $('button[title], img[title]').qtip({
                         position: {
                                 my: 'top center',
                                 at: 'bottom center'
