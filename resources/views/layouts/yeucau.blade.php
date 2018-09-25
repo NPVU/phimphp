@@ -1,31 +1,32 @@
 @extends('layouts.app') 
 @section('title')
-    Báo Lỗi 
+    Yêu Cầu Phim 
 @endsection 
 @section('contentLeft')
 <div class="content-left-section">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2 class="content-left-title">BÁO LỖI</h2>
+        <h2 class="content-left-title">YÊU CẦU PHIM</h2>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        @if(empty($reported))
-        <form method="POST" action="{{ url('bao-loi') }}" class="col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+        @if(empty($success))
+        <form method="POST" action="{{ url('yeu-cau-phim') }}" class="col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
             @csrf
             <div class="form-group">
-                <label for="url" >URL lỗi</label>
+                <label for="email" >E-Mail</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="fa fa-link"></span></span>
-                    <input id="url" type="text" class="form-control" name="url" value="" required autofocus placeholder="Nhập vào URL bị lỗi">
+                    <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                    <input id="email" type="email" class="form-control" name="email" value="{{isset($_POST['email'])?$_POST['email']:''}}" required autofocus placeholder="Nhập vào địa chỉ e-mail của bạn.">
                 </div>                
             </div>
             <div class="form-group">
-                <label for="content" >Mô tả lỗi</label>
+                <label for="content" >Danh sách phim yêu cầu</label>
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
-                    <textarea id="content" name="content" class="form-control" required rows="5">
-
-                    </textarea>
-                </div>                
+                    <span class="input-group-addon"><span class="fa fa-film"></span></span>
+                    <textarea id="content" name="content" class="form-control" rows="5" placeholder="Vui lòng nhập chính xác tên phim, mỗi 1 phim 1 dòng nhé">{{isset($_POST['content'])?$_POST['content']:''}}</textarea>
+                </div>        
+                <span class="invalid-feedback">
+                    <strong class="error-content"></strong>
+                </span>             
             </div>            
             <div class="form-group form-captcha">
                 <label for="captcha">Mã xác nhận</label>
@@ -41,13 +42,14 @@
                 @endif          
             </div>            
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-danger">Báo lỗi</button>              
+                <button type="submit" class="btn btn-danger" onclick="return checkYeuCauContent()">Gửi yêu cầu</button>              
             </div>
         </form>
         @else
             <div class="text-center" style="color:#14cc5e">
                 <span class="fa fa-2x fa-check-circle"></span>
-                <h4>Báo lỗi thành công, cảm ơn bạn đã nhiệt tình hỗ trợ {{ config('app.name') }}.</h4>
+                <h4>Yêu cầu của bạn đã được ghi nhận thành công.</h4>
+                <h5>Chúng tôi sẽ thông báo cho bạn khi hệ thống đã cập nhật phim. Cảm ơn bạn đã ủng hộ {{ config('app.name') }}.</h5>
             </div>
         @endif
     </div>
@@ -62,6 +64,13 @@
             }
         });
     });
+    function checkYeuCauContent(){
+        var str =  $('#content').val();
+        if(str.trim().length < 6){
+            $('.error-content').html('Vui lòng nhập tên phim chính xác, ít nhất 6 ký tự nhé');
+            return false;
+        }
+    }
 </script>
 @endsection 
 @section('contentRight') 

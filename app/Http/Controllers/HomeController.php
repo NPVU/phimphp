@@ -47,6 +47,28 @@ class HomeController extends Controller
         return view('layouts.baoloi_min', $data,parent::getDataHeader());
     }
 
+    public function getYeuCauPhim(){
+        $data['captcha'] = captcha_img();
+        return view('layouts.yeucau_min', $data,parent::getDataHeader());
+    }
+
+    public function postYeuCauPhim(Request $request){
+        $rules = ['captcha' => 'required|captcha'];
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            $data['errorCaptcha'] = true;
+            $data['captcha'] = captcha_img();
+        }else{
+            DB::table('yeucau')->insert([
+                'yeucau_email'          => trim($request->email),
+                'yeucau_content'        => trim($request->content),
+                'yeucau_create_at'      => now()
+            ]);
+            $data['success'] = true;
+        }
+        return view('layouts.yeucau_min', $data,parent::getDataHeader());
+    }
+
     public function indexPhimTheoDoi(){
         if(Auth::check()){
             $listPhim = DB::table('phim')->whereRaw('phim_xuatban = 1 AND phim_id IN (SELECT phim_id FROM follow_phim WHERE user_id = '.Auth::id().')')
