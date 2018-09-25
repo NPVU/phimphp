@@ -8,6 +8,7 @@
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="850">
+<script type="text/javascript" src="{{ asset('js/openload-plugin.min.js') }}"></script>
 @endsection 
 @section('contentLeft')
 <div class="content-left-section" >
@@ -20,12 +21,17 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
         <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}">
-            <img class="server-google {{strcmp($_GET['s'], md5('google'))==0?'server-active':''}}" src="{{asset('img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
+            <img class="server-google {{strcmp($_GET['s'], md5('google'))==0?' server-active':''}}" src="{{asset('img/themes/google-drive-32x32.png')}}" data-toggle="tooltip" title="Server Google" />
         </a>
         @endif                    
+        @if(!empty($tap[0]->tap_openloadlink))
+        <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('openload')}}">
+            <img class="server-openload {{strcmp($_GET['s'], md5('openload'))==0?' server-active':''}}" src="{{asset('img/themes/openload-32x32.png')}}" data-toggle="tooltip" title="Server Openload" />
+        </a>
+        @endif 
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}">
-            <img class="server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?'server-active':''}}" src="{{asset('img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
+            <img class="server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?' server-active':''}}" src="{{asset('img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
         </a>
         @endif
         <span class="title-video">
@@ -37,17 +43,20 @@
 
 <div class="content-left-section">    
     <div>                                                    
-        @if(strcmp($_GET['s'], md5('google'))==0)
+        @if(strcmp($_GET['s'], md5('google'))==0 || strcmp($_GET['s'], md5('openload'))==0)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 text-center" style="margin-top:5px;">                                    
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
             <button class="btn btn-success npv-icon npv-play" title="Xem phim"><i class="fa fa-play"></i></button>
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
+            @if(strcmp($_GET['s'], md5('google'))==0)
             <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>                        
+            @endif
         </div>
         <script type="text/javascript">    
             var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};        
             var auto;
             var video = document.getElementById('my-player');
+            @if(strcmp($_GET['s'], md5('google'))==0)
             $(document).ready(function(){
                 $('#my-player').load();
                 $.ajax({
@@ -82,7 +91,11 @@
                         }                    
                     }
                 });
-            });        
+            });     
+            @endif
+            @if(strcmp($_GET['s'], md5('openload'))==0)
+                getLinkOpenload('{{$tap[0]->tap_openloadlink}}');
+            @endif
             var v = 0;        
             video.onloadeddata = function(){
                 video.play();
@@ -100,7 +113,7 @@
                             progressBarColor: '#27ABDB',
                             buttons: [
                                 ['<button>Chuyển ngay</button>', function (instance, toast) {
-                                    window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s={{md5('google')}}";
+                                    window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
                                 }, true], 
                                 ['<button>Hủy</button>', function (instance, toast) {
                                     instance.hide({
@@ -121,7 +134,7 @@
             }
                 function confirmAutoNext(i){         
                     if(i <= 0){
-                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s={{md5('google')}}";
+                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
                     } else {    
                         $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
                         auto = setTimeout(() => {
@@ -129,8 +142,6 @@
                         }, 1000);
                     }
                 }
-        </script>
-        <script>
             $('.npv-play').click(function(){
                 if(video.paused){
                     video.play();
@@ -138,6 +149,7 @@
                     video.pause();
                 }
             });
+            @if(strcmp($_GET['s'], md5('google'))==0)
             $('.npv-quality').click(function(){
                 var currentTime = video.currentTime;
                 if($('.npv-quality').attr('quality') === "360"){                
@@ -160,6 +172,7 @@
                 }
                 video.currentTime = currentTime;video.play();
             });
+            @endif
             $('.pre-15s').click(function(){
                 video.currentTime += -15;
             });
@@ -298,7 +311,7 @@
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
                 @if($_GET['t'] != $tap->tap_tapso)
                 <a class="click-loading btn btn-primary visit btn-tap"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{md5('google')}}">
+                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_tapso}}&s={{$_GET['s']}}">
                     <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
                 </a>
                 @else
