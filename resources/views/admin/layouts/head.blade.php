@@ -11,11 +11,11 @@
     <script type="text/javascript" src="{{ asset('js/iziModal.min.js') }}"></script> 
     <script type="text/javascript" src="{{ asset('template/plugins/iCheck/icheck.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/adminlte.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script> 
-    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script> 
+    <script type="text/javascript" src="{{ asset('js/dropzone.js') }}"></script>     
     <link href="{{ asset('template/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />    
+    <link href="{{ asset('template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('template/bower_components/morris.js/morris.css') }}" rel="stylesheet" type="text/css" />    
     <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css" />

@@ -38,7 +38,7 @@
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 5%">#</th>                                
                                 <th scope="col" class="text-left" style="width: 25%">Email</th>
-                                <th scope="col" class="text-center" style="width: 50%">Phim yêu cầu</th>                                                          
+                                <th scope="col" class="text-left" style="width: 50%">Phim yêu cầu</th>                                                          
                                 <th scope="col" class="text-center" style="width: 10%">Thời gian</th>
                                 <th scope="col" class="text-center" style="width: 10%"></th>
                             </tr>
