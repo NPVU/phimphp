@@ -535,6 +535,22 @@ class ClassCommon extends BaseController
         }        
     }
 
+    public static function countUser(){
+        return DB::table('users')->count();
+    }
+
+    public static function countPhim(){
+        return DB::table('phim')->count();
+    }
+
+    public static function countReportError(){
+        return DB::table('error_report')->count();
+    }
+
+    public static function countYeuCauPhim(){
+        return DB::table('yeucau')->count();
+    }
+
     public static function removeVietnamese($str){
         $unicode = array(
             'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',

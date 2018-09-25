@@ -31,6 +31,9 @@
                     <a href="{{ url('/quan-ly/tai-khoan/') }}">
                         <i class="fa fa-users"></i>
                         <span>Quản lý tài khoản</span>                    
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-primary">{{ClassCommon::countUser()}}</small>
+                        </span>  
                     </a>                
                 </li>                
                 @endif
@@ -38,7 +41,10 @@
                 <li>
                     <a href="{{ url('/quan-ly/phim/') }}">
                         <i class="fa fa-film"></i>
-                        <span>Quản lý phim</span>                    
+                        <span>Quản lý phim</span>      
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-primary">{{ClassCommon::countPhim()}}</small>
+                        </span>              
                     </a>                
                 </li>
                 <li class="treeview">
@@ -65,6 +71,8 @@
                         <span>Hỗ trợ</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
+                            <small class="label pull-right bg-green">{{ClassCommon::countYeuCauPhim()}}</small>
+                            <small class="label pull-right bg-red">{{ClassCommon::countReportError()}}</small>                            
                         </span>
                     </a>
                     <ul class="treeview-menu">
@@ -72,6 +80,12 @@
                             <a href="{{ url('/quan-ly/ho-tro/bao-loi') }}">
                                 <i class="fa fa-exclamation-circle"></i>
                                 <span>Báo lỗi</span>                    
+                            </a>                
+                        </li>
+                        <li>
+                            <a href="{{ url('/quan-ly/ho-tro/yeu-cau-phim') }}">
+                                <i class="fa fa-gift"></i>
+                                <span>Yêu cầu phim</span>                    
                             </a>                
                         </li>                    
                     </ul>

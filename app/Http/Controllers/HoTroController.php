@@ -69,6 +69,48 @@ class HoTroController extends Controller{
         }
         return redirect()->route('indexError')->with('success', 'Xóa lỗi thành công!');   
     }
+
+
+    public function indexYeuCauPhim(){
+        if(!$this->hasRole()){
+            $data['title'] = 'Không có quyền truy cập';
+            $data['page'] = 'errors.401';
+            $data['backURL'] = URL::to('/');
+            return view('errors/index', $data); 
+        }
+        if(!is_null(Input::get('tukhoa'))){
+            $tuKhoa = Input::get('tukhoa');
+            $count  = DB::table('yeucau')                                   
+                    ->where('yeucau_email', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('yeucau_content', 'like', '%'.$tuKhoa.'%')                   
+                    ->count();
+            $yeucau = DB::table('yeucau')             
+                    ->where('yeucau_email', 'like', '%'.$tuKhoa.'%')
+                    ->orwhere('yeucau_content', 'like', '%'.$tuKhoa.'%') 
+                    ->paginate(10);
+            $yeucau->appends(['tukhoa' => $tuKhoa]);
+        } else {
+            $count = DB::table('yeucau')                    
+                    ->count();
+            $yeucau = DB::table('yeucau')
+                    ->paginate(10);                    
+        }
+        
+        $data['listYeuCau'] = $yeucau;
+        $data['count']    = $count;        
+        $data['title'] = 'Hỗ Trợ - Yêu Cầu Phim';
+        $data['page'] = 'admin.hotro.yeucau';
+        return view('admin/layout', $data);
+    }
+
+    public function deleteYeuCauPhim(Request $request){
+        if($this->hasRole()){
+            if($request->cr_id != 0){
+                DB::table('yeucau')->where('yeucau_id', $request->cr_id)->delete();               
+            }
+        }
+        return redirect()->route('indexYeuCauPhim')->with('success', 'Xóa yêu cầu thành công!');   
+    }
         
 }
 
