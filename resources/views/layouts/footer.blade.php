@@ -14,10 +14,12 @@
             <div class="" style="float:left;">
                 <span>© 2018 &nbsp;{{session('website_name')}}. All rights reserved | &nbsp;{{session('website_email')}}</span>
             </div>
-            <div class="" style="float:right;">
+            <div class="" style="float:right;cursor:pointer">
                 <span class="fas fa-laptop" title="Hỗ trợ tốt hơn trên máy tính" style="font-size: 1.3em"></span>
-                <span class="fab fa-chrome" title="Xem tốt hơn trên trình duyệt Google Chrome, Cốc Cốc" style="font-size: 1.3em"></span>
-                <span class="fab fa-firefox" title="Xem tốt trên trình duyệt Firefox" style="font-size: 1.3em"></span>
+                <span title="Xem tốt trên trình duyệt Google Chrome, Cốc Cốc, Firefox" >
+                    <span class="fab fa-chrome" style="font-size: 1.3em"></span>
+                    <span class="fab fa-firefox" style="font-size: 1.3em"></span>
+                </span>                
                 <span>Version &nbsp;{{session('website_version')}} </span>
             </div>
             <div class="clearfix"></div>
