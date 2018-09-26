@@ -1,16 +1,15 @@
-var key         = "bvLaLh9-";
-var login       = "d6e334799f9a673d";
+var $key        = "bvLaLh9-";
+var $login      = "d6e334799f9a673d";
 var ticket      = "";
 var captcha_url = "";
-var website     = "{{url('/')}}"; 
-var fileID      = "";
+var $fileID     = "";
 function getLinkOpenload(f){
-    fileID = f;
+    $fileID = f;
     getTicket();
 }
 function getTicket(){    
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", $('meta[name="url"]').attr('content')+"/api/openload/ticket/" + fileID + "/" + login + "/" + key, false);
+    xhttp.open("GET", $('meta[name="url"]').attr('content')+"/api/openload/ticket/"+$fileID+"/"+$login+"/"+$key, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);    
     /*console.log(response);*/
@@ -38,7 +37,7 @@ function getVideo(){
         txtCaptcha = "null";
     }
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", $('meta[name="url"]').attr('content')+"/api/openload/video/" + fileID + "/" + ticket + "/" + txtCaptcha, false);
+    xhttp.open("GET", $('meta[name="url"]').attr('content')+"/api/openload/video/" + $fileID + "/" + ticket + "/" + txtCaptcha, false);
     xhttp.send();
     var response = JSON.parse(xhttp.responseText);
     /*console.log(response);*/
