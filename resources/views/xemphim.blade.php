@@ -260,12 +260,17 @@
             </div>
             <script>          
                 $(document).ready(function () {
-                    $('button[title], img[title]').qtip({
-                        position: {
-                                my: 'top center',
-                                at: 'bottom center'
-                            }
-                    });
+                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    
+                    } else {
+                        $('button[title], img[title]').qtip({
+                            position: {
+                                    my: 'top center',
+                                    at: 'bottom center'
+                                }
+                        });
+                    }
+                    
                 });                
                 $('#modal-report-error').iziModal({
                         title: 'Báo lỗi',

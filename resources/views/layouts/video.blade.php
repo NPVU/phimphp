@@ -22,24 +22,26 @@
         </p>
 </video>
 <div id="modal-captcha" data-izimodal-transitionin="fadeInUp">            
-    <div class="modal-body">                
+    <div class="modal-body" style="padding-bottom: 20px">                
         <div>
             <img id="captcha" src="" alt="captcha" title="Mã xác nhận" width="25%"/> 
                 <i id="iconLoadingCaptcha" class="fa fa-sync-alt fa-spin display-none" title="Loading..."></i>                                                   
                 <label id="messageErrorCaptcha" class="text-danger display-none">Mã xác nhận không đúng, vui lòng nhập lại !</label>
         </div>
-        <div class="input-group">
-            <input type="text" id="txtCaptcha" class="form-control" placeholder="Nhập mã xác nhận" aria-label="Nhập mã xác nhận" aria-describedby="basic-addon2">
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-outline-secondary"                                
-                        title="Làm mới mã xác nhận" onclick="getTicket()">
-                    <span class="fa fa-x fa-redo-alt"></span>
-                </button>                                                    
-                <button type="button" class="btn btn-outline-secondary"title="Xác nhận" onclick="getVideo()">
-                    <span class="fa fa-x fa-check-circle btn-api-video" ></span>
-                </button>
-            </div>
-        </div>                         
+        <div style="width:90%;">
+            <div class="input-group">
+                <input type="text" id="txtCaptcha" class="form-control" placeholder="Nhập mã xác nhận" aria-label="Nhập mã xác nhận" aria-describedby="basic-addon2">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-primary btn-outline-secondary"                                
+                            title="Làm mới mã xác nhận" onclick="getTicket()">
+                        <span class="fa fa-x fa-redo-alt"></span>
+                    </button>                                                    
+                    <button type="button" class="btn btn-primary btn-outline-secondary"title="Xác nhận" onclick="getVideo()">
+                        <span class="fa fa-x fa-check-circle btn-api-video" ></span>
+                    </button>
+                </div>
+            </div>     
+        </div>                            
     </div>
 </div>
 <script>                        

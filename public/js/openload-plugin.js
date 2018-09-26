@@ -7,7 +7,9 @@ function getLinkOpenload(f){
     $fileID = f;
     getTicket();
 }
-function getTicket(){    
+function getTicket(){   
+    $("#txtCaptcha").val('');
+    $('#messageErrorCaptcha').addClass('display-none'); 
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", $('meta[name="url"]').attr('content')+"/api/openload/ticket/"+$fileID+"/"+$login+"/"+$key, false);
     xhttp.send();
@@ -43,6 +45,8 @@ function getVideo(){
     /*console.log(response);*/
     if(response.status === 200){
         $('#my-player').attr('src', response.result.url);
+        var video = document.getElementById('my-player');
+        video.play();
         $('#modal-captcha').iziModal('close');
     } else if(response.status === 403){
         $('#messageErrorCaptcha').removeClass('display-none');
