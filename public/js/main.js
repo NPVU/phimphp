@@ -11,6 +11,22 @@ $(document).ready(function(){
     $(document).ajaxStop(function(){
         closeLoading();
     });
+    $('span[title]').qtip({
+        position: {
+                my: 'bottom center',
+                at: 'top center'
+            }
+    });
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        
+    } else {
+        $('button[title], img[title]').qtip({
+            position: {
+                    my: 'top center',
+                    at: 'bottom center'
+                }
+        });        
+    }
     $('a.click-loading').click(function(){
       $('.npv-progress').css('display','block');
       $('.npv-progress-bar').animate({width:'30%'});      
