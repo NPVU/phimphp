@@ -28,12 +28,14 @@
         <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}">
             <img class="server-youtube {{strcmp($_GET['s'], md5('youtube'))==0?' server-active':''}}" src="{{asset('img/themes/youtube-32x32.png')}}" data-toggle="tooltip" title="Server Youtube" />
         </a>
-        @endif              
+        @endif 
+        <!--             
         @if(!empty($tap[0]->tap_openloadlink))
         <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('openload')}}">
             <img class="server-openload {{strcmp($_GET['s'], md5('openload'))==0?' server-active':''}}" src="{{asset('img/themes/openload-32x32.png')}}" data-toggle="tooltip" title="Server Phụ" />
         </a>
-        @endif         
+        @endif  
+        -->       
         <span class="title-video">
             {{$tap[0]->tap_tapsohienthi}}
         </span>
