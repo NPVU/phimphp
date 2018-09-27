@@ -535,6 +535,10 @@ class ClassCommon extends BaseController
         }        
     }
 
+    public static function getVoteTimes($phim_id) {
+        return DB::table('danhgia')->where('phim_id', $phim_id)->count();           
+    }
+
     public static function countUser(){
         return DB::table('users')->count();
     }

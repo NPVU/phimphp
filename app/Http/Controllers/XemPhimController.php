@@ -47,6 +47,7 @@ class XemPhimController extends Controller{
             $check = false;
         }        
         $star = ClassCommon::getStar(Input::get('pid'));
+        $voteTimes = ClassCommon::getVoteTimes(Input::get('pid'));
         $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);        
         $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
         foreach($listSeason as $row){
@@ -70,6 +71,7 @@ class XemPhimController extends Controller{
             $data['listTap'] = $listTap;
             $data['tap'] = $tap_current;
             $data['star'] = $star;
+            $data['voteTimes'] = $voteTimes;
             $data['comment'] = $comment;
             $data['listSeason'] = $listSeason;
             $data['follow_phim'] = $follow;
@@ -135,20 +137,14 @@ class XemPhimController extends Controller{
         }
     }
     
-    public function addDanhGia() {
-        if (Auth::check()) {
-            $user = Auth::user();
-            DB::table('danhgia')->where('user_id', $user->id)->where('phim_id', Input::get('pid'))->delete();
-            DB::table('danhgia')->insert([
-                'user_id' => $user->id,
-                'phim_id' => Input::get('pid'),
-                'danhgia_star' => floatval(Input::get('star')),
-                'danhgia_ngay' => now()
-            ]);
-            return 1;
-        } else {
-            return -1;
-        }
+    public function addDanhGia() {          
+        DB::table('danhgia')->insert([
+            'phim_id' => Input::get('pid'),
+            'danhgia_star' => floatval(Input::get('star')),
+            'danhgia_ngay' => now()
+        ]);
+        return 1;
+        
     }
 
     public function reportError(Request $request){

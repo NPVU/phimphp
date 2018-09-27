@@ -202,7 +202,8 @@
         </script>
         @endif
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 text-center" style="margin-top:5px;">
-        <button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>
+            <!--<button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>-->
+            <button class="btn btn-primary" title="Tự chuyển tập"><i class="fa fa-info-circle">&nbsp;<span>Tự chuyển tập</span></i></button>
             <button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
                 <i class="{{$follow_phim == 0?'fa fa-bell-slash':'fa fa-bell'}}">
                     <span>{{$follow_phim == 0?'Chưa theo dõi':'Đã theo dõi'}}</span>
@@ -212,20 +213,12 @@
             <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>
             <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle">&nbsp;<span>Báo lỗi</span></i></button>
             
-            @include('layouts.infophim_min')
+            <!--@include('layouts.infophim_min')-->
             <div id="modal-vote-phim" data-izimodal-transitionin="comingInDown">
                 <div class="modal-body" style="padding: 20px">        
                     <div class="row vote-body">                
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center danh-gia">
-                            @guest
-                            <h5>Bạn cần phải đăng nhập để thực hiện đánh giá</h5>
-                            <a href="javascript:void(0);" onclick="openLogin()" data-izimodal-close="">Bấm vào đây</a> để đăng nhập
-                            @else
-                            <div class="text-center">
-                                <p>Mỗi tài khoản có thể đánh giá nhiều lần, nhưng chỉ tính lần sau cùng.</p>
-                            </div>
-                            <div class="rate text-center"></div> 
-                            @endguest
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center danh-gia">                            
+                            <div class="rate text-center"></div>                             
                         </div>
                     </div>
                     <div class="row vote-result display-none">
@@ -325,7 +318,86 @@
     })
     </script>
 </div>
-
+<div class="content-left-section" >
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="content-left-title">THÔNG TIN PHIM</h2>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-radius: 3px;">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center">
+                                <img src="{{$phim[0]->phim_hinhanh}}" width="100%" style="max-width:300px"/>
+                            </div>
+                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+                                <div class="text-center">
+                                    <strong style="color: lightseagreen;font-size: 1.5em;">
+                                        {{$phim[0]->phim_ten}}
+                                    </strong>                            
+                                </div>
+                                <div>
+                                    <ul style="list-style: none;padding-left: 0px;">      
+                                        <li>
+                                            <label>Season:</label>
+                                            <span>{{$phim[0]->phim_season}}</span>
+                                        </li>
+                                        <li>
+                                            <label>Thể loại:</label>
+                                            <span>
+                                                <?php
+                                                    for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                                                        echo $listTheLoaiPhim[$i]->theloai_ten;
+                                                        echo $i+1<count($listTheLoaiPhim)?', ':'.';
+                                                    }
+                                                ?>                                        
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <label>Số tập:</label>
+                                            <span>{{$phim[0]->phim_sotap}}</span>
+                                        </li>
+                                        <li>
+                                            <label>Dạng:</label>
+                                            <span>{{$phim[0]->phim_kieu}}</span>
+                                        </li>
+                                        <li>
+                                            <label>Quốc gia:</label>
+                                            <span>{{$phim[0]->quocgia_ten}}</span>
+                                        </li>
+                                        <li>
+                                            <label>Năm phát hành:</label>
+                                            <span>{{$phim[0]->phim_nam}}</span>
+                                        </li>                                
+                                        <li>
+                                            <label>Lượt xem:</label>
+                                            <span class="npv-modal-view-times modal-view-{{$phim[0]->phim_id}}">{{number_format($phim[0]->phim_luotxem)}}</span>
+                                        </li>
+                                        <li>
+                                            <label>Đánh giá:</label>                                    
+                                            <?php for($i = 1; $i <= 5; $i++): ?>
+                                                @if($i <= intval($star))
+                                                    <span class="fa fa-star star star-color"></span>
+                                                @elseif($i > $star && ($i-1) < $star)
+                                                    <span class="fa fa-star-half-alt star star-half-color"></span>
+                                                @else
+                                                    <span class="fa fa-star star"></span>
+                                                @endif
+                                            <?php endfor; ?> ({{$voteTimes==0?1:$voteTimes}}&nbsp;lượt)                           
+                                        </li>                                                                
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <ul style="list-style: none;padding-left: 0px;">                            
+                                    <li>
+                                        <label>Nguồn video:</label>
+                                        <span>{{empty($phim[0]->phim_nguon)?'Đang cập nhật':$phim[0]->phim_nguon}}</span>
+                                    </li>
+                                    <li>
+                                        <label>Tóm tắt nội dung:</label>
+                                        <span>{{empty($phim[0]->phim_gioithieu)?'đang cập nhật':$phim[0]->phim_gioithieu}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+    </div>
+</div>
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">BÌNH LUẬN</h2>
