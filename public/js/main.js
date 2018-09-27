@@ -152,6 +152,30 @@ $(document).ready(function(){
             });
         }                
     });    
+    $('.btn-auto-next').click(function(){
+        var auto = $('.btn-auto-next').attr('aria-auto').trim();                
+        $.ajax({
+            type: "GET",
+            url: $('meta[name="url"').attr('content')+'/auto-next/',
+            data: {'value': auto},
+            success: function (data) {           
+                if(auto==1){
+                    $('.btn-auto-next').attr('aria-auto', 0);
+                    $('.btn-auto-next').attr('title', 'Bật Auto');
+                    $('.text-auto-next').html(' Tắt');
+                    $('.icon-auto-next').addClass('fa-ban');
+                    $('.icon-auto-next').removeClass('fa-check-circle');
+                }else{
+                    $('.btn-auto-next').attr('aria-auto', 1);
+                    $('.btn-auto-next').attr('title', 'Tắt Auto');
+                    $('.text-auto-next').html(' Bật');
+                    $('.icon-auto-next').addClass('fa-check-circle');
+                    $('.icon-auto-next').removeClass('fa-ban');
+                }
+                
+            }
+        });     
+    });
     $('.btn-search').click(function(){
        if($('.input-search').val().trim().length < 3){
            showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);

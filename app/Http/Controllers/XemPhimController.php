@@ -136,6 +136,14 @@ class XemPhimController extends Controller{
             event(new PusherEvent($data));            
         }
     }
+
+    public function autoNext(){
+        if(strcmp(Input::get('value'),'1')==0){
+            session(['autoNext' => 0]);
+        }else{
+            session(['autoNext' => 1]);
+        }        
+    }
     
     public function addDanhGia() {          
         DB::table('danhgia')->insert([

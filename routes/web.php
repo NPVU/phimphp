@@ -107,6 +107,7 @@ Route::get('/tap-moi', 'HomeController@xemThemTapMoi');
 Route::get('/movie-moi', 'HomeController@xemThemMovieMoi');
 Route::get('/tim-kiem', 'HomeController@timKiem');
 
+Route::get('/auto-next', 'XemPhimController@autoNext');
 Route::get('/report-error', 'XemPhimController@reportError');
 Route::get('/follow-phim', 'XemPhimController@followPhim');
 Route::get('/unfollow-phim', 'XemPhimController@unfollowPhim');
