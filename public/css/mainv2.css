@@ -267,7 +267,7 @@ ul.user-menu  li:hover{
     font-family: "-webkit-body";
     min-width:250px;
     min-height: 350px;  
-    left:200px;
+    left:210px;
     top: -90px;
     background: rgb(237, 249, 238);    
     z-index: 10;
@@ -314,7 +314,7 @@ ul.user-menu  li:hover{
     .phim-tip{           
         min-width:250px;
         min-height: 180px; 
-        left:150px;
+        left:155px;
         top: -80px;       
     }
 }
