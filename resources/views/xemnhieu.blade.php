@@ -17,7 +17,7 @@
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
-                                <div class="box-title">{{$row->phim_ten}}</div>
+                                <div class="box-title">{{(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).' ...':$row->phim_ten.' (SS'.$row->phim_season.')')}}</div>
                                 <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /&nbsp;{{$row->phim_sotap}}</div>
                             </div>
                         </div>

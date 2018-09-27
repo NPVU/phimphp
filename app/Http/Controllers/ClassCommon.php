@@ -118,7 +118,7 @@ class ClassCommon extends BaseController
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';                    
+                    $html .=                '<div class="box-title">'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).' ...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';                    
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
 //                    $html .=                '<div class="box-text">';
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
@@ -196,7 +196,7 @@ class ClassCommon extends BaseController
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';                    
+                    $html .=                '<div class="box-title">'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).' ...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';                    
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                     $html .=            '</div>';                    
                     $html .=        '</div>';
