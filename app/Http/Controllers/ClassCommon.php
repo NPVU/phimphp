@@ -554,7 +554,15 @@ class ClassCommon extends BaseController
     public static function countYeuCauPhim(){
         return DB::table('yeucau')->count();
     }
-
+    
+    public static function randomAvatar(){
+        $avatarid = rand(1, 4);
+        $newName=time();
+        $path = 'upload/avatar/'.$newName.'_user.png';
+        copy('img/themes/avatar/user-10'.$avatarid.'.png', $path);
+        return $path;
+    }
+    
     public static function removeVietnamese($str){
         $unicode = array(
             'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
