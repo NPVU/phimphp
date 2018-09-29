@@ -356,7 +356,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:-50px;">
                                 <ul style="list-style: none;padding-left: 0px;">                            
                                     <li>
                                         <label>Nguồn video:</label>
