@@ -126,7 +126,7 @@ button>.icon-bar{
     position: absolute;
     top: 40px;
     width: calc(100% - 20px);
-    background-color: rgba(39, 51, 56, 0.8);
+    background-color: rgba(0, 0, 0, 0.82);
     z-index: 200;
     margin:10px 10px;
     -webkit-transition: display 1s ease-out;
@@ -383,7 +383,7 @@ ul.user-menu  li:hover{
     padding-left: 0px;
 }
 .list-anime>a>li, .list-notification>a>li {
-    height: 70px;
+    height: 80px;
     padding: 5px 5px;
     cursor: pointer;
     -webkit-transition: background-color 0.5s;

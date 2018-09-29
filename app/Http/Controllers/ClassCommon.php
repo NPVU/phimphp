@@ -334,12 +334,12 @@ class ClassCommon extends BaseController
     public static function getHTMLBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
             $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
@@ -394,12 +394,12 @@ class ClassCommon extends BaseController
     public static function getBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
@@ -440,10 +440,13 @@ class ClassCommon extends BaseController
             foreach ($listResult as $row){
                 $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'"><li>';
                 $html .=    '<div style="float:left;">';
-                $html .=        '<img src="'.$row->phim_hinhnen.'" width="50" height="60" style="border-radius:3px;" />';
+                $html .=        '<img src="'.$row->phim_hinhnen.'" width="60" height="70" style="border-radius:3px;" />';
                 $html .=    '</div>';
                 $html .=    '<div style="float:left;padding-left:10px;" >';
                 $html .=        '<div><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
+                if(strlen($row->phim_tenvn)>0){
+                    $html .=        '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?'('.substr($row->phim_tenvn,0,28).'...':'('.$row->phim_tenvn.')').'</div>';
+                }                
                 $html .=        '<div>Season '.$row->phim_season.'</div>';
                 $html .=        '<div>';
                                     $star = ClassCommon::getStar($row->phim_id); 
