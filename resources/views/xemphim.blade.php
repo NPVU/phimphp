@@ -351,7 +351,7 @@
                                         </li>
                                         <li>
                                             <label>Đánh giá:</label>                                    
-                                            <div class="rate"></div> <span class="vote-times">({{$voteTimes==0?1:$voteTimes}}&nbsp;lượt)</span>
+                                            <div class="rate" aria-value="{{Session::get('voted')}}"></div> <span class="vote-times">({{$voteTimes==0?1:$voteTimes}}&nbsp;lượt)</span>
                                         </li>                                                                
                                     </ul>
                                 </div>

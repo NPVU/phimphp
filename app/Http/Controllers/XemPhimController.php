@@ -156,6 +156,7 @@ class XemPhimController extends Controller{
             $data['times'] = DB::table('danhgia')->where('phim_id', $phim_id)->count();
             $data['star'] = ClassCommon::getStar($phim_id);
             $data['status'] = 1;
+            session(['voted' => $phim_id.','.Session::get('voted')]);
         }else{
             $data['status'] = 0;
             $data['message'] = 'Sai token';

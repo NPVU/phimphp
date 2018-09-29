@@ -214,20 +214,27 @@ function showToast(type, content, title, close){switch(type){
         function viewTimes(link){
             $.ajax({url:link,dataType:'text',type:'GET',success:function(data){}});
         }
-function danhGia(value) {    
-    $.ajax({
-        url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
-        dataType: 'text',
-        type: 'get',
-        success: function (data) { 
-            var json = JSON.parse(data);                 
-            if(json.status === 1){                
-                $('.rate').attr('data-rate-value',json.star);
-                $('.rate-select-layer').css('width', 20*json.star+'%');
-                $('.vote-times').html('('+json.times+' lượt)'); 
-            }                       
-        }
-    });
+function danhGia(value) { 
+    var str =  $('.rate').attr('aria-value');
+    if(str.search(getParameterByName('pid','')+',') == -1 && $('.rate').attr('voted') != 1){
+        $.ajax({
+            url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
+            dataType: 'text',
+            type: 'get',
+            success: function (data) { 
+                var json = JSON.parse(data);                 
+                if(json.status === 1){                
+                    $('.rate').attr('data-rate-value',json.star);
+                    $('.rate').attr('voted',1);
+                    $('.rate-select-layer').css('width', 20*json.star+'%');
+                    $('.vote-times').html('('+json.times+' lượt)');
+                    showToast('success','Chúc bạn xem phim vui vẻ','Đánh giá thành công',true);
+                }                       
+            }
+        });
+    }else{
+        showToast('info','','Bạn đã đánh giá phim này rồi!',true);
+    }    
 }
 function sendComment(pid, token){
     if($('#input-comment').val().trim().length > 0){
