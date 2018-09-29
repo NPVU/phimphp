@@ -393,27 +393,42 @@ class ClassCommon extends BaseController
     }
     public static function getBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
-            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+            $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
-            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+            $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
                 . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
-            $listPhimXepHang = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
+            $listPhim = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
-        }         
-        for($i = 0; $i < count($listPhimXepHang); $i++){
-            $listPhimXepHang[$i]->tap = DB::table('tap')
+        }
+        
+        $view = 0;
+        for($i = 0; $i < count($listPhim); $i++){
+            $listPhim[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhimXepHang[$i]->phim_id) 
+                    ->where('phim_id', $listPhim[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
+            if($listPhim[$i]->phim_luotxem == $view){
+                $phim_idX = $listPhim[$i-1]->phim_id;
+                $phim_idY = $listPhim[$i]->phim_id;
+                $starX = DB::table('danhgia')->where('phim_id', $phim_idX)->avg('danhgia_star');
+                $starY = DB::table('danhgia')->where('phim_id', $phim_idY)->avg('danhgia_star');
+                if($starY > $starX){
+                    $temp = $listPhim[$i];
+                    $listPhim[$i] = $listPhim[$i-1];
+                    $listPhim[$i-1] = $temp;
+                }
+            }else{
+                $view = $listPhim[$i]->phim_luotxem;
+            }
         }
-        return $listPhimXepHang;
+        return $listPhim;
     }
     
     public static function getHTMLTimKiem($tukhoa){
