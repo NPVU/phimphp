@@ -162,6 +162,9 @@ ul.user-menu  li:hover{
     .slider img{        
         height: 350px;
     }    
+    .func-video-align, .func_phim_align {
+        text-align:center !important;
+    }    
 }
 @media (max-width: 767px) {
     .slider img{        
@@ -450,6 +453,12 @@ ul.user-menu  li:hover{
     color:gray;
     line-height: 3;
 }
+.func-video-align {
+    text-align:left;
+}
+.func_phim_align {
+    text-align:right;
+}
 .btn-tap{
     min-width: 60px;
     margin-bottom: 5px;
@@ -503,8 +512,14 @@ ul.user-menu  li:hover{
     color: yellow;
 }
 .rate {            
-    font-size: 32px;
-    left:35%;
+    font-size: 1.5em;
+    top: -30px;
+    left: 70px;
+}
+.vote-times{
+    position: relative;
+    top: -55px;
+    left: 160px;
 }
 .page-error{
     text-align: center;
@@ -569,6 +584,12 @@ hr{
 .nav>li>a>i>sup{
     top: -0.9em;
     left: -12px;
+}
+@media (min-width: 992px){
+    .navbar-right {
+        float: right!important;
+        margin-right: -25px;
+    }
 }
 
 /* rewrite videojs */

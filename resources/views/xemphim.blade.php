@@ -46,7 +46,7 @@
 <div class="content-left-section">    
     <div>                                                    
         @if(strcmp($_GET['s'], md5('google'))==0 || strcmp($_GET['s'], md5('openload'))==0)
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 text-center" style="margin-top:5px;">                                    
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 func-video-align" style="margin-top:5px;">                                    
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="fa fa-redo-alt" style="transform: rotateY(180deg);"></span></button>
             <button class="btn btn-success npv-icon npv-play" title="Xem phim"><i class="fa fa-play"></i></button>
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="fa fa-redo-alt"></span>&nbsp;15</button>
@@ -202,39 +202,21 @@
             };
         </script>
         @endif
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 text-center" style="margin-top:5px;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">
             <!--<button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>-->
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
                 <i class="icon-auto-next fa {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}}">&nbsp;<span>Tự chuyển tập:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
             </button>
-            <button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
+            <!--<button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
                 <i class="{{$follow_phim == 0?'fa fa-bell-slash':'fa fa-bell'}}">
                     <span>{{$follow_phim == 0?'Chưa theo dõi':'Đã theo dõi'}}</span>
                     <sup style="" class="follows-tip">{{$follows}}</sup>
                 </i>
             </button>
-            <!--<button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>-->
+            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>-->
             <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle">&nbsp;<span>Báo lỗi</span></i></button>
             
-            <!--@include('layouts.infophim_min')-->
-            <div id="modal-vote-phim" data-izimodal-transitionin="comingInDown">
-                <div class="modal-body" style="padding: 20px">        
-                    <div class="row vote-body">                
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center danh-gia">                            
-                            <div class="rate text-center"></div>                             
-                        </div>
-                    </div>
-                    <div class="row vote-result display-none">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                            <span class="glyphicon glyphicon-2x glyphicon-ok-sign icon-voted"></span>
-                            <div class="content-vote-result"></div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">                
-                            <button class="btn btn-default" data-izimodal-close="">Đóng</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--@include('layouts.infophim_min')-->            
             <div id="modal-report-error" data-izimodal-transitionin="comingInDown">
                 <div class="modal-body" style="padding: 20px">        
                     <div class="row">                
@@ -273,21 +255,10 @@
                     }); 
                 $(document).ready(function(){            
                     $(".rate").rate();
+                    $('.rate').attr('data-rate-value',{{$star}});
+                    $('.rate-select-layer').css('width', 20*{{$star}}+'%');
                 });     
-                $('#modal-vote-phim').iziModal({
-                        title: 'Đánh giá phim',
-                        top: 100,
-                        overlayClose: true,                
-                        width: 600,
-                        openFullscreen:false,
-                        headerColor: '#263238',
-                        icon: 'fa fa-star',
-                        iconColor: 'white',
-                        onOpening: function(){
-                            $('.rate').attr('data-rate-value',{{$star}});
-                            $('.rate-select-layer').css('width', 20*{{$star}}+'%');
-                        }
-                    });                   
+                                
             </script>
 
         </div>        
@@ -336,11 +307,13 @@
                                     </strong>                            
                                 </div>
                                 <div>
-                                    <ul style="list-style: none;padding-left: 0px;">  
+                                    <ul style="list-style: none;padding-left: 0px;">
+                                        @if(!empty($phim[0]->phim_tenvn))
                                         <li>
                                             <label>Tên khác:</label>
-                                            <span>{{$phim[0]->phim_tenkhac}}</span>
+                                            <span>{{$phim[0]->phim_tenvn}}</span>
                                         </li>
+                                        @endif
                                         <li>
                                             <label>Season:</label>
                                             <span>{{$phim[0]->phim_season}}</span>
@@ -378,15 +351,7 @@
                                         </li>
                                         <li>
                                             <label>Đánh giá:</label>                                    
-                                            <?php for($i = 1; $i <= 5; $i++): ?>
-                                                @if($i <= intval($star))
-                                                    <span class="fa fa-star star star-color"></span>
-                                                @elseif($i > $star && ($i-1) < $star)
-                                                    <span class="fa fa-star-half-alt star star-half-color"></span>
-                                                @else
-                                                    <span class="fa fa-star star"></span>
-                                                @endif
-                                            <?php endfor; ?> ({{$voteTimes==0?1:$voteTimes}}&nbsp;lượt)                           
+                                            <div class="rate"></div> <span class="vote-times">({{$voteTimes==0?1:$voteTimes}}&nbsp;lượt)</span>
                                         </li>                                                                
                                     </ul>
                                 </div>
@@ -438,7 +403,10 @@
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
-                                <div class="box-title">{{$season->phim_ten}}</div>
+                            <div class="box-title">
+                                <div>{{(strlen($season->phim_ten.' (SS'.$season->phim_season.')')>20?substr($season->phim_ten,0,20).'...':$season->phim_ten.' (SS'.$season->phim_season.')')}}</div>
+                                <div class="title-vn">{{(strlen($season->phim_tenvn)>28?substr($season->phim_tenvn,0,28).'...':$season->phim_tenvn)}}</div>
+                            </div>
                                 <div class="box-text">Season&nbsp;{{$season->phim_season}}</div>
                             </div>
                         </div>

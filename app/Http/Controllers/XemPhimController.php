@@ -145,13 +145,22 @@ class XemPhimController extends Controller{
         }        
     }
     
-    public function addDanhGia() {          
-        DB::table('danhgia')->insert([
-            'phim_id' => Input::get('pid'),
-            'danhgia_star' => floatval(Input::get('star')),
-            'danhgia_ngay' => now()
-        ]);
-        return 1;
+    public function addDanhGia() {      
+        if(strcmp(Session::token(), Input::get('token'))==0){
+            $phim_id = Input::get('pid');
+            DB::table('danhgia')->insert([
+                'phim_id' => $phim_id,
+                'danhgia_star' => floatval(Input::get('star')),
+                'danhgia_ngay' => now()
+            ]);
+            $data['times'] = DB::table('danhgia')->where('phim_id', $phim_id)->count();
+            $data['star'] = ClassCommon::getStar($phim_id);
+            $data['status'] = 1;
+        }else{
+            $data['status'] = 0;
+            $data['message'] = 'Sai token';
+        }
+        return $data;
         
     }
 

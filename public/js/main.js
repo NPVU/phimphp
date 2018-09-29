@@ -216,15 +216,16 @@ function showToast(type, content, title, close){switch(type){
         }
 function danhGia(value) {    
     $.ajax({
-        url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value,
+        url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
         dataType: 'text',
         type: 'get',
-        success: function (data) {            
-            if (data == 1) {
-                $('.vote-result').removeClass('display-none');
-                $('.vote-body').addClass('display-none');
-                $('.content-vote-result').html('Cảm ơn bạn đã đánh giá !');                                    
-            }
+        success: function (data) { 
+            var json = JSON.parse(data);                 
+            if(json.status === 1){                
+                $('.rate').attr('data-rate-value',json.star);
+                $('.rate-select-layer').css('width', 20*json.star+'%');
+                $('.vote-times').html('('+json.times+' lượt)'); 
+            }                       
         }
     });
 }
