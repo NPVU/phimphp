@@ -22,7 +22,7 @@
                 <label for="content" >Danh sách phim yêu cầu</label>
                 <div class="input-group">
                     <span class="input-group-addon"><span class="fa fa-film"></span></span>
-                    <textarea id="content" name="content" class="form-control" rows="5" placeholder="Vui lòng nhập chính xác tên phim, mỗi 1 phim 1 dòng nhé">{{isset($_POST['content'])?$_POST['content']:''}}</textarea>
+                    <textarea id="content" name="content" class="form-control" rows="5" placeholder="Vui lòng nhập chính xác tên phim, mỗi 1 phim 1 dòng">{{isset($_POST['content'])?$_POST['content']:''}}</textarea>
                 </div>        
                 <span class="invalid-feedback">
                     <strong class="error-content"></strong>
@@ -49,7 +49,7 @@
             <div class="text-center" style="color:#14cc5e">
                 <span class="fa fa-2x fa-check-circle"></span>
                 <h4>Yêu cầu của bạn đã được ghi nhận thành công.</h4>
-                <h5>Chúng tôi sẽ thông báo cho bạn khi hệ thống đã cập nhật phim. Cảm ơn bạn đã ủng hộ {{ config('app.name') }}.</h5>
+                <h5>Chúng tôi sẽ thông báo cho bạn khi hệ thống đã cập nhật phim. Cảm ơn bạn đã ủng hộ&nbsp;{{ config('app.name') }}.</h5>
             </div>
         @endif
     </div>
@@ -66,8 +66,8 @@
     });
     function checkYeuCauContent(){
         var str =  $('#content').val();
-        if(str.trim().length < 6){
-            $('.error-content').html('Vui lòng nhập tên phim chính xác, ít nhất 6 ký tự nhé');
+        if(str.trim().length < 1){
+            $('.error-content').html('Vui lòng nhập chính xác tên phim.');
             return false;
         }
     }

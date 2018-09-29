@@ -47,7 +47,7 @@
         @else
             <div class="text-center" style="color:#14cc5e">
                 <span class="fa fa-2x fa-check-circle"></span>
-                <h4>Báo lỗi thành công, cảm ơn bạn đã nhiệt tình hỗ trợ {{ config('app.name') }}.</h4>
+                <h4>Báo lỗi thành công, cảm ơn bạn đã nhiệt tình hỗ trợ&nbsp;{{ config('app.name') }}.</h4>
             </div>
         @endif
     </div>

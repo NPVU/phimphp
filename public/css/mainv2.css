@@ -262,6 +262,9 @@ ul.user-menu  li:hover{
     background: rgba(0, 0, 0, .6);
     font-weight: 600;
 }
+.title-vn{
+    font-size:0.8em;
+}
 .phim-tip{    
     position:absolute;
     font-family: "-webkit-body";

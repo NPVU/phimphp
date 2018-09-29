@@ -110,7 +110,7 @@
                 if(v.duration - v.currentTime === 0 && auto==1){
                     if(getParameterByName('t','') < sotap){
                         iziToast.show({
-                            timeout: 10000,
+                            timeout: 3000,
                             theme: 'dark',
                             icon: 'fa fa-play',
                             title: 'Chuyển tập trong 5s',                        
@@ -133,7 +133,7 @@
                                 clearTimeout(auto);
                             }
                         });
-                        confirmAutoNext(10);                    
+                        confirmAutoNext(3);                    
                     }
                 }
             }
@@ -213,7 +213,7 @@
                     <sup style="" class="follows-tip">{{$follows}}</sup>
                 </i>
             </button>
-            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>
+            <!--<button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>-->
             <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle">&nbsp;<span>Báo lỗi</span></i></button>
             
             <!--@include('layouts.infophim_min')-->
@@ -336,7 +336,11 @@
                                     </strong>                            
                                 </div>
                                 <div>
-                                    <ul style="list-style: none;padding-left: 0px;">      
+                                    <ul style="list-style: none;padding-left: 0px;">  
+                                        <li>
+                                            <label>Tên khác:</label>
+                                            <span>{{$phim[0]->phim_tenkhac}}</span>
+                                        </li>
                                         <li>
                                             <label>Season:</label>
                                             <span>{{$phim[0]->phim_season}}</span>
@@ -357,7 +361,7 @@
                                             <span>{{$phim[0]->phim_sotap}}</span>
                                         </li>
                                         <li>
-                                            <label>Dạng:</label>
+                                            <label>Loại phim:</label>
                                             <span>{{$phim[0]->phim_kieu}}</span>
                                         </li>
                                         <li>

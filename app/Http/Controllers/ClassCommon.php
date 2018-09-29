@@ -118,7 +118,10 @@ class ClassCommon extends BaseController
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).' ...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';                    
+                    $html .=                '<div class="box-title">';                    
+                    $html .=                    '<div>'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';
+                    $html .=                    '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,28).'...':$row->phim_tenvn).'</div>';
+                    $html .=                '</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
 //                    $html .=                '<div class="box-text">';
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
@@ -142,7 +145,7 @@ class ClassCommon extends BaseController
                                             }
                     $html .=                '</div>';                    
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> '.$row->phim_kieu.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->phim_kieu.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';
@@ -196,7 +199,10 @@ class ClassCommon extends BaseController
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).' ...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';                    
+                    $html .=                '<div class="box-title">';                    
+                    $html .=                    '<div>'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';
+                    $html .=                    '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,28).'...':$row->phim_tenvn).'</div>';
+                    $html .=                '</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                     $html .=            '</div>';                    
                     $html .=        '</div>';
@@ -216,7 +222,7 @@ class ClassCommon extends BaseController
                                             }
                     $html .=                '</div>';                    
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> '.$row->phim_kieu.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->phim_kieu.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';
@@ -414,29 +420,33 @@ class ClassCommon extends BaseController
         $listResult = DB::table('phim')->where([['phim_ten', 'like', '%'.$tukhoa.'%'], ['phim_xuatban', '=', 1]])
                 ->orwhere([['phim_tenkhac', 'like', '%'.$tukhoa.'%'], ['phim_xuatban', '=', 1]])                
                 ->limit(20)->get();
-        $html = '<ul class="list-anime">';                                                                            
-        foreach ($listResult as $row){
-            $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'"><li>';
-            $html .=    '<div style="float:left;">';
-            $html .=        '<img src="'.$row->phim_hinhnen.'" width="50" height="60" style="border-radius:3px;" />';
-            $html .=    '</div>';
-            $html .=    '<div style="float:left;padding-left:10px;" >';
-            $html .=        '<div><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
-            $html .=        '<div>Season '.$row->phim_season.'</div>';
-            $html .=        '<div>';
-                                $star = ClassCommon::getStar($row->phim_id); 
-                                for($i = 1; $i <= 5; $i++){
-                                    if($i <= intval($star)){
-                                        $html .= '<span class="glyphicon glyphicon-star star star-color"></span>';
-                                    } else if($i > $star && ($i-1) < $star){
-                                        $html .= '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
-                                    } else {
-                                        $html .= '<span class="glyphicon glyphicon-star-o star"></span>';
-                                    }
-                                }                         
-            $html .=        '</div>';
-            $html .=    '</div>';
-            $html .= '</li></a>';
+        $html = '<ul class="list-anime">';
+        if(count($listResult) > 0){
+            foreach ($listResult as $row){
+                $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'"><li>';
+                $html .=    '<div style="float:left;">';
+                $html .=        '<img src="'.$row->phim_hinhnen.'" width="50" height="60" style="border-radius:3px;" />';
+                $html .=    '</div>';
+                $html .=    '<div style="float:left;padding-left:10px;" >';
+                $html .=        '<div><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
+                $html .=        '<div>Season '.$row->phim_season.'</div>';
+                $html .=        '<div>';
+                                    $star = ClassCommon::getStar($row->phim_id); 
+                                    for($i = 1; $i <= 5; $i++){
+                                        if($i <= intval($star)){
+                                            $html .= '<span class="glyphicon glyphicon-star star star-color"></span>';
+                                        } else if($i > $star && ($i-1) < $star){
+                                            $html .= '<span class="glyphicon glyphicon-star-half-full star star-half-color"></span>';
+                                        } else {
+                                            $html .= '<span class="glyphicon glyphicon-star-o star"></span>';
+                                        }
+                                    }                         
+                $html .=        '</div>';
+                $html .=    '</div>';
+                $html .= '</li></a>';
+            }
+        }else{
+            $html .= '<a href="javascript:void(0)" style="text-decoration: none;"><li class="text-center" style="height:30px"><p style="font-size:0.8em">Không tim thấy kết quả</p></li></a>';
         }
         $html .= '</ul>';
         return $html;
