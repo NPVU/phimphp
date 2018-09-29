@@ -75,7 +75,8 @@
                                 <div class="result-search">
                                     
                                 </div>
-                            </li>                           
+                            </li>
+                            <!--
                             @guest
                             <li><a href="{{route('login')}}">Đăng nhập</a></li>
                             <li><a href="{{route('register')}}">Đăng ký</a></li>
@@ -95,18 +96,9 @@
                                 <a href="javascript:void(0)" style="margin:5px 5px;width:45px; height:45px; border-radius:100%; text-align:center; background-color:gray;">
                                     <i class="glyphicon glyphicon-user"></i>
                                 </a>                        
-                            </li>
-                            <!--<li>
-                                <a href="javascript:void(0)"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                    Thoát
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </li>-->
+                            </li>                            
                             @endguest
+                            -->
                         </ul>
                     </div>
                 </div>
