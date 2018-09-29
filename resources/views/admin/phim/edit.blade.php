@@ -146,6 +146,13 @@
                                        placeholder="VD: 16"/>
                                 <span class="help-block"><?php echo isset($edit_phim_dotuoi_error)?$edit_phim_dotuoi_error:''; ?></span>
                             </div>
+                            <div class="form-group <?php echo isset($edit_phim_tenvn_error)?'has-error':''; ?>">
+                                <label class="control-label" for="edit_phim_tenvn">Tên tiếng việt</label>
+                                <input type="text" id="edit_phim_tenvn" name="edit_phim_tenvn" 
+                                       class="form-control" value="<?php echo isset($_POST['edit_phim_tenvn']) ? $_POST['edit_phim_tenvn'] : $phim[0]->phim_tenvn ?>"
+                                       placeholder="VD: Thiên Thần Diệt Thế 1"/>
+                                <span class="help-block"><?php echo isset($edit_phim_tenvn_error)?$edit_phim_tenvn_error:''; ?></span>
+                            </div>
                             <div class="form-group <?php echo isset($edit_phim_tenkhac_error)?'has-error':''; ?>">
                                 <label class="control-label" for="edit_phim_tenkhac">Tên phụ (tên khác)</label>
                                 <input type="text" id="edit_phim_tenkhac" name="edit_phim_tenkhac" 

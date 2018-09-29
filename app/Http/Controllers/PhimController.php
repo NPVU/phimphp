@@ -202,6 +202,7 @@ class PhimController extends Controller{
                     [
                         'theloai_id'      => json_encode($request->add_phim_theloai),
                         'phim_ten'        => trim($request->add_phim_ten),
+                        'phim_tenvn'    => trim($request->add_phim_tenvn),
                         'phim_tenkhac'    => trim($request->add_phim_tenkhac),
                         'phim_gioithieu'  => $request->add_phim_gioithieu,
                         'phim_sotap'      => $request->add_phim_sotap,
@@ -313,6 +314,7 @@ class PhimController extends Controller{
                     [
                         'theloai_id'      => json_encode($request->edit_phim_theloai),
                         'phim_ten'        => trim($request->edit_phim_ten),
+                        'phim_tenvn'    => trim($request->edit_phim_tenvn),
                         'phim_tenkhac'    => trim($request->edit_phim_tenkhac),
                         'phim_gioithieu'  => $request->edit_phim_gioithieu,
                         'phim_sotap'      => $request->edit_phim_sotap,
