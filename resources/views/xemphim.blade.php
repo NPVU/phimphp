@@ -336,7 +336,11 @@
                                     </strong>                            
                                 </div>
                                 <div>
-                                    <ul style="list-style: none;padding-left: 0px;">      
+                                    <ul style="list-style: none;padding-left: 0px;">  
+                                        <li>
+                                            <label>Tên khác:</label>
+                                            <span>{{$phim[0]->phim_tenkhac}}</span>
+                                        </li>
                                         <li>
                                             <label>Season:</label>
                                             <span>{{$phim[0]->phim_season}}</span>
@@ -357,7 +361,7 @@
                                             <span>{{$phim[0]->phim_sotap}}</span>
                                         </li>
                                         <li>
-                                            <label>Dạng:</label>
+                                            <label>Loại phim:</label>
                                             <span>{{$phim[0]->phim_kieu}}</span>
                                         </li>
                                         <li>

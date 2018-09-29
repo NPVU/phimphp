@@ -27,7 +27,7 @@
                         <ul class="nav navbar-nav">                 
                             <li><a href="{{URL::to('xem-nhieu')}}">XEM NHIỀU</a></li>                                     
                             <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kiểu phim <span class="caret"></span></a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Loại phim <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{url('/tv-series')}}">TV Series</a></li>                                   
                                     <li><a href="{{url('/movie')}}">Movie</a></li>

@@ -1,10 +1,10 @@
 /*VanillaToasts*/
 !function(t,e){try{"object"==typeof exports?module.exports=e():t.VanillaToasts=e()}catch(t){console.log("Isomorphic compatibility is not supported at this time for VanillaToasts.")}}(this,function(){"complete"===document.readyState?e():window.addEventListener("DOMContentLoaded",e),VanillaToasts={create:function(){console.error(["DOM has not finished loading.","\tInvoke create method when DOMs readyState is complete"].join("\n"))},setTimeout:function(){console.error(["DOM has not finished loading.","\tInvoke create method when DOMs readyState is complete"].join("\n"))},toasts:{}};var t=0;function e(){var e=document.createElement("div");e.id="vanillatoasts-container",document.body.appendChild(e),$("#vanillatoasts-container").css("z-index",999999),VanillaToasts.create=function(e){var a=document.createElement("div");if(a.id=++t,a.id="toast-"+a.id,a.className="vanillatoasts-toast",e.title){var n=document.createElement("h4");n.className="vanillatoasts-title",n.innerHTML=e.title,a.appendChild(n)}if(e.text){var o=document.createElement("p");o.className="vanillatoasts-text",o.innerHTML=e.text,a.appendChild(o)}if(e.icon){var i=document.createElement("img");i.src=e.icon,i.className="vanillatoasts-icon",a.appendChild(i)}function s(){document.getElementById("vanillatoasts-container").removeChild(a),delete VanillaToasts.toasts[a.id]}return"function"==typeof e.callback&&a.addEventListener("click",e.callback),a.hide=function(){a.className+=" vanillatoasts-fadeOut",a.addEventListener("animationend",s,!1)},e.timeout&&setTimeout(a.hide,e.timeout),e.type&&(a.className+=" vanillatoasts-"+e.type),a.addEventListener("click",a.hide),document.getElementById("vanillatoasts-container").appendChild(a),VanillaToasts.toasts[a.id]=a,a},VanillaToasts.setTimeout=function(t,e){VanillaToasts.toasts[t]&&setTimeout(VanillaToasts.toasts[t].hide,e)}}return VanillaToasts});
 $(window).load(function() {
-    closeWindowLoading();
+    
 });
 $(document).ready(function(){
-    openWindowLoading();    
+      
     $(document).ajaxSend(function(e, xhr, opt){
         openLoading();
     });
@@ -27,11 +27,6 @@ $(document).ready(function(){
                 }
         });        
     }
-    $('a.click-loading').click(function(){
-      $('.npv-progress').css('display','block');
-      $('.npv-progress-bar').animate({width:'30%'});      
-      $('.npv-progress-bar').animate({width:'95%'});
-    });        
     $('.btn-lock-account').click(function(){        
         var token = $('#comment').attr('aria-token');
         $.ajax({
@@ -178,7 +173,7 @@ $(document).ready(function(){
     });
     $('.btn-search').click(function(){
        if($('.input-search').val().trim().length < 3){
-           showToast('error', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
+           showToast('info', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
        }
     });
     $('.input-search').keyup(function(){        
@@ -211,7 +206,11 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
-function showToast(type, content, title, close){switch(type){case 'success': toastr.options.closeButton = close; toastr.success(content, title); break;case 'error': toastr.options.closeButton = close; toastr.error(content, title); break;}}(function ($){"use strict";var input = $('.validate-input .input100');$('.validate-form').on('submit',function(){var check = true;for(var i=0; i<input.length; i++) {if(validate(input[i]) == false){showValidate(input[i]);check=false;}}return check;});$('.validate-form .input100').each(function(){$(this).focus(function(){hideValidate(this);});});function validate (input) {if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {return false;}}else {if($(input).val().trim() == ''){return false;}}}function showValidate(input) {var thisAlert = $(input).parent();$(thisAlert).addClass('alert-validate');}function hideValidate(input) {var thisAlert = $(input).parent();$(thisAlert).removeClass('alert-validate');}})(jQuery);
+function showToast(type, content, title, close){switch(type){
+        case 'info': toastr.options.closeButton = close; toastr.info(content, title); break;
+        case 'success': toastr.options.closeButton = close; toastr.success(content, title); break;
+        case 'error': toastr.options.closeButton = close; toastr.error(content, title); break;
+    }}(function ($){"use strict";var input = $('.validate-input .input100');$('.validate-form').on('submit',function(){var check = true;for(var i=0; i<input.length; i++) {if(validate(input[i]) == false){showValidate(input[i]);check=false;}}return check;});$('.validate-form .input100').each(function(){$(this).focus(function(){hideValidate(this);});});function validate (input) {if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {return false;}}else {if($(input).val().trim() == ''){return false;}}}function showValidate(input) {var thisAlert = $(input).parent();$(thisAlert).addClass('alert-validate');}function hideValidate(input) {var thisAlert = $(input).parent();$(thisAlert).removeClass('alert-validate');}})(jQuery);
         function viewTimes(link){
             $.ajax({url:link,dataType:'text',type:'GET',success:function(data){}});
         }
