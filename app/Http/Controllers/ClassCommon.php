@@ -461,7 +461,7 @@ class ClassCommon extends BaseController
                 $html .= '</li></a>';
             }
         }else{
-            $html .= '<a href="javascript:void(0)" style="text-decoration: none;"><li class="text-center" style="height:30px"><p style="font-size:0.8em">Không tim thấy kết quả</p></li></a>';
+            $html .= '<a href="javascript:void(0)" style="text-decoration: none;"><li class="text-center" style="height:30px"><p style="font-size:0.8em">Không tìm thấy kết quả</p></li></a>';
         }
         $html .= '</ul>';
         return $html;
