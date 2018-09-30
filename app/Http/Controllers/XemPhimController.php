@@ -59,7 +59,7 @@ class XemPhimController extends Controller{
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
         }
-        $listGoiY = $this->getListGoiY($phim[0]->quocgia_id);
+        $listGoiY = $this->getListGoiY($phim[0]);
         foreach($listGoiY as $row){
             $row->listTheLoai = '';
             $idTheLoai = json_decode($row->theloai_id);
@@ -108,10 +108,10 @@ class XemPhimController extends Controller{
         return $listSeason;
     }
 
-    public function getListGoiY($quocgiaID){
+    public function getListGoiY($phim){
         return DB::table('phim')
         ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
-        ->where('phim.quocgia_id', $quocgiaID)
+        ->where([['phim.quocgia_id', $phim->quocgia_id],['phim_kieu', $phim->phim_kieu],['phim_id', '!=', $phim->phim_id]])
         ->orderByRaw('RAND()')
         ->limit(8)
         ->get();
