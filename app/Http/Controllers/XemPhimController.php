@@ -103,7 +103,7 @@ class XemPhimController extends Controller{
     public function getListSeason($phimID, $phimTag){
         $listSeason = DB::select(DB::raw('SELECT * FROM phim '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
-                . ' WHERE phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
+                . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
                 . ' ORDER BY phim_season ASC')); 
         return $listSeason;
     }
