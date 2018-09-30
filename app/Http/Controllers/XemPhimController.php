@@ -53,20 +53,20 @@ class XemPhimController extends Controller{
         foreach($listSeason as $row){
             $row->listTheLoai = '';
             $idTheLoai = json_decode($row->theloai_id);
-            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-            for($i = 0; $i < count($listTheLoaiPhim); $i++){
-                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
-                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            $listTheLoaiSeason = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiSeason); $i++){
+                $row->listTheLoai .=  $listTheLoaiSeason[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiSeason)?', ':'.';
             }
         }
         $listGoiY = $this->getListGoiY($phim[0]);
         foreach($listGoiY as $row){
             $row->listTheLoai = '';
             $idTheLoai = json_decode($row->theloai_id);
-            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-            for($i = 0; $i < count($listTheLoaiPhim); $i++){
-                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
-                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            $listTheLoaiGoiY = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiGoiY); $i++){
+                $row->listTheLoai .=  $listTheLoaiGoiY[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiGoiY)?', ':'.';
             }
         }
         $follow = 0;
