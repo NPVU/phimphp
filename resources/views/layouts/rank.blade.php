@@ -3,14 +3,14 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangTuan as $tuan)
-                        <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}"><li>
+                        <a title="{{$tuan->phim_ten}}&nbsp;{{strlen($tuan->phim_tenvn)>0?'| '.$tuan->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
                                 <img src="{{$tuan->phim_hinhnen}}" width="60" height="70" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
                                 <div>{{strlen($tuan->phim_ten)>20?substr($tuan->phim_ten,0,20).'...':$tuan->phim_ten}}</div>
                                 @if(strlen($tuan->phim_tenvn)>0)
-                                <div class="title-vn">{{(strlen($tuan->phim_tenvn)>28?'('.substr($tuan->phim_tenvn,0,28).'...':'('.$tuan->phim_tenvn.')')}}</div>               
+                                <div class="title-vn">{{(strlen($tuan->phim_tenvn)>28?'('.substr($tuan->phim_tenvn,0,strrpos(substr($tuan->phim_tenvn,0,28),' ')).'...':'('.$tuan->phim_tenvn.')')}}</div>               
                                 @endif
                                 <div style="font-size:0.8em"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($tuan->phim_luotxem)}}</div>
                                 <div>
@@ -41,14 +41,14 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangThang as $thang)
-                        <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}"><li>
+                        <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
                                 <img src="{{$thang->phim_hinhnen}}" width="60" height="70" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
                                 <div>{{strlen($thang->phim_ten)>20?substr($thang->phim_ten,0,20).'...':$thang->phim_ten}}</div>
                                 @if(strlen($thang->phim_tenvn)>0)
-                                <div class="title-vn">{{(strlen($thang->phim_tenvn)>28?'('.substr($thang->phim_tenvn,0,28).'...':'('.$thang->phim_tenvn.')')}}</div>               
+                                <div class="title-vn">{{(strlen($thang->phim_tenvn)>28?'('.substr($thang->phim_tenvn,0,strrpos(substr($thang->phim_tenvn,0,28),' ')).'...':'('.$thang->phim_tenvn.')')}}</div>               
                                 @endif
                                 <div style="font-size:0.8em"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($thang->phim_luotxem)}}</div>
                                 <div>

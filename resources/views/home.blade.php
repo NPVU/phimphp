@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title')
-    Trang Chủ 
+XEM PHIM ONLINE MIỄN PHÍ | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM 
 @endsection 
 @section('metaCEO')
 <meta property="og:description" content="Xem Phim Anime Vietsub Online, Xem phim anime, Anime Hành động, Anime Download, Anime HD, Anime Vietsub Online" /> 
