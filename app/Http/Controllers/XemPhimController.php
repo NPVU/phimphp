@@ -58,7 +58,17 @@ class XemPhimController extends Controller{
                 $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
             }
-        }   
+        }
+        $listGoiY = $this->getListGoiY($phim[0]->quocgia_id);
+        foreach($listGoiY as $row){
+            $row->listTheLoai = '';
+            $idTheLoai = json_decode($row->theloai_id);
+            $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+            for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                $row->listTheLoai .=  $listTheLoaiPhim[$i]->theloai_ten;
+                $row->listTheLoai .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+            }
+        }
         $follow = 0;
         if(Auth::check()){
             $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
@@ -74,6 +84,7 @@ class XemPhimController extends Controller{
             $data['voteTimes'] = $voteTimes;
             $data['comment'] = $comment;
             $data['listSeason'] = $listSeason;
+            $data['listGoiY'] = $listGoiY;
             $data['follow_phim'] = $follow;
             $data['follows'] = $followAmount;
             return view('xemphim_min', $data, parent::getDataHeader()); 
@@ -95,6 +106,15 @@ class XemPhimController extends Controller{
                 . ' WHERE phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
                 . ' ORDER BY phim_season ASC')); 
         return $listSeason;
+    }
+
+    public function getListGoiY($quocgiaID){
+        return DB::table('phim')
+        ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
+        ->where('phim.quocgia_id', $quocgiaID)
+        ->orderByRaw('RAND()')
+        ->limit(8)
+        ->get();
     }
 
     public function loadVideo(){

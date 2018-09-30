@@ -474,60 +474,60 @@
         <h2 class="content-left-title">PHIM GỢI Ý</h2>
     </div>
     <div>
-        @if(count($listSeason) > 0)
-            @foreach($listSeason as $season)
+        @if(count($listGoiY) > 0)
+        @foreach($listGoiY as $row)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <a class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
-                                <img src="{{$season->phim_hinhnen}}">
+                                <img src="{{$row->phim_hinhnen}}">
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
-                            <div class="box-title">
-                                <div>{{(strlen($season->phim_ten.' (SS'.$season->phim_season.')')>20?substr($season->phim_ten,0,20).'...':$season->phim_ten.' (SS'.$season->phim_season.')')}}</div>
-                                <div class="title-vn">{{(strlen($season->phim_tenvn)>28?substr($season->phim_tenvn,0,28).'...':$season->phim_tenvn)}}</div>
-                            </div>
-                                <div class="box-text">Season&nbsp;{{$season->phim_season}}</div>
+                                <div class="box-title">
+                                    <div>{{(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')')}}</div>
+                                    <div class="title-vn">{{(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,28).'...':$row->phim_tenvn)}}</div>
+                                </div>
+                                <!--<div class="box-text">{{$row->phim_sotap}}&nbsp;tập</div>-->
                             </div>
                         </div>
                         <div class="phim-tip">
                             <div class="phim-tip-content">
-                            <div class="phim-tip-ten">{{$season->phim_ten}}</div>
+                            <div class="phim-tip-ten">{{$row->phim_ten}}</div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span>&nbsp; {{$season->phim_season}}
+                                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span>&nbsp; {{$row->phim_season}}
                                 <span style="float:right">
-                                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span>&nbsp; {{$season->phim_nam}}
+                                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span>&nbsp; {{$row->phim_nam}}
                                     <span></span>
                                 </span>
                             </div>
                             <div class="phim-tip-noidung">
-                                @if(is_null($season->phim_gioithieu))
+                                @if(is_null($row->phim_gioithieu))
                                     Đang cập nhật ...
                                 @else
-                                {{strlen($season->phim_gioithieu)>255?substr($season->phim_gioithieu,0,strrpos(substr($season->phim_gioithieu,0,255),' ')).' ...':$season->phim_gioithieu}}
+                                {{strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu}}
                                 @endif                            
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> 
-                                        {{$season->listTheLoai}}
+                                        {{$row->listTheLoai}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$season->phim_sotap}}
+                                <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$row->phim_sotap}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> {{$season->phim_kieu}}
+                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> {{$row->phim_kieu}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$season->quocgia_ten}}
+                                <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$season->phim_luotxem}}
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$row->phim_luotxem}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
                                 <?php
-                                    $star = ClassCommon::getStar($season->phim_id); 
+                                    $star = ClassCommon::getStar($row->phim_id); 
                                     for($i = 1; $i <= 5; $i++){
                                         if($i <= intval($star)){
                                             echo '<span class="glyphicon fa fa-star star star-color"></span>';
