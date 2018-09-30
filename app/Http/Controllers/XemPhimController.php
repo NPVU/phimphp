@@ -111,7 +111,7 @@ class XemPhimController extends Controller{
     public function getListGoiY($phim){
         return DB::table('phim')
         ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
-        ->where([['phim.quocgia_id', $phim->quocgia_id],['phim_kieu', $phim->phim_kieu],['phim_id', '!=', $phim->phim_id]])
+        ->where([['phim.quocgia_id', $phim->quocgia_id],['phim_kieu', $phim->phim_kieu],['phim_id', '!=', $phim->phim_id], ['phim_xuatban', 1]])
         ->orderByRaw('RAND()')
         ->limit(8)
         ->get();

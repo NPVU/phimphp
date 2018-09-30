@@ -304,17 +304,9 @@ class HomeController extends Controller
     }
 
     public function getPhimRandom(){             
-        $count = DB::table('phim')->where('phim_xuatban', 1)->count();
-        $listID = array();
-        for($i = 1; $i <= 10; $i++){
-            $randomID = rand(0, $count);
-            if(in_array($randomID, $listID)){
-                $i--;
-            }else{
-                array_push($listID, $randomID.'');
-            }            
-        }
-        $listRandom = DB::table('phim')->where('phim_xuatban', 1)->whereIn('phim_id', $listID)->get();
+        $listRandom = DB::table('phim')->where('phim_xuatban', 1)->orderByRaw('RAND()')
+        ->limit(10)
+        ->get();
         return $listRandom;
     }
 }
