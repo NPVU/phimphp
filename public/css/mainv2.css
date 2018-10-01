@@ -303,7 +303,7 @@ ul.user-menu  li:hover{
     color:gray;
     font-size: 1.1em;
 }
-.phim-tip-content > .phim-tip-underten .glyphicon, .phim-tip-content > .phim-tip-underten > .title{
+.phim-tip-content > .phim-tip-underten .glyphicon, .phim-tip-content > .phim-tip-underten > .title, .phim-tip-underten .title{
     color:#11c3cb;
 }
 .phim-tip-content > .phim-tip-noidung {

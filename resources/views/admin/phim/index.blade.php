@@ -192,6 +192,10 @@
                             <span class="help-block add_tapphim_luotxem_error"></span>
                         </div>
                         <div class="form-group">                            
+                            <input type="checkbox" name="is_tap_moi" class="flat-red" value="true" />
+                            <label>Tập mới</label>
+                        </div>
+                        <div class="form-group">                            
                             <input type="checkbox" name="thongbao" class="flat-red" value="true" />
                             <label>Thông báo</label>
                         </div>
@@ -346,17 +350,10 @@
             $('#add_phim_id').val(id);
             $('#add_phim_maxtap').val(maxtap);
             $('#add_phim_ten').html(ten + ' ('+maxtap+' tập)');
-            resetFormAddTapPhim();
-            if(parseInt(tap) < $('#add_phim_maxtap').val()){
-                $('title').html('Thêm Tập '+ten);
-                $('#add_tapphim_tap').val(parseInt(taphientai)<maxtap?parseInt(taphientai)+1:0);
-                $('#modal-add-tapphim').iziModal('open');
-            }  else {
-                $('title').html('Thông Báo');
-                $('.modal-send-message').html('Số tập của phim đã đủ không thể thêm tập!');
-                $('#modal-message').iziModal('open');
-            }
-            
+            resetFormAddTapPhim();            
+            $('title').html('Thêm Tập '+ten);
+            $('#add_tapphim_tap').val(parseInt(taphientai)<maxtap?parseInt(taphientai)+1:0);
+            $('#modal-add-tapphim').iziModal('open');                       
         }
         function resetFormAddTapPhim(){
             $('#add_tapphim_ten').val('');

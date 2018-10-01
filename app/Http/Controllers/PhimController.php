@@ -370,21 +370,38 @@ class PhimController extends Controller{
             $data['status'] = 0;
             $data['msg'] = 'Tập '.$request->add_tapphim_tap.' của phim này đã có, mời bạn vào chức năng chỉnh sửa';
             return $data;
+        }        
+        if($request->is_tap_moi){
+            DB::table('tap')->insert(
+                [
+                    'phim_id'           => $request->add_phim_id,
+                    'tap_ten'           => trim($request->add_tapphim_ten),
+                    'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
+                    'tap_tapso'         => $request->add_tapphim_tap,
+                    'tap_localhostlink' => trim($request->localhostLink),
+                    'tap_googlelink'    => trim($request->googleLink),
+                    'tap_youtubelink'   => trim($request->youtubeLink),
+                    'tap_openloadlink'  => trim($request->openloadLink),
+                    'tap_luotxem'       => $request->add_tapphim_luotxem,
+                    'tap_ngaycapnhat'   => now()
+                ]
+            );
+        }else{
+            DB::table('tap')->insert(
+                [
+                    'phim_id'           => $request->add_phim_id,
+                    'tap_ten'           => trim($request->add_tapphim_ten),
+                    'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
+                    'tap_tapso'         => $request->add_tapphim_tap,
+                    'tap_localhostlink' => trim($request->localhostLink),
+                    'tap_googlelink'    => trim($request->googleLink),
+                    'tap_youtubelink'   => trim($request->youtubeLink),
+                    'tap_openloadlink'  => trim($request->openloadLink),
+                    'tap_luotxem'       => $request->add_tapphim_luotxem
+                ]
+            );
         }
-        DB::table('tap')->insert(
-                    [
-                        'phim_id'           => $request->add_phim_id,
-                        'tap_ten'           => trim($request->add_tapphim_ten),
-                        'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
-                        'tap_tapso'         => $request->add_tapphim_tap,
-                        'tap_localhostlink' => trim($request->localhostLink),
-                        'tap_googlelink'    => trim($request->googleLink),
-                        'tap_youtubelink'   => trim($request->youtubeLink),
-                        'tap_openloadlink'  => trim($request->openloadLink),
-                        'tap_luotxem'       => $request->add_tapphim_luotxem,
-                        'tap_ngaycapnhat'   => now()
-                    ]
-                );
+        
         if($request->add_tapphim_luotxem>0){
             ClassCommon::updateLuotXem($request->add_phim_id);     
         }        

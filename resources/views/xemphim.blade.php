@@ -435,7 +435,7 @@
                                 <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$season->phim_sotap}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> {{$season->phim_kieu}}
+                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$season->phim_kieu}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$season->quocgia_ten}}
@@ -516,7 +516,7 @@
                                 <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$row->phim_sotap}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Dạng:</span> {{$row->phim_kieu}}
+                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$row->phim_kieu}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}

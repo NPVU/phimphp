@@ -95,7 +95,7 @@
                             
                             <div class="form-group <?php echo isset($edit_phim_sotap_error)?'has-error':''; ?>">
                                 <label>Số tập</label>
-                                <input type="number" name="edit_phim_sotap" class="form-control required" 
+                                <input type="text" name="edit_phim_sotap" class="form-control required" 
                                        value="<?php echo isset($_POST['edit_phim_sotap']) ? $_POST['edit_phim_sotap'] : $phim[0]->phim_sotap ?>"
                                        placeholder="VD: 24"/>
                                 <span class="help-block"><?php echo isset($edit_phim_sotap_error)?$edit_phim_sotap_error:''; ?></span>
