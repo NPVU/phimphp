@@ -262,11 +262,14 @@
                 });                     
                 var sticky = video.offsetTop;
                 window.onscroll = function() {
-                    if (window.pageYOffset >= sticky+520) {
-                        video.classList.add("sticky-video")
+                    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {                    
                     } else {
-                        video.classList.remove("sticky-video");
-                    }
+                        if (window.pageYOffset >= sticky+520) {
+                        video.classList.add("sticky-video")
+                        } else {
+                            video.classList.remove("sticky-video");
+                        }
+                    }                    
                 };       
             </script>          
             <style>
@@ -274,7 +277,7 @@
                     position: fixed;
                     bottom: 60px;
                     right:0px;
-                    width: 300px;
+                    width: 360px;
                     height:200px;
                     z-index:1000;
                 }
