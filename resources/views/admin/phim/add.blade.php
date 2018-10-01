@@ -33,7 +33,7 @@
                                          {{asset('img/themes/jquery-file-upload-scripts.png')}}
                                          <?php endif; ?>"
                                          onclick="$('#selectFileImage').click()" 
-                                         class="img-select-file npv-add-image" id="imgPhimDragDrop"/> 
+                                         class="img-select-file npv-add-image" id="imgPhimDragDrop" width="100%"/> 
                                     <span class="help-block"><?php echo isset($add_phim_image_error)?$add_phim_image_error:''; ?></span>
                                 </div>
                                 <div class="form-group <?php echo isset($add_phim_image_link_error)?'has-error':''; ?>">
@@ -57,7 +57,7 @@
                                          {{asset('img/themes/jquery-file-upload-scripts.png')}}
                                          <?php endif; ?>"
                                          onclick="$('#selectFileBackground').click()" 
-                                         class="img-select-file npv-add-image" id="backgroundPhimDragDrop"/> 
+                                         class="img-select-file npv-add-image" id="backgroundPhimDragDrop" width="100%"/> 
                                     <span class="help-block"><?php echo isset($phim_background_error)?$phim_background_error:''; ?></span>
                                 </div>
                                 <div class="form-group <?php echo isset($phim_background_link_error)?'has-error':''; ?>">
