@@ -8,6 +8,7 @@
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="850">
+<meta name="keywords" content="<?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?> | <?php echo $phim[0]->phim_tenkhac?>" />
 <script type="text/javascript" src="{{ asset('js/openload-plugin.min.js') }}"></script>
 @endsection 
 @section('contentLeft')
@@ -15,7 +16,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">{{$phim[0]->phim_ten}}</h2>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                       
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
         @include('layouts.video_min') 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
@@ -257,10 +258,26 @@
                     $(".rate").rate();
                     $('.rate').attr('data-rate-value',{{$star}});
                     $('.rate-select-layer').css('width', 20*{{$star}}+'%');
-                });     
-                                
-            </script>
-
+                });                     
+                var sticky = video.offsetTop;
+                window.onscroll = function() {
+                    if (window.pageYOffset >= sticky+520) {
+                        video.classList.add("sticky-video")
+                    } else {
+                        video.classList.remove("sticky-video");
+                    }
+                };       
+            </script>          
+            <style>
+                .sticky-video {
+                    position: fixed;
+                    bottom: 60px;
+                    right:0px;
+                    width: 300px;
+                    height:200px;
+                    z-index:1000;
+                }
+            </style>
         </div>        
     </div>
 </div>

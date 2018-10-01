@@ -13,6 +13,8 @@
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="XemPhimZero.com" />
     <meta property="fb:app_id" content="1228373097312732" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="robots" content="index,follow" />
     <title>@yield('title')</title>
 
     <!-- Scripts -->
@@ -24,7 +26,7 @@
     <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/iziToast.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/iziModal.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/iziModal.min.js') }}"></script>    
     <script type="text/javascript" src="{{ asset('js/main.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/rater.min.js') }}"></script>   
        
