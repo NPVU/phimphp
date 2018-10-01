@@ -3,6 +3,7 @@
     {{$phim[0]->phim_ten}}&nbsp;- &nbsp;{{$tap[0]->tap_tapsohienthi}}
 @endsection 
 @section('metaCEO') 
+<meta property="og:title" content="Xem Phim <?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?>" />
 <meta property="og:description" content="Download phim <?php echo $phim[0]->phim_ten ?>, Tải Phim <?php echo $phim[0]->phim_ten?>" /> 
 <meta property="og:description" content="Xem Phim <?php echo $phim[0]->phim_ten?>, Xem Phim <?php echo $phim[0]->phim_ten?> Online, Xem Phim <?php echo $phim[0]->phim_ten?> HD, Xem Phim <?php echo $phim[0]->phim_ten?> Miễn Phí, Xem Phim <?php echo $phim[0]->phim_ten?> Không Quảng Cáo" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">

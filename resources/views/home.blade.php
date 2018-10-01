@@ -3,6 +3,7 @@
 XEM PHIM ONLINE MIỄN PHÍ | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM 
 @endsection 
 @section('metaCEO')
+<meta property="og:title" content="XEM PHIM ONLINE MIỄN PHÍ | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
 <meta property="og:description" content="Xem Phim Anime Vietsub Online, Xem phim anime, Anime Hành động, Anime Download, Anime HD, Anime Vietsub Online" /> 
 <meta name="keywords" content="Xem Phim Online Miễn Phí | Xem Phim Không Quảng Cáo | XEMPHIMZERO.COM" />
 @endsection 

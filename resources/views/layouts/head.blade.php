@@ -5,8 +5,7 @@
     <link rel="icon" type="img/ico" href="{{ asset('img/themes/favicon.ico') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="url" content="{{ url('/') }}">
-    <meta property="og:title" content="XEM PHIM ANIME VIETSUB ONLINE | XEM PHIM ANIME MÙA | PHIM ANIME HAY | PHIM ANIME TOP | XEM ANIME ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
+    <meta name="url" content="{{ url('/') }}">    
     @yield('metaCEO')     
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url('/') }}" />
