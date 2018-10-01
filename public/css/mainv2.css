@@ -356,6 +356,9 @@ ul.user-menu  li:hover{
     .box-phim:hover ~ .phim-tip{
         display: none;
     }    
+    .vote-times{       
+        left: 180px;
+    }
 }
 @media (max-width: 480px) {
     .box-phim {
