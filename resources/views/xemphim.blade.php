@@ -279,7 +279,7 @@
                     right:0px;
                     width: 360px;
                     height:200px;
-                    z-index:1000;
+                    z-index:9;
                 }
             </style>
         </div>        
