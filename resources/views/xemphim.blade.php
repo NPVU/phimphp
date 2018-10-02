@@ -208,7 +208,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">
             <!--<button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>-->
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
-                <i class="icon-auto-next fa {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}}">&nbsp;<span>Tự chuyển tập:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
+                <i class="icon-auto-next fa @if(Session::has('autoNext')) {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}} @else fa-check-circle @endif">&nbsp;<span>Tự chuyển tập:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
             </button>
             <!--<button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
                 <i class="{{$follow_phim == 0?'fa fa-bell-slash':'fa fa-bell'}}">
