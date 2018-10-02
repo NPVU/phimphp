@@ -1,10 +1,11 @@
 @extends('layouts.app') 
-@section('title')
-XEM PHIM ONLINE MIỄN PHÍ | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM 
+@section('title') 
+XEMPHIMZERO.COM - XEM PHIM KHÔNG QUẢNG CÁO 
 @endsection 
 @section('metaCEO')
-<meta property="og:title" content="XEM PHIM ONLINE MIỄN PHÍ | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
-<meta property="og:description" content="Xem Phim Anime Vietsub Online, Xem phim anime, Anime Hành động, Anime Download, Anime HD, Anime Vietsub Online" /> 
+<meta property="og:image" content="{{asset('img/themes/logo-2.png')}}">
+<meta property="og:title" content="XEMPHIMZERO.COM | XEM PHIM KHÔNG QUẢNG CÁO | XEM PHIM ONLINE MIỄN PHÍ" />
+<meta property="og:description" content="Xem Phim Chất Lượng Cao Không Bị Quảng Cáo Làm Gián Đoạn" /> 
 <meta name="keywords" content="Xem Phim Online Miễn Phí | Xem Phim Không Quảng Cáo | XEMPHIMZERO.COM" />
 @endsection 
 @section('contentLeft')

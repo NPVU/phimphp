@@ -456,6 +456,11 @@ ul.user-menu  li:hover{
     color:gray;
     line-height: 3;
 }
+.fb-button{
+    float: right;
+    line-height: 2.3;
+    margin-right: 30px;
+}
 .func-video-align {
     text-align:left;
 }

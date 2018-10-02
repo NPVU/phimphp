@@ -40,8 +40,9 @@
         -->       
         <span class="title-video">
             {{$tap[0]->tap_tapsohienthi}}
-        </span>
+        </span>        
         <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
+        <span class="fb-button"><div class="fb-like" data-href="{{URL::to('/')}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div></span>
     </div>
 </div>
 
