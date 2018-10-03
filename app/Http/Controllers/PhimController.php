@@ -382,6 +382,7 @@ class PhimController extends Controller{
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
                     'tap_openloadlink'  => trim($request->openloadLink),
+                    'tap_audiolink'     => trim($request->audioLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem,
                     'tap_ngaycapnhat'   => now()
                 ]
@@ -397,6 +398,7 @@ class PhimController extends Controller{
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
                     'tap_openloadlink'  => trim($request->openloadLink),
+                    'tap_audiolink'     => trim($request->audioLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem
                 ]
             );
@@ -444,6 +446,7 @@ class PhimController extends Controller{
                         'tap_googlelink'    => trim($request->googleLink),
                         'tap_youtubelink'   => trim($request->youtubeLink),
                         'tap_openloadlink'  => trim($request->openloadLink),
+                        'tap_audiolink'     => trim($request->audioLink),
                         'tap_luotxem'       => $request->tapphim_luotxem                        
                     ]
         );

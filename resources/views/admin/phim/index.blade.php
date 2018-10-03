@@ -252,6 +252,19 @@
                                 </div>
                             </div>  
                             <span class="help-block add_openload_link_error"></span>
+                        </div>
+                        <div class="form-group add_audio_link">
+                            <label>Link Audio</label>
+                            <div class="input-group">                        
+                                <input type="text" id="audioLink" name="audioLink" value="" placeholder="Nhập link audio ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkAudioLink" class="btn btn-success" onclick="checkVideo('AudioLink')">
+                                        <span class="btnCheckAudioLink">Kiểm tra</span>
+                                        <i class="fa iconCheckAudioLink"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <span class="help-block add_audio_link_error"></span>
                         </div>                        
                     </div>
                     <div class="col-md-4">
@@ -484,7 +497,7 @@
                 $('.btnCheck'+clas+'Link').html('Kiểm tra');                
                 $('.iconCheck'+clas+'Link').addClass('fa-close');
             });
-        }
+        }        
         $(function () {
             //iCheck for checkbox and radio inputs
             $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
