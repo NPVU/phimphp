@@ -27,6 +27,16 @@ $(document).ready(function(){
                 }
         });        
     }
+    $(document).click(function(event) {
+        var target = $(event.target);
+        if (!target.parents().andSelf().is('.result-search')            
+            ) {
+                $('.result-search > ul > a ').hide(1000, function(){
+                    $('.result-search > ul > a ').remove();
+                });
+                $('.result-search').html('');
+            }
+    });
     $('.btn-lock-account').click(function(){        
         var token = $('#comment').attr('aria-token');
         $.ajax({
