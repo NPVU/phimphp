@@ -546,6 +546,9 @@ ul.user-menu  li:hover{
     padding-right: 10px;
     padding-left: 10px;
 }
+.col-md-1{
+    width: 10%;
+}
 a.btn{
     padding: 6px 0px;
 }
