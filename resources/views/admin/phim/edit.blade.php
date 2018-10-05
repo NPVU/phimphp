@@ -187,9 +187,14 @@
 
                             <div class="form-group <?php echo isset($edit_phim_xuatban_error)?'has-error':''; ?>">
                                 <label>Xuất bản</label>
-                                <input type="checkbox" name="edit_phim_xuatban" 
+                                <input type="checkbox" name="edit_phim_xuatban" class="flat-red" 
                                        value="1" <?php echo $phim[0]->phim_xuatban == 1?'checked':'' ?> />
                                 <span class="help-block"><?php echo isset($edit_phim_xuatban_error)?$edit_phim_xuatban_error:''; ?></span>
+                            </div>
+                            <div class="form-group">
+                                <label>Hoàn thành</label>
+                                <input type="checkbox" name="phim_hoanthanh" class="flat-red"
+                                       value="1" <?php echo $phim[0]->phim_hoanthanh == 1?'checked':'' ?> />                                
                             </div>
                         </div>
                         <div class="col-md-4">

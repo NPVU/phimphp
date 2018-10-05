@@ -199,6 +199,10 @@
                             <input type="checkbox" name="thongbao" class="flat-red" value="true" />
                             <label>Thông báo</label>
                         </div>
+                        <div class="form-group">                            
+                            <input type="checkbox" name="hoanthanh" id="hoanthanh" class="flat-red" value="true" />
+                            <label>Hoàn thành</label>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group add_localhost_link">
@@ -442,7 +446,8 @@
                            $('.add_tapphim_tap').removeClass('has-error');
                            $('.add_tapphim_tap_error').html(''); 
                            resetFormAddTapPhim();
-                           if(parseInt(tap) < $('#add_phim_maxtap').val()){
+                           var hoanthanh = document.getElementById('hoanthanh');
+                           if(!hoanthanh.checked){
                                $('#add_tapphim_tap').val(parseInt(tap)+1);
                                $('#add_tapphim_taphienthi').val('Tập '+(parseInt(tap)+1));
                            } else {

@@ -39,9 +39,9 @@ class PhimController extends Controller{
         }
         if ($tienDo != -1) {
             if ($tienDo == 1) {
-                $where .= ' AND phim_sotap = (SELECT MAX(tap_tapso) FROM tap WHERE tap.phim_id = phim.phim_id )';
+                $where .= ' AND phim_hoanthanh = 1';
             } else {
-                $where .= ' AND (phim_sotap > (SELECT MAX(tap_tapso) FROM tap WHERE tap.phim_id = phim.phim_id ) OR (SELECT MAX(tap_tapso) FROM tap WHERE tap.phim_id = phim.phim_id ) is null)';
+                $where .= ' AND phim_hoanthanh = 0';
             }
         }
         if (!is_null($request->tenphim)) {
@@ -310,6 +310,10 @@ class PhimController extends Controller{
             if(isset($request->edit_phim_xuatban) && $request->edit_phim_xuatban == 1){
                 $xuatBan = 1;
             }
+            $hoanThanh = 0;
+            if(isset($request->phim_hoanthanh) && $request->phim_hoanthanh == 1){
+                $hoanThanh = 1;
+            }
             DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
                     [
                         'theloai_id'      => json_encode($request->edit_phim_theloai),
@@ -325,7 +329,8 @@ class PhimController extends Controller{
                         'phim_dotuoi'     => $request->edit_phim_dotuoi,
                         'phim_tag'        => $request->edit_phim_tag,
                         'phim_nguon'      => $request->edit_phim_nguon,
-                        'phim_xuatban'    => $xuatBan
+                        'phim_xuatban'    => $xuatBan,
+                        'phim_hoanthanh'  => $hoanThanh
                     ]
                 );            
             return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
@@ -382,7 +387,6 @@ class PhimController extends Controller{
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
                     'tap_openloadlink'  => trim($request->openloadLink),
-                    'tap_audiolink'     => trim($request->audioLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem,
                     'tap_ngaycapnhat'   => now()
                 ]
@@ -398,16 +402,21 @@ class PhimController extends Controller{
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
                     'tap_openloadlink'  => trim($request->openloadLink),
-                    'tap_audiolink'     => trim($request->audioLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem
                 ]
             );
         }
-        
+        if($request->hoanthanh){
+            DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
+                [
+                    'phim_hoanthanh'    => 1
+                ]
+            );  
+        } 
         if($request->add_tapphim_luotxem>0){
             ClassCommon::updateLuotXem($request->add_phim_id);     
-        }        
-        if($request->thongbao){
+        }   
+        if ($request->thongbao){
             ClassCommon::sendPusher($request->add_phim_id, $request->add_tapphim_tap);
         }
         NotificationUtils::sendNotificationOfPhim($request->add_phim_id, $request->add_tapphim_tap, trim($request->add_tapphim_taphienthi));
@@ -446,7 +455,6 @@ class PhimController extends Controller{
                         'tap_googlelink'    => trim($request->googleLink),
                         'tap_youtubelink'   => trim($request->youtubeLink),
                         'tap_openloadlink'  => trim($request->openloadLink),
-                        'tap_audiolink'     => trim($request->audioLink),
                         'tap_luotxem'       => $request->tapphim_luotxem                        
                     ]
         );
