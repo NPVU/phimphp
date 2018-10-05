@@ -92,10 +92,15 @@ class ClassCommon extends BaseController
     }
     
     public static function getHTMLTapMoi($limit, $offset){
-        $listPhimToday = DB::select(DB::raw('SELECT *, (SELECT MAX(tap_ngaycapnhat) FROM tap WHERE tap.phim_id = phim.phim_id) AS ngaycapnhat FROM phim '
-                . ' JOIN (SELECT DISTINCT tap.phim_id FROM tap, phim p WHERE tap.phim_id = p.phim_id AND p.phim_xuatban = 1 AND (p.phim_kieu = "TV Series" OR p.phim_kieu = "Ova") ORDER BY tap_ngaycapnhat DESC LIMIT '.$limit.' OFFSET '.$offset.') tap '
-                . ' ON phim.phim_id IN (tap.phim_id) '
-                . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id ORDER BY ngaycapnhat DESC'));            
+        $listPhimToday = DB::table('phim')->where([['phim_xuatban', 1], ['phim_kieu', 'TV Series']])
+                                          ->orWhere([['phim_xuatban', 1], ['phim_kieu', 'Ova']])
+                                          ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                          ->orderByRaw('phim_ngaycapnhat_moinhat DESC')
+                                          ->offset($offset)
+                                          ->limit($limit)
+                                          ->get();
+        
+                
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
                     ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
