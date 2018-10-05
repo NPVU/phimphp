@@ -406,6 +406,11 @@ class PhimController extends Controller{
                 ]
             );
         }
+        DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
+                [
+                    'phim_ngaycapnhat_moinhat'    => now()
+                ]
+            );
         if($request->hoanthanh){
             DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
                 [
