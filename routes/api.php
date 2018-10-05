@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('openload/ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
 Route::get('openload/video/{fileID}/{ticket}/{captcha}', 'ServicesController@openloadDownloadAPI');
+Route::get('/tim-kiem', 'HomeController@timKiem');
