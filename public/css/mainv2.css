@@ -7,6 +7,7 @@
 body {
     background: #263238;
     color: gray;
+    font-size:12px;
     min-width: 414px;
 }
 body::-webkit-scrollbar {
@@ -379,6 +380,9 @@ ul.user-menu  li:hover{
     .box-overlay-rich{
         top:-20px;
     }
+    .vote-times{       
+        left: 200px;
+    }
 }
 
 .list-anime, .list-notification {
@@ -470,6 +474,7 @@ ul.user-menu  li:hover{
 .btn-tap{
     min-width: 60px;
     margin-bottom: 5px;
+    font-size:1em;
 }
 .btn-danger, .btn-default, .btn-info, .btn-primary, .btn-success, .btn-warning{
     background-image: none;
@@ -521,12 +526,12 @@ ul.user-menu  li:hover{
 }
 .rate {            
     font-size: 1.5em;
-    top: -30px;
+    top: -27px;
     left: 70px;
 }
 .vote-times{
     position: relative;
-    top: -55px;
+    top: -47px;
     left: 160px;
 }
 .page-error{

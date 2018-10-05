@@ -8,7 +8,7 @@
                                 <img src="{{$tuan->phim_hinhnen}}" width="60" height="70" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div>{{strlen($tuan->phim_ten)>20?substr($tuan->phim_ten,0,20).'...':$tuan->phim_ten}}</div>
+                                <div>{{strlen($tuan->phim_ten)>21?substr($tuan->phim_ten,0,21).'...':$tuan->phim_ten}}</div>
                                 @if(strlen($tuan->phim_tenvn)>0)
                                 <div class="title-vn">{{(strlen($tuan->phim_tenvn)>28?'('.substr($tuan->phim_tenvn,0,strrpos(substr($tuan->phim_tenvn,0,28),' ')).'...':'('.$tuan->phim_tenvn.')')}}</div>               
                                 @endif
@@ -46,7 +46,7 @@
                                 <img src="{{$thang->phim_hinhnen}}" width="60" height="70" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div>{{strlen($thang->phim_ten)>20?substr($thang->phim_ten,0,20).'...':$thang->phim_ten}}</div>
+                                <div>{{strlen($thang->phim_ten)>21?substr($thang->phim_ten,0,21).'...':$thang->phim_ten}}</div>
                                 @if(strlen($thang->phim_tenvn)>0)
                                 <div class="title-vn">{{(strlen($thang->phim_tenvn)>28?'('.substr($thang->phim_tenvn,0,strrpos(substr($thang->phim_tenvn,0,28),' ')).'...':'('.$thang->phim_tenvn.')')}}</div>               
                                 @endif
