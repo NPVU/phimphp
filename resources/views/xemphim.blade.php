@@ -5,7 +5,7 @@
 @section('metaCEO') 
 <meta property="og:url" content="{{url()->full()}}" />
 <meta property="og:title" content="Xem Phim <?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
-<meta property="og:description" content="Xem Phim <?php echo $phim[0]->phim_ten?>, Xem Phim <?php echo $phim[0]->phim_ten?> Online, Xem Phim <?php echo $phim[0]->phim_ten?> HD, Xem Phim <?php echo $phim[0]->phim_ten?> Miễn Phí, Xem Phim <?php echo $phim[0]->phim_ten?> Không Quảng Cáo" /> 
+<meta property="og:description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="850">
@@ -57,94 +57,78 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 func-video-align" style="margin-top:5px;">                                    
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="glyphicon glyphicon-backward"></span></button>
             <button class="btn btn-success npv-icon npv-play" title="Xem phim"><i class="fa fa-play"></i></button>
-            <button class="btn btn-success next-15s" title="15 giây sau"><span class="glyphicon glyphicon-forward"></span>&nbsp;15</button>
-            @if(strcmp($_GET['s'], md5('google'))==0)
-            <button class="btn btn-success npv-quality" title="Bật HD" quality="360">HD</button>                        
-            @endif
+            <button class="btn btn-success next-15s" title="15 giây sau"><span class="glyphicon glyphicon-forward"></span>&nbsp;15</button>           
         </div>
-        <script type="text/javascript">    
-            var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};        
-            var auto;
-            var video = document.getElementById('my-player');
-            @if(strcmp($_GET['s'], md5('google'))==0)
+        <script type="text/javascript">
             $(document).ready(function(){
-                $('#my-player').load();
-                $.ajax({
-                    url: $('meta[name="url"]').attr('content')+'/autoload/?pid='+getParameterByName('pid','')+'&t='+getParameterByName('t','')+'&token={{Session::token()}}',
-                    dataType: 'text',
-                    type: 'get',
-                    success:function(data){
-                        if(data!=null){
-                            data = JSON.parse(data);                                   
-                            $('#google360p').attr('src', data['360p']);
-                            if(data['720p']!=null){
-                                $('#my-player').attr('src', data['720p']);                                                   
-                                $('.npv-quality').css('color','white');
-                                $('.npv-quality').css('font-weight',700);
-                                $('.npv-quality').attr('quality', "720");
-                                $('.npv-quality').attr('title', "Tắt HD");
-                                video.onerror = function(){                                
-                                    video.setAttribute('src', $('#google360p').attr('src'));                                
-                                    video.play();
-                                };
-                                $('.icon-quality').removeClass('display-none');
-                                $('#google720p').attr('src', data['720p']);
-                            }else{
-                                $('#my-player').attr('src', data['360p']);
-                                $('.npv-quality').css('display','none');                       
-                            }
-                            if(data['1080p']!=null){
-                                $('#google1080p').attr('src', data['1080p']);
-                            }
-                            $('#my-player').removeAttr('poster');
-                            $('#my-player').prop('controls',true);
-                        }                    
+                var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};
+                var v = 0;     
+                var auto;
+                $('video').get(0).id = 'jw-video';   
+                var video = document.getElementById('jw-video');    
+                $('.npv-play').click(function(){
+                    if(video.paused){
+                        video.play();
+                    }else{
+                        video.pause();
                     }
+                });            
+                $('.pre-15s').click(function(){
+                    video.currentTime += -15;
                 });
-            });     
-            @endif
-            @if(strcmp($_GET['s'], md5('openload'))==0)
-                $(window).load(function() {
-                    getLinkOpenload('{{$tap[0]->tap_openloadlink}}');
-                });                 
-            @endif
-            var v = 0;        
-            video.onloadeddata = function(){
-                video.play();
-            };        
-            function nextVideo(){
-                var v = document.getElementById('my-player');
-                var auto = $('.btn-auto-next').attr('aria-auto').trim();
-                if(v.duration - v.currentTime === 0 && auto==1){
-                    if(getParameterByName('t','') < sotap){
-                        iziToast.show({
-                            timeout: 3000,
-                            theme: 'dark',
-                            icon: 'fa fa-play',
-                            title: 'Chuyển tập trong 5s',                        
-                            position: 'center', 
-                            progressBarColor: '#27ABDB',
-                            buttons: [
-                                ['<button>Chuyển ngay</button>', function (instance, toast) {
-                                    window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
-                                }, true], 
-                                ['<button>Hủy</button>', function (instance, toast) {
-                                    instance.hide({
-                                        transitionOut: 'fadeOutUp',
-                                        onClosing: function(instance, toast, closedBy){
-                                            clearTimeout(auto);
-                                        }
-                                    }, toast, 'buttonName');
-                                }]
-                            ],
-                            onClosing: function(instance, toast, closedBy){
-                                clearTimeout(auto);
-                            }
-                        });
-                        confirmAutoNext(3);                    
+                $('.next-15s').click(function(){
+                    video.currentTime += 15;
+                });
+                video.onplaying = function(){
+                    $('.npv-play > i').addClass('fa-pause');
+                    $('.npv-play > i').removeClass('fa-play');
+                    $('.npv-play').attr('title','Tạm dừng');
+                    if(v===0){
+                        v=1;
+                        setTimeout(function(){
+                            viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
+                        }, 10000);
+                    }
+                };
+                video.onpause = function(){
+                    $('.npv-play > i').addClass('fa-play');
+                    $('.npv-play > i').removeClass('fa-pause');
+                    nextVideo();
+                    $('.npv-play').attr('title','Xem phim');
+                };
+
+                function nextVideo(){                    
+                    var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
+                    if(video.duration - video.currentTime === 0 && autoconfig==1){
+                        if(getParameterByName('t','') < sotap){
+                            iziToast.show({
+                                timeout: 3000,
+                                theme: 'dark',
+                                icon: 'fa fa-play',
+                                title: 'Chuyển tập trong 5s',                        
+                                position: 'center', 
+                                progressBarColor: '#27ABDB',
+                                buttons: [
+                                    ['<button>Chuyển ngay</button>', function (instance, toast) {
+                                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
+                                    }, true], 
+                                    ['<button>Hủy</button>', function (instance, toast) {
+                                        instance.hide({
+                                            transitionOut: 'fadeOutUp',
+                                            onClosing: function(instance, toast, closedBy){
+                                                clearTimeout(auto);
+                                            }
+                                        }, toast, 'buttonName');
+                                    }]
+                                ],
+                                onClosing: function(instance, toast, closedBy){
+                                    clearTimeout(auto);
+                                }
+                            });
+                            confirmAutoNext(3);                    
+                        }
                     }
                 }
-            }
                 function confirmAutoNext(i){         
                     if(i <= 0){
                         window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
@@ -155,59 +139,8 @@
                         }, 1000);
                     }
                 }
-            $('.npv-play').click(function(){
-                if(video.paused){
-                    video.play();
-                }else{
-                    video.pause();
-                }
             });
-            @if(strcmp($_GET['s'], md5('google'))==0)
-            $('.npv-quality').click(function(){
-                var currentTime = video.currentTime;
-                if($('.npv-quality').attr('quality') === "360"){                
-                    video.setAttribute('src', $('#google720p').attr('src'));
-                    $('.npv-quality').css('color','white');
-                    $('.npv-quality').css('font-weight',700);
-                    $('.npv-quality').attr('quality', "720");
-                    $('.npv-quality').attr('title', "Tắt HD");
-                    video.onerror = function(){
-                        video.setAttribute('src', $('#google360p').attr('src'));
-                        video.currentTime = currentTime;
-                        video.play();
-                    };
-                }else{                
-                    video.setAttribute('src', $('#google360p').attr('src'));
-                    $('.npv-quality').css('color','gray');
-                    $('.npv-quality').css('font-weight',400);
-                    $('.npv-quality').attr('quality', "360");
-                    $('.npv-quality').attr('title', "Bật HD");
-                }
-                video.currentTime = currentTime;video.play();
-            });
-            @endif
-            $('.pre-15s').click(function(){
-                video.currentTime += -15;
-            });
-            $('.next-15s').click(function(){
-                video.currentTime += 15;
-            });
-            video.onplaying = function(){
-                $('.npv-play > i').addClass('fa-pause');
-                $('.npv-play > i').removeClass('fa-play');
-                $('.npv-play').attr('title','Tạm dừng');
-                if(v===0){
-                    v=1;
-                    setTimeout(function(){
-                        viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
-                    }, 10000);
-                }
-            };
-            video.onpause = function(){
-                $('.npv-play > i').addClass('fa-play');
-                $('.npv-play > i').removeClass('fa-pause');nextVideo();
-                $('.npv-play').attr('title','Xem phim');
-            };
+            
         </script>
         @endif
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">
@@ -266,14 +199,14 @@
                     $('.rate').attr('data-rate-value',{{$star}});
                     $('.rate-select-layer').css('width', 20*{{$star}}+'%');
                 });                     
-                var sticky = video.offsetTop;
+                var sticky = document.getElementById('video').offsetTop;
                 window.onscroll = function() {
                     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {                    
                     } else {
                         if (window.pageYOffset >= sticky+520) {
-                        video.classList.add("sticky-video")
+                            document.getElementById('video').classList.add("sticky-video")
                         } else {
-                            video.classList.remove("sticky-video");
+                            document.getElementById('video').classList.remove("sticky-video");
                         }
                     }                    
                 };       

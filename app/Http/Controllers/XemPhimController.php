@@ -87,6 +87,7 @@ class XemPhimController extends Controller{
             $data['listGoiY'] = $listGoiY;
             $data['follow_phim'] = $follow;
             $data['follows'] = $followAmount;
+            $data['video'] = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
             return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';

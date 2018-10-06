@@ -1,5 +1,5 @@
 @if(strcmp($_GET['s'], md5('google'))==0)
-<video id="my-player" class="video-js">
+<!--<video id="my-player" class="video-js">
             <source src="" id="google360p" type="video/mp4"/>
             <source src="" id="google720p" type="video/mp4"/>
             <source src="" id="google1080p" type="video/mp4"/>
@@ -10,7 +10,26 @@
             supports HTML5 video
             </a>
         </p>
-</video>
+</video>-->
+<div id="video" class="video-js">
+    <div id="my-player">Nếu không xem được vui lòng nhấn Crtl+F5 </div>
+</div>
+<script type="text/javascript" src="{{ asset('js/jwplayer.min.js') }}"></script>
+<script type="text/javascript">    
+    jwplayer.key=$videoKey;
+    var playerInstance = jwplayer('my-player');
+    playerInstance.setup({
+        width: "100%",
+        height: "100%",
+        sources: [
+                {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},  
+                @if(strlen($video["720p"])>0)
+                {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
+                @endif                                             
+            ],
+        autostart: 'false',image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},});
+    playerInstance.on('error', function() {});
+    </script>
 @elseif(strcmp($_GET['s'], md5('openload'))==0)
 <video id="my-player" class="video-js" src="" controls="true" autoplay="true">           
         <p class="vjs-no-js">
