@@ -39,7 +39,7 @@
         @endif  
         -->       
         <span class="title-video">
-            {{$tap[0]->tap_tapsohienthi}}
+            {{strlen($tap[0]->tap_tapsohienthi)>3?$tap[0]->tap_tapsohienthi:'Tập '.$tap[0]->tap_tapsohienthi}}
         </span>        
         <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
         <span class="fb-button">

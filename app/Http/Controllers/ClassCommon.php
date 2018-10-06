@@ -127,7 +127,7 @@ class ClassCommon extends BaseController
                     $html .=                    '<div>'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';
                     $html .=                    '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':$row->phim_tenvn).'</div>';
                     $html .=                '</div>';
-                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
+                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapso.'/'.$row->phim_sotap.'</div>';
 //                    $html .=                '<div class="box-text">';
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
 //                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
