@@ -197,7 +197,11 @@ class PhimController extends Controller{
             } else {
                 $url_background = $request->phim_background_link;
             }
-            
+
+            $xuatban = 0;
+            if($request->add_phim_xuatban){
+                $xuatban = 1;
+            }
             DB::table('phim')->insert(
                     [
                         'theloai_id'      => json_encode($request->add_phim_theloai),
@@ -215,6 +219,7 @@ class PhimController extends Controller{
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
                         'phim_nguon'      => $request->add_phim_nguon,
+                        'phim_xuatban'    => $xuatban,
                         'phim_ngaycapnhat'=> now()
                     ]
                 );
@@ -391,6 +396,11 @@ class PhimController extends Controller{
                     'tap_ngaycapnhat'   => now()
                 ]
             );
+            DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
+                [
+                    'phim_ngaycapnhat_moinhat'    => now()
+                ]
+            );
         }else{
             DB::table('tap')->insert(
                 [
@@ -405,12 +415,7 @@ class PhimController extends Controller{
                     'tap_luotxem'       => $request->add_tapphim_luotxem
                 ]
             );
-        }
-        DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
-                [
-                    'phim_ngaycapnhat_moinhat'    => now()
-                ]
-            );
+        }        
         if($request->hoanthanh){
             DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
                 [

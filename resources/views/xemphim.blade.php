@@ -4,7 +4,7 @@
 @endsection 
 @section('metaCEO') 
 <meta property="og:url" content="{{url()->full()}}" />
-<meta property="og:title" content="Xem Phim <?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?>" />
+<meta property="og:title" content="Xem Phim <?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
 <meta property="og:description" content="Xem Phim <?php echo $phim[0]->phim_ten?>, Xem Phim <?php echo $phim[0]->phim_ten?> Online, Xem Phim <?php echo $phim[0]->phim_ten?> HD, Xem Phim <?php echo $phim[0]->phim_ten?> Miễn Phí, Xem Phim <?php echo $phim[0]->phim_ten?> Không Quảng Cáo" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
