@@ -28,7 +28,18 @@
                 @endif                                             
             ],
         autostart: 'false',image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},});
-    playerInstance.on('error', function() {});
+    playerInstance.on('error', function() {
+        jwplayer("my-player").setup({            
+            width: "100%",
+            height: "100%",
+            sources: [
+                {file:'{{$video["360p"]}}',label:'360p','type':'mp4'}                                                     
+            ],
+            autostart: 'false',
+            image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
+        });
+        jwplayer('my-player').load();
+    });
     </script>
 @elseif(strcmp($_GET['s'], md5('openload'))==0)
 <video id="my-player" class="video-js" src="" controls="true" autoplay="true">           
