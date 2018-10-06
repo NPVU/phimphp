@@ -3,10 +3,10 @@
 XemPhimZero.com - Xem Phim Không Quảng Cáo 
 @endsection 
 @section('metaCEO')
-<meta property="og:image" content="{{asset('img/themes/logo-2.png')}}">
-<meta property="og:title" content="XemPhimZero.com | Xem Phim Không Quảng Cáo  | Xem Phim Online Miễn Phí" />
+<meta property="og:image" content="{{asset('img/themes/fb-logo.png')}}">
+<meta property="og:title" content="XemPhimZero.com - Xem Phim Không Quảng Cáo" />
 <meta property="og:description" content="Xem Phim Chất Lượng Cao Không Bị Quảng Cáo Làm Gián Đoạn" /> 
-<meta name="keywords" content="XemPhimZero.com | Xem Phim Không Quảng Cáo  | Xem Phim Online Miễn Phí" />
+<meta name="keywords" content="XemPhimZero.com - Xem Phim Không Quảng Cáo" />
 @endsection 
 @section('contentLeft')
 <div class="slider">    

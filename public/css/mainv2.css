@@ -434,6 +434,7 @@ ul.user-menu  li:hover{
 .content-left-section .content-left-title{
     margin-top: 0px;
     border-bottom: 1px solid;
+    font-size: 2em;
 }
 
 .server-google, .server-youtube, .server-openload {

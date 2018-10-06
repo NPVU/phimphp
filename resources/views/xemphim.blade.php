@@ -1,10 +1,10 @@
 @extends('layouts.app') 
 @section('title')
-    {{$phim[0]->phim_ten}}&nbsp;- &nbsp;{{$tap[0]->tap_tapsohienthi}}
+ Xem Phim <?php echo $phim[0]->phim_ten.' - '.$tap[0]->tap_tapsohienthi?>
 @endsection 
 @section('metaCEO') 
+<meta property="og:url" content="{{url()->full()}}" />
 <meta property="og:title" content="Xem Phim <?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?>" />
-<meta property="og:description" content="Download phim <?php echo $phim[0]->phim_ten ?>, Tải Phim <?php echo $phim[0]->phim_ten?>" /> 
 <meta property="og:description" content="Xem Phim <?php echo $phim[0]->phim_ten?>, Xem Phim <?php echo $phim[0]->phim_ten?> Online, Xem Phim <?php echo $phim[0]->phim_ten?> HD, Xem Phim <?php echo $phim[0]->phim_ten?> Miễn Phí, Xem Phim <?php echo $phim[0]->phim_ten?> Không Quảng Cáo" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
@@ -42,7 +42,12 @@
             {{$tap[0]->tap_tapsohienthi}}
         </span>        
         <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
-        <span class="fb-button"><div class="fb-like" data-href="{{URL::to('/')}}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div></span>
+        <span class="fb-button">
+        <div class="fb-share-button" 
+            data-href="{{url()->full()}}" 
+            data-layout="button">
+        </div>
+        </span>
     </div>
 </div>
 
@@ -403,7 +408,7 @@
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=1228373097312732&autoLogAppEvents=1';
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=345152536241287&autoLogAppEvents=1';
             fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
         <div class="fb-comments" data-href="{{url('xem-phim')}}/{{$phim[0]->phim_id}}" data-width="100%" data-numposts="10" data-colorscheme="dark" data-order-by="reverse_time"></div>
