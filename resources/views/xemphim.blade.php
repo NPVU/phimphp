@@ -166,9 +166,16 @@
                                 <label>Mô tả lỗi</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-exclamation-circle"></span></span>
-                                    <input type="text" class="form-control" id="input-report-error" placeholder="Vui lòng mô tả lỗi ít nhất 6 ký tự" />
-                                </div>
+                                    <input type="text" class="form-control" id="input-report-error" placeholder="Vui lòng mô tả lỗi rõ ràng" />
+                                </div>                                
                                 <span class="help-block help-block-report-error"></span>
+                                <div style="margin-top:10px">Mô tả lỗi càng rõ ràng chúng tôi sẽ sửa lỗi càng nhanh.
+                                    <ul>
+                                        <li>VD: Tập này không có sub, không có âm thanh.</li>
+                                        <li>VD: Tập này bị mất sub, mất âm thanh ở phút thứ 13 (cụ thể móc thời gian).</li>
+                                        <li>VD: Tập này bị nhầm lẫn với tập (nào đó) rồi.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">

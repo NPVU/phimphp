@@ -23,7 +23,7 @@
         height: "100%",
         sources: [
                 {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},  
-                @if(strlen($video["720p"])>0)
+                @if(!empty($video["720p"]))
                 {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
                 @endif                                             
             ],
