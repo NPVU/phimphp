@@ -446,7 +446,7 @@
                     $('#tapphim_luotxem').val(data[0].tap_luotxem);
                     $('#localhostLink').val(data[0].tap_tentap_localhostlink);
                     $('#googleLink').val(data[0].tap_googlelink);
-                    $('#youtubeLink').val(data[0].tap_youtubelink);
+                    $('#youtubeLink').val(data[0].tap_youtubelink.length>0? data[0].tap_youtubelink:'https://www.youtube.com/embed/');
                     $('#openloadLink').val(data[0].tap_openloadlink);
                 }
             })
