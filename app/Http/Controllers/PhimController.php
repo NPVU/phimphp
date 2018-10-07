@@ -284,17 +284,17 @@ class PhimController extends Controller{
                 }
                 
                 // Xóa file cũ
-                $phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
-                $str = explode("/", $phim[0]->phim_hinhanh);
-                $file_name = end($str);
-                if (file_exists(ClassCommon::getPathUploadImage().$file_name)){
-                    unlink(ClassCommon::getPathUploadImage().$file_name);
-                }
-                $str = explode("/", $phim[0]->phim_hinhnen);
-                $file_name = end($str);
-                if (file_exists(ClassCommon::getPathUploadImage().$file_name)){
-                    unlink(ClassCommon::getPathUploadImage().$file_name);
-                }
+                //$phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
+                //$str = explode("/", $phim[0]->phim_hinhanh);
+                //$file_name = end($str);
+                //if (file_exists(ClassCommon::getPathUploadImage().$file_name)){
+                //    unlink(ClassCommon::getPathUploadImage().$file_name);
+                //}
+                //$str = explode("/", $phim[0]->phim_hinhnen);
+                //$file_name = end($str);
+                //if (file_exists(ClassCommon::getPathUploadImage().$file_name)){
+                //    unlink(ClassCommon::getPathUploadImage().$file_name);
+                //}
                 
                 DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
                     [                        

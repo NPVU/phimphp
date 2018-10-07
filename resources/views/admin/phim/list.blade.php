@@ -310,7 +310,7 @@
                            $('#tapphim_luotxem').val(data.content.tap_luotxem);
                            $('#localhostLink').val(data.content.tap_localhostlink);
                            $('#googleLink').val(data.content.tap_googlelink);
-                           $('#youtubeLink').val(data.content.tap_youtubelink);
+                           $('#youtubeLink').val(data.content.tap_youtubelink.length>0? data.content.tap_youtubelink:'https://www.youtube.com/embed/');
                            $('#openloadLink').val(data.content.tap_openloadlink);
                        }
                    }

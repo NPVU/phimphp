@@ -158,7 +158,9 @@
 </script>
 @elseif(strcmp($_GET['s'], md5('youtube'))==0) 
     @if(!empty($tap[0]->tap_youtubelink))
-    <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="380"></iframe>
+    <div id="video" class="video-js">
+        <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="100%"></iframe>
+    </div>
     @else    
     <script>
         window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}";
