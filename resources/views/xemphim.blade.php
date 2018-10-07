@@ -60,12 +60,8 @@
             <button class="btn btn-success next-15s" title="15 giây sau"><span class="glyphicon glyphicon-forward"></span>&nbsp;15</button>           
         </div>
         <script type="text/javascript">
-            $(document).ready(function(){
-                var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};
-                var v = 0;     
-                var auto;
-                $('video').get(0).id = 'jw-video';   
-                var video = document.getElementById('jw-video');    
+            $(document).ready(function(){                             
+                var video = $('video').get(0);    
                 $('.npv-play').click(function(){
                     if(video.paused){
                         video.play();
@@ -78,67 +74,7 @@
                 });
                 $('.next-15s').click(function(){
                     video.currentTime += 15;
-                });
-                video.onplaying = function(){
-                    $('.npv-play > i').addClass('fa-pause');
-                    $('.npv-play > i').removeClass('fa-play');
-                    $('.npv-play').attr('title','Tạm dừng');
-                    if(v===0){
-                        v=1;
-                        setTimeout(function(){
-                            viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
-                        }, 10000);
-                    }
-                };
-                video.onpause = function(){
-                    $('.npv-play > i').addClass('fa-play');
-                    $('.npv-play > i').removeClass('fa-pause');
-                    nextVideo();
-                    $('.npv-play').attr('title','Xem phim');
-                };
-
-                function nextVideo(){                    
-                    var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
-                    if(video.duration - video.currentTime === 0 && autoconfig==1){
-                        if(getParameterByName('t','') < sotap){
-                            iziToast.show({
-                                timeout: 3000,
-                                theme: 'dark',
-                                icon: 'fa fa-play',
-                                title: 'Chuyển tập trong 5s',                        
-                                position: 'center', 
-                                progressBarColor: '#27ABDB',
-                                buttons: [
-                                    ['<button>Chuyển ngay</button>', function (instance, toast) {
-                                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
-                                    }, true], 
-                                    ['<button>Hủy</button>', function (instance, toast) {
-                                        instance.hide({
-                                            transitionOut: 'fadeOutUp',
-                                            onClosing: function(instance, toast, closedBy){
-                                                clearTimeout(auto);
-                                            }
-                                        }, toast, 'buttonName');
-                                    }]
-                                ],
-                                onClosing: function(instance, toast, closedBy){
-                                    clearTimeout(auto);
-                                }
-                            });
-                            confirmAutoNext(3);                    
-                        }
-                    }
-                }
-                function confirmAutoNext(i){         
-                    if(i <= 0){
-                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
-                    } else {    
-                        $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
-                        auto = setTimeout(() => {
-                            confirmAutoNext(i-1);
-                        }, 1000);
-                    }
-                }
+                });              
             });
             
         </script>

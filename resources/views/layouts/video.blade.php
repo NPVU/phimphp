@@ -12,13 +12,22 @@
         </p>
 </video>-->
 <div id="video" class="video-js">
-    <div id="my-player">Nếu không xem được vui lòng nhấn Crtl+F5 </div>
+    <div id="my-player"><h4 style="margin-left:20px"> Đang xử lý dữ liệu ...
+        <ol>
+            <li>Nếu không xem được vui lòng nhấn Crtl+F5 </li>
+            <li>Báo lỗi </li>
+            <li>Chuyển Server khác (nếu có) </li>
+        </ol>
+    </h4></div>
 </div>
 <script type="text/javascript" src="{{ asset('js/jwplayer.min.js') }}"></script>
 <script type="text/javascript">    
     jwplayer.key=$videoKey;
-    var playerInstance = jwplayer('my-player');
-    playerInstance.setup({
+    var vupdate = 0;
+    var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};
+    var auto;
+    var xpr = jwplayer('my-player');
+    xpr.setup({
         width: "100%",
         height: "100%",
         sources: [
@@ -27,8 +36,9 @@
                 {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
                 @endif                                             
             ],
-        autostart: 'false',image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},});
-    playerInstance.on('error', function() {
+        autostart: 'false',image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+    });
+    xpr.on('error', function() {
         jwplayer("my-player").setup({            
             width: "100%",
             height: "100%",
@@ -40,7 +50,65 @@
         });
         jwplayer('my-player').load();
     });
-    </script>
+    xpr.on('play', function(){
+        $('.npv-play > i').addClass('fa-pause');
+        $('.npv-play > i').removeClass('fa-play');
+        $('.npv-play').attr('title','Tạm dừng');
+        if(vupdate===0){
+            vupdate=1;
+            setTimeout(function(){
+                viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
+            }, 10000);
+        }
+    });
+    xpr.on('pause', function(){
+        $('.npv-play > i').addClass('fa-play');
+        $('.npv-play > i').removeClass('fa-pause');       
+        $('.npv-play').attr('title','Xem phim');
+    });
+    xpr.on('complete', function(){      
+        var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
+        if(xpr.getDuration() - xpr.getPosition() === 0 && autoconfig==1){
+            if(getParameterByName('t','') < sotap){
+                iziToast.show({
+                    timeout: 3000,
+                    theme: 'dark',
+                    icon: 'fa fa-play',
+                    title: 'Chuyển tập trong 5s',                        
+                    position: 'center', 
+                    progressBarColor: '#27ABDB',
+                    buttons: [
+                        ['<button>Chuyển ngay</button>', function (instance, toast) {
+                            window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
+                        }, true], 
+                        ['<button>Hủy</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutUp',
+                                onClosing: function(instance, toast, closedBy){
+                                    clearTimeout(auto);
+                                }
+                            }, toast, 'buttonName');
+                        }]
+                    ],
+                    onClosing: function(instance, toast, closedBy){
+                        clearTimeout(auto);
+                    }
+                    });
+                confirmAutoNext(3);                    
+            }
+        }
+    });
+    function confirmAutoNext(i){         
+        if(i <= 0){
+             window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
+        } else {    
+            $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
+            auto = setTimeout(() => {
+                confirmAutoNext(i-1);
+            }, 1000);
+        }
+    }
+</script>
 @elseif(strcmp($_GET['s'], md5('openload'))==0)
 <video id="my-player" class="video-js" src="" controls="true" autoplay="true">           
         <p class="vjs-no-js">

@@ -155,10 +155,6 @@ class PhimController extends Controller{
             $data['add_phim_tenkhac_error'] = 'Tên phim có độ dài tối đa 100 ký tự';
             $valid = false;
         }  
-        if($request->add_phim_sotap <= 0){
-            $data['add_phim_sotap_error'] = 'Số tập phim phải lớn hơn 0';
-            $valid = false;
-        }
         if($request->add_phim_season <= 0){
             $data['add_phim_season_error'] = 'Season phim phải lớn hơn 0';
             $valid = false;
@@ -248,10 +244,6 @@ class PhimController extends Controller{
             $data['edit_phim_tenkhac_error'] = 'Tên phim có độ dài tối đa 100 ký tự';
             $valid = false;
         }        
-        if($request->edit_phim_sotap <= 0){
-            $data['edit_phim_sotap_error'] = 'Số tập phim phải lớn hơn 0';
-            $valid = false;
-        }
         if($request->edit_phim_season <= 0){
             $data['edit_phim_season_error'] = 'Season phim phải lớn hơn 0';
             $valid = false;

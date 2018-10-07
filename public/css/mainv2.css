@@ -662,3 +662,7 @@ hr{
     -moz-opacity: 0;
     filter: alpha(opacity=0);
 }
+/* rewrite jwplayer */
+.jw-display-icon-container{
+    border-radius: 5px;
+}
