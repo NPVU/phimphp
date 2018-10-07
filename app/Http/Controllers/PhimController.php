@@ -385,6 +385,7 @@ class PhimController extends Controller{
                     'tap_youtubelink'   => trim($request->youtubeLink),
                     'tap_openloadlink'  => trim($request->openloadLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem,
+                    'tap_chatluong'     => $request->chatluong,
                     'tap_ngaycapnhat'   => now()
                 ]
             );
@@ -404,7 +405,8 @@ class PhimController extends Controller{
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
                     'tap_openloadlink'  => trim($request->openloadLink),
-                    'tap_luotxem'       => $request->add_tapphim_luotxem
+                    'tap_luotxem'       => $request->add_tapphim_luotxem,
+                    'tap_chatluong'     => $request->chatluong
                 ]
             );
         }        
@@ -457,7 +459,8 @@ class PhimController extends Controller{
                         'tap_googlelink'    => trim($request->googleLink),
                         'tap_youtubelink'   => trim($request->youtubeLink),
                         'tap_openloadlink'  => trim($request->openloadLink),
-                        'tap_luotxem'       => $request->tapphim_luotxem                        
+                        'tap_luotxem'       => $request->tapphim_luotxem,
+                        'tap_chatluong'     => $request->chatluong                        
                     ]
         );
         if($request->tapphim_luotxem > 0){

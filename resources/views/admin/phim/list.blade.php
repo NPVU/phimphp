@@ -102,6 +102,17 @@
                             <input type="text" id="tapphim_ten" name="tapphim_ten" class="form-control" value="" placeholder=""/>
                             <span class="help-block tapphim_ten_error"></span>
                         </div>
+                        <div class="form-group chatluong">
+                            <label>Chất lượng</label>
+                            <select name="chatluong" id="chatluong" class="form-control">
+                                <option value="1">360p</option>
+                                <option value="2">480p</option>
+                                <option value="3">720p</option>
+                                <option value="4">1080p</option>
+                                <option value="5">2K</option>
+                                <option value="6">4K</option>
+                            </select>                                                        
+                        </div>
                         <div class="form-group tapphim_luotxem">
                             <label>Lượt xem</label>
                             <input type="number" id="tapphim_luotxem" name="tapphim_luotxem" class="form-control" value="" placeholder=""/>
@@ -308,6 +319,7 @@
                            $('#tapphim_taphienthi').val(data.content.tap_tapsohienthi);
                            $('#tapphim_ten').val(data.content.tap_ten);
                            $('#tapphim_luotxem').val(data.content.tap_luotxem);
+                           $('#chatluong').val(data.content.tap_chatluong);
                            $('#localhostLink').val(data.content.tap_localhostlink);
                            $('#googleLink').val(data.content.tap_googlelink);
                            $('#youtubeLink').val(data.content.tap_youtubelink.length>0? data.content.tap_youtubelink:'https://www.youtube.com/embed/');
@@ -444,6 +456,7 @@
                     $('#tapphim_taphienthi').val(data[0].tap_tapsohienthi);
                     $('#tapphim_ten').val(data[0].tap_ten);
                     $('#tapphim_luotxem').val(data[0].tap_luotxem);
+                    $('#chatluong').val(data[0].tap_chatluong);
                     $('#localhostLink').val(data[0].tap_tentap_localhostlink);
                     $('#googleLink').val(data[0].tap_googlelink);
                     $('#youtubeLink').val(data[0].tap_youtubelink.length>0? data[0].tap_youtubelink:'https://www.youtube.com/embed/');

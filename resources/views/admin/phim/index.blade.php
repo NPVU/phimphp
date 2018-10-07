@@ -186,6 +186,17 @@
                             <input type="text" id="add_tapphim_ten" name="add_tapphim_ten" class="form-control" value="" placeholder=""/>
                             <span class="help-block add_tapphim_ten_error"></span>
                         </div>
+                        <div class="form-group chatluong">
+                            <label>Chất lượng</label>
+                            <select name="chatluong" class="form-control">
+                                <option value="1">360p</option>
+                                <option value="2">480p</option>
+                                <option value="3" selected>720p</option>
+                                <option value="4">1080p</option>
+                                <option value="5">2K</option>
+                                <option value="6">4K</option>
+                            </select>                                                        
+                        </div>
                         <div class="form-group add_tapphim_luotxem">
                             <label>Lượt xem</label>
                             <input type="number" id="add_tapphim_luotxem" name="add_tapphim_luotxem" class="form-control" value="0" placeholder=""/>
