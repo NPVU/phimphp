@@ -79,19 +79,19 @@
                             ?>
                             @foreach ($listPhim as $row)
                             <tr id="row{{$row->phim_id}}" >
-                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
-                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_ten}}
                                 </td>
-                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->tap==null?'0':$row->tap}}/{{$row->phim_sotap}}
                                 </td> 
-                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_tag}}
                                 </td>                                                              
-                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_luotxem}}
                                 </td>
                                 <td class="text-center">
@@ -102,7 +102,7 @@
                                 </td>
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">                                        
-                                        <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', {{$row->phim_sotap}}, {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" data-toggle="tooltip" title="Thêm tập">
+                                        <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" data-toggle="tooltip" title="Thêm tập">
                                             <i class="fa fa fa-plus-circle text-light-blue"></i>
                                         </span>
                                         <a href="{{url('quan-ly/phim/danh-sach-tap/')}}/{{$row->phim_id}}/{{csrf_token()}}" data-toggle="tooltip" title="Danh sách tập">
@@ -452,7 +452,7 @@
                            var hoanthanh = document.getElementById('hoanthanh');
                            if(!hoanthanh.checked){
                                $('#add_tapphim_tap').val(parseInt(tap)+1);
-                               $('#add_tapphim_taphienthi').val('Tập '+(parseInt(tap)+1));
+                               $('#add_tapphim_taphienthi').val((parseInt(tap)+1));
                            } else {
                                $('#modal-add-tapphim').iziModal('close');
                            }                           

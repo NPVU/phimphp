@@ -39,14 +39,14 @@
         @endif  
         -->       
         <span class="title-video">
-            {{'Tập '.$tap[0]->tap_tapsohienthi}}
+            {{'Tập '.$tap[0]->tap_tapsohienthi}} <span class="name-video">{{strlen($tap[0]->tap_ten)>0?': '.$tap[0]->tap_ten:''}}</span>
         </span>        
         <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
         <span class="fb-button">
-        <div class="fb-share-button" 
-            data-href="{{url()->full()}}" 
-            data-layout="button">
-        </div>
+            <div class="fb-share-button" 
+                data-href="{{url()->full()}}" 
+                data-layout="button">
+            </div>
         </span>
     </div>
 </div>
@@ -299,7 +299,7 @@
         @if(count($listSeason) > 0)
             @foreach($listSeason as $season)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <a class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img src="{{$season->phim_hinhnen}}">
@@ -310,7 +310,15 @@
                                 <div>{{(strlen($season->phim_ten.' (SS'.$season->phim_season.')')>20?substr($season->phim_ten,0,20).'...':$season->phim_ten.' (SS'.$season->phim_season.')')}}</div>
                                 <div class="title-vn">{{(strlen($season->phim_tenvn)>28?substr($season->phim_tenvn,0,28).'...':$season->phim_tenvn)}}</div>
                             </div>
-                                <div class="box-text">Season&nbsp;{{$season->phim_season}}</div>
+                                @if(strcmp($season->phim_kieu, 'Movie')==0) 
+                                <div class="box-text">Movie &nbsp;{{$season->phim_season}}</div> 
+                                @elseif(strcmp($season->phim_kieu, 'Ova')==0) 
+                                <div class="box-text">Ova &nbsp;{{$season->phim_season}}</div> 
+                                @elseif(strcmp($season->phim_kieu, 'Live Action')==0) 
+                                <div class="box-text">Live Action &nbsp;{{$season->phim_season}}</div> 
+                                @else 
+                                <div class="box-text">Season&nbsp;{{$season->phim_season}}</div> 
+                                @endif                                 
                             </div>
                         </div>
                         <div class="phim-tip">
@@ -380,7 +388,7 @@
         @if(count($listGoiY) > 0)
         @foreach($listGoiY as $row)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <a class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img src="{{$row->phim_hinhnen}}">

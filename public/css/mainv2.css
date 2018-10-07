@@ -174,6 +174,9 @@ ul.user-menu  li:hover{
     .btn-tap{
         min-width:100px !important;
     }
+    .name-video{
+        display: none;
+    } 
 }
 @media (max-width: 540px) {
     .btn-tap{
@@ -439,6 +442,7 @@ ul.user-menu  li:hover{
 }
 
 .server-google, .server-youtube, .server-openload {
+    width: 24px;
     opacity: 0.3;
     border-radius: 5px;
     cursor: pointer;
@@ -451,10 +455,11 @@ ul.user-menu  li:hover{
 
 .title-video {
     float:left;
-    line-height: 1.5;
-    font-size:24px;
+    line-height: 1.5;    
     font-weight: 600;
     color: darkgrey;
+    font-size: 1.2em;
+    margin-top: 2px;
     margin-left: 5px;
 }
 .view-times {
@@ -628,7 +633,7 @@ hr{
 @media (max-width: 480px) {
     .video-js {
         height: 300px;
-    }
+    }       
 }
 /* end videojs */
 
