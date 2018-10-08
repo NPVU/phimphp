@@ -322,7 +322,7 @@
                            $('#chatluong').val(data.content.tap_chatluong);
                            $('#localhostLink').val(data.content.tap_localhostlink);
                            $('#googleLink').val(data.content.tap_googlelink);
-                           $('#youtubeLink').val(data.content.tap_youtubelink.length>0? data.content.tap_youtubelink:'https://www.youtube.com/embed/');
+                           $('#youtubeLink').val(data.content.tap_youtubelink);
                            $('#openloadLink').val(data.content.tap_openloadlink);
                        }
                    }
@@ -459,7 +459,7 @@
                     $('#chatluong').val(data[0].tap_chatluong);
                     $('#localhostLink').val(data[0].tap_tentap_localhostlink);
                     $('#googleLink').val(data[0].tap_googlelink);
-                    $('#youtubeLink').val(data[0].tap_youtubelink.length>0? data[0].tap_youtubelink:'https://www.youtube.com/embed/');
+                    $('#youtubeLink').val(data[0].tap_youtubelink);
                     $('#openloadLink').val(data[0].tap_openloadlink);
                 }
             })

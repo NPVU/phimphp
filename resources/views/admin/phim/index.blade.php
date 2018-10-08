@@ -245,7 +245,7 @@
                         <div class="form-group add_youtube_link">
                             <label>Link Youtube</label>
                             <div class="input-group">                        
-                                <input type="text" id="youtubeLink" name="youtubeLink" value="https://www.youtube.com/embed/" placeholder="Nhập link youtube ..." class="form-control" />
+                                <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập link youtube ..." class="form-control" />
                                 <div class="input-group-btn">
                                     <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success" onclick="checkVideo('Youtube')">
                                         <span class="btnCheckYoutubeLink">Kiểm tra</span>

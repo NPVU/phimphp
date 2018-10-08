@@ -159,7 +159,7 @@
 @elseif(strcmp($_GET['s'], md5('youtube'))==0) 
     @if(!empty($tap[0]->tap_youtubelink))
     <div id="video" class="video-js">
-        <iframe class="npv-youtube" src="{{$tap[0]->tap_youtubelink}}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="100%"></iframe>
+        <iframe class="npv-youtube" src="https://www.youtube.com/embed/{{$tap[0]->tap_youtubelink}}?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="100%"></iframe>
     </div>
     @else    
     <script>

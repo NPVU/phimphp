@@ -4,7 +4,7 @@
 @endsection 
 @section('metaCEO') 
 <meta property="og:url" content="{{url()->full()}}" />
-<meta property="og:title" content="Xem Phim <?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
+<meta property="og:title" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
 <meta property="og:description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
