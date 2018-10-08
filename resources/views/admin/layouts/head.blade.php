@@ -15,8 +15,7 @@
     <script type="text/javascript" src="{{ asset('js/main.min.js') }}"></script>     
     <link href="{{ asset('template/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('template/bower_components/morris.js/morris.css') }}" rel="stylesheet" type="text/css" />    
+    <link href="{{ asset('template/bower_components/Ionicons/css/ionicons.min.css') }}" rel="stylesheet" type="text/css" />      
     <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('template/plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css" />

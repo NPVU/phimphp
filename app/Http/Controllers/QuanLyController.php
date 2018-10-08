@@ -27,9 +27,16 @@ class QuanLyController extends Controller{
             $data['backURL'] = URL::to('/');
             return view('errors/index', $data); 
         }
-       $data['title'] = 'Bảng Điều Khiển';
-       $data['page'] = 'admin.index';
-       return view('admin/layout', $data);
+
+        $tongPhim = DB::table('phim')->count();
+        $phimHoanThanh = DB::table('phim')->where('phim_hoanthanh', 1)->count();
+
+        $data['tongphim'] = $tongPhim;
+        $data['phimhoanthanh'] = $phimHoanThanh;
+
+        $data['title'] = 'Bảng Điều Khiển';
+        $data['page'] = 'admin.index';
+        return view('admin/layout', $data);
     }
 }
 

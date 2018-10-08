@@ -1,99 +1,72 @@
 <section class="content">
     <div class="row">        
-        <div class="col-md-12">            
+        <div class="col-md-12">        
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Dashboard</h3>                               
+                    <h3 class="box-title">Thống Kê</h3>                               
                 </div>                
                 <div class="box-body chart-responsive">
-                  <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+                  <div class="col-md-6">
+                    <div id="hoanthanh"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div id="updating-phim"></div>
+                  </div>
                 </div>                          
             </div>            
         </div>        
     </div>
-    <script type="text/javascript" src="{{ asset('template/bower_components/raphael/raphael.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('template/bower_components/morris.js/morris.min.js') }}"></script>
+    <link href="{{ asset('css/morris.css') }}" rel="stylesheet" type="text/css" />  
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script type="text/javascript" src="{{ asset('js//morris.js') }}"></script>
     <script>
-    $(function () {
-      "use strict";
+      Morris.Donut({
+        element: 'hoanthanh',
+        data: [
+          {value: {{number_format(($phimhoanthanh/$tongphim)* 100, 2)}}, label: 'Hoàn thành'},
+          {value: {{100-number_format(($phimhoanthanh/$tongphim)* 100, 2)}}, label: 'Chưa hoàn thành'}
+        ],
+        backgroundColor: '#ccc',
+        labelColor: '#060',
+        colors: [
+          '#0BA462',
+          '#39B580',
+          '#67C69D',
+          '#95D7BB'
+        ],
+        formatter: function (x) { return x + "%"}
+    });
 
-      // AREA CHART
-      var area = new Morris.Area({
-        element: 'revenue-chart',
-        resize: true,
-        data: [
-          {y: '2011 Q1', item1: 2666, item2: 2666},
-          {y: '2011 Q2', item1: 2778, item2: 2294},
-          {y: '2011 Q3', item1: 4912, item2: 1969},
-          {y: '2011 Q4', item1: 3767, item2: 3597},
-          {y: '2012 Q1', item1: 6810, item2: 1914},
-          {y: '2012 Q2', item1: 5670, item2: 4293},
-          {y: '2012 Q3', item1: 4820, item2: 3795},
-          {y: '2012 Q4', item1: 15073, item2: 5967},
-          {y: '2013 Q1', item1: 10687, item2: 4460},
-          {y: '2013 Q2', item1: 8432, item2: 5713}
-        ],
-        xkey: 'y',
-        ykeys: ['item1', 'item2'],
-        labels: ['Item 1', 'Item 2'],
-        lineColors: ['#a0d0e0', '#3c8dbc'],
-        hideHover: 'auto'
-      });
-
-      // LINE CHART
-      var line = new Morris.Line({
-        element: 'line-chart',
-        resize: true,
-        data: [
-          {y: '2011 Q1', item1: 2666},
-          {y: '2011 Q2', item1: 2778},
-          {y: '2011 Q3', item1: 4912},
-          {y: '2011 Q4', item1: 3767},
-          {y: '2012 Q1', item1: 6810},
-          {y: '2012 Q2', item1: 5670},
-          {y: '2012 Q3', item1: 4820},
-          {y: '2012 Q4', item1: 15073},
-          {y: '2013 Q1', item1: 10687},
-          {y: '2013 Q2', item1: 8432}
-        ],
-        xkey: 'y',
-        ykeys: ['item1'],
-        labels: ['Item 1'],
-        lineColors: ['#3c8dbc'],
-        hideHover: 'auto'
-      });
-
-      //DONUT CHART
-      var donut = new Morris.Donut({
-        element: 'sales-chart',
-        resize: true,
-        colors: ["#3c8dbc", "#f56954", "#00a65a"],
-        data: [
-          {label: "Download Sales", value: 12},
-          {label: "In-Store Sales", value: 30},
-          {label: "Mail-Order Sales", value: 20}
-        ],
-        hideHover: 'auto'
-      });
-      //BAR CHART
-      var bar = new Morris.Bar({
-        element: 'bar-chart',
-        resize: true,
-        data: [
-          {y: '2006', a: 100, b: 90},
-          {y: '2007', a: 75, b: 65},
-          {y: '2008', a: 50, b: 40},
-          {y: '2009', a: 75, b: 65},
-          {y: '2010', a: 50, b: 40},
-          {y: '2011', a: 75, b: 65},
-          {y: '2012', a: 100, b: 90}
-        ],
-        barColors: ['#00a65a', '#f56954'],
-        xkey: 'y',
-        ykeys: ['a', 'b'],
-        labels: ['CPU', 'DISK'],
-        hideHover: 'auto'
-      });
+    Morris.Bar({
+      element: 'updating-phim',
+      data: [
+        {x: '2011 Q1', y: 0},
+        {x: '2011 Q2', y: 1},
+        {x: '2011 Q3', y: 2},
+        {x: '2011 Q4', y: 3},
+        {x: '2012 Q1', y: 4},
+        {x: '2012 Q2', y: 5},
+        {x: '2012 Q3', y: 6},
+        {x: '2012 Q4', y: 7},
+        {x: '2013 Q1', y: 8}
+      ],
+      xkey: 'x',
+      ykeys: ['y'],
+      labels: ['Y'],
+      barColors: function (row, series, type) {
+        if (type === 'bar') {
+          var red = Math.ceil(255 * row.y / this.ymax);
+          return 'rgb(' + red + ',0,0)';
+        }
+        else {
+          return '#000';
+        }
+      }
     });
   </script>    
+  <style>
+      tspan{
+          font-family: --webkit-body;
+      }
+  </style>
 </section>

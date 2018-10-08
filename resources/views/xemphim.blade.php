@@ -201,7 +201,7 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-radius: 3px;">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 text-center">
-                                <img src="{{$phim[0]->phim_hinhanh}}" width="100%" style="max-width:300px"/>
+                                <img src="{{$phim[0]->phim_hinhanh}}" width="100%" style="max-width:300px;max-height: 230px;"/>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                                 <div class="text-center">
