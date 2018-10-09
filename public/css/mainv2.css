@@ -605,10 +605,24 @@ hr{
     top: -0.9em;
     left: -12px;
 }
+.pagination>li>a {
+    color: #ffffff;
+    background-color: rgb(38, 50, 56);
+}
+.pagination>.active>span, .pagination>.active>span:hover{
+    background-color: #3e8f3e;
+    border-color: #3e8f3e;
+}
+.pagination>.disabled>span{
+    background-color: rgb(38, 50, 56);
+}
 @media (min-width: 992px){
     .navbar-right {
         float: right!important;
         margin-right: -25px;
+    }
+    li.dropdown:hover .dropdown-menu{
+        display: block;
     }
 }
 
