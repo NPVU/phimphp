@@ -52,7 +52,8 @@
 </div>
 
 <div class="content-left-section">    
-    <div>                                                    
+    <div>            
+        <!--
         @if(strcmp($_GET['s'], md5('google'))==0 || strcmp($_GET['s'], md5('openload'))==0)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 func-video-align" style="margin-top:5px;">                                    
             <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="glyphicon glyphicon-backward"></span></button>
@@ -79,6 +80,7 @@
             
         </script>
         @endif
+        -->
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">
             <!--<button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>-->
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
@@ -287,7 +289,7 @@
             js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=345152536241287&autoLogAppEvents=1';
             fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
-        <div class="fb-comments" data-href="{{url('xem-phim')}}/{{$phim[0]->phim_id}}" data-width="100%" data-numposts="10" data-colorscheme="dark" data-order-by="reverse_time"></div>
+        <div class="fb-comments" data-href="{{url('xem-phim')}}/{{$phim[0]->phim_id}}" data-width="100%" width="100%" data-numposts="10" data-colorscheme="dark" data-order-by="reverse_time"></div>
     </div>
 </div>
 

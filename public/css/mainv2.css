@@ -685,3 +685,8 @@ hr{
 .jw-display-icon-container{
     border-radius: 5px;
 }
+
+/* rewrite facebook */
+.fb_iframe_widget_fluid_desktop, .fb_iframe_widget_fluid_desktop span, .fb_iframe_widget_fluid_desktop iframe {
+    width: 100% !important;
+}

@@ -3,12 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/phimphp/public/css/main.min.css</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/layout.blade.php</file>
             <file>file:/C:/xampp/htdocs/phimphp/resources/views/xemphim.blade.php</file>
-            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/phim/list.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/public/js/main.js</file>
+            <file>file:/C:/xampp/htdocs/phimphp/routes/web.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/layouts/head.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/layouts/content.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/app/Http/Controllers/TaiKhoanController.php</file>
             <file>file:/C:/xampp/htdocs/phimphp/app/Http/Controllers/PhimController.php</file>
-            <file>file:/C:/xampp/htdocs/phimphp/public/css/mainv2.css</file>
-            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/phim/index.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/app/Http/Controllers/XemPhimController.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/app/Http/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/layouts/header.blade.php</file>
         </group>
     </open-files>
 </project-private>
