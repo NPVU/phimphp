@@ -76,6 +76,8 @@ Route::group(['prefix' => 'services'], function(){
         
         Route::get('/get-info-tap','ServicesController@getInfoTapPhim');
 });
+Route::get('/quan-ly/upload-video', 'UploadPhimController@getUpload');
+Route::post('/quan-ly/upload-video', 'UploadPhimController@postUpload');
 Auth::routes();
 Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
