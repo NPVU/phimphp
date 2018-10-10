@@ -17,11 +17,6 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
     background-color: #0f1416 !important;
 }
-a.visit:visited{
-    background: #738492;
-    border-color: #738492;    
-}
-
 .no-padding {
     padding-left:0px !important;
     padding-right:0px !important;

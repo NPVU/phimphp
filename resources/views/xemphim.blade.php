@@ -54,22 +54,22 @@
 <div class="content-left-section">    
     <div>   
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 func-video-align" style="margin-top:5px;">
-            <button class="btn btn-success" title="Tập trước" onclick="epBefore()" {{ClassCommon::isFirstEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-backward" style="cursor:unset;"></span></button>
-            <button class="btn btn-success" title="Tập tiếp theo" onclick="epAfter()" {{ClassCommon::isLastEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-forward" style="cursor:unset;"></span></button>  
+            <button class="btn btn-primary" title="Tập trước" onclick="epBefore()" {{ClassCommon::isFirstEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-backward" style="cursor:unset;"></span></button>
+            <button class="btn btn-primary" title="Tập tiếp theo" onclick="epAfter()" {{ClassCommon::isLastEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-forward" style="cursor:unset;"></span></button>  
         </div>         
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">
-            <!--<button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>-->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">   
+        @if(strcmp($_GET['s'], md5('youtube'))!=0)          
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
                 <i class="icon-auto-next fa @if(Session::has('autoNext')) {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}} @else fa-check-circle @endif">&nbsp;<span>Tự chuyển tập:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
             </button>
+        @endif
             <!--<button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
                 <i class="{{$follow_phim == 0?'fa fa-bell-slash':'fa fa-bell'}}">
                     <span>{{$follow_phim == 0?'Chưa theo dõi':'Đã theo dõi'}}</span>
                     <sup style="" class="follows-tip">{{$follows}}</sup>
                 </i>
-            </button>
-            <button class="btn btn-primary" data-izimodal-open="#modal-vote-phim" title="Đánh giá phim"><i class="fa fa-star">&nbsp;<span>Đánh giá</span></i></button>-->
+            </button>-->            
             <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle">&nbsp;<span>Báo lỗi</span></i></button>
             
             <!--@include('layouts.infophim_min')-->            
