@@ -492,6 +492,17 @@ ul.user-menu  li:hover{
     color: #6b6b6b;
     border-radius: 3px;
 }
+#list-ep{
+    max-height: 300px;
+    overflow-x: auto;
+}
+#list-ep::-webkit-scrollbar {
+    width: 6px;
+    height: 6px !important;
+}
+#list-ep::-webkit-scrollbar-thumb {
+    background-color: #313f46;
+}
 .username-comment,.report-comment-username{color:blue; font-weight: 700;}
 .text-light-red, .color-name-admin{color:rgb(208, 108, 85) !important}
 

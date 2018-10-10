@@ -624,4 +624,25 @@ class ClassCommon extends BaseController
         }       
         return $str;
     }
+
+
+    public static function isFirstEpisode($tap_id){
+        $tap = DB::table('tap')->where('tap_id', $tap_id)->get();
+        $minEp = DB::table('tap')->where('phim_id', $tap[0]->phim_id)->min('tap_tapso');
+        if($tap[0]->tap_tapso == $minEp){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static function isLastEpisode($tap_id){
+        $tap = DB::table('tap')->where('tap_id', $tap_id)->get();
+        $maxEp = DB::table('tap')->where('phim_id', $tap[0]->phim_id)->max('tap_tapso');
+        if($tap[0]->tap_tapso == $maxEp){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

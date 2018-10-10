@@ -52,35 +52,12 @@
 </div>
 
 <div class="content-left-section">    
-    <div>            
-        <!--
-        @if(strcmp($_GET['s'], md5('google'))==0 || strcmp($_GET['s'], md5('openload'))==0)
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 func-video-align" style="margin-top:5px;">                                    
-            <button class="btn btn-success pre-15s" title="15 giây trước">15&nbsp;<span class="glyphicon glyphicon-backward"></span></button>
-            <button class="btn btn-success npv-icon npv-play" title="Xem phim"><i class="fa fa-play"></i></button>
-            <button class="btn btn-success next-15s" title="15 giây sau"><span class="glyphicon glyphicon-forward"></span>&nbsp;15</button>           
-        </div>
-        <script type="text/javascript">
-            $(document).ready(function(){                             
-                var video = $('video').get(0);    
-                $('.npv-play').click(function(){
-                    if(video.paused){
-                        video.play();
-                    }else{
-                        video.pause();
-                    }
-                });            
-                $('.pre-15s').click(function(){
-                    video.currentTime += -15;
-                });
-                $('.next-15s').click(function(){
-                    video.currentTime += 15;
-                });              
-            });
-            
-        </script>
-        @endif
-        -->
+    <div>   
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 func-video-align" style="margin-top:5px;">
+            <button class="btn btn-success" title="Tập trước" onclick="epBefore()" {{ClassCommon::isFirstEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-backward" style="cursor:unset;"></span></button>
+            <button class="btn btn-success" title="Tập tiếp theo" onclick="epAfter()" {{ClassCommon::isLastEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-forward" style="cursor:unset;"></span></button>  
+        </div>         
+        
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">
             <!--<button class="btn btn-primary" data-izimodal-open="#modal-info-phim" title="Thông tin phim"><i class="fa fa-info-circle">&nbsp;<span>Thông tin phim</span></i></button>-->
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
@@ -155,6 +132,12 @@
                         }
                     }                    
                 };       
+                function epBefore(){
+                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap[0]->tap_tapso-1}}&s={{$_GET['s']}}";
+                }
+                function epAfter(){
+                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap[0]->tap_tapso+1}}&s={{$_GET['s']}}";
+                }
             </script>          
             <style>
                 .sticky-video {
@@ -174,7 +157,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">TẬP</h2>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
+    <div id="list-ep" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
         @foreach($listTap as $tap)            
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
                 @if($_GET['t'] != $tap->tap_tapso)
