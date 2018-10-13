@@ -3,7 +3,7 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangTuan as $tuan)
-                        <a title="{{$tuan->phim_ten}}&nbsp;{{strlen($tuan->phim_tenvn)>0?'| '.$tuan->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t=1&s='.md5('google')}}"><li>
+                        <a title="{{$tuan->phim_ten}}&nbsp;{{strlen($tuan->phim_tenvn)>0?'| '.$tuan->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t='.$tuan->tap_id.'&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
                                 <img src="{{$tuan->phim_hinhnen}}" width="60" height="70" style="border-radius:3px;"/>                                
                             </div>
@@ -41,7 +41,7 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangThang as $thang)
-                        <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t=1&s='.md5('google')}}"><li>
+                        <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t='.$thang->tap_id.'&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
                                 <img src="{{$thang->phim_hinhnen}}" width="60" height="70" style="border-radius:3px;"/>                                
                             </div>

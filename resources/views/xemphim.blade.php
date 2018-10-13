@@ -284,7 +284,7 @@
         @if(count($listSeason) > 0)
             @foreach($listSeason as $season)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t='.$season->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img src="{{$season->phim_hinhnen}}">
@@ -373,7 +373,7 @@
         @if(count($listGoiY) > 0)
         @foreach($listGoiY as $row)
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$season->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img src="{{$row->phim_hinhnen}}">

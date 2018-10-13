@@ -103,7 +103,8 @@ class HomeController extends Controller
         $arrdata = explode('-', $theloai);
         $theloaiID = $arrdata[count($arrdata)-1];
         $theloai = DB::table('theloai')->where('theloai_id', $theloaiID)->get();
-        $listPhimTheloai = DB::table('phim')->where([['theloai_id', 'like', '%"'.$theloaiID.'"%'], ['phim_xuatban', '=', 1]])
+        $listPhimTheloai = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where([['theloai_id', 'like', '%"'.$theloaiID.'"%'], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));
         foreach($listPhimTheloai as $row){
@@ -130,7 +131,8 @@ class HomeController extends Controller
         $arrdata = explode('-', $quocgia);
         $quocgiaID = $arrdata[count($arrdata)-1];
         $quocgia = DB::table('quocgia')->where('quocgia_id', $quocgiaID)->get();
-        $listPhimQuocGia = DB::table('phim')->where([['phim.quocgia_id', '=', $quocgiaID], ['phim_xuatban', '=', 1]])
+        $listPhimQuocGia = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where([['phim.quocgia_id', '=', $quocgiaID], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));
         
@@ -155,7 +157,8 @@ class HomeController extends Controller
     }
 
     public function indexXemNhieu(){        
-        $listPhimXemNhieu = DB::table('phim')->where('phim_xuatban', 1)->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+        $listPhimXemNhieu = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where('phim_xuatban', 1)->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->orderByRaw('phim_luotxem DESC')
                                         ->paginate(Session::get('PhimPerPage'));     
                                     
@@ -179,7 +182,8 @@ class HomeController extends Controller
     }
 
     public function indexTvSeries(){
-        $listPhim = DB::table('phim')->where('phim_kieu', 'TV Series')
+        $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where('phim_kieu', 'TV Series')
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
@@ -203,7 +207,8 @@ class HomeController extends Controller
     }
 
     public function indexMovie(){
-        $listPhim = DB::table('phim')->where('phim_kieu', 'Movie')
+        $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where('phim_kieu', 'Movie')
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
@@ -227,7 +232,8 @@ class HomeController extends Controller
     }
 
     public function indexOva(){
-        $listPhim = DB::table('phim')->where('phim_kieu', 'Ova')
+        $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where('phim_kieu', 'Ova')
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
@@ -251,7 +257,8 @@ class HomeController extends Controller
     }
 
     public function indexLiveAction(){
-        $listPhim = DB::table('phim')->where('phim_kieu', 'Live Action')
+        $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                                        ->where('phim_kieu', 'Live Action')
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
@@ -304,9 +311,10 @@ class HomeController extends Controller
     }
 
     public function getPhimRandom(){             
-        $listRandom = DB::table('phim')->where('phim_xuatban', 1)->orderByRaw('RAND()')
-        ->limit(10)
-        ->get();
+        $listRandom = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+                ->where('phim_xuatban', 1)->orderByRaw('RAND()')
+                ->limit(10)
+                ->get();
         return $listRandom;
     }
 }

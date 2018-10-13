@@ -203,17 +203,19 @@
                             <span class="help-block add_tapphim_luotxem_error"></span>
                         </div>
                         <div class="form-group">                            
+                            <input type="checkbox" name="thuyetminh" class="flat-red" value="true" />
+                            <label>Thuyết Minh</label>
+                        </div>
+                        <div class="form-group">                            
                             <input type="checkbox" name="is_tap_moi" class="flat-red" value="true" />
                             <label>Tập mới</label>
-                        </div>
-                        <div class="form-group">                            
+                            
                             <input type="checkbox" name="thongbao" class="flat-red" value="true" />
                             <label>Thông báo</label>
-                        </div>
-                        <div class="form-group">                            
+                            
                             <input type="checkbox" name="hoanthanh" id="hoanthanh" class="flat-red" value="true" />
                             <label>Hoàn thành</label>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="col-md-4">
                         <div class="form-group add_localhost_link">

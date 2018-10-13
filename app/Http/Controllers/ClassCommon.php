@@ -103,7 +103,7 @@ class ClassCommon extends BaseController
                 
         for($i = 0; $i < count($listPhimToday); $i++){
             $listPhimToday[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
                     ->where('phim_id', $listPhimToday[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
@@ -116,7 +116,7 @@ class ClassCommon extends BaseController
                 $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
+                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" />';
@@ -188,7 +188,7 @@ class ClassCommon extends BaseController
                   
         for($i = 0; $i < count($listPhim); $i++){
             $listPhim[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
                     ->where('phim_id', $listPhim[$i]->phim_id) 
                     ->orderByRaw('tap_tapso DESC')
                     ->limit(1)->get();
@@ -201,7 +201,7 @@ class ClassCommon extends BaseController
                 $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_tapso.'&s='.md5('google').'" data-toggle="modal" data-target="">';
+                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img src="'.$row->phim_hinhnen.'" />';
@@ -257,162 +257,22 @@ class ClassCommon extends BaseController
             return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
         }        
     }
-    
-    public static function getHTMLTheLoai($theloai, $limit, $offset){
-        $listPhimTheLoai = DB::select(DB::raw('SELECT * FROM phim '
-                . ' WHERE theloai_id like "%\"'.$theloai.'\"%" AND phim_xuatban = 1 '
-                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));            
-        for($i = 0; $i < count($listPhimTheLoai); $i++){
-            $listPhimTheLoai[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhimTheLoai[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
-        }
         
-        if(count($listPhimTheLoai)>0){
-            $html = '';
-            foreach ($listPhimTheLoai as $row){
-                if(count($row->tap)>0){
-                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="modal" data-target="">';
-                    $html .=        '<div class="npv-box-phim">';
-                    $html .=            '<div class="box-image">';
-                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
-                    $html .=            '</div>';
-                    $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
-                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
-                    $html .=                '<div class="box-text">';
-                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
-                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
-                    $html .=                '</div>';
-                    $html .=            '</div>';
-                    $html .=        '</div>';
-                    $html .=    '</a>';
-                    $html .= '</div>';
-                }
-            }
-            return $html;
-        } else {
-            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
-        }        
-    }
-    
-    public static function getHTMLNam($nam, $limit, $offset){
-        $listPhimNam = DB::select(DB::raw('SELECT * FROM phim '
-                . ' WHERE phim_xuatban = 1 AND phim_nam = ' .$nam
-                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset)); 
-        for($i = 0; $i < count($listPhimNam); $i++){
-            $listPhimNam[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhimNam[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
-        }
-        
-        if(count($listPhimNam)>0){
-            $html = '';
-            foreach ($listPhimNam as $row){
-                if(count($row->tap)>0){
-                    $html .= '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">';
-                    $html .=    '<a class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="modal" data-target="">';
-                    $html .=        '<div class="npv-box-phim">';
-                    $html .=            '<div class="box-image">';
-                    $html .=                '<img src="'.$row->phim_hinhnen.'" width="100%" height="100%" />';
-                    $html .=            '</div>';
-                    $html .=            '<div class="box-info">';
-                    $html .=                '<div class="box-title">'.$row->phim_ten.'</div>';
-                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'/'.$row->phim_sotap.'</div>';
-                    $html .=                '<div class="box-text">';
-                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->phim_luotxem).' lượt xem</span>';
-                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
-                    $html .=                '</div>';
-                    $html .=            '</div>';
-                    $html .=        '</div>';
-                    $html .=    '</a>';
-                    $html .= '</div>';
-                }
-            }
-            return $html;
-        } else {
-            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
-        }        
-    }
-    
-    public static function getHTMLBangXepHang($time, $limit, $offset){
-        if(strcmp($time, 'week') == 0){
-            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn FROM phim '                
-                . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
-                . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
-        } else if(strcmp($time, 'month') == 0){
-            $listPhimXepHang = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn FROM phim '                
-                . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
-                . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
-        } else {
-            $listPhimXepHang = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
-                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
-        }         
-        for($i = 0; $i < count($listPhimXepHang); $i++){
-            $listPhimXepHang[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhimXepHang[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
-        }
-        
-        if(count($listPhimXepHang)>0){
-            $rank = 1+$offset;
-            $html = '';
-            foreach ($listPhimXepHang as $row){
-                if(count($row->tap)>0){
-                    $star = ClassCommon::getStar($row->phim_id);
-                    $html .= '<tr>';
-                    $html .=    '<td data-title="Hạng" class="text-center npv-rank-number">#'.$rank.'</td>';
-                    $html .=    '<td data-title="" class="npv-rank-td-image"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'"><img class="npv-rank-image" src="'.$row->phim_hinhnen.'" /></a></td>';
-                    $html .=    '<td data-title="Tên phim" class="text-left"><a class="click-loading npv-rank-name" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google').'" data-toggle="tooltip" title="Xem phim">'.$row->phim_ten.'</a></td>';
-                    if(strcmp($time, 'week') == 0){
-                        $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-week-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
-                    } else if(strcmp($time, 'month') == 0){
-                        $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-month-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
-                    } else {
-                        $html .=    '<td data-title="Lượt xem" class="text-right npv-rank-view view-'.$row->phim_id.'">'. self::formatLuotXem($row->phim_luotxem).' lượt xem</td>';
-                    }                    
-                    $html .=    '<td data-title="Đánh giá" class="text-center npv-rank-danhgia">';
-                    for($i = 1; $i <= 5; $i++){
-                        if($i <= intval($star)){
-                            $html .= '<span class="fa fa-star star star-color"></span>';
-                        } else if($i > $star && ($i-1) < $star){
-                            $html .= '<span class="fa fa-star-half-full star star-half-color"></span>';
-                        } else {
-                            $html .= '<span class="fa fa-star-o star"></span>';
-                        }
-                    }
-                    $html .=    '</td>';
-                    $html .= '</tr>';
-                    $rank++;
-                }
-            }
-            return $html;
-        } else {
-            return '<tr><td colspan="5" class="text-center"><i style="color:gray">Không tìm thấy dữ liệu</i></td></tr>';
-        }        
-    }
     public static function getBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn FROM phim '                
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id'
+                . ' FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
-                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn FROM phim '                
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id'
+                . ' FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
-            $listPhim = DB::select(DB::raw('SELECT * FROM phim WHERE phim_xuatban = 1 '                
+            $listPhim = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id FROM phim WHERE phim_xuatban = 1 '                
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
         }
         
@@ -448,7 +308,8 @@ class ClassCommon extends BaseController
         $html = '<ul class="list-anime">';
         if(count($listResult) > 0){
             foreach ($listResult as $row){
-                $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t=1&s='.md5('google')).'"><li>';
+                $tap = DB::table('tap')->where([['phim_id', $row->phim_id],['tap_tapso', 1]])->limit(1)->get();
+                $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$tap[0]->tap_id.'&s='.md5('google')).'"><li>';
                 $html .=    '<div style="float:left;">';
                 $html .=        '<img src="'.$row->phim_hinhnen.'" width="60" height="70" style="border-radius:3px;" />';
                 $html .=    '</div>';

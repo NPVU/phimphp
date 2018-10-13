@@ -39,7 +39,7 @@ class XemPhimController extends Controller{
                         ->where('phim_id', Input::get('pid'))->orderBy('tap_tapso')->get();
         $tap_current = DB::table('tap')->where([
                         ['phim_id', Input::get('pid')],
-                        ['tap_tapso', Input::get('t')]
+                        ['tap_id', Input::get('t')]
                 ])->get();        
         if (count($tap_current) > 0) {
             
@@ -107,7 +107,7 @@ class XemPhimController extends Controller{
     }    
 
     public function getListSeason($phimID, $phimTag){
-        $listSeason = DB::select(DB::raw('SELECT * FROM phim '
+        $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id FROM phim '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
                 . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
                 . ' ORDER BY phim_season ASC')); 
@@ -116,6 +116,7 @@ class XemPhimController extends Controller{
 
     public function getListGoiY($phim){
         return DB::table('phim')
+        ->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
         ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
         ->where([['phim.quocgia_id', $phim->quocgia_id],['phim_kieu', $phim->phim_kieu],['phim_id', '!=', $phim->phim_id], ['phim_tag', '!=', $phim->phim_tag], ['phim_xuatban', 1]])
         ->orderByRaw('RAND()')

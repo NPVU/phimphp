@@ -364,15 +364,10 @@ class PhimController extends Controller{
     }
 
     public function addTapPhim(Request $request){
-        $tap = DB::table('tap')->where([
-            ['phim_id', '=', $request->add_phim_id],
-            ['tap_tapso', '=', $request->add_tapphim_tap]
-        ])->count();
-        if($tap > 0){
-            $data['status'] = 0;
-            $data['msg'] = 'Tập '.$request->add_tapphim_tap.' của phim này đã có, mời bạn vào chức năng chỉnh sửa';
-            return $data;
-        }        
+        $thuyetminh = 0;
+        if($request->thuyetminh){
+            $thuyetminh = 1;
+        }
         if($request->is_tap_moi){
             DB::table('tap')->insert(
                 [
@@ -380,6 +375,7 @@ class PhimController extends Controller{
                     'tap_ten'           => trim($request->add_tapphim_ten),
                     'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
                     'tap_tapso'         => $request->add_tapphim_tap,
+                    'tap_thuyetminh'    => $thuyetminh,
                     'tap_localhostlink' => trim($request->localhostLink),
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
@@ -401,6 +397,7 @@ class PhimController extends Controller{
                     'tap_ten'           => trim($request->add_tapphim_ten),
                     'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
                     'tap_tapso'         => $request->add_tapphim_tap,
+                    'tap_thuyetminh'    => $thuyetminh,
                     'tap_localhostlink' => trim($request->localhostLink),
                     'tap_googlelink'    => trim($request->googleLink),
                     'tap_youtubelink'   => trim($request->youtubeLink),
