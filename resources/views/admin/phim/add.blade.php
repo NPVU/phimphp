@@ -100,7 +100,7 @@
                             
                             <div class="form-group <?php echo isset($add_phim_season_error)?'has-error':''; ?>">
                                 <label>Season (Phần)</label>
-                                <input type="number" name="add_phim_season" class="form-control required" 
+                                <input type="text" name="add_phim_season" class="form-control required" 
                                        value="<?php echo isset($_POST['add_phim_season']) ? $_POST['add_phim_season'] : '' ?>"
                                        placeholder="VD: 1"/>
                                 <span class="help-block"><?php echo isset($add_phim_season_error)?$add_phim_season_error:''; ?></span>
