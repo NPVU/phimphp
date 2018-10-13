@@ -30,25 +30,20 @@ class XemPhimController extends Controller{
     
     function xemPhim(){
         $check = true;
-
+        $phim_id = Input::get('pid');
         $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')->get();
         $idTheLoai = json_decode($phim[0]->theloai_id);
         $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-        $listTap = DB::table('tap')
-                        ->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
-                        ->where('phim_id', Input::get('pid'))->orderBy('tap_tapso')->get();
         $tap_current = DB::table('tap')->where([
                         ['phim_id', Input::get('pid')],
                         ['tap_id', Input::get('t')]
                 ])->get();        
-        if (count($tap_current) > 0) {
-            
-        } else {
+        if (count($tap_current) <= 0) {
             $check = false;
-        }        
+        }    
         $star = ClassCommon::getStar(Input::get('pid'));
         $voteTimes = ClassCommon::getVoteTimes(Input::get('pid'));
-        $comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);        
+        //$comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);        
         $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
         foreach($listSeason as $row){
             $row->listTheLoai = '';
@@ -71,18 +66,19 @@ class XemPhimController extends Controller{
         }
         $follow = 0;
         if(Auth::check()){
-            $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
-            NotificationUtils::removeNotificationForUserOfPhim(Input::get('pid'));
+           $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
+           NotificationUtils::removeNotificationForUserOfPhim(Input::get('pid'));
         }
         $followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
-            $data['listTap'] = $listTap;
+            $data['listTapVS'] = $this->getListTapVietsub($phim_id); 
+            $data['listTapTM'] = $this->getListTapThuyetMinh($phim_id);
             $data['tap'] = $tap_current;
             $data['star'] = $star;
             $data['voteTimes'] = $voteTimes;
-            $data['comment'] = $comment;
+            //$data['comment'] = $comment;
             $data['listSeason'] = $listSeason;
             $data['listGoiY'] = $listGoiY;
             $data['follow_phim'] = $follow;
@@ -104,7 +100,17 @@ class XemPhimController extends Controller{
             }
             return view('errors/index', $data);
         }
-    }    
+    }
+
+    public function getListTapVietsub($phim_id){
+        return DB::table('tap')->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
+                        ->where([['phim_id', $phim_id],['tap_thuyetminh', 0]])->orderBy('tap_tapso')->get(); 
+    }
+
+    public function getListTapThuyetMinh($phim_id){
+        return DB::table('tap')->selectRaw('tap_id, tap_ten, tap_tapso, tap_tapsohienthi, tap_luotxem')
+                        ->where([['phim_id', $phim_id],['tap_thuyetminh', 1]])->orderBy('tap_tapso')->get();
+    }
 
     public function getListSeason($phimID, $phimTag){
         $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id FROM phim '

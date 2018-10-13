@@ -23,8 +23,7 @@
 <script type="text/javascript" src="{{ asset('js/jwplayer.min.js') }}"></script>
 <script type="text/javascript">    
     jwplayer.key=$videoKey;
-    var vupdate = 0;
-    var sotap = {{$listTap[count($listTap)-1]->tap_tapso}};
+    var vupdate = 0;    
     var auto;
     var xpr = jwplayer('my-player');
     xpr.setup({

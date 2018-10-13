@@ -155,10 +155,10 @@
 
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2 class="content-left-title">TẬP</h2>
+        <h2 class="content-left-title">TẬP - VIETSUB</h2>
     </div>
     <div id="list-ep" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
-        @foreach($listTap as $tap)            
+        @foreach($listTapVS as $tap)            
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
                 @if($_GET['t'] != $tap->tap_id)
                 <a class="click-loading btn btn-primary visit btn-tap"
@@ -174,6 +174,29 @@
             </div>               
         @endforeach 
     </div>
+
+    @if(count($listTapTM) > 0)
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2 class="content-left-title">TẬP - THUYẾT MINH</h2>
+    </div>
+    <div id="list-ep" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
+        @foreach($listTapTM as $tap)            
+            <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
+                @if($_GET['t'] != $tap->tap_id)
+                <a class="click-loading btn btn-primary visit btn-tap"
+                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_id}}&s={{$_GET['s']}}">
+                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
+                </a>
+                @else
+                <a class="btn btn-success btn-tap"
+                   href="#">
+                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
+                </a>
+                @endif
+            </div>               
+        @endforeach 
+    </div>
+    @endif
     <script>
     $('a.click-loading').click(function(){
         $("html,body").animate({scrollTop:$("#my-player").offset().top},"slow");
