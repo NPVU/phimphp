@@ -3,7 +3,7 @@
  Xem Phim <?php echo $phim[0]->phim_ten.' - '.$tap[0]->tap_tapsohienthi?>
 @endsection 
 @section('metaCEO') 
-<meta property="og:url" content="{{url()->full()}}" />
+<meta property="og:url" content="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}" />
 <meta property="og:title" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
 <meta property="og:description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
@@ -44,7 +44,7 @@
         <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
         <span class="fb-button">
             <div class="fb-share-button" 
-                data-href="{{url()->full()}}" 
+                data-href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}" 
                 data-layout="button">
             </div>
         </span>
