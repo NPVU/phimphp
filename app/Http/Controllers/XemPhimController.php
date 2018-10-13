@@ -107,7 +107,7 @@ class XemPhimController extends Controller{
     }    
 
     public function getListSeason($phimID, $phimTag){
-        $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id FROM phim '
+        $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id FROM phim '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
                 . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
                 . ' ORDER BY phim_season ASC')); 
@@ -128,7 +128,7 @@ class XemPhimController extends Controller{
         if(strcmp(Session::token(), Input::get('token')) == 0){
             $tap_current = DB::table('tap')->where([
                             ['phim_id', Input::get('pid')],
-                            ['tap_tapso', Input::get('t')]
+                            ['tap_id', Input::get('t')]
                     ])->get();
             if (!empty($tap_current[0]->tap_googlelink)) {
                 return $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
@@ -148,7 +148,7 @@ class XemPhimController extends Controller{
             ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));            
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
                         ['phim_id', Input::get('pid')],
-                        ['tap_tapso', Input::get('t')]
+                        ['tap_id', Input::get('t')]
                 ])->get();
             $phim = DB::table('phim')->selectRaw('phim_luotxem, phim_luotxem_tuan, phim_luotxem_thang')->where('phim_id', Input::get('pid'))->get();
             $data['event']      = 'view';
@@ -196,7 +196,7 @@ class XemPhimController extends Controller{
         if(strcmp(Session::token(), $request->_token) == 0){
             $tap = DB::table('tap')->where([
                 ['phim_id', $request->pid],
-                ['tap_tapso', $request->t]
+                ['tap_id', $request->t]
             ])->get();
             $countReport = DB::table('error_report')->where([['phim_id', '=', $request->pid], ['tap_id','=',$tap[0]->tap_id]])->count();
             if($countReport < 5){

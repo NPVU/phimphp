@@ -69,7 +69,8 @@
     xpr.on('complete', function(){      
         var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
         if(xpr.getDuration() - xpr.getPosition() === 0 && autoconfig==1){
-            if(getParameterByName('t','') < sotap){
+            @if(!ClassCommon::isLastEpisode($tap[0]->tap_id))
+            
                 iziToast.show({
                     timeout: 3000,
                     theme: 'dark',
@@ -79,7 +80,7 @@
                     progressBarColor: '#27ABDB',
                     buttons: [
                         ['<button>Chuyển ngay</button>', function (instance, toast) {
-                            window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
+                            window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s="+getParameterByName('s','');
                         }, true], 
                         ['<button>Hủy</button>', function (instance, toast) {
                             instance.hide({
@@ -95,12 +96,12 @@
                     }
                     });
                 confirmAutoNext(3);                    
-            }
+            @endif
         }
     });
     function confirmAutoNext(i){         
         if(i <= 0){
-             window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+(parseInt(getParameterByName('t',''))+1)+"&s="+getParameterByName('s','');
+             window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s="+getParameterByName('s','');
         } else {    
             $('.iziToast-title').html('Chuyển tập trong '+(i-1)+'s');
             auto = setTimeout(() => {

@@ -32,7 +32,7 @@ class ClassCommon extends BaseController
     public static function addLuotXem($phimID, $tap){
         DB::table('tap')->where([
                         ['phim_id', $phimID],
-                        ['tap_tapso', $tap]
+                        ['tap_id', $tap]
                     ])->update([
                         'tap_luotxem' => DB::raw('tap_luotxem + 1')
                     ]);        
@@ -505,5 +505,25 @@ class ClassCommon extends BaseController
         }else{
             return false;
         }
+    }
+
+    public static function getNextEpisode($tap_id){
+        $tap = DB::table('tap')->where('tap_id', $tap_id)->get();
+        $next = DB::table('tap')->where([['phim_id', $tap[0]->phim_id],['tap_tapso', '>', $tap[0]->tap_tapso]])
+                                ->orderByRaw('tap_tapso ASC')->limit(1)->get();        
+        if(count($next) > 0){
+            return $next[0]->tap_id;
+        }
+        return $tap_id;
+    }
+
+    public static function getPreviousEpisode($tap_id){
+        $tap = DB::table('tap')->where('tap_id', $tap_id)->get();
+        $previous = DB::table('tap')->where([['phim_id', $tap[0]->phim_id],['tap_tapso', '<', $tap[0]->tap_tapso]])
+                                ->orderByRaw('tap_tapso DESC')->limit(1)->get();
+        if(count($previous) > 0){
+            return $previous[0]->tap_id;
+        }
+        return $tap_id;
     }
 }
