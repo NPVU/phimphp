@@ -5,7 +5,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="text-center">
                     <h5>Phim này có cảnh quay nhạy cảm không phù hợp với khán giả dưới&nbsp;{{$phim[0]->phim_dotuoi.' tuổi'}}</h5>
-                    <h4 style="color: lightseagreen;">Bạn cần cân nhắc trước khi xem</h4>
+                    <h4>Bạn cần cân nhắc trước khi xem</h4>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
@@ -17,15 +17,14 @@
 </div>
 <script>
     $('#modal-confirm-age').iziModal({
-        title: 'Cảnh báo độ tuổi',
-        top: 100,
+        title: 'Cảnh báo độ tuổi',        
         overlayClose: false,
         closeButton:false,
         closeOnEscape:false,
         width: 600,
-        headerColor: '#263238',
+        headerColor: 'rgb(217, 83, 79)',
         icon: 'fa fa-exclamation-triangle',
-        iconColor: '#e4de17',
+        iconColor: 'white',
         onClosing: function(){
             confirmAge({{$phim[0]->phim_id}});
         }
