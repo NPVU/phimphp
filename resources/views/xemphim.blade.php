@@ -18,8 +18,9 @@
         <h2 class="content-left-title">{{$phim[0]->phim_ten}}</h2>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
-        @include('layouts.confirmAge_min')
+        @include('layouts.confirmAge_min') 
         @include('layouts.video_min') 
+        @include('layouts.cookiePhim') 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
@@ -138,7 +139,7 @@
                 }
                 function epAfter(){
                     window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s={{$_GET['s']}}";
-                }
+                }               
             </script>          
             <style>
                 .sticky-video {
@@ -286,8 +287,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">BÌNH LUẬN</h2>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-radius: 3px;">
-    <!-- @include('layouts.comment_min') -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-radius: 3px;">    
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -472,4 +472,4 @@
 @endsection 
 @section('contentRight') 
     @include('layouts.rank_min') 
-@endsection 
+@endsection

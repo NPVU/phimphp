@@ -25,6 +25,7 @@
     jwplayer.key=$videoKey;
     var vupdate = 0;    
     var auto;
+    var cookie = getParameterByName('n', '');
     var xpr = jwplayer('my-player');
     xpr.setup({
         width: "100%",
@@ -35,7 +36,7 @@
                 {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
                 @endif                                             
             ],
-        autostart: 'false',image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+        autostart: cookie?true:false,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
     });
     xpr.on('error', function() {
         jwplayer("my-player").setup({            
@@ -54,7 +55,11 @@
         $('.npv-play > i').removeClass('fa-play');
         $('.npv-play').attr('title','Tạm dừng');
         if(vupdate===0){
-            vupdate=1;
+            vupdate=1;            
+            if(cookie){
+                $('video').get(0).currentTime = {{Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))==null?0:Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))}};
+                $('video').get(0).play();
+            }               
             setTimeout(function(){
                 viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
             }, 10000);

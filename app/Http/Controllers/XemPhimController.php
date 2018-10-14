@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -42,8 +43,7 @@ class XemPhimController extends Controller{
             $check = false;
         }    
         $star = ClassCommon::getStar(Input::get('pid'));
-        $voteTimes = ClassCommon::getVoteTimes(Input::get('pid'));
-        //$comment = CommentUtils::getHTMLComment(Input::get('pid'),Session::get('CommentPerPage'),0);        
+        $voteTimes = ClassCommon::getVoteTimes(Input::get('pid'));       
         $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
         foreach($listSeason as $row){
             $row->listTheLoai = '';
@@ -77,8 +77,7 @@ class XemPhimController extends Controller{
             $data['listTapTM'] = $this->getListTapThuyetMinh($phim_id);
             $data['tap'] = $tap_current;
             $data['star'] = $star;
-            $data['voteTimes'] = $voteTimes;
-            //$data['comment'] = $comment;
+            $data['voteTimes'] = $voteTimes;            
             $data['listSeason'] = $listSeason;
             $data['listGoiY'] = $listGoiY;
             $data['follow_phim'] = $follow;
@@ -89,7 +88,7 @@ class XemPhimController extends Controller{
                 ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));
             }
             
-            return view('xemphim_min', $data, parent::getDataHeader()); 
+            return view('xemphim', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';
@@ -248,6 +247,15 @@ class XemPhimController extends Controller{
         }        
         array_push($arrayAge, Input::get('pid'));
         session(['confirmAge' => $arrayAge]);
+    }
+    
+    public function setCookie(){
+        $tap_id = Input::get('t');
+        $tap = DB::table('tap')->where('tap_id', $tap_id)->get();
+        Cookie::queue('tapID-'.$tap[0]->phim_id, $tap_id);
+        Cookie::queue('tapSo-'.$tap[0]->phim_id, $tap[0]->tap_tapso);
+        Cookie::queue('tapSoHienThi-'.$tap[0]->phim_id, $tap[0]->tap_tapsohienthi);
+        Cookie::queue('time-'.$tap_id, Input::get('time'));
     }
     
     function curl($url) {
