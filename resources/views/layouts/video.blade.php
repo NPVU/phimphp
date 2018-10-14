@@ -32,7 +32,7 @@
         height: "100%",
         sources: [
                 {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},  
-                @if(!empty($video["720p"]))
+                @if(!empty($video["720p"]) && $tap[0]->tap_chatluong >= 3)
                 {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
                 @endif                                             
             ],
