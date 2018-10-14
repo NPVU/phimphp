@@ -18,6 +18,7 @@
         <h2 class="content-left-title">{{$phim[0]->phim_ten}}</h2>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
+        @include('layouts.confirmAge_min')
         @include('layouts.video_min') 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">

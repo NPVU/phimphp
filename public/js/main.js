@@ -367,6 +367,16 @@ function xtmv(){
                 }
         });
 }
+function confirmAge(pid){
+    $.ajax({
+    url: $('meta[name="url"').attr('content') + '/confirm-age?pid=' + pid,
+        dataType: 'text',
+        type: 'get',
+        success: function (data) {
+                
+        }
+    });
+}
 function openLoading(){
     $('#loading').fadeIn();
 }

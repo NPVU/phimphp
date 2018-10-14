@@ -240,6 +240,16 @@ class XemPhimController extends Controller{
         return DB::table('follow_phim')->where('phim_id', $request->pid)->count();
     }
     
+    public function confirmAge(){
+        if(Session::has('confirmAge')){
+            $arrayAge = Session::get('confirmAge');
+        }else{
+            $arrayAge = array();
+        }        
+        array_push($arrayAge, Input::get('pid'));
+        session(['confirmAge' => $arrayAge]);
+    }
+    
     function curl($url) {
         $ch = @curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
