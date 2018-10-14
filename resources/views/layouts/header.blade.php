@@ -68,7 +68,7 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="search-addon seach-pc">
-                                <div class="input-group" style="padding:10px 10px;">
+                                <div class="input-group" style="padding:10px 10px; min-width: 300px;">
                                     <span class="input-group-addon btn-search"><span class="glyphicon glyphicon-search"></span></span>
                                     <input type="text" class="form-control input-search" placeholder="Nhập tên phim..." aria-describedby="sizing-addon2">
                                 </div>
