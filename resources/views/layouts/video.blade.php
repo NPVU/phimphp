@@ -31,8 +31,11 @@
         width: "100%",
         height: "100%",
         sources: [
-                {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},  
-                @if(!empty($video["720p"]))
+                {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},
+                @if(!empty($video["480p"]) && $tap[0]->tap_chatluong >= 2)
+                {file:'{{$video["480p"]}}',label:'480p','type':'mp4'},
+                @endif 
+                @if(!empty($video["720p"]) && $tap[0]->tap_chatluong >= 3)
                 {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
                 @endif                                             
             ],
