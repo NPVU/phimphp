@@ -289,25 +289,19 @@ class XemPhimController extends Controller{
             if($count > 4) {
                 $v1080p = $decode.'=m37';
                 $v720p = $decode.'=m22';
-                $v480p = $decode.'=m59';
                 $v360p = $decode.'=m18';
                 $linkDownload['1080p'] = $v1080p;
                 $linkDownload['720p'] = $v720p;
-                $linkDownload['480p'] = $v480p;
                 $linkDownload['360p'] = $v360p;
             }
             if($count > 3) {
                 $v720p = $decode.'=m22';
-                $v480p = $decode.'=m59';
                 $v360p = $decode.'=m18';
                 $linkDownload['720p'] = $v720p;
-                $linkDownload['480p'] = $v480p;
                 $linkDownload['360p'] = $v360p;
             }
             if($count > 2) {
-                $v480p = $decode.'=m59';
                 $v360p = $decode.'=m18';
-                $linkDownload['480p'] = $v480p;
                 $linkDownload['360p'] = $v360p;
             }
             return $linkDownload;
