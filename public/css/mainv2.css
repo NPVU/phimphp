@@ -623,6 +623,21 @@ hr{
     background-color: rgb(38, 50, 56);
 }
 @media (min-width: 992px){
+    .dropdown-menu{
+        display: unset;
+        visibility: hidden;
+        opacity: 0;        
+        transform: translateY(2em);        
+        transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+    }
+    .dropdown:focus .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu,
+    .dropdown:hover .dropdown-menu {
+      visibility: visible;
+      opacity: 1;      
+      transform: translateY(0%);
+      transition-delay: 0s, 0s, 0.3s;
+    }
     .navbar-right {
         float: right!important;
         margin-right: -25px;
