@@ -311,10 +311,10 @@ class ClassCommon extends BaseController
                 $tap = DB::table('tap')->where([['phim_id', $row->phim_id],['tap_tapso', 1]])->limit(1)->get();
                 $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$tap[0]->tap_id.'&s='.md5('google')).'"><li>';
                 $html .=    '<div style="float:left;">';
-                $html .=        '<img src="'.$row->phim_hinhnen.'" width="60" height="70" style="border-radius:3px;" />';
+                $html .=        '<img src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
                 $html .=    '</div>';
                 $html .=    '<div style="float:left;padding-left:10px;" >';
-                $html .=        '<div><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
+                $html .=        '<div class="title"><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
                 if(strlen($row->phim_tenvn)>0){
                     $html .=        '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?'('.substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':'('.$row->phim_tenvn.')').'</div>';
                 }                
@@ -410,7 +410,7 @@ class ClassCommon extends BaseController
         $array['tenphim'] = $phim[0]->phim_ten;
         $array['tap'] = 'Tập '.$tap[0]->tap_tapsohienthi;
         $array['tentap'] = strcmp($tap[0]->tap_ten, '')==0?null:$tap[0]->tap_ten;
-        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))) . '/?pid=' . $phim_id . '&t=' . $tapso . '&s='.md5('google');
+        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))) . '/?pid=' . $phim_id . '&t=' . $tap[0]->tap_id . '&s='.md5('google');
         $data['content'] = $array;
         event(new PusherEvent($data));
     }

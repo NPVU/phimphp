@@ -401,6 +401,14 @@ ul.user-menu  li:hover{
 .list-anime>a>li:hover{    
     background-color: #00a5ad;
 }
+.list-anime .title{
+    max-width: 140px;
+    white-space: nowrap;
+}
+.list-anime img{
+    width: 80px;
+    height:70px;
+}
 .list-notification>a>li{
     border-bottom: 1px solid;
 }

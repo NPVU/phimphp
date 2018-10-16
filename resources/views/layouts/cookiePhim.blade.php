@@ -35,17 +35,15 @@ $(document).ready(function(){
        if(currentTimeSecond == null){
            currentTimeSecond = 0;
        }
-       var tap = getParameterByName('t','');
-       console.log('tap '+tap);
-       console.log('second '+currentTimeSecond);
        var xhttp = new XMLHttpRequest();
-       xhttp.open("GET", $('meta[name="url"').attr('content') + '/cookie?t=' + tap + '&time=' + currentTimeSecond, false);
+       xhttp.open("GET", $('meta[name="url"').attr('content') + '/cookie?t=' + {{$tap[0]->tap_id}} + '&time=' + currentTimeSecond, false);
        xhttp.send();
       
     });
 });
-function xemTiepTuc(){
-    if(getParameterByName('t', '') === {{$tap[0]->tap_id}}){
+function xemTiepTuc(){    
+    var tap = {{Request::cookie('tapID-'.$phim[0]->phim_id)}};
+    if(getParameterByName('t', '') == tap){
         $('#modal-cookie-phim').iziModal('close');
         $('video').get(0).currentTime = {{Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))==null?0:Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))}};
         $('video').get(0).play();            

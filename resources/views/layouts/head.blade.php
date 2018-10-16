@@ -45,7 +45,7 @@
                 $('.modal-view-'+data.message.content.phimid).html(data.message.content.pview);
                 $('.view-str-'+data.message.content.phimid).html(data.message.content.pstrview+lx);                                             
             }else if(data.message.event==='pnew'){                       
-                VanillaToasts.create({title: data.message.content.tenphim,text: data.message.content.tap+ (data.message.content.tentap!==null?' - '+data.message.content.tentap:'')+' mới được cập nhật',type: 'info',icon: data.message.content.icon,timeout: 10000,callback: function() {window.location.href = data.message.content.link;}});
+                VanillaToasts.create({title: data.message.content.tenphim,text: '<span style="color:#00a5ad">'+data.message.content.tap+ (data.message.content.tentap!==null?' - '+data.message.content.tentap:'')+'</span> vừa được cập nhật',type: 'info',icon: data.message.content.icon,timeout: 100000,callback: function() {window.location.href = data.message.content.link;}});
             }});
         $(document).click(function(event) {var target = $(event.target);if (!target.parents().andSelf().is('.npv-user')&&!target.parents().andSelf().is('.open-popup-user')&&!target.parents().andSelf().is('#user-password')&&!target.parents().andSelf().is('#user-profile')) {$('.npv-user').hide('slow');}});
     </script>
