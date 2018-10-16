@@ -136,6 +136,32 @@
                                 </div>
                             </div> 
                             <span class="help-block facebook_link_error"></span>
+                        </div>                        
+                        <div class="form-group youtube_link">
+                            <label>ID Youtube</label>
+                            <div class="input-group">                        
+                                <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập link youtube ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success" onclick="checkVideo('Youtube')">
+                                        <span class="btnCheckYoutubeLink">Kiểm tra</span>
+                                        <i class="fa iconCheckYoutubeLink"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <span class="help-block youtube_link_error"></span>
+                        </div>
+                        <div class="form-group openload_link">
+                            <label>ID Openload</label>
+                            <div class="input-group">                        
+                                <input type="text" id="openloadLink" name="openloadLink" value="" placeholder="Nhập link openload ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkOpenloadLink" class="btn btn-success" onclick="checkVideo('Openload')">
+                                        <span class="btnCheckOpenloadLink">Kiểm tra</span>
+                                        <i class="fa iconCheckOpenloadLink"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <span class="help-block openload_link_error"></span>
                         </div>
                         <div class="form-group google_link">
                             <label>Link Google Photos</label>
@@ -149,32 +175,6 @@
                                 </div>
                             </div> 
                             <span class="help-block google_link_error"></span>
-                        </div>
-                        <div class="form-group youtube_link">
-                            <label>Link Youtube</label>
-                            <div class="input-group">                        
-                                <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập link youtube ..." class="form-control" />
-                                <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success" onclick="checkVideo('Youtube')">
-                                        <span class="btnCheckYoutubeLink">Kiểm tra</span>
-                                        <i class="fa iconCheckYoutubeLink"></i>
-                                    </button>
-                                </div>
-                            </div>  
-                            <span class="help-block youtube_link_error"></span>
-                        </div>
-                        <div class="form-group openload_link">
-                            <label>Link Openload</label>
-                            <div class="input-group">                        
-                                <input type="text" id="openloadLink" name="openloadLink" value="" placeholder="Nhập link openload ..." class="form-control" />
-                                <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkOpenloadLink" class="btn btn-success" onclick="checkVideo('Openload')">
-                                        <span class="btnCheckOpenloadLink">Kiểm tra</span>
-                                        <i class="fa iconCheckOpenloadLink"></i>
-                                    </button>
-                                </div>
-                            </div>  
-                            <span class="help-block openload_link_error"></span>
                         </div>
                         <div class="form-group audio_link">
                             <label>Link Audio</label>
