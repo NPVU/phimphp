@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
     <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
         <div class="box-phim">
             <div class="box-image">
