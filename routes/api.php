@@ -20,4 +20,4 @@ Route::get('openload/ticket/{file}/{loginkey}/{apikey}', 'ServicesController@ope
 Route::get('openload/video/{fileID}/{ticket}/{captcha}', 'ServicesController@openloadDownloadAPI');
 Route::get('/tim-kiem', 'HomeController@timKiem');
 
-Route::post('fb', 'APIController@getSourceFacebook');
+Route::get('fb/{tapid}', 'APIController@getSourceFacebook');

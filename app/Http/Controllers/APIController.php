@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class APIController extends Controller {
     
-    public function getSourceFacebook(){
+    public function getSourceFacebook($tapid){
         $config = DB::table('config')->get();
         
         $tap = DB::table('tap')->where('tap_id', $tapid)->get();
@@ -23,7 +23,7 @@ class APIController extends Controller {
 
         $fields = '?fields=source';
 
-        $videoID = '1077987079031052';
+        $videoID = $tap[0]->tap_facebooklink;
 
         $result = file_get_contents($graphAPI . $videoID . $fields . $token);
 

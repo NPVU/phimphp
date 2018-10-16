@@ -20,7 +20,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
         @include('layouts.confirmAge_min') 
         @include('layouts.video_min') 
-        @include('layouts.cookiePhim') 
+        
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))

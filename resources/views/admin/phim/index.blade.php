@@ -218,18 +218,18 @@
                         </div>                        
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group add_localhost_link">
-                            <label>Link Localhost</label>
+                        <div class="form-group add_facebook_link">
+                            <label>ID Facebook</label>
                             <div class="input-group">                        
-                                <input type="text" id="localhostLink" name="localhostLink" value="" placeholder="Nhập link localhost ..." class="form-control" />
+                                <input type="text" id="facebookLink" name="facebookLink" value="" placeholder="Nhập ID Facebook ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkLocalhostLink" class="btn btn-success" onclick="checkVideo('Localhost')">
-                                        <span class="btnCheckLocalhostLink">Kiểm tra</span>
-                                        <i class="fa iconCheckLocalhostLink"></i>
+                                    <button type="button" name="btn" value="checkFacebookLink" class="btn btn-success" onclick="checkVideo('Facebook')">
+                                        <span class="btnCheckFacebookLink">Kiểm tra</span>
+                                        <i class="fa iconCheckFacebookLink"></i>
                                     </button>
                                 </div>
                             </div> 
-                            <span class="help-block add_localhost_link_error"></span>
+                            <span class="help-block add_facebook_link_error"></span>
                         </div>
                         <div class="form-group add_google_link">
                             <label>Link Google Photos</label>
@@ -388,7 +388,7 @@
         function resetFormAddTapPhim(){
             $('#add_tapphim_ten').val('');
             $('#add_tapphim_taphienthi').val('');            
-            $('#localhostLink').val('');
+            $('#facebookLink').val('');
             $('#googleLink').val('');
             $('#youtubeLink').val('');
             $('#openloadLink').val('');

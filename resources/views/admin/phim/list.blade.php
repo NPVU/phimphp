@@ -50,8 +50,8 @@
                                     @if($row->tap_youtubelink != '')
                                         Y
                                     @endif
-                                    @if($row->tap_localhostlink != '')
-                                        L
+                                    @if($row->tap_facebooklink != '')
+                                        F
                                     @endif)
                                 </span>
                             </span>
@@ -67,7 +67,7 @@
                         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>G</b>: Server Google</div>
                         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>O</b>: Server Openload</div>
                         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>Y</b>: Server Youtube</div>
-                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>L</b>: Server Local</div>
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>F</b>: Server Facebook</div>
                     </div>
                 </div>                                              
             </div>            
@@ -124,18 +124,18 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group localhost_link">
-                            <label>Link Localhost</label>
+                        <div class="form-group facebooklink">
+                            <label>ID Facebook</label>
                             <div class="input-group">                        
-                                <input type="text" id="localhostLink" name="localhostLink" value="" placeholder="Nhập link localhost ..." class="form-control" />
+                                <input type="text" id="facebookLink" name="facebookLink" value="" placeholder="Nhập ID Facebook ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkLocalhostLink" class="btn btn-success" onclick="checkVideo('Localhost')">
-                                        <span class="btnCheckLocalhostLink">Kiểm tra</span>
-                                        <i class="fa iconCheckLocalhostLink"></i>
+                                    <button type="button" name="btn" value="checkFacebookLink" class="btn btn-success" onclick="checkVideo('Facebook')">
+                                        <span class="btnCheckFacebookLink">Kiểm tra</span>
+                                        <i class="fa iconCheckFacebookLink"></i>
                                     </button>
                                 </div>
                             </div> 
-                            <span class="help-block localhost_link_error"></span>
+                            <span class="help-block facebook_link_error"></span>
                         </div>
                         <div class="form-group google_link">
                             <label>Link Google Photos</label>
@@ -320,7 +320,7 @@
                            $('#tapphim_ten').val(data.content.tap_ten);
                            $('#tapphim_luotxem').val(data.content.tap_luotxem);
                            $('#chatluong').val(data.content.tap_chatluong);
-                           $('#localhostLink').val(data.content.tap_localhostlink);
+                           $('#facebookLink').val(data.content.tap_facebooklink);
                            $('#googleLink').val(data.content.tap_googlelink);
                            $('#youtubeLink').val(data.content.tap_youtubelink);
                            $('#openloadLink').val(data.content.tap_openloadlink);
@@ -384,7 +384,7 @@
             } else if(clas === 'Youtube'){
                 var url = "{{url('services/youtube/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
             } else {
-                var url = "{{url('services/localhost/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
+                var url = "{{url('services/facebook/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
             }
             $.ajax({
                 type: "GET",
@@ -457,7 +457,7 @@
                     $('#tapphim_ten').val(data[0].tap_ten);
                     $('#tapphim_luotxem').val(data[0].tap_luotxem);
                     $('#chatluong').val(data[0].tap_chatluong);
-                    $('#localhostLink').val(data[0].tap_tentap_localhostlink);
+                    $('#facebookLink').val(data[0].tap_facebooklink);
                     $('#googleLink').val(data[0].tap_googlelink);
                     $('#youtubeLink').val(data[0].tap_youtubelink);
                     $('#openloadLink').val(data[0].tap_openloadlink);
