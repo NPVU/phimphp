@@ -5,7 +5,7 @@
                         @foreach($phimXepHangTuan as $tuan)
                         <a title="{{$tuan->phim_ten}}&nbsp;{{strlen($tuan->phim_tenvn)>0?'| '.$tuan->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/?pid='.$tuan->phim_id.'&t='.$tuan->tap_id.'&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
-                                <img src="{{$tuan->phim_hinhnen}}" style="border-radius:3px;"/>                                
+                                <img class="lazy" data-src="{{$tuan->phim_hinhnen}}" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
                                 <div class="title">{{strlen($tuan->phim_ten)>21?substr($tuan->phim_ten,0,21).'...':$tuan->phim_ten}}</div>
@@ -43,7 +43,7 @@
                         @foreach($phimXepHangThang as $thang)
                         <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t='.$thang->tap_id.'&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
-                                <img src="{{$thang->phim_hinhnen}}" style="border-radius:3px;"/>                                
+                                <img class="lazy" data-src="{{$thang->phim_hinhnen}}" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
                                 <div class="title">{{strlen($thang->phim_ten)>21?substr($thang->phim_ten,0,21).'...':$thang->phim_ten}}</div>

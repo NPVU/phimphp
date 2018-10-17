@@ -22,6 +22,7 @@
     <script src="{{ asset('js/move-top.js') }}"></script>        
     <script src="{{ asset('js/easing.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.qtip.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.lazy/jquery.lazy.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/toast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/iziToast.min.js') }}"></script>
@@ -52,7 +53,10 @@
     <script type="text/javascript">
         $(document).ready(function() {
                 $().UItoTop({ easingType: 'easeOutQuart' });								
-        });  
+        });          
+        $(function() {
+            $('.lazy').lazy();
+        });
     </script>
     <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>        
 

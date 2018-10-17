@@ -119,7 +119,7 @@ class ClassCommon extends BaseController
                     $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
-                    $html .=                '<img src="'.$row->phim_hinhnen.'" />';
+                    $html .=                '<img class="lazy" data-src="'.$row->phim_hinhnen.'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
@@ -204,7 +204,7 @@ class ClassCommon extends BaseController
                     $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
-                    $html .=                '<img src="'.$row->phim_hinhnen.'" />';
+                    $html .=                '<img class="lazy" data-src="'.$row->phim_hinhnen.'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';

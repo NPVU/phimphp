@@ -719,3 +719,12 @@ hr{
 .fb_iframe_widget_fluid_desktop, .fb_iframe_widget_fluid_desktop span, .fb_iframe_widget_fluid_desktop iframe {
     width: 100% !important;
 }
+
+img.lazy {    
+    display: block;   
+    background-color: #ffffff;     
+    background-image: url('../img/themes/img-loading.gif');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-position: 50% 50%;
+}

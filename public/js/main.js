@@ -350,6 +350,7 @@ function xt(){
                         var newPage = document.createElement('span');
                         newPage.className = 'tapmoi-page-' + nextPage;
                         $('.listTapMoi').append(newPage);
+                        $('.lazy').lazy();
                 }
         });
 }
@@ -366,6 +367,7 @@ function xtmv(){
                         var newPage = document.createElement('span');
                         newPage.className = 'moviemoi-page-' + nextPage;
                         $('.listMovieMoi').append(newPage);
+                        $('.lazy').lazy();
                 }
         });
 }
