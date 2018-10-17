@@ -20,7 +20,7 @@ XemPhimZero.com - Xem Phim Không Quảng Cáo
                         <div class="slider-name text-center" style="font-size:1em">Season&nbsp;{{$random->phim_season}}&nbsp;({{$random->phim_nam}})</div>
                         <div class="slider-button text-center">
                             <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($random->phim_ten)))).'/?pid='.$random->phim_id.'&t='.$random->tap_id.'&s='.md5('google')}}">
-                                <button class="btn btn-danger">Xem ngay</button>
+                                <button class="xem-ngay">Xem ngay</button>
                             </a>
                         </div>
                     </div>
@@ -39,6 +39,29 @@ XemPhimZero.com - Xem Phim Không Quảng Cáo
                     autoplayTimeout:3000,
                     autoplayHoverPause:true,
                     margin:10
+                });
+
+                var $button = $('button.xem-ngay');
+
+                $button.on('click', function () {
+                    var $this = $(this);
+                    if ($this.hasClass('active') || $this.hasClass('success')) {
+                        return false;
+                    }
+                    $this.addClass('active');
+                    setTimeout(function () {
+                        $this.addClass('loader');
+                    }, 125);
+                    setTimeout(function () {
+                        $this.removeClass('loader active');
+                        $this.text('OK');
+                        $this.addClass('success animated pulse');
+                    }, 3000);
+                    setTimeout(function () {
+                        $this.text('Xem ngay');
+                        $this.removeClass('success animated pulse');
+                        $this.blur();
+                    }, 2900);
                 });
             });
         </script>    

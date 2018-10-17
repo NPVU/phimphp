@@ -728,3 +728,66 @@ img.lazy {
     background-size: 60px 60px;
     background-position: 50% 50%;
 }
+    button.xem-ngay {
+    width: 100px;
+    height: 50px;
+    background: transparent;
+    border-radius: 3px;
+    will-change: transform;
+    transition: all .2s ease;
+    border: 1px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.6313725490196078);
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;    
+    outline: none;
+    text-align: center;
+  }
+  button.xem-ngay:hover {
+    background: #00a5ad;
+    color: #ffffff;
+  }
+  button.xem-ngay:active {
+    font-size: 15px;
+    -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+  }
+  button.xem-ngay.active {
+    font-size: 0;
+    border-radius: 25px;
+    width: 50px;
+    background: transparent;
+  }
+  button.xem-ngay.loader {
+    border-right: 2px solid #ffffff;
+    -webkit-animation: loader .4s linear infinite;
+            animation: loader .4s linear infinite;
+  }
+  button.xem-ngay.success {
+    background: #3BB873;
+    border-color: #3BB873;
+    font-size: 14px;
+    color: #ffffff;
+  }
+  
+  @-webkit-keyframes loader {
+    0% {
+      -webkit-transform: rotateZ(0);
+              transform: rotateZ(0);
+    }
+    100% {
+      -webkit-transform: rotateZ(360deg);
+              transform: rotateZ(360deg);
+    }
+  }
+  
+  @keyframes loader {
+    0% {
+      -webkit-transform: rotateZ(0);
+              transform: rotateZ(0);
+    }
+    100% {
+      -webkit-transform: rotateZ(360deg);
+              transform: rotateZ(360deg);
+    }
+  }
