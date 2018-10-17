@@ -311,7 +311,7 @@
                     <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t='.$season->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
-                                <img src="{{$season->phim_hinhnen}}">
+                                <img class="lazy" data-src="{{$season->phim_hinhnen}}">
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
@@ -400,7 +400,7 @@
                     <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
-                                <img src="{{$row->phim_hinhnen}}">
+                                <img class="lazy" data-src="{{$row->phim_hinhnen}}">
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">

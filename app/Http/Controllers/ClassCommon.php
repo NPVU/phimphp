@@ -311,7 +311,7 @@ class ClassCommon extends BaseController
                 $tap = DB::table('tap')->where([['phim_id', $row->phim_id],['tap_tapso', 1]])->limit(1)->get();
                 $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$tap[0]->tap_id.'&s='.md5('google')).'"><li>';
                 $html .=    '<div style="float:left;">';
-                $html .=        '<img src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
+                $html .=        '<img class="lazy" data-src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
                 $html .=    '</div>';
                 $html .=    '<div style="float:left;padding-left:10px;" >';
                 $html .=        '<div class="title"><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';

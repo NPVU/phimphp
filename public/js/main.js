@@ -198,7 +198,8 @@ $(document).ready(function(){
                 type: "GET",
                 url: $('meta[name="url"]').attr('content')+'/tim-kiem?tukhoa='+tukhoa,                
                 success: function (data) {                    
-                    $('.result-search').html(data);                    
+                    $('.result-search').html(data);
+                    $('.lazy').lazy();                
                 }
             });                     
         }
