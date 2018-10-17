@@ -346,7 +346,7 @@ ul.user-menu  li:hover{
     }
     .result-search{
         left: 80px;
-        width: calc(100% - 120px);
+        width: calc(100% - 110px);
     }
     .result-search > ul.list-anime{
         margin-bottom:0px;

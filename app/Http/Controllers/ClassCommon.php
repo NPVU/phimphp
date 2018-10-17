@@ -316,7 +316,7 @@ class ClassCommon extends BaseController
                 $html .=    '<div style="float:left;padding-left:10px;" >';
                 $html .=        '<div class="title"><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
                 if(strlen($row->phim_tenvn)>0){
-                    $html .=        '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?'('.substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':'('.$row->phim_tenvn.')').'</div>';
+                    $html .=        '<div class="title title-vn">'.(strlen($row->phim_tenvn)>28?'('.substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':'('.$row->phim_tenvn.')').'</div>';
                 }                
                 $html .=        '<div>Season '.$row->phim_season.'</div>';
                 $html .=        '<div>';
