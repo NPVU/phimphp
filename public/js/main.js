@@ -42,7 +42,7 @@ $(document).ready(function(){
         var token = $('#comment').attr('aria-token');
         $.ajax({
             type: 'get',           
-            url: $('meta[name="url"').attr('content')+'/quan-ly/tai-khoan/lock/comment/',
+            url: $('meta[name="url"]').attr('content')+'/quan-ly/tai-khoan/lock/comment/',
             data: {'_token':token,'cid':$('#action-comment').attr('cid')},        
             headers: {
                 'X-CSRF-TOKEN': token
@@ -57,7 +57,7 @@ $(document).ready(function(){
         var token = $('#current-token').val();
         $.ajax({
             type: 'get',           
-            url: $('meta[name="url"').attr('content')+'/delete-comment/',
+            url: $('meta[name="url"]').attr('content')+'/delete-comment/',
             data: {'_token':token,'cid':$('#action-comment').attr('cid')},        
             headers: {
                 'X-CSRF-TOKEN': token
@@ -75,7 +75,7 @@ $(document).ready(function(){
             $('.help-report-comment').css('color','gray');
             $.ajax({
                 type: 'get',           
-                url: $('meta[name="url"').attr('content')+'/report-comment/',
+                url: $('meta[name="url"]').attr('content')+'/report-comment/',
                 data: {'_token':token,'cid':$('#report-comment').attr('cid'), 'content': reportContent},        
                 headers: {
                     'X-CSRF-TOKEN': token
@@ -100,7 +100,7 @@ $(document).ready(function(){
             $('.help-block-report-error').html('');
             $.ajax({
                 type: 'get',           
-                url: $('meta[name="url"').attr('content')+'/report-error/',
+                url: $('meta[name="url"]').attr('content')+'/report-error/',
                 data: {'_token':token,'pid':getParameterByName('pid',''), 't':getParameterByName('t',''), 'content':content},        
                 headers: {
                     'X-CSRF-TOKEN': token
@@ -119,7 +119,7 @@ $(document).ready(function(){
         if(follow == 0){           
             $.ajax({
                 type: 'get',           
-                url: $('meta[name="url"').attr('content')+'/follow-phim/',
+                url: $('meta[name="url"]').attr('content')+'/follow-phim/',
                 data: {'_token':token,'pid':getParameterByName('pid','')},        
                 headers: {
                     'X-CSRF-TOKEN': token
@@ -141,7 +141,7 @@ $(document).ready(function(){
         } else {
             $.ajax({
                 type: 'get',           
-                url: $('meta[name="url"').attr('content')+'/unfollow-phim/',
+                url: $('meta[name="url"]').attr('content')+'/unfollow-phim/',
                 data: {'_token':token,'pid':getParameterByName('pid','')},        
                 headers: {
                     'X-CSRF-TOKEN': token
@@ -162,7 +162,7 @@ $(document).ready(function(){
         var auto = $('.btn-auto-next').attr('aria-auto').trim();                
         $.ajax({
             type: "GET",
-            url: $('meta[name="url"').attr('content')+'/auto-next/',
+            url: $('meta[name="url"]').attr('content')+'/auto-next/',
             data: {'value': auto},
             success: function (data) {           
                 if(auto==1){
@@ -196,12 +196,11 @@ $(document).ready(function(){
             $('.result-search').css('display','block'); 
             $.ajax({
                 type: "GET",
-                url: $('meta[name="url"').attr('content')+'/tim-kiem/',
-                data: {'tukhoa': tukhoa},
+                url: $('meta[name="url"]').attr('content')+'/tim-kiem?tukhoa='+tukhoa,                
                 success: function (data) {                    
                     $('.result-search').html(data);                    
                 }
-            });                  
+            });                     
         }
     })
 });
@@ -231,7 +230,7 @@ function danhGia(value) {
     var str =  $('.rate').attr('aria-value');
     if(str.search(getParameterByName('pid','')+',') == -1 && $('.rate').attr('voted') != 1){
         $.ajax({
-            url: $('meta[name="url"').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
+            url: $('meta[name="url"]').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
             dataType: 'text',
             type: 'get',
             success: function (data) { 
@@ -253,7 +252,7 @@ function sendComment(pid, token){
     if($('#input-comment').val().trim().length > 0){
         $.ajax({
             type: "GET",
-            url: $('meta[name="url"').attr('content')+'/add-comment/',
+            url: $('meta[name="url"]').attr('content')+'/add-comment/',
             data: {'token': token, 'pid':pid, 'content':$('#input-comment').val()},
             success: function (data) {
                 if (data !== 0 && data !== -1) {
@@ -276,7 +275,7 @@ function sendComment(pid, token){
 function xtc(pid){
     var page = $('.xtc').attr('aria-page');
     $.ajax({
-        url: $('meta[name="url"').attr('content')+'/comment?pid='+pid+'&page='+page,
+        url: $('meta[name="url"]').attr('content')+'/comment?pid='+pid+'&page='+page,
         dataType: 'text',                    
         type: 'get',                    
         success: function (data) {                
@@ -303,7 +302,7 @@ function replyComment(cid){
     var page = $('.xtc').attr('aria-page');
     $.ajax({
         type: 'get',
-        url: $('meta[name="url"').attr('content')+'/reply-comment/',
+        url: $('meta[name="url"]').attr('content')+'/reply-comment/',
         data: {'cid':cid, 'content':content, 'page':page},        
         headers: {
             'X-CSRF-TOKEN': $('#current-token').val()
@@ -340,9 +339,8 @@ function openReport(cid){
 function xt(){
     var page = $('.xttm').attr('aria-page');
         $.ajax({
-        url: $('meta[name="url"').attr('content') + '/tap-moi?page=' + page,
-                dataType: 'text',
-                type: 'get',
+            type: "GET",
+            url: $('meta[name="url"]').attr('content')+'/tap-moi?page='+page, 
                 success: function (data) {                
                         $('.tapmoi-page-' + page).html(data);
                         var nextPage = parseInt(page) + 1;
@@ -357,9 +355,8 @@ function xt(){
 function xtmv(){
     var page = $('.xtmv').attr('aria-page');
         $.ajax({
-        url: $('meta[name="url"').attr('content') + '/movie-moi?page=' + page,
-                dataType: 'text',
-                type: 'get',
+            type: "GET",
+            url: $('meta[name="url"]').attr('content')+'/movie-moi?page='+page,          
                 success: function (data) {                
                         $('.moviemoi-page-' + page).html(data);
                         var nextPage = parseInt(page) + 1;
@@ -373,7 +370,7 @@ function xtmv(){
 }
 function confirmAge(pid){
     $.ajax({
-    url: $('meta[name="url"').attr('content') + '/confirm-age?pid=' + pid,
+    url: $('meta[name="url"]').attr('content') + '/confirm-age?pid=' + pid,
         dataType: 'text',
         type: 'get',
         success: function (data) {
