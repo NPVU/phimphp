@@ -24,8 +24,7 @@
 <script type="text/javascript">    
     jwplayer.key=$videoKey;    
     var vupdate = 0;    
-    var auto;
-    var cookie = getParameterByName('n', '');
+    var auto;    
     var xpr = jwplayer('my-player');
     xpr.setup({
         width: "100%",
@@ -33,10 +32,10 @@
         sources: [
                 {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},  
                 @if(!empty($video["720p"]) && $tap[0]->tap_chatluong >= 3)
-                {file:'{{$video["720p"]}}',label:'720p','type':'mp4'},
-                @endif                                             
+                {file:'{{$video["720p"]}}',label:'720p','type':'mp4','default': 'true'},
+                @endif                                                         
             ],
-        autostart: cookie==true?true:false,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+        autostart: true,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
     });    
     xpr.on('error', function() { 
         @if(!empty($tap[0]->tap_facebooklink))
@@ -55,7 +54,7 @@
                 sources: [
                     {file: link,label:'360p','type':'mp4'}                                                     
                 ],
-                autostart: 'false',
+                autostart: true,
                 image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
             });
         @else
@@ -63,35 +62,24 @@
                 width: "100%",
                 height: "100%",
                 sources: [
-                        {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},                                                                
+                        {file:'{{$video["360p"]}}',label:'360p','type':'mp4','default': 'true'},                                                                
                     ],
-                autostart: cookie==true?true:false,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+                autostart: true,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
             });
         @endif
-            jwplayer('my-player').load();
-            jwplayer('my-player').on('play', function(){        
-                $('.npv-play > i').addClass('fa-pause');
-                $('.npv-play > i').removeClass('fa-play');
-                $('.npv-play').attr('title','Tạm dừng');
-                if(vupdate===0){
-                    vupdate=1;            
-                    if(cookie==true){
-                        $('video').get(0).currentTime = {{Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))==null?0:Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))}};
-                        $('video').get(0).play();
-                    }               
-                    setTimeout(function(){
-                        viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
-                    }, 10000);
-                }        
-            });
+        jwplayer('my-player').load();
+        jwplayer('my-player').on('play', function(){        
+            if(vupdate===0){
+                vupdate=1;                                          
+                setTimeout(function(){
+                    viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
+                }, 10000);
+            }        
+        });
     });
     xpr.on('play', function(){        
         if(vupdate===0){
-            vupdate=1;            
-            if(cookie==true){
-                $('video').get(0).currentTime = {{Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))==null?0:Request::cookie("time-".Request::cookie("tapID-".$phim[0]->phim_id))}};
-                $('video').get(0).play();
-            }               
+            vupdate=1;                                     
             setTimeout(function(){
                 viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
             }, 10000);

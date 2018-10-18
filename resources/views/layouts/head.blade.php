@@ -57,8 +57,7 @@
         $(function() {
             $('.lazy').lazy();
         });
-    </script>
-    <script type="application/x-javascript">addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);function hideURLbar(){ window.scrollTo(0,1); }</script>        
+    </script>    
 
     <!-- Styles -->
     <link href="{{ asset('bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">
