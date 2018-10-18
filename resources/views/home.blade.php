@@ -13,7 +13,7 @@ XemPhimZero.com - Xem Phim Không Quảng Cáo
         <div class="owl-carousel owl-theme">
             @foreach($listRandom as $random)
             <div class="item">                
-                <img class="lazy" data-src="{{$random->phim_hinhnen}}" />
+                <img class="lazy" src="{{$random->phim_hinhnen}}" />
                 <div class="slider-info">
                     <div class="slider-info-inner">
                         <div class="slider-name text-center">{{$random->phim_ten}}</div>
