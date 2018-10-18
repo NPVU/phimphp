@@ -11,7 +11,7 @@
     <meta property="og:url" content="{{ url('/') }}" />
     <meta property="og:locale" content="vi_VN" />
     <meta property="og:site_name" content="XemPhimZero.com" />
-    <meta property="fb:app_id" content="345152536241287" />
+    <meta property="fb:app_id" content="277037466252028" />
     <meta name="googlebot" content="index,follow" />
     <meta name="robots" content="index,follow" />
     <title>@yield('title')</title>
