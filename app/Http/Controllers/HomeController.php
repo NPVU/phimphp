@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
     
     public function index(){        
+        Cookie::queue('beforePhimID', 0);
         $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
         $htmlMovieMoi = ClassCommon::getHTMLMovieMoi(Session::get('PhimPerPage'),0);
         $data['htmlTapMoi']     = $htmlTapMoi;

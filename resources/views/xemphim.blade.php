@@ -20,7 +20,9 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
         @include('layouts.confirmAge_min') 
         @include('layouts.video_min') 
-        
+        @if($cookiePhim['openCookie']) 
+            @include('layouts.cookiePhim') 
+        @endif
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
@@ -122,6 +124,16 @@
                     $(".rate").rate();
                     $('.rate').attr('data-rate-value',{{$star}});
                     $('.rate-select-layer').css('width', 20*{{$star}}+'%');
+                    $('a[href]').click(function(){
+                        var currentTimeSecond = $('video').get(0).currentTime;
+                        if(currentTimeSecond == null){
+                            currentTimeSecond = 0;
+                        }
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.open("GET", $('meta[name="url"').attr('content') + '/cookie?t=' + {{$tap[0]->tap_id}} + '&time=' + currentTimeSecond, false);
+                        xhttp.send();
+                        
+                    });
                 });                     
                 var sticky = document.getElementById('video').offsetTop;
                 window.onscroll = function() {

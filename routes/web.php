@@ -99,7 +99,7 @@ Route::get('/autoload', 'XemPhimController@loadVideo');
 Route::get('/update/{str}', 'XemPhimController@addLuotXem');
 Route::get('/danh-gia', 'XemPhimController@addDanhGia');
 Route::get('/confirm-age', 'XemPhimController@confirmAge');
-Route::get('/cookie', 'XemPhimController@setCookie');
+Route::get('/cookie', 'XemPhimController@setCookieXemPhim');
 
 Route::get('/add-comment', 'CommentUtils@comment');
 Route::get('/reply-comment', 'CommentUtils@replyComment');

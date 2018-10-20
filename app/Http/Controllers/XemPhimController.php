@@ -65,11 +65,12 @@ class XemPhimController extends Controller{
             }
         }
         $follow = 0;
-        if(Auth::check()){
-           $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
-           NotificationUtils::removeNotificationForUserOfPhim(Input::get('pid'));
-        }
-        $followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
+        $followAmount = 0;
+        //if(Auth::check()){
+        //   $follow = DB::table('follow_phim')->where([['phim_id','=',Input::get('pid')], ['user_id','=',Auth::id()]])->count();
+        //   NotificationUtils::removeNotificationForUserOfPhim(Input::get('pid'));
+        //}
+        //$followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
         if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
@@ -87,7 +88,8 @@ class XemPhimController extends Controller{
             }else{
                 ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));
             }
-            
+            $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, Input::get('t'));
+
             return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
@@ -95,7 +97,7 @@ class XemPhimController extends Controller{
             if(!isset($phim)){
                 $data['backURL'] = URL::to('/');
             } else {
-                $data['backURL'] = URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'?pid='.$phim[0]->phim_id.'&t=1&s='.md5('google').'&token='.Session::token());
+                $data['backURL'] = URL::to('/xem-phim'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'?pid='.$phim[0]->phim_id.'&t=1&s='.md5('google').'&token='.Session::token());
             }
             return view('errors/index', $data);
         }
@@ -248,15 +250,46 @@ class XemPhimController extends Controller{
         array_push($arrayAge, Input::get('pid'));
         session(['confirmAge' => $arrayAge]);
     }
+
+    public function getCookieXemPhim($phim_id, $tap_id){     
+        $data['openCookie'] = false;           
+        
+        /* 
+            Nếu beforePhimID == phim_id tức là đang xem cùng 1 bộ phim => không cần cookie
+            Nếu beforePhimID !== phim_id tức là phim xem lần trước là phim khác 
+                (hoặc lần truy cập này chưa xem phim nào, hoặc trở về trang chủ) => cần kiểm tra cookie
+        */
+        if(Cookie::get('beforePhimID') !== $phim_id){
+            /*
+                Nếu phim đang xem là lần đâu tiên xem => == null => không cần cookie
+                Nếu phim đang xem đã có xem vào thời điểm nào đó rồi => !== null => cần kiểm tra cookie
+            */
+            if(Cookie::get('cookiePhimID-'.$phim_id) !== null){
+                /*
+                    Lấy tập phim lần cuối người này xem
+                    Lấy móc thời gian lần cuối của tập phim 
+                */
+                $json = json_decode(Cookie::get('cookiePhimID-'.$phim_id));
+                $data['tapID'] = $json->tap_id;
+                $data['time'] = isset($json->time)?$json->time:0;
+                $data['timeDisplay'] = ClassCommon::formatSeconds(isset($json->time)?$json->time:0);
+                $data['tapSoHienThi'] = $json->tapsohienthi;
+                $data['openCookie'] = true;
+            }
+        }        
+        return $data;
+    }
     
-    public function setCookie(){
+    public function setCookieXemPhim(){
         $tap_id = Input::get('t');
         $tap = DB::table('tap')->where('tap_id', $tap_id)->get();
-        Cookie::queue('tapID-'.$tap[0]->phim_id, $tap_id);
-        Cookie::queue('tapSo-'.$tap[0]->phim_id, $tap[0]->tap_tapso);
-        Cookie::queue('tapSoHienThi-'.$tap[0]->phim_id, $tap[0]->tap_tapsohienthi);
-        Cookie::queue('time-'.$tap_id, Input::get('time'));
-    }
+        $data['tap_id'] = $tap_id;
+        $data['time']   = Input::get('time');
+        $data['tapso']  = $tap[0]->tap_tapso;
+        $data['tapsohienthi']  = $tap[0]->tap_tapsohienthi;
+        Cookie::queue('beforePhimID', $tap[0]->phim_id);
+        Cookie::queue('cookiePhimID-'.$tap[0]->phim_id, json_encode($data));
+    }    
     
     function curl($url) {
         $ch = @curl_init();
