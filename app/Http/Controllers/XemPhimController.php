@@ -88,7 +88,7 @@ class XemPhimController extends Controller{
             }else{
                 ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));
             }
-            $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, Input::get('t'));
+            $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, Input::get('t'), $tap_current[0]->tap_tapso);
 
             return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
@@ -251,7 +251,7 @@ class XemPhimController extends Controller{
         session(['confirmAge' => $arrayAge]);
     }
 
-    public function getCookieXemPhim($phim_id, $tap_id){     
+    public function getCookieXemPhim($phim_id, $tap_id, $tapso){     
         $data['openCookie'] = false;           
         
         /* 
@@ -270,11 +270,13 @@ class XemPhimController extends Controller{
                     Lấy móc thời gian lần cuối của tập phim 
                 */
                 $json = json_decode(Cookie::get('cookiePhimID-'.$phim_id));
-                $data['tapID'] = $json->tap_id;
-                $data['time'] = isset($json->time)?$json->time:0;
-                $data['timeDisplay'] = ClassCommon::formatSeconds(isset($json->time)?$json->time:0);
-                $data['tapSoHienThi'] = $json->tapsohienthi;
-                $data['openCookie'] = true;
+                if($tapso <= $json->tapso){
+                    $data['tapID'] = $json->tap_id;
+                    $data['time'] = isset($json->time)?$json->time:0;
+                    $data['timeDisplay'] = ClassCommon::formatSeconds(isset($json->time)?$json->time:0);
+                    $data['tapSoHienThi'] = $json->tapsohienthi;
+                    $data['openCookie'] = true;
+                }                
             }
         }        
         return $data;
