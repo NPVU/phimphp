@@ -3,11 +3,14 @@
         <div class="row">                
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="text-center">
-                    <h5 class="chuyentap-content">Lần trước bạn đã xem đến phút thứ&nbsp;<span style="font-weight:700">{{$cookiePhim['timeDisplay']}}&nbsp;(Tập&nbsp;{{$cookiePhim['tapSoHienThi']}})</span>. Bạn có muốn tiếp tục xem không?</h5>                    
+                    <h5 class="chuyentap-content"> 
+                        <div>Lần trước bạn đã xem đến phút thứ&nbsp;<span style="font-weight:700">{{$cookiePhim['timeDisplay']}}&nbsp;của tập&nbsp;{{$cookiePhim['tapSoHienThi']}}</span>.</div>
+                        <div> Bạn có muốn tiếp tục xem không?</div>
+                    </h5>                    
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
-                <button class="btn btn-primary" onclick="xemTiepTuc();">Xem tiếp</button>
+                <button class="btn btn-primary" onclick="xemTiepTuc();">Tiếp tục</button>
                 <button class="btn btn-default" data-izimodal-close="">Không</button>
             </div>
         </div>
@@ -18,8 +21,7 @@ $(document).ready(function(){
     var tap = {{$cookiePhim['tapID']}};
 
     $('#modal-cookie-phim').iziModal({
-        title: 'Xem tiếp lần trước',
-        top: 100,        
+        title: 'Tiếp tục lần trước',        
         headerColor: '#263238',
         icon: 'fa fa-info-circle',
         iconColor: 'white'
@@ -33,8 +35,8 @@ $(document).ready(function(){
         } , 1000);        
     }
 });
-function xemTiepTuc(){    
-    $('.chuyentap-content').html('Đang chuyển tập ....');
+function xemTiepTuc(){        
+    $('#modal-cookie-phim').iziModal('startLoading');
     window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$cookiePhim['tapID']}}&s={{$_GET['s']}}";    
 }
 function millisToMinutesAndSeconds(millis) {

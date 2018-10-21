@@ -26,6 +26,7 @@
     var vupdate = 0;    
     var auto;    
     var xpr = jwplayer('my-player');
+    var autoplay = '{{!($phim[0]->phim_dotuoi > 0 && (!Session::has('confirmAge') || (Session::has('confirmAge') && !in_array($phim[0]->phim_id, Session::get('confirmAge')))))?true:false}}';
     xpr.setup({
         width: "100%",
         height: "100%",
@@ -35,7 +36,7 @@
                 {file:'{{$video["720p"]}}',label:'720p','type':'mp4','default': 'true'},
                 @endif                                                         
             ],
-        autostart: true,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+        autostart: autoplay,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
     });    
     xpr.on('error', function() { 
         @if(!empty($tap[0]->tap_facebooklink))

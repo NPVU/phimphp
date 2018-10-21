@@ -21,8 +21,8 @@
         @include('layouts.confirmAge_min') 
         @include('layouts.video_min') 
         @if($cookiePhim['openCookie']) 
-            @include('layouts.cookiePhim') 
-        @endif
+            @include('layouts.cookiePhim_min') 
+        @endif 
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
