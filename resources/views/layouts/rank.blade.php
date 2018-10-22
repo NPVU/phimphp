@@ -39,7 +39,7 @@
                 <div class="content-right-section">
                     <h4 class="content-right-title">BẢNG XẾP HẠNG THÁNG</h4>
                     <ul class="list-anime">
-                        @if(count($phimXepHangTuan) > 0)
+                        @if(count($phimXepHangThang) > 0)
                         @foreach($phimXepHangThang as $thang)
                         <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/?pid='.$thang->phim_id.'&t='.$thang->tap_id.'&s='.md5('google')}}"><li>
                             <div class="" style="float:left;">
