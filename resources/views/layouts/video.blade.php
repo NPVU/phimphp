@@ -27,98 +27,113 @@
     var auto;    
     var xpr = jwplayer('my-player');
     var autoplay = '{{!($phim[0]->phim_dotuoi > 0 && (!Session::has('confirmAge') || (Session::has('confirmAge') && !in_array($phim[0]->phim_id, Session::get('confirmAge')))))?true:false}}';
-    xpr.setup({
-        width: "100%",
-        height: "100%",
-        sources: [
-                {file:'{{$video["360p"]}}',label:'360p','type':'mp4'},  
-                @if(!empty($video["720p"]) && $tap[0]->tap_chatluong >= 3)
-                {file:'{{$video["720p"]}}',label:'720p','type':'mp4','default': 'true'},
-                @endif                                                         
-            ],
-        autostart: autoplay,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
-    });    
-    xpr.on('error', function() { 
-        @if(!empty($tap[0]->tap_facebooklink))
-            var xhttp = new XMLHttpRequest();
-            var link = '';
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {                    
-                    link = xhttp.responseText;                    
-                }
-            };
-            xhttp.open("GET", "{{url('api/fb').'/'.$tap[0]->tap_id}}", false);
-            xhttp.send();
-            jwplayer('my-player').setup({            
-                width: "100%",
-                height: "100%",
-                sources: [
-                    {file: link,label:'360p','type':'mp4'}                                                     
-                ],
-                autostart: true,
-                image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
-            });
-        @else
-            jwplayer('my-player').setup({
-                width: "100%",
-                height: "100%",
-                sources: [
-                        {file:'{{$video["360p"]}}',label:'360p','type':'mp4','default': 'true'},                                                                
-                    ],
-                autostart: true,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
-            });
-        @endif
-        jwplayer('my-player').load();
-        jwplayer('my-player').on('play', function(){        
-            if(vupdate===0){
-                vupdate=1;                                          
-                setTimeout(function(){
-                    viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
-                }, 10000);
-            }        
-        });
-    });
-    xpr.on('play', function(){        
-        if(vupdate===0){
-            vupdate=1;                                     
-            setTimeout(function(){
-                viewTimes($('meta[name="url"]').attr('content')+'/update/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t="+getParameterByName('t','')+"&s={{md5('google')}}&token={{csrf_token()}}");
-            }, 10000);
-        }        
-    });   
-    xpr.on('complete', function(){      
-        var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
-        if(xpr.getDuration() - xpr.getPosition() === 0 && autoconfig==1){
-            @if(!ClassCommon::isLastEpisode($tap[0]->tap_id))
-            
-                iziToast.show({
-                    timeout: 3000,
-                    theme: 'dark',
-                    icon: 'fa fa-play',
-                    title: 'Chuyển tập trong 5s',                        
-                    position: 'center', 
-                    progressBarColor: '#27ABDB',
-                    buttons: [
-                        ['<button>Chuyển ngay</button>', function (instance, toast) {
-                            window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s="+getParameterByName('s','');
-                        }, true], 
-                        ['<button>Hủy</button>', function (instance, toast) {
-                            instance.hide({
-                                transitionOut: 'fadeOutUp',
+    var sourcesTemp = '';
+    $(document).ready(function(){
+        $.ajax({
+            type: 'post',           
+            url: $('meta[name="url"]').attr('content')+'/load',
+            data: {'id':{{$tap[0]->tap_id}} },        
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {                
+                sourcesTemp = data['360p'];
+                xpr.setup({
+                    width: "100%",
+                    height: "100%",
+                    sources: [
+                            {file: data['360p'],label:'360p','type':'mp4'},  
+                            @if($tap[0]->tap_chatluong >= 3)
+                            {file: data['720p'],label:'720p','type':'mp4','default': 'true'},
+                            @endif                                                         
+                        ],
+                    autostart: autoplay,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+                });    
+                xpr.on('error', function() { 
+                    @if(!empty($tap[0]->tap_facebooklink))
+                        var xhttp = new XMLHttpRequest();
+                        var link = '';
+                        xhttp.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {                    
+                                link = xhttp.responseText;                    
+                            }
+                        };
+                        xhttp.open("GET", "{{url('api/fb').'/'.$tap[0]->tap_id}}", false);
+                        xhttp.send();
+                        jwplayer('my-player').setup({            
+                            width: "100%",
+                            height: "100%",
+                            sources: [
+                                {file: link,label:'360p','type':'mp4'}                                                     
+                            ],
+                            autostart: true,
+                            image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
+                        });
+                    @else
+                        jwplayer('my-player').setup({
+                            width: "100%",
+                            height: "100%",
+                            sources: [
+                                    {file:sourcesTemp,label:'360p','type':'mp4','default': 'true'},                                                                
+                                ],
+                            autostart: true,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+                        });
+                    @endif
+                    jwplayer('my-player').load();
+                    jwplayer('my-player').on('play', function(){        
+                        if(vupdate===0){
+                            vupdate=1;                                          
+                            setTimeout(function(){
+                                viewTimes({{$tap[0]->tap_id}});
+                            }, 10000);
+                        }        
+                    });
+                });
+                xpr.on('play', function(){        
+                    if(vupdate===0){
+                        vupdate=1;                                     
+                        setTimeout(function(){
+                            viewTimes({{$tap[0]->tap_id}});
+                        }, 10000);
+                    }        
+                });   
+                xpr.on('complete', function(){      
+                    var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
+                    if(xpr.getDuration() - xpr.getPosition() === 0 && autoconfig==1){
+                        @if(!ClassCommon::isLastEpisode($tap[0]->tap_id))
+                        
+                            iziToast.show({
+                                timeout: 3000,
+                                theme: 'dark',
+                                icon: 'fa fa-play',
+                                title: 'Chuyển tập trong 5s',                        
+                                position: 'center', 
+                                progressBarColor: '#27ABDB',
+                                buttons: [
+                                    ['<button>Chuyển ngay</button>', function (instance, toast) {
+                                        window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s="+getParameterByName('s','');
+                                    }, true], 
+                                    ['<button>Hủy</button>', function (instance, toast) {
+                                        instance.hide({
+                                            transitionOut: 'fadeOutUp',
+                                            onClosing: function(instance, toast, closedBy){
+                                                clearTimeout(auto);
+                                            }
+                                        }, toast, 'buttonName');
+                                    }]
+                                ],
                                 onClosing: function(instance, toast, closedBy){
                                     clearTimeout(auto);
                                 }
-                            }, toast, 'buttonName');
-                        }]
-                    ],
-                    onClosing: function(instance, toast, closedBy){
-                        clearTimeout(auto);
+                                });
+                            confirmAutoNext(3);                    
+                        @endif
                     }
-                    });
-                confirmAutoNext(3);                    
-            @endif
-        }
+                });
+            }
+        });
     });
+    
     function confirmAutoNext(i){         
         if(i <= 0){
              window.location.href = $('meta[name="url"]').attr('content')+'/xem-phim/'+"{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid="+getParameterByName('pid','')+"&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s="+getParameterByName('s','');

@@ -132,43 +132,35 @@ class XemPhimController extends Controller{
     }
 
     public function loadVideo(){
-        if(strcmp(Session::token(), Input::get('token')) == 0){
-            $tap_current = DB::table('tap')->where([
-                            ['phim_id', Input::get('pid')],
-                            ['tap_id', Input::get('t')]
-                    ])->get();
-            if (!empty($tap_current[0]->tap_googlelink)) {
+        
+            $tap_current = DB::table('tap')->where('tap_id', Input::get('id'))->get();
+            if (!empty($tap_current[0]->tap_googlelink)) {               
                 return $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
             } else {
                 return null;
             }
-        } else {
-            $data['title'] = 'Không tìm thấy trang';
-            $data['page'] = 'errors.404';            
-            $data['backURL'] = URL::to('/');
-            return view('errors/index', $data);
-        }
+       
     }
     
     public function addLuotXem(){
-        if(strcmp(Session::token(), Input::get('token')) == 0){
-            ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));            
+            $tap = DB::table('tap')->where('tap_id', Input::get('id'))->get();
+            ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
-                        ['phim_id', Input::get('pid')],
-                        ['tap_id', Input::get('t')]
+                        ['phim_id', $tap[0]->phim_id],
+                        ['tap_id', $tap[0]->tap_id]
                 ])->get();
-            $phim = DB::table('phim')->selectRaw('phim_luotxem, phim_luotxem_tuan, phim_luotxem_thang')->where('phim_id', Input::get('pid'))->get();
+            $phim = DB::table('phim')->selectRaw('phim_luotxem, phim_luotxem_tuan, phim_luotxem_thang')->where('phim_id', $tap[0]->phim_id)->get();
             $data['event']      = 'view';
             $array['tapid']     = $luotxem[0]->tap_id;
             $array['tview']     = ClassCommon::formatLuotXem($luotxem[0]->tap_luotxem);
-            $array['phimid']    = Input::get('pid');
+            $array['phimid']    = $tap[0]->phim_id;
             $array['pview']     = ClassCommon::formatLuotXem($phim[0]->phim_luotxem);
             $array['pviewweek'] = ClassCommon::formatLuotXem($phim[0]->phim_luotxem_tuan);
             $array['pviewmonth']= ClassCommon::formatLuotXem($phim[0]->phim_luotxem_thang);
             $array['pstrview']  = ClassCommon::demLuotXem($phim[0]->phim_luotxem);
             $data['content']    = $array;
             event(new PusherEvent($data));            
-        }
+        
     }
 
     public function autoNext(){
