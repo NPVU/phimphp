@@ -187,21 +187,25 @@ $(document).ready(function(){
            showToast('info', '', 'Từ khóa tìm kiếm phải có ít nhất 3 ký tự', true);
        }
     });
-    $('.input-search').keyup(function(){        
+    var searchTimeout;
+    $('.input-search').keyup(function(){    
+        clearTimeout(searchTimeout);    
         var tukhoa = this.value.trim();        
         if(tukhoa.length < 3){
             $('.result-search').css('display','none');
             $('.result-search').html('');                   
         }else{            
             $('.result-search').css('display','block'); 
-            $.ajax({
-                type: "GET",
-                url: $('meta[name="url"]').attr('content')+'/tim-kiem?tukhoa='+tukhoa,                
-                success: function (data) {                    
-                    $('.result-search').html(data);
-                    $('.lazy').lazy();                
-                }
-            });                     
+            searchTimeout = setTimeout(function(){
+                $.ajax({
+                    type: "GET",
+                    url: $('meta[name="url"]').attr('content')+'/tim-kiem?tukhoa='+tukhoa,                
+                    success: function (data) {                    
+                        $('.result-search').html(data);
+                        $('.lazy').lazy();                
+                    }
+                });   
+            }, 300);                              
         }
     })
 });
