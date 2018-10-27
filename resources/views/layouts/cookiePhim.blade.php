@@ -32,7 +32,7 @@ $(document).ready(function(){
         setTimeout(function(){
             $('video').get(0).currentTime = {{$cookiePhim['time']}};
             $('video').get(0).play();
-        } , 1000);        
+        } , 3000);        
     }
 });
 function xemTiepTuc(){        

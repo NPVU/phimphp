@@ -40,7 +40,7 @@ class XemPhimController extends Controller{
                         ['tap_id', Input::get('t')]
                 ])->get();        
         if (count($tap_current) <= 0) {
-            $check = false;
+            $tap_current = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();        
         }    
         $star = ClassCommon::getStar(Input::get('pid'));
         $voteTimes = ClassCommon::getVoteTimes(Input::get('pid'));       
