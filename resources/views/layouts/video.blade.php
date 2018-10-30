@@ -50,25 +50,28 @@
                     autostart: autoplay,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
                 });    
                 xpr.on('error', function() { 
-                    @if(!empty($tap[0]->tap_facebooklink))
-                        var xhttp = new XMLHttpRequest();
-                        var link = '';
-                        xhttp.onreadystatechange = function() {
-                            if (this.readyState == 4 && this.status == 200) {                    
-                                link = xhttp.responseText;                    
+                    @if(!empty($tap[0]->tap_facebooklink))                       
+                        $.ajax({
+                            type: 'post',           
+                            url: $('meta[name="url"]').attr('content')+'/api/fb',
+                            data: {'tapid':{{$tap[0]->tap_id}} },        
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {                                
+                                jwplayer('my-player').setup({            
+                                    width: "100%",
+                                    height: "100%",
+                                    sources: [
+                                        {file: data.sd,label:'360p','type':'mp4'},     
+                                        {file: data.hd,label:'720p','type':'mp4','default': 'true'},                                                
+                                    ],
+                                    autostart: true,
+                                    image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
+                                });
                             }
-                        };
-                        xhttp.open("GET", "{{url('api/fb').'/'.$tap[0]->tap_id}}", false);
-                        xhttp.send();
-                        jwplayer('my-player').setup({            
-                            width: "100%",
-                            height: "100%",
-                            sources: [
-                                {file: link,label:'360p','type':'mp4'}                                                     
-                            ],
-                            autostart: true,
-                            image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
                         });
+                        
                     @else
                         jwplayer('my-player').setup({
                             width: "100%",

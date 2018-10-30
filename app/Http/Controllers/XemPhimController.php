@@ -84,7 +84,7 @@ class XemPhimController extends Controller{
             $data['follow_phim'] = $follow;
             $data['follows'] = $followAmount;
             if(strcmp(Input::get('s'), md5('google')) == 0){
-                $data['video'] = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
+            //    $data['video'] = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
             }else{
                 ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));
             }
