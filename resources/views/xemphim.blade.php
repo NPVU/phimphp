@@ -26,15 +26,15 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
-        <a style="float:left;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}">
+        <a style="float:left;" class="click-loading" onclick="loadServer(this,1, {{$tap[0]->tap_id}},'')">
             <img class="server {{strcmp($_GET['s'], md5('google'))==0?' server-active':''}}" src="{{asset('img/themes/server-1.svg')}}" width="24" data-toggle="tooltip" title="Server chính" />
         </a>
         @endif      
         @if(!empty($tap[0]->tap_youtubelink))
-        <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('youtube')}}">
-            <img class="server {{strcmp($_GET['s'], md5('youtube'))==0?' server-active':''}}" src="{{asset('img/themes/server-2.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
+        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
+            <img class="server {{strcmp($_GET['s'], md5('youtube'))==0?' server-active':''}}" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
         </a>
-        @endif 
+        @endif        
         <!--             
         @if(!empty($tap[0]->tap_openloadlink))
         <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('openload')}}">

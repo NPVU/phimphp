@@ -23,8 +23,8 @@ class APIController extends Controller {
         $data = explode('","sd_src":"', $dataTemp[1]);
         $video['hd'] = $data[0];
         $video['sd'] = explode('","hd_tag":"', $data[1])[0];
-        $video['hd'] = 'https://video.fsgn5-5.fna.fbcdn.net/v/t42.9040-2/'.explode('\/',($video['hd']))[5];
-        $video['sd'] = 'https://video.fsgn5-5.fna.fbcdn.net/v/t42.9040-2/'.explode('\/',(explode('","hd_tag":"', $data[1])[0]))[5];
+        $video['hd'] = 'https://scontent.xx.fbcdn.net/v/t42.9040-2/'.explode('\/',($video['hd']))[5];
+        $video['sd'] = 'https://scontent.xx.fbcdn.net/v/t42.9040-2/'.explode('\/',(explode('","hd_tag":"', $data[1])[0]))[5];
         return $video;
     }
 

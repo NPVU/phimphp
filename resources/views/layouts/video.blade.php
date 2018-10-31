@@ -134,6 +134,37 @@
                     }
                 });
             }
+        }).fail(function() {
+            $.ajax({
+                type: 'post',           
+                url: $('meta[name="url"]').attr('content')+'/api/fb',
+                data: {'tapid':{{$tap[0]->tap_id}} },        
+                headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {                                
+                    jwplayer('my-player').setup({            
+                    width: "100%",
+                    height: "100%",
+                    sources: [
+                        {file: data.sd,label:'360p','type':'mp4'},     
+                        {file: data.hd,label:'720p','type':'mp4','default': 'true'},                                                
+                    ],
+                    autostart: true,
+                        image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
+                    });
+                    jwplayer('my-player').load();
+                    jwplayer('my-player').on('play', function(){        
+                        if(vupdate===0){
+                            vupdate=1;                                          
+                            setTimeout(function(){
+                                viewTimes({{$tap[0]->tap_id}});
+                            }, 10000);
+                        }        
+                    });
+                }
+            });
+            
         });
     });
     

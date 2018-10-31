@@ -390,6 +390,51 @@ function confirmAge(pid){
         }
     });
 }
+function loadServer(event, server, tapid, dataid){
+    if($(event).find('img').hasClass('server-active')){
+            return false;
+    }
+    if(server == 1){                    
+        var sourcesTemp = '';
+        $.ajax({
+            type: 'post',           
+            url: $('meta[name="url"]').attr('content')+'/load',
+            data: {'id':tapid },        
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {                
+                sourcesTemp = data['360p'];
+                jwplayer('my-player').setup({
+                    width: "100%",
+                    height: "100%",
+                    sources: [
+                            {file: data['360p'],label:'360p','type':'mp4'},                                          
+                            {file: data['720p'],label:'720p','type':'mp4','default': 'true'},                                                      
+                        ],
+                    autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                }); 
+                jwplayer('my-player').load();  
+                jwplayer('my-player').on('error', function() { 
+                    jwplayer('my-player').setup({
+                        width: "100%",
+                        height: "100%",
+                        sources: [
+                                {file:sourcesTemp,label:'360p','type':'mp4','default': 'true'},                                                                
+                            ],
+                            autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                    });
+                    jwplayer('my-player').load();
+                }); 
+            }
+        });
+    }
+    if(server == 3){
+        $('#my-player').html('<iframe id="frame-youtube" class="npv-youtube" src="https://www.youtube.com/embed/'+dataid+'?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="100%"></iframe>');                         
+    }
+    $('img').removeClass('server-active');
+    $(event).find('img').addClass('server-active');
+}
 function openLoading(){
     $('#loading').fadeIn();
 }
