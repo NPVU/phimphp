@@ -266,7 +266,15 @@ ul.user-menu  li:hover{
     z-index: 1;
     color:white;
     background: rgba(0, 0, 0, .6);
-    font-weight: 600;
+    font-weight: 600;        
+}
+.box-title div{
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;    
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 .title-vn{
     font-size:0.8em;
@@ -407,6 +415,10 @@ ul.user-menu  li:hover{
 .list-anime .title{
     max-width: 140px;
     white-space: nowrap;
+    text-overflow: ellipsis;    
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 .list-anime img{
     width: 80px;

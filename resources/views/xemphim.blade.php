@@ -328,8 +328,8 @@
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
                             <div class="box-title">
-                                <div>{{(strlen($season->phim_ten.' (SS'.$season->phim_season.')')>20?substr($season->phim_ten,0,20).'...':$season->phim_ten.' (SS'.$season->phim_season.')')}}</div>
-                                <div class="title-vn">{{(strlen($season->phim_tenvn)>28?substr($season->phim_tenvn,0,28).'...':$season->phim_tenvn)}}</div>
+                                <div>{{$season->phim_ten}}</div>
+                                <div class="title-vn">{{$season->phim_tenvn}}</div>
                             </div>
                                 @if(strcmp($season->phim_kieu, 'Movie')==0) 
                                 <div class="box-text">Movie &nbsp;{{$season->phim_season}}</div> 
@@ -417,8 +417,8 @@
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
                                 <div class="box-title">
-                                    <div>{{(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')')}}</div>
-                                    <div class="title-vn">{{(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,28).'...':$row->phim_tenvn)}}</div>
+                                    <div>{{$row->phim_ten}}</div>
+                                    <div class="title-vn">{{$row->phim_tenvn}}</div>
                                 </div>
                                 <!--<div class="box-text">{{$row->phim_sotap}}&nbsp;tập</div>-->
                             </div>

@@ -8,9 +8,9 @@
                                 <img class="lazy" data-src="{{$tuan->phim_hinhnen}}" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div class="title">{{strlen($tuan->phim_ten)>21?substr($tuan->phim_ten,0,21).'...':$tuan->phim_ten}}</div>
+                                <div class="title">{{$tuan->phim_ten}}</div>
                                 @if(strlen($tuan->phim_tenvn)>0)
-                                <div class="title title-vn">{{(strlen($tuan->phim_tenvn)>28?'('.substr($tuan->phim_tenvn,0,strrpos(substr($tuan->phim_tenvn,0,28),' ')).'...':'('.$tuan->phim_tenvn.')')}}</div>               
+                                <div class="title title-vn">{{$tuan->phim_tenvn}}</div>               
                                 @endif
                                 <div style="font-size:0.8em"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($tuan->phim_luotxem)}}</div>
                                 <div>
@@ -46,9 +46,9 @@
                                 <img class="lazy" data-src="{{$thang->phim_hinhnen}}" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div class="title">{{strlen($thang->phim_ten)>21?substr($thang->phim_ten,0,21).'...':$thang->phim_ten}}</div>
+                                <div class="title">{{$thang->phim_ten}}</div>
                                 @if(strlen($thang->phim_tenvn)>0)
-                                <div class="title title-vn">{{(strlen($thang->phim_tenvn)>28?'('.substr($thang->phim_tenvn,0,strrpos(substr($thang->phim_tenvn,0,28),' ')).'...':'('.$thang->phim_tenvn.')')}}</div>               
+                                <div class="title title-vn">{{$thang->phim_tenvn}}</div>               
                                 @endif
                                 <div style="font-size:0.8em"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;&nbsp; {{number_format($thang->phim_luotxem)}}</div>
                                 <div>

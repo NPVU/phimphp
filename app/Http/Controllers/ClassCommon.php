@@ -124,8 +124,8 @@ class ClassCommon extends BaseController
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
                     $html .=                '<div class="box-title">';                    
-                    $html .=                    '<div>'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';
-                    $html .=                    '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':$row->phim_tenvn).'</div>';
+                    $html .=                    '<div>'.$row->phim_ten.'</div>';
+                    $html .=                    '<div class="title-vn">'.$row->phim_tenvn.'</div>';
                     $html .=                '</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapso.'/'.$row->phim_sotap.'</div>';
 //                    $html .=                '<div class="box-text">';
@@ -209,8 +209,8 @@ class ClassCommon extends BaseController
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
                     $html .=                '<div class="box-title">';                    
-                    $html .=                    '<div>'.(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')').'</div>';
-                    $html .=                    '<div class="title-vn">'.(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':$row->phim_tenvn).'</div>';
+                    $html .=                    '<div>'.$row->phim_ten.'</div>';
+                    $html .=                    '<div class="title-vn">'.$row->phim_tenvn.'</div>';
                     $html .=                '</div>';
                     $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
                     $html .=            '</div>';                    
@@ -314,9 +314,9 @@ class ClassCommon extends BaseController
                 $html .=        '<img class="lazy" data-src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
                 $html .=    '</div>';
                 $html .=    '<div style="float:left;padding-left:10px;" >';
-                $html .=        '<div class="title"><b>'.(strlen($row->phim_ten)>24?substr($row->phim_ten,0,24).'...':$row->phim_ten).'</b></div>';
+                $html .=        '<div class="title"><b>'.$row->phim_ten.'</b></div>';
                 if(strlen($row->phim_tenvn)>0){
-                    $html .=        '<div class="title title-vn">'.(strlen($row->phim_tenvn)>28?'('.substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':'('.$row->phim_tenvn.')').'</div>';
+                    $html .=        '<div class="title title-vn">'.$row->phim_tenvn.'</div>';
                 }                
                 $html .=        '<div>Season '.$row->phim_season.'</div>';
                 $html .=        '<div>';

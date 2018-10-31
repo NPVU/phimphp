@@ -7,8 +7,8 @@
             <div class="box-overlay-rich"></div>
             <div class="box-info">
                 <div class="box-title">
-                    <div>{{(strlen($row->phim_ten.' (SS'.$row->phim_season.')')>20?substr($row->phim_ten,0,20).'...':$row->phim_ten.' (SS'.$row->phim_season.')')}}</div>
-                    <div class="title-vn">{{(strlen($row->phim_tenvn)>28?substr($row->phim_tenvn,0,strrpos(substr($row->phim_tenvn,0,28),' ')).'...':$row->phim_tenvn)}}</div>
+                    <div>{{$row->phim_ten}}</div>
+                    <div class="title-vn">{{$row->phim_tenvn}}</div>
                 </div>
                 <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /{{$row->phim_sotap}}</div>
             </div>
