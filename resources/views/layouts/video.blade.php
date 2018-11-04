@@ -45,6 +45,9 @@
                             {file: data['360p'],label:'360p','type':'mp4'},  
                             @if($tap[0]->tap_chatluong >= 3)
                             {file: data['720p'],label:'720p','type':'mp4','default': 'true'},
+                            @endif  
+                            @if($tap[0]->tap_chatluong >= 4)
+                            {file: data['1080p'],label:'1080p','type':'mp4'},
                             @endif                                                         
                         ],
                     autostart: autoplay,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},

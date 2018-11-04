@@ -301,13 +301,29 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-radius: 3px;">    
         <div id="fb-root"></div>
-        <script>(function(d, s, id) {
+        
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId      : '1228373097312732',
+            cookie     : true,
+            xfbml      : true,
+            version    : 'v3.2'
+            });
+            
+            FB.AppEvents.logPageView();               
+            
+        };
+
+        (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
+            if (d.getElementById(id)) {return;}
             js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=277037466252028&autoLogAppEvents=1';
+            js.src = "https://connect.facebook.net/vi_VN/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+        }(document, 'script', 'facebook-jssdk'));
+                
+    </script>
         <div class="fb-comments" data-href="{{url('xem-phim')}}/{{$phim[0]->phim_id}}" data-width="100%" width="100%" data-numposts="10" data-colorscheme="dark" data-order-by="reverse_time"></div>
     </div>
 </div>
