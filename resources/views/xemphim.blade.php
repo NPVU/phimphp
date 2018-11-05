@@ -226,8 +226,8 @@
                                 <img src="{{$phim[0]->phim_hinhanh}}" width="100%" style="max-width:300px;max-height: 230px;"/>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                <div class="text-center">
-                                    <strong style="color: lightseagreen;font-size: 1.5em;">
+                                <div class="text-center phim-title-header">
+                                    <strong>
                                         {{$phim[0]->phim_ten}}
                                     </strong>                            
                                 </div>

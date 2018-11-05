@@ -327,6 +327,13 @@ ul.user-menu  li:hover{
 .search-mobile{
     display: none !important;
 }
+.phim-title-header{
+    background-color: #00a5ad;
+    padding: 5px;
+    margin: 5px 0px;
+    color: white;
+    font-size: 1.5em;
+}
 @media (max-width: 1199px) {
     .phim-tip{           
         min-width:250px;
