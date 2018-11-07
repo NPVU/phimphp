@@ -79,6 +79,35 @@
                                     <span class="help-block"><?php echo isset($phim_background_link_error)?$phim_background_link_error:''; ?></span>
                                 </div>
                             </div>
+                            <div class="col-md-12 box-body-title">
+                                ảnh thumb
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group <?php echo isset($phim_thumb_error)?'has-error':''; ?>">
+                                    <input type="hidden" name="phim_thumb" id="phim_thumb" value="<?php echo isset($_POST['phim_thumb'])?$_POST['phim_thumb']:'' ?>" />
+                                    <input type="file" class="form-control display-none" id="selectFileThumb" onchange="autoUploadThumb()" />
+                                    <img src="<?php if(isset($_POST['phim_thumb']) && !empty($_POST['phim_thumb'])) :?>
+                                         <?php echo $_POST['phim_thumb'] ?>
+                                         <?php else :?>
+                                         {{$phim[0]->phim_thumb}}
+                                         <?php endif; ?>"
+                                         onclick="$('#selectFileThumb').click()" 
+                                         class="img-select-file npv-add-image" id="thumbPhimDragDrop" width="100%" style="min-width:200px; min-height:200px"/> 
+                                    <span class="help-block"><?php echo isset($phim_thumb_error)?$phim_thumb_error:''; ?></span>
+                                </div>
+                                <div class="form-group <?php echo isset($phim_thumb_link_error)?'has-error':''; ?>">
+                                    <label class="control-label" for="phim_thumb"><small>hoặc</small> Đường dẫn ảnh</label>
+                                    <div class="input-group">
+                                        <input type="text" id="phim_thumb_link" name="phim_thumb_link" 
+                                               class="form-control" value="<?php echo isset($_POST['phim_thumb']) ? $_POST['phim_thumb'] : $phim[0]->phim_thumb ?>"
+                                               placeholder="VD: http://imurg.org/naruto.png (Full HD)"/>
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-success" onclick="loadThumb()">Load</button>
+                                        </div>
+                                    </div>
+                                    <span class="help-block"><?php echo isset($phim_thumb_link_error)?$phim_thumb_link_error:''; ?></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
@@ -299,6 +328,9 @@
         function autoUploadBackground() {
             sendImagePhim($('#selectFileBackground').prop('files')[0], 'background');
         }
+        function autoUploadThumb() {
+            sendImagePhim($('#selectFileThumb').prop('files')[0], 'thumb');
+        }
         
         function uploadDragDropImagePhim(files, type){    
             console.log(files[0]);
@@ -326,9 +358,12 @@
                          if(type === 'icon'){
                             $('#imgPhimDragDrop').attr('src', urlImage);
                             $('#edit_phim_image').val(urlImage);
-                        } else {
+                        } if(type === 'background') {
                             $('#backgroundPhimDragDrop').attr('src', urlImage);
                             $('#phim_background').val(urlImage);
+                        } else {
+                            $('#thumbPhimDragDrop').attr('src', urlImage);
+                            $('#phim_thumb').val(urlImage);
                         }
                     }
             });
@@ -342,6 +377,11 @@
         function loadBackground(){
             var url = $('#phim_background_link').val();
             $('#backgroundPhimDragDrop').attr('src', url);            
+        }
+
+        function loadThumb(){
+            var url = $('#phim_thumb_link').val();
+            $('#thumbPhimDragDrop').attr('src', url);            
         }
         
         $(function () {

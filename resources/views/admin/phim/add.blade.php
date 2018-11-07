@@ -68,6 +68,24 @@
                                     <span class="help-block"><?php echo isset($phim_background_link_error)?$phim_background_link_error:''; ?></span>
                                 </div>
                             </div>
+                            <div class="col-md-12 box-body-title">
+                                ảnh thumb
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group <?php echo isset($phim_thumb_error)?'has-error':''; ?>">
+                                    <input type="hidden" name="phim_thumb" id="phim_thumb" value="<?php echo isset($_POST['phim_thumb'])?$_POST['phim_thumb']:'' ?>" />
+                                    <input type="file" class="form-control display-none" id="selectFileThumb" onchange="autoUploadThumb()" />
+                                    <img src="<?php if(isset($_POST['phim_thumb']) && !empty($_POST['phim_thumb'])) :?>
+                                         <?php echo $_POST['phim_thumb'] ?>
+                                         <?php else :?>
+                                         {{asset('img/themes/jquery-file-upload-scripts.png')}}
+                                         <?php endif; ?>"
+                                         onclick="$('#selectFileThumb').click()" 
+                                         class="img-select-file npv-add-image" id="thumbPhimDragDrop" width="100%" style="min-width:200px; min-height:200px"/> 
+                                    <span class="help-block"><?php echo isset($phim_thumb_error)?$phim_thumb_error:''; ?></span>
+                                </div>                                
+                            </div>
+                            
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12 box-body-title">
@@ -280,6 +298,9 @@
         function autoUploadBackground() {
             sendImagePhim($('#selectFileBackground').prop('files')[0], 'background');
         }
+        function autoUploadThumb() {
+            sendImagePhim($('#selectFileThumb').prop('files')[0], 'thumb');
+        }
         function uploadDragDropImagePhim(files, type){    
             console.log(files[0]);
             sendImagePhim(files[0], type);
@@ -306,9 +327,12 @@
                         if(type === 'icon'){
                             $('#imgPhimDragDrop').attr('src', urlImage);
                             $('#add_phim_image').val(urlImage);
-                        } else {
+                        } if(type === 'background') {
                             $('#backgroundPhimDragDrop').attr('src', urlImage);
                             $('#phim_background').val(urlImage);
+                        } else {
+                            $('#thumbPhimDragDrop').attr('src', urlImage);
+                            $('#phim_thumb').val(urlImage);
                         }
                     }
             });

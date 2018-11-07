@@ -193,6 +193,13 @@ class PhimController extends Controller{
             } else {
                 $url_background = $request->phim_background_link;
             }
+            if(!empty($request->phim_thumb)){
+                $path = ClassCommon::getPathUploadImage().Session::get('fileThumbPhim');
+                rename(ClassCommon::getPathUploadTemp().Session::get('fileThumbPhim'), $path);
+                $url_thumb = URL::to('/').'/'.$path;
+            } else {
+                $url_thumb = $request->phim_thumb_link;
+            }
 
             $xuatban = 0;
             if($request->add_phim_xuatban){
@@ -214,6 +221,7 @@ class PhimController extends Controller{
                         'phim_tag'        => $request->add_phim_tag,
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
+                        'phim_thumb'      => $url_thumb,
                         'phim_nguon'      => $request->add_phim_nguon,
                         'phim_xuatban'    => $xuatban,
                         'phim_ngaycapnhat'=> now()
@@ -282,6 +290,13 @@ class PhimController extends Controller{
                 } else {
                     $url_background = $request->phim_background_link;
                 }
+                if(!empty($request->phim_thumb)){
+                    $path = ClassCommon::getPathUploadImage().Session::get('fileThumbPhim');
+                    rename(ClassCommon::getPathUploadTemp().Session::get('fileThumbPhim'), $path);
+                    $url_thumb = URL::to('/').'/'.$path;
+                } else {
+                    $url_thumb = $request->phim_thumb_link;
+                }
                 
                 // Xóa file cũ
                 //$phim = DB::table('phim')->where('phim_id', $request->edit_phim_id)->get();
@@ -299,7 +314,8 @@ class PhimController extends Controller{
                 DB::table('phim')->where('phim_id', $request->edit_phim_id)->update(
                     [                        
                         'phim_hinhanh'        => $url_icon,
-                        'phim_hinhnen'        => $url_background
+                        'phim_hinhnen'        => $url_background,
+                        'phim_thumb'          => $url_thumb
                     ]
                 );
             }
@@ -520,8 +536,10 @@ class PhimController extends Controller{
             $filePath = $file->move(ClassCommon::getPathUploadTemp(), $newName.'_'.$file->getClientOriginalName());
             if(strcmp('icon', $request->type) == 0){
                 session(['fileImagePhim' => $newName.'_'.$file->getClientOriginalName()]);
-            } else {
+            } if(strcmp('background', $request->type) == 0) {
                 session(['fileBackgroundPhim' => $newName.'_'.$file->getClientOriginalName()]);
+            } else {
+                session(['fileThumbPhim' => $newName.'_'.$file->getClientOriginalName()]);
             }
             return $filePath;    
         }

@@ -119,7 +119,7 @@ class ClassCommon extends BaseController
                     $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
-                    $html .=                '<img class="lazy" data-src="'.$row->phim_hinhnen.'" />';
+                    $html .=                '<img class="lazy" data-src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
@@ -204,7 +204,7 @@ class ClassCommon extends BaseController
                     $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
-                    $html .=                '<img class="lazy" data-src="'.$row->phim_hinhnen.'" />';
+                    $html .=                '<img class="lazy" data-src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
@@ -260,13 +260,13 @@ class ClassCommon extends BaseController
         
     public static function getBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
-            $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+            $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh, phim_thumb,'
                 . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id'
                 . ' FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
-            $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh,'
+            $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh, phim_thumb, '
                 . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id'
                 . ' FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
