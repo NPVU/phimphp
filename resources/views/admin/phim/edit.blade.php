@@ -358,7 +358,7 @@
                          if(type === 'icon'){
                             $('#imgPhimDragDrop').attr('src', urlImage);
                             $('#edit_phim_image').val(urlImage);
-                        } if(type === 'background') {
+                        } else if(type === 'background') {
                             $('#backgroundPhimDragDrop').attr('src', urlImage);
                             $('#phim_background').val(urlImage);
                         } else {

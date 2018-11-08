@@ -83,7 +83,19 @@
                                          onclick="$('#selectFileThumb').click()" 
                                          class="img-select-file npv-add-image" id="thumbPhimDragDrop" width="100%" style="min-width:200px; min-height:200px"/> 
                                     <span class="help-block"><?php echo isset($phim_thumb_error)?$phim_thumb_error:''; ?></span>
-                                </div>                                
+                                </div>  
+                                <div class="form-group <?php echo isset($phim_thumb_link_error)?'has-error':''; ?>">
+                                    <label class="control-label" for="phim_thumb"><small>hoặc</small> Đường dẫn ảnh</label>
+                                    <div class="input-group">
+                                        <input type="text" id="phim_thumb_link" name="phim_thumb_link" 
+                                               class="form-control" value="<?php echo isset($_POST['phim_thumb']) ? $_POST['phim_thumb'] : '' ?>"
+                                               placeholder="VD: http://imurg.org/naruto.png (Full HD)"/>
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-success" onclick="loadThumb()">Load</button>
+                                        </div>
+                                    </div>
+                                    <span class="help-block"><?php echo isset($phim_thumb_link_error)?$phim_thumb_link_error:''; ?></span>
+                                </div>                              
                             </div>
                             
                         </div>
@@ -322,12 +334,12 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (data) {
-                        console.log(data);
+                        console.log(data + ' - ' +type);
                         var urlImage = '{{url("/")}}/'+data;
                         if(type === 'icon'){
                             $('#imgPhimDragDrop').attr('src', urlImage);
                             $('#add_phim_image').val(urlImage);
-                        } if(type === 'background') {
+                        } else if(type === 'background') {
                             $('#backgroundPhimDragDrop').attr('src', urlImage);
                             $('#phim_background').val(urlImage);
                         } else {

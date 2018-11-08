@@ -536,7 +536,7 @@ class PhimController extends Controller{
             $filePath = $file->move(ClassCommon::getPathUploadTemp(), $newName.'_'.$file->getClientOriginalName());
             if(strcmp('icon', $request->type) == 0){
                 session(['fileImagePhim' => $newName.'_'.$file->getClientOriginalName()]);
-            } if(strcmp('background', $request->type) == 0) {
+            } else if(strcmp('background', $request->type) == 0) {
                 session(['fileBackgroundPhim' => $newName.'_'.$file->getClientOriginalName()]);
             } else {
                 session(['fileThumbPhim' => $newName.'_'.$file->getClientOriginalName()]);
