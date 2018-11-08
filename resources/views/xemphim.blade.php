@@ -328,12 +328,13 @@
     </div>
 </div>
 
+@if(count($listSeason) > 0) 
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">PHIM LIÊN QUAN</h2>
     </div>
     <div>
-        @if(count($listSeason) > 0)
+        
             @foreach($listSeason as $season)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
                     <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t='.$season->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
@@ -411,11 +412,9 @@
                 </a>
             </div>
             @endforeach
-        @else
-            <div class="text-center"><i style="color:gray">Không tìm thấy phim liên quan</i></div>
-        @endif
     </div>
 </div>
+@endif 
 
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
