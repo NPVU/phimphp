@@ -19,7 +19,7 @@ XemPhimZero.com - Xem Phim Không Quảng Cáo
                         <div class="slider-name text-center" style="background-color: #dc0f0fb8;">{{$random->phim_ten}}</div>
                         <div class="slider-name text-center" style="font-size:1em">Season&nbsp;{{$random->phim_season}}&nbsp;({{$random->phim_nam}})</div>
                         <div class="slider-button text-center">
-                            <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($random->phim_ten)))).'/?pid='.$random->phim_id.'&t='.$random->tap_id.'&s='.md5('google')}}">
+                            <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($random->phim_ten)))).'/'.$random->tap_id.'.html'}}">
                                 <button class="xem-ngay">Xem ngay</button>
                             </a>
                         </div>

@@ -26,7 +26,7 @@ $(document).ready(function(){
         icon: 'fa fa-info-circle',
         iconColor: 'white'
     });
-    if(getParameterByName('t', '') != tap){
+    if($('meta[name="tid"]').attr('content') != tap){
         $('#modal-cookie-phim').iziModal('open');
     } else {
         setTimeout(function(){
@@ -37,7 +37,7 @@ $(document).ready(function(){
 });
 function xemTiepTuc(){        
     $('#modal-cookie-phim').iziModal('startLoading');
-    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$cookiePhim['tapID']}}&s={{$_GET['s']}}";    
+    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$cookiePhim['tapID']}}.html";    
 }
 function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000);

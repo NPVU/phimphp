@@ -101,7 +101,7 @@ $(document).ready(function(){
             $.ajax({
                 type: 'get',           
                 url: $('meta[name="url"]').attr('content')+'/report-error/',
-                data: {'_token':token,'pid':getParameterByName('pid',''), 't':getParameterByName('t',''), 'content':content},        
+                data: {'_token':token,'pid':$('meta[name="pid"]').attr('content'), 't':$('meta[name="tid"]').attr('content'), 'content':content},        
                 headers: {
                     'X-CSRF-TOKEN': token
                 },
@@ -120,7 +120,7 @@ $(document).ready(function(){
             $.ajax({
                 type: 'get',           
                 url: $('meta[name="url"]').attr('content')+'/follow-phim/',
-                data: {'_token':token,'pid':getParameterByName('pid','')},        
+                data: {'_token':token,'pid':$('meta[name="pid"]').attr('content')},        
                 headers: {
                     'X-CSRF-TOKEN': token
                 },
@@ -142,7 +142,7 @@ $(document).ready(function(){
             $.ajax({
                 type: 'get',           
                 url: $('meta[name="url"]').attr('content')+'/unfollow-phim/',
-                data: {'_token':token,'pid':getParameterByName('pid','')},        
+                data: {'_token':token,'pid':$('meta[name="pid"]').attr('content')},        
                 headers: {
                     'X-CSRF-TOKEN': token
                 },
@@ -240,9 +240,9 @@ function showToast(type, content, title, close){switch(type){
         }
 function danhGia(value) { 
     var str =  $('.rate').attr('aria-value');
-    if(str.search(getParameterByName('pid','')+',') == -1 && $('.rate').attr('voted') != 1){
+    if(str.search($('meta[name="pid"]').attr('content')+',') == -1 && $('.rate').attr('voted') != 1){
         $.ajax({
-            url: $('meta[name="url"]').attr('content')+'/danh-gia?pid='+getParameterByName('pid','')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
+            url: $('meta[name="url"]').attr('content')+'/danh-gia?pid='+$('meta[name="pid"]').attr('content')+'&star=' + value+'&token='+$('meta[name="csrf-token"').attr('content'),
             dataType: 'text',
             type: 'get',
             success: function (data) { 
@@ -265,7 +265,7 @@ function sendComment(pid, token){
         $.ajax({
             type: "GET",
             url: $('meta[name="url"]').attr('content')+'/add-comment/',
-            data: {'token': token, 'pid':pid, 'content':$('#input-comment').val()},
+            data: {'token': token, 'pid':$('meta[name="pid"]').attr('content'), 'content':$('#input-comment').val()},
             success: function (data) {
                 if (data !== 0 && data !== -1) {
                     $('.list-comment').html('');
@@ -287,7 +287,7 @@ function sendComment(pid, token){
 function xtc(pid){
     var page = $('.xtc').attr('aria-page');
     $.ajax({
-        url: $('meta[name="url"]').attr('content')+'/comment?pid='+pid+'&page='+page,
+        url: $('meta[name="url"]').attr('content')+'/comment?pid='+$('meta[name="pid"]').attr('content')+'&page='+page,
         dataType: 'text',                    
         type: 'get',                    
         success: function (data) {                
@@ -382,7 +382,7 @@ function xtmv(){
 }
 function confirmAge(pid){
     $.ajax({
-    url: $('meta[name="url"]').attr('content') + '/confirm-age?pid=' + pid,
+    url: $('meta[name="url"]').attr('content') + '/confirm-age?pid=' + $('meta[name="pid"]').attr('content'),
         dataType: 'text',
         type: 'get',
         success: function (data) {

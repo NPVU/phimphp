@@ -3,13 +3,15 @@
  Xem Phim <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>
 @endsection 
 @section('metaCEO') 
-<meta property="og:url" content="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}" />
+<meta property="og:url" content="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$tap[0]->tap_id}}.html" />
 <meta property="og:title" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
 <meta property="og:description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="850">
 <meta name="keywords" content="<?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?> | <?php echo $phim[0]->phim_tenkhac?>" />
+<meta name="pid" content="{{ $phim[0]->phim_id }}">
+<meta name="tid" content="{{ $tap[0]->tap_id }}">
 <script type="text/javascript" src="{{ asset('js/openload-plugin.min.js') }}"></script>
 @endsection 
 @section('contentLeft')
@@ -27,28 +29,21 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
         <a style="float:left;" class="click-loading" onclick="loadServer(this,1, {{$tap[0]->tap_id}},'')">
-            <img class="server {{strcmp($_GET['s'], md5('google'))==0?' server-active':''}}" src="{{asset('img/themes/server-1.svg')}}" width="24" data-toggle="tooltip" title="Server chính" />
+            <img class="server server-active" src="{{asset('img/themes/server-1.svg')}}" width="24" data-toggle="tooltip" title="Server chính" />
         </a>
         @endif      
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
-            <img class="server {{strcmp($_GET['s'], md5('youtube'))==0?' server-active':''}}" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
+            <img class="server" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
         </a>
-        @endif        
-        <!--             
-        @if(!empty($tap[0]->tap_openloadlink))
-        <a style="float:left; margin-left:5px;" class="click-loading" href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('openload')}}">
-            <img class="server {{strcmp($_GET['s'], md5('openload'))==0?' server-active':''}}" src="{{asset('img/themes/openload-32x32.png')}}" width="24" data-toggle="tooltip" title="Server Phụ" />
-        </a>
-        @endif  
-        -->       
+        @endif               
         <span class="title-video">
             {{'Tập '.$tap[0]->tap_tapsohienthi}} <span class="name-video">{{strlen($tap[0]->tap_ten)>0?': '.$tap[0]->tap_ten:''}}</span>
         </span>        
         <span class="view-times view-{{$phim[0]->phim_id}}-{{$tap[0]->tap_id}}">{{number_format($tap[0]->tap_luotxem)}}&nbsp;lượt xem</span>
         <span class="fb-button">
             <div class="fb-share-button" 
-                data-href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$_GET['t']}}&s={{md5('google')}}" 
+                data-href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$tap[0]->tap_id}}.html" 
                 data-layout="button">
             </div>
         </span>
@@ -63,11 +58,11 @@
         </div>         
         
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">   
-        @if(strcmp($_GET['s'], md5('youtube'))!=0)          
+              
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
                 <i class="icon-auto-next fa @if(Session::has('autoNext')) {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}} @else fa-check-circle @endif">&nbsp;<span>Tự chuyển tập:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
             </button>
-        @endif
+       
             <!--<button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
                 <i class="{{$follow_phim == 0?'fa fa-bell-slash':'fa fa-bell'}}">
                     <span>{{$follow_phim == 0?'Chưa theo dõi':'Đã theo dõi'}}</span>
@@ -147,11 +142,11 @@
                     }                    
                 };       
                 function epBefore(){
-                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{ClassCommon::getPreviousEpisode($tap[0]->tap_id)}}&s={{$_GET['s']}}";
+                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{ClassCommon::getPreviousEpisode($tap[0]->tap_id)}}.html";
                 }
                 function epAfter(){
-                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{ClassCommon::getNextEpisode($tap[0]->tap_id)}}&s={{$_GET['s']}}";
-                }               
+                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{ClassCommon::getNextEpisode($tap[0]->tap_id)}}.html";
+                }             
             </script>          
             <style>
                 .sticky-video {
@@ -172,17 +167,17 @@
         <h2 class="content-left-title">TẬP - VIETSUB</h2>
     </div>
     <div id="list-ep" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
-        @foreach($listTapVS as $tap)            
+        @foreach($listTapVS as $ep)            
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
-                @if($_GET['t'] != $tap->tap_id)
+                @if($tap[0]->tap_id != $ep->tap_id)
                 <a class="click-loading btn btn-primary visit btn-tap"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_id}}&s={{$_GET['s']}}">
-                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
+                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$ep->tap_id}}.html">
+                    <span style="padding: 0px 5px;">{{$ep->tap_tapsohienthi}}</span>
                 </a>
                 @else
                 <a class="btn btn-success btn-tap"
                    href="#">
-                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
+                    <span style="padding: 0px 5px;">{{$ep->tap_tapsohienthi}}</span>
                 </a>
                 @endif
             </div>               
@@ -194,17 +189,17 @@
         <h2 class="content-left-title">TẬP - THUYẾT MINH</h2>
     </div>
     <div id="list-ep" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                    
-        @foreach($listTapTM as $tap)            
+        @foreach($listTapTM as $ep)            
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
-                @if($_GET['t'] != $tap->tap_id)
+                @if($tap[0]->tap_id != $ep->tap_id)
                 <a class="click-loading btn btn-primary visit btn-tap"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/?pid={{$_GET['pid']}}&t={{$tap->tap_id}}&s={{$_GET['s']}}">
-                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
+                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$ep->tap_id}}.html">
+                    <span style="padding: 0px 5px;">{{$ep->tap_tapsohienthi}}</span>
                 </a>
                 @else
                 <a class="btn btn-success btn-tap"
                    href="#">
-                    <span style="padding: 0px 5px;">{{$tap->tap_tapsohienthi}}</span>
+                    <span style="padding: 0px 5px;">{{$ep->tap_tapsohienthi}}</span>
                 </a>
                 @endif
             </div>               
@@ -337,7 +332,7 @@
         
             @foreach($listSeason as $season)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/?pid='.$season->phim_id.'&t='.$season->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/'.$season->tap_id.'.html'}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img class="lazy" data-src="{{$season->phim_hinhnen}}">
@@ -424,7 +419,7 @@
         @if(count($listGoiY) > 0)
         @foreach($listGoiY as $row)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap_id.'&s='.md5('google')}}" data-toggle="modal" data-target="">
+                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img class="lazy" data-src="{{$row->phim_hinhnen}}">

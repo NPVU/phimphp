@@ -29,22 +29,23 @@ class XemPhimController extends Controller{
         return $hasRole>0?true:false;
     }
     
-    function xemPhim(){
+    function xemPhim($url, $tapid){
+        $tapid = explode('.', $tapid)[0];
         $check = true;
-        $phim_id = Input::get('pid');
-        $phim = DB::table('phim')->where('phim_id', Input::get('pid'))->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')->get();
-        $idTheLoai = json_decode($phim[0]->theloai_id);
-        $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-        $tap_current = DB::table('tap')->where([
-                        ['phim_id', Input::get('pid')],
-                        ['tap_id', Input::get('t')]
-                ])->get();        
+        $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();          
+        
         if (count($tap_current) <= 0) {
             $tap_current = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();        
         }    
-        $star = ClassCommon::getStar(Input::get('pid'));
-        $voteTimes = ClassCommon::getVoteTimes(Input::get('pid'));       
-        $listSeason = $this->getListSeason($phim[0]->phim_id, $phim[0]->phim_tag);
+
+        $phim_id = $tap_current[0]->phim_id;
+        $phim = DB::table('phim')->where('phim_id', $phim_id)->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')->get();
+        $idTheLoai = json_decode($phim[0]->theloai_id);
+        $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
+
+        $star = ClassCommon::getStar($phim_id);
+        $voteTimes = ClassCommon::getVoteTimes($phim_id);       
+        $listSeason = $this->getListSeason($phim_id, $phim[0]->phim_tag);
         foreach($listSeason as $row){
             $row->listTheLoai = '';
             $idTheLoai = json_decode($row->theloai_id);
@@ -86,9 +87,9 @@ class XemPhimController extends Controller{
             if(strcmp(Input::get('s'), md5('google')) == 0){
             //    $data['video'] = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
             }else{
-                ClassCommon::addLuotXem(Input::get('pid'), Input::get('t'));
+                ClassCommon::addLuotXem($phim_id, $tapid);
             }
-            $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, Input::get('t'), $tap_current[0]->tap_tapso);
+            $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, $tapid, $tap_current[0]->tap_tapso);
 
             return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
