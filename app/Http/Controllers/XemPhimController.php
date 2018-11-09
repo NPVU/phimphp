@@ -83,12 +83,7 @@ class XemPhimController extends Controller{
             $data['listSeason'] = $listSeason;
             $data['listGoiY'] = $listGoiY;
             $data['follow_phim'] = $follow;
-            $data['follows'] = $followAmount;
-            if(strcmp(Input::get('s'), md5('google')) == 0){
-            //    $data['video'] = $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
-            }else{
-                ClassCommon::addLuotXem($phim_id, $tapid);
-            }
+            $data['follows'] = $followAmount;            
             $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, $tapid, $tap_current[0]->tap_tapso);
 
             return view('xemphim_min', $data, parent::getDataHeader()); 
