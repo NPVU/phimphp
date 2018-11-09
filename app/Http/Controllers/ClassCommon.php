@@ -119,7 +119,7 @@ class ClassCommon extends BaseController
                     $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
-                    $html .=                '<img class="lazy" data-src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
+                    $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
@@ -204,7 +204,7 @@ class ClassCommon extends BaseController
                     $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap[0]->tap_id.'&s='.md5('google').'" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
-                    $html .=                '<img class="lazy" data-src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
+                    $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
                     $html .=            '</div>';
                     $html .=            '<div class="box-overlay-rich"></div>';
                     $html .=            '<div class="box-info">';
@@ -311,7 +311,7 @@ class ClassCommon extends BaseController
                 $tap = DB::table('tap')->where([['phim_id', $row->phim_id],['tap_tapso', 1]])->limit(1)->get();
                 $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$tap[0]->tap_id.'&s='.md5('google')).'"><li>';
                 $html .=    '<div style="float:left;">';
-                $html .=        '<img class="lazy" data-src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
+                $html .=        '<img class="lazy" src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
                 $html .=    '</div>';
                 $html .=    '<div style="float:left;padding-left:10px;" >';
                 $html .=        '<div class="title"><b>'.$row->phim_ten.'</b></div>';
