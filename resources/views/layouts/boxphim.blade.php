@@ -10,7 +10,7 @@
                     <div>{{$row->phim_ten}}</div>
                     <div class="title-vn">{{$row->phim_tenvn}}</div>
                 </div>
-                <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso}} @else 0 @endif /{{$row->phim_sotap}}</div>
+                <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso.'/'}} @else 0.'/' @endif {{$row->phim_sotap}}</div>
             </div>
         </div>
         <div class="phim-tip">

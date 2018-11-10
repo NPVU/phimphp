@@ -205,7 +205,7 @@
                             </div>
                             <div class="form-group <?php echo isset($add_phim_xuatban_error)?'has-error':''; ?>">
                                 <label>Xuất bản</label>
-                                <input type="checkbox" name="add_phim_xuatban" 
+                                <input type="checkbox" name="add_phim_xuatban" class="flat-red"
                                        value="1" <?php echo isset($_POST['add_phim_xuatban']) && $_POST['add_phim_xuatban'] == 1 ? 'checked' : '' ?> />
                                 <span class="help-block"><?php echo isset($add_phim_xuatban_error)?$add_phim_xuatban_error:''; ?></span>
                             </div>
