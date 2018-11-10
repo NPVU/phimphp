@@ -159,8 +159,8 @@ class PhimController extends Controller{
             $data['add_phim_season_error'] = 'Season phim phải lớn hơn 0';
             $valid = false;
         }
-        if($request->add_phim_nam < 1990 || $request->add_phim_nam > date('Y')){
-            $data['add_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1990 - '.date('Y');
+        if($request->add_phim_nam < 1980 || $request->add_phim_nam > date('Y')){
+            $data['add_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1980 - '.date('Y');
             $valid = false;
         }
         if(empty($request->add_phim_image) && empty($request->add_phim_image_link)){            
@@ -256,8 +256,8 @@ class PhimController extends Controller{
             $data['edit_phim_season_error'] = 'Season phim phải lớn hơn 0';
             $valid = false;
         }
-        if($request->edit_phim_nam < 1990 || $request->edit_phim_nam > date('Y')){
-            $data['edit_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1990 - '.date('Y');
+        if($request->edit_phim_nam < 1980 || $request->edit_phim_nam > date('Y')){
+            $data['edit_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1980 - '.date('Y');
             $valid = false;
         }
         if(empty($request->edit_phim_image) && empty($request->edit_phim_image_link)){            
