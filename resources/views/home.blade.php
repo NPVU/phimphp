@@ -1,12 +1,16 @@
 @extends('layouts.app') 
 @section('title') 
-XemPhimZero.com - Xem Phim Không Quảng Cáo 
+Anime VietSub Online | Phim VietSub Online | XemPhimZero.com 
 @endsection 
 @section('metaCEO')
 <meta property="og:image" content="{{asset('img/themes/fb-logo.png')}}">
-<meta property="og:title" content="XemPhimZero.com - Xem Phim Không Quảng Cáo" />
-<meta property="og:description" content="Xem Phim Chất Lượng Cao Không Bị Quảng Cáo Làm Gián Đoạn" /> 
-<meta name="keywords" content="XemPhimZero.com - Xem Phim Không Quảng Cáo" />
+<meta property="og:title" content="Anime VietSub Online | Phim VietSub Online | XemPhimZero.com" />
+<meta property="og:description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" /> 
+<meta property="description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" /> 
+<meta name="keywords" content="xem phim không quảng cáo, xem anime không quảng cáo, xem phim không lag, xem anime không lag" />
+<meta itemprop="name" content="Anime VietSub Online | Phim VietSub Online | XemPhimZero.com" />
+<meta itemprop="description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" />
+<meta itemprop="image" content="{{asset('img/themes/fb-logo.png')}}" />
 @endsection 
 @section('contentLeft')
 <div class="slider">    

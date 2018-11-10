@@ -1,6 +1,6 @@
 @extends('layouts.app') 
-@section('title')
- Xem Phim <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>
+@section('title') 
+ <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>
 @endsection 
 @section('metaCEO') 
 <meta property="og:url" content="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$tap[0]->tap_id}}.html" />
@@ -9,7 +9,11 @@
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="850">
+<meta property="description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta name="keywords" content="<?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?> | <?php echo $phim[0]->phim_tenkhac?>" />
+<meta itemprop="name" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
+<meta itemprop="description" content="{{$phim[0]->phim_gioithieu}}" />
+<meta itemprop="image" content="{{$phim[0]->phim_hinhnen}}" />
 <meta name="pid" content="{{ $phim[0]->phim_id }}">
 <meta name="tid" content="{{ $tap[0]->tap_id }}">
 <script type="text/javascript" src="{{ asset('js/openload-plugin.min.js') }}"></script>

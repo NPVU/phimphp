@@ -1,11 +1,13 @@
 <div id="video" class="video-js">
-    <div id="my-player"><h4 style="margin-left:20px"> Đang xử lý dữ liệu ...
-        <ol>
-            <li>Nếu không xem được vui lòng nhấn Crtl+F5 </li>
-            <li>Báo lỗi </li>
-            <li>Chuyển Server khác (nếu có) </li>
-        </ol>
-    </h4></div>
+    <div id="my-player">
+        <p style="margin-left:20px; font-size:18px"> Đang xử lý dữ liệu ...
+            <ol>
+                <li style="font-size:16px">Nếu không xem được vui lòng nhấn Crtl+F5 </li>
+                <li style="font-size:16px">Báo lỗi </li>
+                <li style="font-size:16px">Chuyển Server khác (nếu có) </li>
+            </ol>
+        </p>
+    </div>
 </div>
 <script type="text/javascript" src="{{ asset('js/jwplayer.min.js') }}"></script>
 <script type="text/javascript">    
