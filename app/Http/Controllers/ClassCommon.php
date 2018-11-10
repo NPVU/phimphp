@@ -410,7 +410,7 @@ class ClassCommon extends BaseController
         $array['tenphim'] = $phim[0]->phim_ten;
         $array['tap'] = 'Tập '.$tap[0]->tap_tapsohienthi;
         $array['tentap'] = strcmp($tap[0]->tap_ten, '')==0?null:$tap[0]->tap_ten;
-        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))) . '/?pid=' . $phim_id . '&t=' . $tap[0]->tap_id . '&s='.md5('google');
+        $array['link'] = URL::to('/xem-phim') . '/' . strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten)))) . '/' . $tap[0]->tap_id . '.html';
         $data['content'] = $array;
         event(new PusherEvent($data));
     }
