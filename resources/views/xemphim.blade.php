@@ -343,19 +343,11 @@
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
-                            <div class="box-title">
-                                <div>{{$season->phim_ten}}</div>
-                                <div class="title-vn">{{$season->phim_tenvn}}</div>
-                            </div>
-                                @if(strcmp($season->phim_kieu, 'Movie')==0) 
-                                <div class="box-text">Movie &nbsp;{{$season->phim_season}}</div> 
-                                @elseif(strcmp($season->phim_kieu, 'Ova')==0) 
-                                <div class="box-text">Ova &nbsp;{{$season->phim_season}}</div> 
-                                @elseif(strcmp($season->phim_kieu, 'Live Action')==0) 
-                                <div class="box-text">Live Action &nbsp;{{$season->phim_season}}</div> 
-                                @else 
-                                <div class="box-text">Season&nbsp;{{$season->phim_season}}</div> 
-                                @endif                                 
+                                <div class="box-title">
+                                    <div>{{$season->phim_ten}}</div>
+                                    <div class="title-vn">{{$season->phim_tenvn}}</div>
+                                </div>
+                                <div class="box-text">{{$season->tap[0]->tap_tapso.'/'.$season->phim_sotap}}</div>                                
                             </div>
                         </div>
                         <div class="phim-tip">
@@ -434,7 +426,7 @@
                                     <div>{{$row->phim_ten}}</div>
                                     <div class="title-vn">{{$row->phim_tenvn}}</div>
                                 </div>
-                                <!--<div class="box-text">{{$row->phim_sotap}}&nbsp;tập</div>-->
+                                <div class="box-text">{{$row->tap[0]->tap_tapso.'/'.$row->phim_sotap}}</div>
                             </div>
                         </div>
                         <div class="phim-tip">

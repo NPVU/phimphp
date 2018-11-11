@@ -54,6 +54,11 @@ class XemPhimController extends Controller{
                 $row->listTheLoai .=  $listTheLoaiSeason[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiSeason)?', ':'.';
             }
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }
         $listGoiY = $this->getListGoiY($phim[0]);
         foreach($listGoiY as $row){
@@ -64,6 +69,11 @@ class XemPhimController extends Controller{
                 $row->listTheLoai .=  $listTheLoaiGoiY[$i]->theloai_ten;
                 $row->listTheLoai .=  $i+1<count($listTheLoaiGoiY)?', ':'.';
             }
+            $row->tap = DB::table('tap')
+                    ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
+                    ->where('phim_id', $row->phim_id) 
+                    ->orderByRaw('tap_tapso DESC')
+                    ->limit(1)->get();
         }
         $follow = 0;
         $followAmount = 0;

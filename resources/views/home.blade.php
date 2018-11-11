@@ -20,9 +20,8 @@ Anime VietSub Online | Phim VietSub Online | XemPhimZero.com
                 <img class="lazy" src="{{$random->phim_hinhnen}}" />
                 <div class="slider-info">
                     <div class="slider-info-inner">
-                        <div class="slider-name text-center" style="background-color: #dc0f0fb8;">{{$random->phim_ten}}</div>
-                        <div class="slider-name text-center" style="font-size:1em">Season&nbsp;{{$random->phim_season}}&nbsp;({{$random->phim_nam}})</div>
-                        <div class="slider-button text-center">
+                        <div class="slider-name text-center" style="background-color: #dc0f0fb8;">{{$random->phim_ten . ' ('.$random->phim_nam.')'}}</div>                        
+                        <div class="slider-button text-center" style="margin-top:15px">
                             <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($random->phim_ten)))).'/'.$random->tap_id.'.html'}}">
                                 <button class="xem-ngay">Xem ngay</button>
                             </a>
