@@ -279,6 +279,9 @@ ul.user-menu  li:hover{
 .title-vn{
     font-size:0.8em;
 }
+.info-phim ul li label{
+    color:#988568;
+}
 .phim-tip{    
     position:absolute;
     font-family: "-webkit-body";

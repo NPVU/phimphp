@@ -230,7 +230,7 @@
                                         {{$phim[0]->phim_ten}}
                                     </strong>                            
                                 </div>
-                                <div>
+                                <div class="info-phim">
                                     <ul style="list-style: none;padding-left: 0px;">
                                         @if(!empty($phim[0]->phim_tenvn))
                                         <li>
@@ -280,7 +280,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top:-20px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 info-phim" style="margin-top:-20px;">
                                 <ul style="list-style: none;padding-left: 0px;">                            
                                     <li>
                                         <label>Nhóm sub:</label>
@@ -288,7 +288,7 @@
                                     </li>
                                     <li>
                                         <label>Tóm tắt nội dung:</label>
-                                        <span>{{empty($phim[0]->phim_gioithieu)?'đang cập nhật':$phim[0]->phim_gioithieu}}</span>
+                                        <span style="white-space: pre-line;">{{empty($phim[0]->phim_gioithieu)?'đang cập nhật':$phim[0]->phim_gioithieu}}</span>
                                     </li>
                                 </ul>
                             </div>
