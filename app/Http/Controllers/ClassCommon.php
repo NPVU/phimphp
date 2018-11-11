@@ -261,18 +261,18 @@ class ClassCommon extends BaseController
     public static function getBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh, phim_thumb,'
-                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id'
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id'
                 . ' FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh, phim_thumb, '
-                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id'
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id'
                 . ' FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
-            $listPhim = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id FROM phim WHERE phim_xuatban = 1 '                
+            $listPhim = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id FROM phim WHERE phim_xuatban = 1 '                
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
         }
         
@@ -308,7 +308,7 @@ class ClassCommon extends BaseController
         $html = '<ul class="list-anime">';
         if(count($listResult) > 0){
             foreach ($listResult as $row){
-                $tap = DB::table('tap')->where([['phim_id', $row->phim_id],['tap_tapso', 1]])->limit(1)->get();
+                $tap = DB::table('tap')->where('phim_id',$row->phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();
                 $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$tap[0]->tap_id.'.html').'"><li>';
                 $html .=    '<div style="float:left;">';
                 $html .=        '<img class="lazy" src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
