@@ -82,6 +82,8 @@ Auth::routes();
 Route::post('/login', 'Auth\\LoginController@postLogin');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/gop-y', 'HomeController@getGopY');
+Route::post('/gop-y', 'HomeController@postGopY');
 Route::get('/bao-loi', 'HomeController@getBaoLoi');
 Route::post('/bao-loi', 'HomeController@postBaoLoi');
 Route::get('/yeu-cau-phim', 'HomeController@getYeuCauPhim');

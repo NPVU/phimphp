@@ -24,6 +24,28 @@ class HomeController extends Controller
         return view('home_min', $data, parent::getDataHeader());
     }
 
+    public function getGopY(){
+        $data['captcha'] = captcha_img();
+        return view('layouts.gopy_min', $data,parent::getDataHeader());
+    }
+
+    public function postGopY(Request $request){
+        $rules = ['captcha' => 'required|captcha'];
+        $validator = Validator::make(Input::all(), $rules);
+        if($validator->fails()){
+            $data['errorCaptcha'] = true;
+            $data['captcha'] = captcha_img();
+            
+        }else{
+            DB::table('feedback')->insert([               
+                'feedback_content'    => trim($request->content),
+                'feedback_create_at'  => now()
+            ]);
+            $data['reported'] = true;
+        }
+        return view('layouts.gopy_min', $data,parent::getDataHeader());
+    }
+
     public function getBaoLoi(){
         $data['captcha'] = captcha_img();
         return view('layouts.baoloi_min', $data,parent::getDataHeader());

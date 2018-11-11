@@ -61,6 +61,7 @@
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hỗ Trợ <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="{{url('gop-y')}}">Góp ý</a></li>
                                     <li><a href="{{url('bao-loi')}}">Báo lỗi</a></li>
                                     <li><a href="{{url('yeu-cau-phim')}}">Yêu cầu phim</a></li>                                                                       
                                 </ul>
