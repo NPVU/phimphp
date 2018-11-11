@@ -8,7 +8,7 @@
                                 <img class="lazy" src="{{($tuan->phim_thumb!=null?$tuan->phim_thumb:$tuan->phim_hinhnen)}}" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div class="title">{{$tuan->phim_ten}}</div>
+                                <div class="title" style="font-weight: 600;color: #ffc355;">{{$tuan->phim_ten}}</div>
                                 @if(strlen($tuan->phim_tenvn)>0)
                                 <div class="title title-vn">{{$tuan->phim_tenvn}}</div>               
                                 @endif
@@ -46,7 +46,7 @@
                                 <img class="lazy" src="{{($thang->phim_thumb!=null?$thang->phim_thumb:$thang->phim_hinhnen)}}" style="border-radius:3px;"/>                                
                             </div>
                             <div style="float:left;padding-left:10px;">
-                                <div class="title">{{$thang->phim_ten}}</div>
+                                <div class="title" style="font-weight: 600;color: #ffc355;">{{$thang->phim_ten}}</div>
                                 @if(strlen($thang->phim_tenvn)>0)
                                 <div class="title title-vn">{{$thang->phim_tenvn}}</div>               
                                 @endif
