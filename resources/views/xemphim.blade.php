@@ -209,12 +209,7 @@
             </div>               
         @endforeach 
     </div>
-    @endif
-    <script>
-    $('a.click-loading').click(function(){
-        $("html,body").animate({scrollTop:$("#my-player").offset().top},"slow");
-    })
-    </script>
+    @endif    
 </div>
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -301,28 +296,13 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border-radius: 3px;">    
         <div id="fb-root"></div>
         
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-            appId      : '1228373097312732',
-            cookie     : true,
-            xfbml      : true,
-            version    : 'v3.2'
-            });
-            
-            FB.AppEvents.logPageView();               
-            
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/vi_VN/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-                
-    </script>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=1228373097312732&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
         <div class="fb-comments" data-href="{{url('xem-phim')}}/{{$phim[0]->phim_id}}" data-width="100%" width="100%" data-numposts="10" data-colorscheme="dark" data-order-by="reverse_time"></div>
     </div>
 </div>

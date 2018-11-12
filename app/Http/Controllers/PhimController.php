@@ -150,13 +150,9 @@ class PhimController extends Controller{
         } else if(strlen(trim($request->add_phim_ten)) > 100){
             $data['add_phim_ten_error'] = 'Tên phim có độ dài tối đa 100 ký tự';
             $valid = false;
-        }
-        if(!empty(trim($request->add_phim_tenkhac)) && strlen(trim($request->add_phim_tenkhac)) > 100){
-            $data['add_phim_tenkhac_error'] = 'Tên phim có độ dài tối đa 100 ký tự';
-            $valid = false;
-        }  
-        if($request->add_phim_season <= 0){
-            $data['add_phim_season_error'] = 'Season phim phải lớn hơn 0';
+        }         
+        if(empty($request->add_phim_season)){
+            $data['add_phim_season_error'] = 'Season phim không được bỏ trống';
             $valid = false;
         }
         if($request->add_phim_nam < 1980 || $request->add_phim_nam > date('Y')){
@@ -247,13 +243,9 @@ class PhimController extends Controller{
         } else if(strlen(trim($request->edit_phim_ten)) > 100){
             $data['edit_phim_ten_error'] = 'Tên phim có độ dài tối đa 100 ký tự';
             $valid = false;
-        }
-        if(!empty(trim($request->edit_phim_tenkhac)) && strlen(trim($request->edit_phim_tenkhac)) > 100){
-            $data['edit_phim_tenkhac_error'] = 'Tên phim có độ dài tối đa 100 ký tự';
-            $valid = false;
-        }        
-        if($request->edit_phim_season <= 0){
-            $data['edit_phim_season_error'] = 'Season phim phải lớn hơn 0';
+        }    
+        if(empty($request->edit_phim_season)){
+            $data['edit_phim_season_error'] = 'Season phim không được bỏ trống';
             $valid = false;
         }
         if($request->edit_phim_nam < 1980 || $request->edit_phim_nam > date('Y')){

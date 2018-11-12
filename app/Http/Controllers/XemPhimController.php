@@ -120,16 +120,16 @@ class XemPhimController extends Controller{
     }
 
     public function getListSeason($phimID, $phimTag){
-        $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap_tapso = 1 LIMIT 1) AS tap_id FROM phim '
+        $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id FROM phim '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
                 . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
-                . ' ORDER BY phim_season ASC')); 
+                . ' ORDER BY phim_nam ASC')); 
         return $listSeason;
     }
 
     public function getListGoiY($phim){
         return DB::table('phim')
-        ->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id AND tap.tap_tapso = 1 LIMIT 1) AS tap_id ')
+        ->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap.tap_tapso ASC LIMIT 1) AS tap_id ')
         ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
         ->where([['phim.quocgia_id', $phim->quocgia_id],['phim_kieu', $phim->phim_kieu],['phim_id', '!=', $phim->phim_id], ['phim_tag', '!=', $phim->phim_tag], ['phim_xuatban', 1]])
         ->orderByRaw('RAND()')
@@ -257,12 +257,12 @@ class XemPhimController extends Controller{
             Nếu beforePhimID !== phim_id tức là phim xem lần trước là phim khác 
                 (hoặc lần truy cập này chưa xem phim nào, hoặc trở về trang chủ) => cần kiểm tra cookie
         */
-        if(Cookie::get('beforePhimID') !== $phim_id){
+        if(Cookie::get('beforePhimID') != $phim_id){
             /*
                 Nếu phim đang xem là lần đâu tiên xem => == null => không cần cookie
                 Nếu phim đang xem đã có xem vào thời điểm nào đó rồi => !== null => cần kiểm tra cookie
             */
-            if(Cookie::get('cookiePhimID-'.$phim_id) !== null){
+            if(Cookie::get('cookiePhimID-'.$phim_id) != null){
                 /*
                     Lấy tập phim lần cuối người này xem
                     Lấy móc thời gian lần cuối của tập phim 
