@@ -33,36 +33,67 @@
                     </div>
                 </div>                
                 <div class="box-body text-center">
-                    @foreach ($list as $row)
-                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
-                        <div class="input-group">                    
-                            <span class="btn btn-primary le" 
-                                  style="width:140px;margin-bottom: 5px;"
-                                  onclick="preEditTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')">
-                                {{$row->tap_tapsohienthi}}
-                                <span class="ls">
-                                    (@if($row->tap_googlelink != '')
-                                       G
+                    <table class="table table-hover" style="font-size:1em;">                           
+                            <thead>
+                                <tr class="bg-primary">                                                                
+                                    <th scope="col" class="text-center" style="width: 10%">Tập số</th>
+                                    <th scope="col" class="text-center" style="width: 10%">Tập hiển thị</th>
+                                    <th scope="col" class="text-left" style="width: 25%">Tên tập</th>
+                                    <th scope="col" class="text-center" style="width: 10%">Chất lượng</th>
+                                    <th scope="col" class="text-left" style="width: 10%">VS/TM</th>
+                                    <th scope="col" class="text-center" style="width: 10%">Lượt xem</th>                                                                
+                                    <th scope="col" class="text-left" style="width: 10%">Host</th>
+                                    <th scope="col" class="text-center" style="width: 15%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($list as $row)
+                                <tr>
+                                    <td class="text-center">{{$row->tap_tapso}}</td>
+                                    <td class="text-center">{{$row->tap_tapsohienthi}}</td>
+                                    <td>{{$row->tap_ten==null?'N/A':$row->tap_ten}}</td>
+                                    <td class="text-center">
+                                        @if($row->tap_chatluong == 1)
+                                        360p
+                                        @elseif($row->tap_chatluong == 2)
+                                        480p
+                                        @elseif($row->tap_chatluong == 3)
+                                        720p
+                                        @elseif($row->tap_chatluong == 4)
+                                        1080p
+                                        @endif
+                                    </td>
+                                    <td>{{$row->tap_thuyetminh == 0?'VS':'TM'}}</td>
+                                    <td class="text-center">{{$row->tap_luotxem}}</td>
+                                    <td class="text-left">
+                                    @if($row->tap_googlelink != '')
+                                       Google
                                     @endif
                                     @if($row->tap_openloadlink != '')
-                                        O
+                                        ,Openload
                                     @endif
                                     @if($row->tap_youtubelink != '')
-                                        Y
+                                        ,Youtube
                                     @endif
                                     @if($row->tap_facebooklink != '')
-                                        F
-                                    @endif)
-                                </span>
-                            </span>
-                            <span class="btn btn-danger " 
-                                  style="width:50px;margin-bottom: 5px;"
-                                  onclick="preDelTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')">
-                                Xóa
-                            </span>
-                        </div>  
-                    </div>
-                    @endforeach
+                                        ,Facebook
+                                    @endif
+                                    </td>
+                                    <td class="text-center">                                      
+                                        <div class="list-action-icon">                                        
+                                            <span onclick="preEditTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')" data-toggle="tooltip" title="Sửa tập">
+                                                <i class="fa fa-edit text-light-blue"></i>
+                                            </span>
+                                            <span onclick="preDelTap({{$row->tap_id}}, '{{$row->tap_tapsohienthi}}')" data-toggle="tooltip" title="Xóa tập">
+                                                <i class="fa fa-close text-light-red"></i>
+                                            </span>                                                             
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                    </table>
+                   
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-left" style="background:lightgrey; margin-top:20px">
                         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>G</b>: Server Google</div>
                         <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"><b>O</b>: Server Openload</div>

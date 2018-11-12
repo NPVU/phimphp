@@ -51,7 +51,7 @@
                         </form>
                         
                     </div>
-                    <table class="table table-hover">
+                    <table class="table table-hover" style="font-size:1em;">
                         <caption>
                             <span>Tổng: {{$count}}</span>
                             <span class="box-btn-header" style="float:right;">
@@ -60,12 +60,11 @@
                         </caption>
                         <thead>
                             <tr class="bg-primary">
-                                <th scope="col" class="text-center" style="width: 5%">#</th>                                
-                                <th scope="col" class="text-left" style="width: 25%">Tên phim</th>
+                                <th scope="col" class="text-center" style="width: 3%">#</th>                                
+                                <th scope="col" class="text-left" style="width: 15%">Tên phim</th>
                                 <th scope="col" class="text-center" style="width: 10%">Số tập</th>
-                                <th scope="col" class="text-left" style="width: 20%">Tag</th>                                                                
-                                <th scope="col" class="text-center" style="width: 10%">Lượt xem</th>
-                                <th scope="col" class="text-center" style="width: 15%">Ngày cập nhật</th>
+                                <th scope="col" class="text-left" style="width: 20%">Tag</th>       
+                                <th scope="col" class="text-left" style="width: 37%">Nhóm sub</th>                                                                
                                 <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
                         </thead>
@@ -82,24 +81,18 @@
                                 <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     <?php $rowIndex++; echo $rowIndex ?>
                                 </td>                                
-                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td class="text-large" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_ten}}
                                 </td>
                                 <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->tap==null?'0':$row->tap}}/{{$row->phim_sotap}}
                                 </td> 
-                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                <td class="text-large" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_tag}}
-                                </td>                                                              
-                                <td class="text-center" onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
-                                    {{$row->phim_luotxem}}
-                                </td>
-                                <td class="text-center">
-                                    <?php 
-                                        $date = date_create($row->phim_ngaycapnhat);
-                                        echo date_format($date, 'd-m-Y');
-                                    ?>
-                                </td>
+                                </td> 
+                                <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
+                                    {{$row->phim_nguon}}
+                                </td>                                                                                              
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">                                        
                                         <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" data-toggle="tooltip" title="Thêm tập">
@@ -111,9 +104,9 @@
                                         <span data-toggle="tooltip" title="Chỉnh sửa phim">
                                             <a href="{{url('quan-ly/phim/edit')}}/{{$row->phim_id}}/{{csrf_token()}}"><i class="fa fa-edit text-light-blue"></i></a>
                                         </span>
-                                        <span onclick="openComment({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Tất cả bình luận">
+                                        <!--<span onclick="openComment({{$row->phim_id}}, '{{$row->phim_ten}}')" data-toggle="tooltip" title="Tất cả bình luận">
                                             <a><i class="fa fa-comments"></i></a>
-                                        </span>                                       
+                                        </span>        -->                               
                                     </div>
                                 </td>
                             </tr>
