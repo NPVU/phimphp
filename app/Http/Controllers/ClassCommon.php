@@ -416,17 +416,15 @@ class ClassCommon extends BaseController
     }
 
     public static function getStar($phim_id) {
-        $danhGia = DB::table('danhgia')->selectRaw('SUM(danhgia_star) as sumStar, count(1) as countLuot')->where('phim_id', $phim_id)->get();
-        if($danhGia[0]->sumStar > 0){
-            $star = $danhGia[0]->sumStar / $danhGia[0]->countLuot;
+        $danhGia = DB::table('danhgia')->selectRaw('AVG(danhgia_star) as star, count(1) as countLuot')->where('phim_id', $phim_id)->get();
+        if($danhGia[0]->star > 0){            
+            $star = $danhGia[0]->star;
             if (strlen($star) > 1) {
-                if (intval(substr($star, 2)) == 5) {
+                if ((intval(substr($star, 2,1))*0.1 > 0.25) && intval(substr($star, 2,1))*0.1 < 0.75) {
                     $star = intval($star) + 0.5;
-                } else if (intval(substr($star, 2)) > 50) {
-                    $star = intval($star) + 1;
                 } else {
-                    $star = $star - 0.25;
-                }
+                    $star = round($star);
+                } 
             }    
             return $star;
         } else {
