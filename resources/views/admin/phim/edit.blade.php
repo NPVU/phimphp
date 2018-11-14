@@ -157,16 +157,14 @@
                                 <span class="help-block"><?php echo isset($edit_phim_quocgia_error)?$edit_phim_quocgia_error:''; ?></span>
                             </div>
 
-                            <div class="form-group <?php echo isset($edit_phim_kieu_error)?'has-error':''; ?>">
-                                <label class="control-label" for="edit_phim_kieu">Dạng anime</label>
-                                <select id="edit_phim_kieu" name="edit_phim_kieu" class="form-control"
-                                    value="<?php echo isset($_POST['edit_phim_kieu']) ? $_POST['edit_phim_kieu'] : $phim[0]->phim_kieu ?>">
-                                    <option value="TV Series" {{strcmp('TV Series',$phim[0]->phim_kieu)==0?'selected':''}}>TV Series</option>
-                                    <option value="Movie" {{strcmp('Movie',$phim[0]->phim_kieu)==0?'selected':''}}>Movie</option>
-                                    <option value="Ova" {{strcmp('Ova',$phim[0]->phim_kieu)==0?'selected':''}}>Ova</option>
-                                    <option value="Live Action" {{strcmp('Live Action',$phim[0]->phim_kieu)==0?'selected':''}}>Live Action</option>
-                                </select>                                
-                                <span class="help-block"><?php echo isset($edit_phim_kieu_error)?$edit_phim_kieu_error:''; ?></span>
+                            <div class="form-group">
+                                <label class="control-label" for="loaiphim">Loại phim</label>
+                                <select id="loaiphim" name="loaiphim" class="form-control"
+                                    value="<?php echo isset($_POST['loaiphim']) ? $_POST['loaiphim'] : $phim[0]->phim_kieu ?>">
+                                    @foreach($listLoaiPhim as $row)
+                                    <option value="{{$row->loaiphim_id}}" <?php echo $phim[0]->phim_kieu==$row->loaiphim_id?'selected':'' ?> >{{$row->loaiphim_ten}}</option>
+                                    @endforeach
+                                </select>                                                                
                             </div>
                             <div class="form-group <?php echo isset($edit_phim_dotuoi_error)?'has-error':''; ?>">
                                 <label>Độ tuổi</label>
@@ -213,17 +211,21 @@
                                        placeholder="VD: anime47, phimmoi, vuighe ...."/>
                                 <span class="help-block"><?php echo isset($edit_phim_nguon_error)?$edit_phim_nguon_error:''; ?></span>
                             </div>
-
+                            <div class="form-group">
+                                <input type="checkbox" name="no_anime" class="flat-red"
+                                       value="1" <?php echo $phim[0]->phim_anime == 0 ? 'checked' : '' ?> /> 
+                                <label>Không phải Anime</label>                                                               
+                            </div>
                             <div class="form-group <?php echo isset($edit_phim_xuatban_error)?'has-error':''; ?>">
-                                <label>Xuất bản</label>
                                 <input type="checkbox" name="edit_phim_xuatban" class="flat-red" 
                                        value="1" <?php echo $phim[0]->phim_xuatban == 1?'checked':'' ?> />
+                                <label>Xuất bản</label>                                
                                 <span class="help-block"><?php echo isset($edit_phim_xuatban_error)?$edit_phim_xuatban_error:''; ?></span>
                             </div>
                             <div class="form-group">
-                                <label>Hoàn thành</label>
                                 <input type="checkbox" name="phim_hoanthanh" class="flat-red"
-                                       value="1" <?php echo $phim[0]->phim_hoanthanh == 1?'checked':'' ?> />                                
+                                       value="1" <?php echo $phim[0]->phim_hoanthanh == 1?'checked':'' ?> />  
+                                <label>Hoàn thành</label>                                                              
                             </div>
                         </div>
                         <div class="col-md-4">

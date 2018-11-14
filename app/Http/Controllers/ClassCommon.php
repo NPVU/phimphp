@@ -92,9 +92,10 @@ class ClassCommon extends BaseController
     }
     
     public static function getHTMLTapMoi($limit, $offset){
-        $listPhimToday = DB::table('phim')->where([['phim_xuatban', 1], ['phim_kieu', 'TV Series']])
-                                          ->orWhere([['phim_xuatban', 1], ['phim_kieu', 'Ova']])
+        $listPhimToday = DB::table('phim')->where([['phim_xuatban', 1], ['phim_kieu', 1]])
+                                          ->orWhere([['phim_xuatban', 1], ['phim_kieu', 3]])
                                           ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                          ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                           ->orderByRaw('phim_ngaycapnhat_moinhat DESC')
                                           ->offset($offset)
                                           ->limit($limit)
@@ -150,7 +151,7 @@ class ClassCommon extends BaseController
                                             }
                     $html .=                '</div>';                    
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->phim_kieu.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->loaiphim_ten.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';
@@ -179,8 +180,10 @@ class ClassCommon extends BaseController
 
     public static function getHTMLMovieMoi($limit, $offset){
         
-        $listPhim = DB::table('phim')->where([['phim_xuatban', 1], ['phim_kieu', 'Movie']])
+        $listPhim = DB::table('phim')->where([['phim_xuatban', 1], ['phim_kieu', 2]])
+                                          ->orwhere([['phim_xuatban', 1], ['phim_kieu', 4]])
                                           ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                          ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                           ->orderByRaw('phim_ngaycapnhat_moinhat DESC')
                                           ->offset($offset)
                                           ->limit($limit)
@@ -231,7 +234,7 @@ class ClassCommon extends BaseController
                                             }
                     $html .=                '</div>';                    
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->phim_kieu.'</div>';
+                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->loaiphim_ten.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
                     $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';

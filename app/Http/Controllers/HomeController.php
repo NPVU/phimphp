@@ -130,6 +130,7 @@ class HomeController extends Controller
         $listPhimTheloai = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
                                         ->where([['theloai_id', 'like', '%"'.$theloaiID.'"%'], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->paginate(Session::get('PhimPerPage'));
         foreach($listPhimTheloai as $row){
             $row->listTheLoai = '';
@@ -158,6 +159,7 @@ class HomeController extends Controller
         $listPhimQuocGia = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
                                         ->where([['phim.quocgia_id', '=', $quocgiaID], ['phim_xuatban', '=', 1]])
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->paginate(Session::get('PhimPerPage'));
         
         foreach($listPhimQuocGia as $row){
@@ -182,7 +184,9 @@ class HomeController extends Controller
 
     public function indexXemNhieu(){        
         $listPhimXemNhieu = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
-                                        ->where('phim_xuatban', 1)->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->where('phim_xuatban', 1)
+                                        ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->orderByRaw('phim_luotxem DESC')
                                         ->paginate(Session::get('PhimPerPage'));     
                                     
@@ -207,8 +211,9 @@ class HomeController extends Controller
 
     public function indexTvSeries(){
         $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
-                                        ->where('phim_kieu', 'TV Series')
+                                        ->where('phim_kieu', 1)
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
             $row->listTheLoai = '';
@@ -232,8 +237,9 @@ class HomeController extends Controller
 
     public function indexMovie(){
         $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
-                                        ->where('phim_kieu', 'Movie')
+                                        ->where('phim_kieu', 2)
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
             $row->listTheLoai = '';
@@ -257,8 +263,9 @@ class HomeController extends Controller
 
     public function indexOva(){
         $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
-                                        ->where('phim_kieu', 'Ova')
+                                        ->where('phim_kieu', 3)
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
             $row->listTheLoai = '';
@@ -282,8 +289,9 @@ class HomeController extends Controller
 
     public function indexLiveAction(){
         $listPhim = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
-                                        ->where('phim_kieu', 'Live Action')
+                                        ->where('phim_kieu', 4)
                                         ->join('quocgia', 'quocgia.quocgia_id', '=', 'phim.quocgia_id')
+                                        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
                                         ->paginate(Session::get('PhimPerPage'));                
         foreach($listPhim as $row){
             $row->listTheLoai = '';
