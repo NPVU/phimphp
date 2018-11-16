@@ -39,7 +39,10 @@ class XemPhimController extends Controller{
         }    
 
         $phim_id = $tap_current[0]->phim_id;
-        $phim = DB::table('phim')->where('phim_id', $phim_id)->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')->get();
+        $phim = DB::table('phim')->where('phim_id', $phim_id)
+                ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
+                ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
+                ->get();
         $idTheLoai = json_decode($phim[0]->theloai_id);
         $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
 
@@ -122,6 +125,7 @@ class XemPhimController extends Controller{
     public function getListSeason($phimID, $phimTag){
         $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id FROM phim '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
+                . ' LEFT JOIN loaiphim ON phim.phim_kieu = loaiphim.loaiphim_id'
                 . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
                 . ' ORDER BY phim_nam ASC')); 
         return $listSeason;
@@ -131,6 +135,7 @@ class XemPhimController extends Controller{
         return DB::table('phim')
         ->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap.tap_tapso ASC LIMIT 1) AS tap_id ')
         ->join('quocgia','quocgia.quocgia_id','=','phim.quocgia_id')
+        ->join('loaiphim', 'loaiphim.loaiphim_id', '=', 'phim.phim_kieu')
         ->where([['phim.quocgia_id', $phim->quocgia_id],['phim_kieu', $phim->phim_kieu],['phim_id', '!=', $phim->phim_id], ['phim_tag', '!=', $phim->phim_tag], ['phim_xuatban', 1]])
         ->orderByRaw('RAND()')
         ->limit(8)

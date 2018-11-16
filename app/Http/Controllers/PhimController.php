@@ -81,6 +81,9 @@ class PhimController extends Controller{
         $listQuocGia = DB::table('quocgia')->get();
         $data['listQuocGia'] = $listQuocGia;
         
+        $listLoaiPhim = DB::table('loaiphim')->get();
+        $data['listLoaiPhim'] = $listLoaiPhim;
+        
         $data['title'] = 'Thêm Phim';
         $data['page'] = 'admin.phim.add';        
         return view('admin/layout', $data);
@@ -103,6 +106,10 @@ class PhimController extends Controller{
             $data['listQuocGia'] = $listQuocGia;
             $data['phim'] = $phim;
             $data['listTheLoai'] = $listTheLoai;
+            
+            $listLoaiPhim = DB::table('loaiphim')->get();
+            $data['listLoaiPhim'] = $listLoaiPhim;
+            
             $data['token'] = $token;
 
             $data['title'] = 'Chỉnh Sửa Phim';
@@ -197,7 +204,11 @@ class PhimController extends Controller{
                 $url_thumb = $request->phim_thumb_link;
             }
 
+            $isanime = 1;
             $xuatban = 0;
+            if($request->no_anime){
+                $isanime = 0;
+            }
             if($request->add_phim_xuatban){
                 $xuatban = 1;
             }
@@ -212,13 +223,14 @@ class PhimController extends Controller{
                         'phim_nam'        => $request->add_phim_nam,
                         'phim_season'     => $request->add_phim_season,
                         'quocgia_id'      => $request->add_phim_quocgia,
-                        'phim_kieu'       => $request->add_phim_kieu,
+                        'phim_kieu'       => $request->loaiphim,
                         'phim_dotuoi'     => $request->add_phim_dotuoi,
                         'phim_tag'        => $request->add_phim_tag,
                         'phim_hinhanh'    => $url_icon,
                         'phim_hinhnen'    => $url_background,
                         'phim_thumb'      => $url_thumb,
                         'phim_nguon'      => $request->add_phim_nguon,
+                        'phim_anime'      => $isanime,
                         'phim_xuatban'    => $xuatban,
                         'phim_ngaycapnhat'=> now()
                     ]
@@ -311,6 +323,11 @@ class PhimController extends Controller{
                     ]
                 );
             }
+            
+            $isanime = 1;            
+            if(isset($request->no_anime) && $request->no_anime == 1){
+                $isanime = 0;
+            }
             $xuatBan = 0;
             if(isset($request->edit_phim_xuatban) && $request->edit_phim_xuatban == 1){
                 $xuatBan = 1;
@@ -323,17 +340,18 @@ class PhimController extends Controller{
                     [
                         'theloai_id'      => json_encode($request->edit_phim_theloai),
                         'phim_ten'        => trim($request->edit_phim_ten),
-                        'phim_tenvn'    => trim($request->edit_phim_tenvn),
+                        'phim_tenvn'      => trim($request->edit_phim_tenvn),
                         'phim_tenkhac'    => trim($request->edit_phim_tenkhac),
                         'phim_gioithieu'  => $request->edit_phim_gioithieu,
                         'phim_sotap'      => $request->edit_phim_sotap,
                         'phim_nam'        => $request->edit_phim_nam,
                         'phim_season'     => $request->edit_phim_season,
                         'quocgia_id'      => $request->edit_phim_quocgia,
-                        'phim_kieu'       => $request->edit_phim_kieu,
+                        'phim_kieu'       => $request->loaiphim,
                         'phim_dotuoi'     => $request->edit_phim_dotuoi,
                         'phim_tag'        => $request->edit_phim_tag,
                         'phim_nguon'      => $request->edit_phim_nguon,
+                        'phim_anime'      => $isanime,
                         'phim_xuatban'    => $xuatBan,
                         'phim_hoanthanh'  => $hoanThanh
                     ]

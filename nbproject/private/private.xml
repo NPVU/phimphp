@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/phimphp/app/Http/Middleware/Cors.php</file>
-            <file>file:/C:/xampp/htdocs/phimphp/app/Http/Kernel.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/xemphim.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/layouts/boxphim_min.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/xemphim_min.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/phim/add.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/app/Http/Controllers/XemPhimController.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/home.blade.php</file>
+            <file>file:/C:/xampp/htdocs/phimphp/resources/views/admin/phim/edit.blade.php</file>
         </group>
     </open-files>
 </project-private>

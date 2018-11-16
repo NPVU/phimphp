@@ -147,16 +147,14 @@
                                 <span class="help-block"><?php echo isset($add_phim_quocgia_error)?$add_phim_quocgia_error:''; ?></span>
                             </div>
 
-                            <div class="form-group <?php echo isset($add_phim_kieu_error)?'has-error':''; ?>">
-                                <label class="control-label" for="add_phim_kieu">Dạng anime</label>
-                                <select id="add_phim_kieu" name="add_phim_kieu" class="form-control"
-                                    value="<?php echo isset($_POST['add_phim_kieu']) ? $_POST['add_phim_kieu'] : 'TV Series' ?>">
-                                    <option value="TV Series">TV Series</option>
-                                    <option value="Movie">Movie</option>
-                                    <option value="Ova">Ova</option>
-                                    <option value="Live Action">Live Action</option>
-                                </select>                                
-                                <span class="help-block"><?php echo isset($add_phim_kieu_error)?$add_phim_kieu_error:''; ?></span>
+                            <div class="form-group">
+                                <label class="control-label">Loại phim</label>
+                                <select name="loaiphim" class="form-control"
+                                    value="<?php echo isset($_POST['loaiphim']) ? $_POST['loaiphim'] : 1 ?>">
+                                    @foreach($listLoaiPhim as $row)
+                                    <option value="{{$row->loaiphim_id}}">{{$row->loaiphim_ten}}</option>
+                                    @endforeach
+                                </select>                                                                
                             </div>
                             <div class="form-group <?php echo isset($add_phim_dotuoi_error)?'has-error':''; ?>">
                                 <label>Độ tuổi</label>
@@ -203,10 +201,15 @@
                                        placeholder="VD: anime47, phimmoi, vuighe ...."/>
                                 <span class="help-block"><?php echo isset($add_phim_nguon_error)?$add_phim_nguon_error:''; ?></span>
                             </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="no_anime" class="flat-red"
+                                       value="1" <?php echo isset($_POST['no_anime']) && $_POST['no_anime'] == 1 ? 'checked' : '' ?> /> 
+                                <label>Không phải Anime</label>                                                               
+                            </div>
                             <div class="form-group <?php echo isset($add_phim_xuatban_error)?'has-error':''; ?>">
-                                <label>Xuất bản</label>
                                 <input type="checkbox" name="add_phim_xuatban" class="flat-red"
                                        value="1" <?php echo isset($_POST['add_phim_xuatban']) && $_POST['add_phim_xuatban'] == 1 ? 'checked' : '' ?> />
+                                <label>Xuất bản</label>                                
                                 <span class="help-block"><?php echo isset($add_phim_xuatban_error)?$add_phim_xuatban_error:''; ?></span>
                             </div>
                         </div>

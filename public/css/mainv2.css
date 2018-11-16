@@ -166,11 +166,26 @@ ul.user-menu  li:hover{
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.20);
 }
-.slider-name, .slider-button{
-    position: relative;
-    top: 20%;
+.slider-name{
+    position: absolute;
+    bottom: 0px;
+    right:100px;
     font-weight: 700;
-    font-size: 3em;
+    font-size: 2em;
+    color: white;
+    max-width: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.slider-button{
+    position: absolute;
+    bottom: 0px;
+    right:0px;
+    font-weight: 700;
+    font-size: 2em;
     color: white;
 }
 .slider-button > a > .btn-danger{
@@ -753,9 +768,8 @@ img.lazy {
     background-size: 60px 60px;
     background-position: 50% 50%;
 }
-    button.xem-ngay {
-    width: 100px;
-    height: 50px;
+    button.xem-ngay {    
+    height: 35px;
     background: transparent;
     border-radius: 3px;
     will-change: transform;
@@ -780,7 +794,7 @@ img.lazy {
   button.xem-ngay.active {
     font-size: 0;
     border-radius: 25px;
-    width: 50px;
+    width: 35px;
     background: transparent;
   }
   button.xem-ngay.loader {

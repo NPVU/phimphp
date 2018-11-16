@@ -254,7 +254,7 @@
                                         </li>
                                         <li>
                                             <label>Loại phim:</label>
-                                            <span>{{$phim[0]->phim_kieu}}</span>
+                                            <span>{{$phim[0]->loaiphim_ten}}</span>
                                         </li>
                                         <li>
                                             <label>Quốc gia:</label>
@@ -355,7 +355,7 @@
                                 <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$season->phim_sotap}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$season->phim_kieu}}
+                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$season->loaiphim_ten}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$season->quocgia_ten}}
@@ -434,7 +434,7 @@
                                 <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$row->phim_sotap}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$row->phim_kieu}}
+                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$row->loaiphim_ten}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}

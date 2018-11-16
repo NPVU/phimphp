@@ -15,6 +15,7 @@
     <meta property="fb:pages" content="2156928571246435" />
     <meta name="googlebot" content="index,follow" />
     <meta name="robots" content="index,follow" />
+    <meta name="google-site-verification" content="MGNEEMNGFH1e4yLvIMdE5Hq-9PYNFwn56JCikQQwVzg" />
     <title>@yield('title')</title>
 
     <!-- Scripts -->
