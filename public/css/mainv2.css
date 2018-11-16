@@ -173,7 +173,7 @@ ul.user-menu  li:hover{
     font-weight: 700;
     font-size: 2em;
     color: white;
-    max-width: 50%;
+    max-width: 70%;
     white-space: nowrap;
     text-overflow: ellipsis;
     display: block;
@@ -220,8 +220,11 @@ ul.user-menu  li:hover{
         min-width:60px !important;
     }
     .slider-name{
-        font-size:2em;
+        font-size:1.3em;
     }
+    button.xem-ngay {         
+        font-size: 14px !important;      
+      }
 }
 @media (max-width: 480px) {
     .slider img{        
