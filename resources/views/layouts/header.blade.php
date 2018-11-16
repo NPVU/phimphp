@@ -49,7 +49,7 @@
                             </li>
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="min-width:370px">
+                                <ul class="dropdown-menu" style="min-width:500px">
                                     <?php 
                                     $listTheLoai = DB::table('theloai')->orderBy('theloai_ten')->get(); 
                                     ?>                                     
