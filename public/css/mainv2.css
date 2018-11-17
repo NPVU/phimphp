@@ -179,6 +179,12 @@ ul.user-menu  li:hover{
     display: block;
     box-sizing: border-box;
     overflow: hidden;
+    padding: 0px 5px;
+    border-radius: 3px;
+    border: 2px solid white;
+    border-left: none;
+    border-right: none;
+    background-color: rgba(0, 0, 0, 0.45);
 }
 .slider-button{
     position: absolute;
@@ -772,12 +778,12 @@ img.lazy {
     background-position: 50% 50%;
 }
     button.xem-ngay {    
-    height: 35px;
+    height: 38px;
     background: transparent;
     border-radius: 3px;
     will-change: transform;
     transition: all .2s ease;
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     background-color: rgba(0, 0, 0, 0.6313725490196078);
     cursor: pointer;
     color: #ffffff;
@@ -797,7 +803,7 @@ img.lazy {
   button.xem-ngay.active {
     font-size: 0;
     border-radius: 25px;
-    width: 35px;
+    width: 38px;
     background: transparent;
   }
   button.xem-ngay.loader {
