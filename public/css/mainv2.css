@@ -245,8 +245,7 @@ ul.user-menu  li:hover{
     -webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
-.phim-runing {
-    height: 205px;
+.phim-runing {    
     border: 3px solid #5cb85c;
 }
 .box-text-runing{
