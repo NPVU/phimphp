@@ -316,8 +316,12 @@
         
             @foreach($listSeason as $season)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
+                    @if($season->phim_id == $phim[0]->phim_id)
+                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="javascript:void(0)">
+                    @else
                     <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/'.$season->tap_id.'.html'}}" data-toggle="modal" data-target="">
-                        <div class="box-phim">
+                    @endif
+                        <div class="box-phim {{$season->phim_id == $phim[0]->phim_id?' phim-runing':''}}">
                             <div class="box-image">
                                 <img class="lazy" data-src="{{$season->phim_hinhnen}}">
                             </div>
@@ -327,7 +331,15 @@
                                     <div>{{$season->phim_ten}}</div>
                                     <div class="title-vn">{{$season->phim_tenvn}}</div>
                                 </div>
-                                <div class="box-text">{{$season->tap[0]->tap_tapso.'/'.$season->phim_sotap}}</div>                                
+                                @if($season->phim_kieu == 1)
+                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Phần '.$season->phim_season}}</div> 
+                                @elseif($season->phim_kieu == 2)
+                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Movie '.$season->phim_season}}</div> 
+                                @elseif($season->phim_kieu == 3)
+                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Ova '.$season->phim_season}}</div> 
+                                @elseif($season->phim_kieu == 4)
+                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Live Action '.$season->phim_season}}</div> 
+                                @endif                                
                             </div>
                         </div>
                         <div class="phim-tip">

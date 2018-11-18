@@ -126,7 +126,7 @@ class XemPhimController extends Controller{
         $listSeason = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id FROM phim '
                 . ' LEFT JOIN quocgia ON phim.quocgia_id = quocgia.quocgia_id'
                 . ' LEFT JOIN loaiphim ON phim.phim_kieu = loaiphim.loaiphim_id'
-                . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" AND phim_id != '.$phimID
+                . ' WHERE phim_xuatban = 1 AND phim_tag like "%'.$phimTag.'%" '
                 . ' ORDER BY phim_nam ASC')); 
         return $listSeason;
     }
