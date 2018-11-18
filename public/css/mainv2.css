@@ -245,6 +245,9 @@ ul.user-menu  li:hover{
     -webkit-transition: opacity 0.5s;
     transition: opacity 0.5s;
 }
+.box-phim-lienquan{    
+    height: 205px !important;   
+}
 .phim-runing {    
     border: 3px solid #5cb85c;
 }
@@ -415,6 +418,9 @@ ul.user-menu  li:hover{
 @media (max-width: 480px) {
     .box-phim {
         height: 160px;
+    }
+    .box-phim-lienquan{    
+        height: 165px !important;   
     }
     .box-info>.box-text{
         top:-160px;

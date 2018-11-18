@@ -321,7 +321,7 @@
                     @else
                     <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/'.$season->tap_id.'.html'}}" data-toggle="modal" data-target="">
                     @endif
-                        <div class="box-phim {{$season->phim_id == $phim[0]->phim_id?' phim-runing':''}}" style="height:205px;">
+                        <div class="box-phim box-phim-lienquan {{$season->phim_id == $phim[0]->phim_id?' phim-runing':''}}">
                             <div class="box-image">
                                 <img class="lazy" data-src="{{$season->phim_hinhnen}}">
                             </div>
