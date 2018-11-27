@@ -549,6 +549,7 @@ class ClassCommon extends BaseController
         if(count($ipaddress) > 0){
             DB::table('access')->where('access_ipaddress', request()->ip())->update([                
                 'access_url' => request()->fullUrl(),
+                'access_times' => ($ipaddress[0]->access_times + 1),
                 'access_time' => now()
             ]);
         }else{
