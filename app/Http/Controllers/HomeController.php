@@ -15,6 +15,13 @@ class HomeController extends Controller
 {
     
     public function index(){        
+
+        DB::table('access')->insert([
+            'access_ipaddress' => request()->ip(),
+            'access_url' => request()->fullUrl(),
+            'access_time' => now()
+        ]); 
+
         Cookie::queue('beforePhimID', 0);
         $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
         $htmlMovieMoi = ClassCommon::getHTMLMovieMoi(Session::get('PhimPerPage'),0);

@@ -13,6 +13,7 @@
     <meta property="og:site_name" content="XemPhimZero.com" />
     <meta property="fb:app_id" content="1228373097312732" />
     <meta property="fb:pages" content="2156928571246435" />
+    <meta property="fb:admins" content="1078149449014815"/>
     <meta name="googlebot" content="index,follow" />
     <meta name="robots" content="index,follow" />
     <meta name="google-site-verification" content="MGNEEMNGFH1e4yLvIMdE5Hq-9PYNFwn56JCikQQwVzg" />
