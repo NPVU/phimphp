@@ -28,6 +28,15 @@
                 @endif
                 @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1 || count(explode(RoleUtils::getRoleAdminUser(),Auth::user()->getRoles())) > 1)
                 <li>
+                    <a href="{{ url('/quan-ly/truy-cap/') }}">
+                        <i class="fa fa-link"></i>
+                        <span>Quản lý truy cập</span>      
+                        <span class="pull-right-container">
+                            <small class="label pull-right bg-primary"></small>
+                        </span>              
+                    </a>                
+                </li>
+                <li>
                     <a href="{{ url('/quan-ly/tai-khoan/') }}">
                         <i class="fa fa-users"></i>
                         <span>Quản lý tài khoản</span>                    
@@ -35,7 +44,7 @@
                             <small class="label pull-right bg-primary">{{ClassCommon::countUser()}}</small>
                         </span>  
                     </a>                
-                </li>                
+                </li>                       
                 @endif
                 @if(count(explode(RoleUtils::getRoleSuperAdmin(),Auth::user()->getRoles())) > 1 || count(explode(RoleUtils::getRoleAdminPhim(),Auth::user()->getRoles())) > 1)
                 <li>
@@ -89,7 +98,7 @@
                             </a>                
                         </li>                    
                     </ul>
-                </li>
+                </li>                
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gears"></i> 

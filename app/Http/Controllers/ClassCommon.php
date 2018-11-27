@@ -543,4 +543,20 @@ class ClassCommon extends BaseController
         }
         return $tap_id;
     }
+    
+    public static function processAccess(){
+        $ipaddress = DB::table('access')->where('access_ipaddress', request()->ip())->get();
+        if(count($ipaddress) > 0){
+            DB::table('access')->where('access_ipaddress', request()->ip())->update([                
+                'access_url' => request()->fullUrl(),
+                'access_time' => now()
+            ]);
+        }else{
+            DB::table('access')->insert([
+                'access_ipaddress' => request()->ip(),
+                'access_url' => request()->fullUrl(),
+                'access_time' => now()
+            ]);
+        } 
+    }
 }

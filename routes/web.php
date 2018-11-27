@@ -69,6 +69,7 @@ Route::group(['prefix'=>'/quan-ly/cau-hinh'],function(){
     Route::get('/he-thong/reset-view','CauHinhController@resetView');
     Route::post('/he-thong','CauHinhController@actionHeThong');
 });
+Route::get('/quan-ly/truy-cap', 'AccessController@index');
 Route::group(['prefix' => 'services'], function(){
 	Route::get('ticket/{file}/{loginkey}/{apikey}', 'ServicesController@openloadTicketAPI');
 	Route::get('download/{file}/{loginkey}/{apikey}', 'ServicesController@openloadDownloadAPI');

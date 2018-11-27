@@ -30,13 +30,9 @@ class XemPhimController extends Controller{
     }
     
     function xemPhim($url, $tapid){
-
-        DB::table('access')->insert([
-            'access_ipaddress' => request()->ip(),
-            'access_url' => request()->fullUrl(),
-            'access_time' => now()
-        ]); 
-
+                               
+        ClassCommon::processAccess();
+        
         $tapid = explode('.', $tapid)[0];
         $check = true;
         $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();          
