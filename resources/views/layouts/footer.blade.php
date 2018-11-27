@@ -13,10 +13,6 @@
     <a href="#" class="dribbble"><span></span><b class=""></b></a>
   </li>-->
 </ul>
-<div class="menu-left">
-  <h1>Floating social icon buttons</h1>
-  <p>Icon credit to <a href="http://danielbruce.se/">Daniel Bruce</a> and <a href="http://weloveiconfonts.com/">We Love Icons</a></p>
-</div>
 <style>
 @import url(http://weloveiconfonts.com/api/?family=entypo);
 *,
@@ -113,38 +109,6 @@
 [class*="fontawesome-"]:before {
   font-family: 'fontawesome', sans-serif;
 }
-
-.menu-left {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -60%);
-          transform: translate(-50%, -60%);
-}
-.menu-left h1 {
-  font-weight: 600;
-  font-size: 2.4em;
-  color: #303030;
-  margin-bottom: .5em;
-}
-.menu-left p {
-  color: #999;
-  font-weight: 400;
-  font-size: 1.2em;
-}
-.menu-left a {
-  color: #4183D7;
-  text-decoration: none;
-  font-weight: 600;
-  padding-bottom: 2px;
-  border-bottom: 2px dotted #4183D7;
-  transition: all .25s ease;
-}
-.menu-left a:hover {
-  color: #D2527F;
-  border-color: #D2527F;
-}    
 </style>
 
 <div class="footer">
