@@ -447,3 +447,21 @@ function openWindowLoading(){
 function closeWindowLoading(){
     $('#loadingWindow').fadeOut();
 }
+function submitYeuCau(){ 
+    var name = $('.request-name').val();
+    if(name){
+        $.ajax({
+            type: 'post',           
+            url: $('meta[name="url"]').attr('content')+'/post-yeu-cau',
+            data: $("#frm-request").serialize(),               
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {  
+
+            }
+        }); 
+    }else{
+        $('.request-name').css('color','red');
+    }                                   
+}

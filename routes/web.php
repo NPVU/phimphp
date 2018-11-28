@@ -89,6 +89,7 @@ Route::get('/bao-loi', 'HomeController@getBaoLoi');
 Route::post('/bao-loi', 'HomeController@postBaoLoi');
 Route::get('/yeu-cau-phim', 'HomeController@getYeuCauPhim');
 Route::post('/yeu-cau-phim', 'HomeController@postYeuCauPhim');
+Route::post('/post-yeu-cau', 'HomeController@postYeuCauPhim');
 Route::get('/danh-sach/phim-theo-doi', 'HomeController@indexPhimTheoDoi');
 Route::get('/xem-nhieu', 'HomeController@indexXemNhieu')->name('upPhim');
 Route::get('/tv-series', 'HomeController@indexTvSeries');
