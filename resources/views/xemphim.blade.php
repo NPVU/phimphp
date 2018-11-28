@@ -3,12 +3,6 @@
  <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>
 @endsection 
 @section('metaCEO') 
-<meta property="og:url" content="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$tap[0]->tap_id}}.html" />
-<meta property="og:title" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
-<meta property="og:description" content="{{$phim[0]->phim_gioithieu}}" /> 
-<meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="850">
 <meta property="description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta name="keywords" content="<?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?> | <?php echo $phim[0]->phim_tenkhac?>" />
 <meta itemprop="name" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
@@ -16,6 +10,19 @@
 <meta itemprop="image" content="{{$phim[0]->phim_hinhnen}}" />
 <meta name="pid" content="{{ $phim[0]->phim_id }}">
 <meta name="tid" content="{{ $tap[0]->tap_id }}">
+
+<meta property="og:url" content="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$tap[0]->tap_id}}.html" />
+<meta property="og:title" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
+<meta property="og:description" content="{{$phim[0]->phim_gioithieu}}" /> 
+<meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="850">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="<?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>">
+<meta name="twitter:description" content="{{$phim[0]->phim_gioithieu}}">
+<meta name="twitter:site" content="@xemphimzero">
+<meta name="twitter:image" content="{{$phim[0]->phim_hinhnen}}">
 <script type="text/javascript" src="{{ asset('js/openload-plugin.min.js') }}"></script>
 @endsection 
 @section('contentLeft')
