@@ -1,9 +1,9 @@
 <ul class="menu-left-item">
   <li>
-    <a href="#" class="spotify"><span>Góp ý</span><b class="entypo-mail"></b></a>
+    <a href="javascript:void(0)" class="spotify" data-izimodal-open="#modal-feedback"><span>Góp ý</span><b class="entypo-mail"></b></a>
   </li>
   <li>
-    <a href="#" class="soundcloud"><span>Báo lỗi</span><b class="entypo-attention"></b></a>
+    <a href="javascript:void(0)" class="soundcloud" data-izimodal-open="#modal-error"><span>Báo lỗi</span><b class="entypo-attention"></b></a>
   </li>
   <li>
     <a href="javascript:void(0)" class="skype" data-izimodal-open="#modal-request"><span>Yêu cầu</span><b class="entypo-upload"></b></a>
@@ -21,19 +21,81 @@
                     <div class="form-group">
                         <label>Tên phim</label>
                         <input type="text" name="name" class="required request-name form-control" required placeholder="Nhập tên phim..."/>
+                        <div class="input-invalid display-none">Tên phim là bắt buộc</div>
                     </div>
                     <div class="form-group">
-                        <label>Link ảnh (nếu có)</label>
-                        <input type="text" name="image" class="form-control" placeholder="Nhập link ảnh..."/>
+                        <label>URL ảnh (nếu có)</label>
+                        <input type="text" name="link" class="form-control" placeholder="Nhập url ảnh..."/>
                     </div>
                     <div class="form-group">
                         <label>Email (nếu có)</label>
                         <input type="text" name="email" class="form-control" placeholder="Nhập email để nhận thông báo..."/>
                     </div>
                 </form>
+                <div id="rs-request" class="display-none text-center" style="color:green">
+                    <span class="fa fa-2x fa-check-circle"></span>
+                    <h5><b>Yêu cầu đã được ghi nhận</b></h5>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
-                <button class="btn btn-primary" onclick="submitYeuCau();">Yêu cầu</button>
+                <button class="btn btn-primary btn-request-submit" onclick="submitYeuCau();">Yêu cầu</button>
+                <button class="btn btn-primary btn-request-continue display-none" onclick="nextYeuCau();">Tiếp tục</button>
+                <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="modal-error" class="modal-support" data-izimodal-transitionin="comingInDown">
+    <div class="modal-body" style="padding: 20px">        
+        <div class="row">                
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <form id="frm-error">                    
+                    <div class="form-group">
+                        <label>URL lỗi</label>
+                        <input type="text" name="url" class="form-control" placeholder="Nhập url bị lỗi..."/>
+                    </div>
+                    <div class="form-group">
+                        <label>Mô tả lỗi</label>
+                        <input type="text" class="required error-content form-control" required name="content" placeholder="Nhập mô tả lỗi..."/>                                        
+                        <div class="input-invalid display-none">Mô tả lỗi là bắt buộc</div>
+                    </div>                    
+                </form>
+                <div id="rs-error" class="display-none text-center" style="color:green">
+                    <span class="fa fa-2x fa-check-circle"></span>
+                    <h5><b>Lỗi đã được ghi nhận</b></h5>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                <button class="btn btn-warning btn-error-submit" onclick="submitError();">Báo lỗi</button>
+                <button class="btn btn-primary btn-error-continue display-none" onclick="nextError();">Tiếp tục</button>
+                <button class="btn btn-default" data-izimodal-close="">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="modal-feedback" class="modal-support" data-izimodal-transitionin="comingInDown">
+    <div class="modal-body" style="padding: 20px">        
+        <div class="row">                
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <form id="frm-feedback">                                       
+                    <div class="form-group">
+                        <label>Nội dung góp ý</label>
+                        <input type="text" class="required feedback-content form-control" required name="content" placeholder="Nhập nội dung góp ý"/>                                        
+                        <div class="input-invalid display-none">Nội dung góp ý là bắt buộc</div>
+                    </div>                    
+                </form>
+                <div id="rs-feedback" class="display-none text-center" style="color:green">
+                    <span class="fa fa-2x fa-check-circle"></span>
+                    <h5><b>Góp ý đã được ghi nhận</b></h5>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+                <button class="btn btn-success btn-feedback-submit" onclick="submitFeedback();">Góp ý</button>
+                <button class="btn btn-primary btn-feedback-continue display-none" onclick="nextFeedback();">Tiếp tục</button>
                 <button class="btn btn-default" data-izimodal-close="">Đóng</button>
             </div>
         </div>
@@ -43,16 +105,41 @@
 
 <script>
     $('#modal-request').iziModal({
-        title: 'Yêu Cầu Phim',        
-        overlayClose: true,                        
-        openFullscreen:false,
-        headerColor: '#263238',
-        icon: 'fa fa-upload',
-        iconColor: 'white',
-        onOpening: function(){
-                $('#frm-request').get(0).reset();
-            }
-        });        
+    title: 'Yêu Cầu Phim',        
+    overlayClose: true,                        
+    openFullscreen:false,
+    headerColor: '#263238',
+    icon: 'fa fa-upload',
+    iconColor: 'white',
+    onOpening: function(){
+            $('#frm-request').get(0).reset();
+            $('.input-invalid').addClass('display-none');
+        }
+    });  
+$('#modal-error').iziModal({
+    title: 'Báo lỗi',        
+    overlayClose: true,                        
+    openFullscreen:false,
+    headerColor: '#263238',
+    icon: 'fa fa-exclamation-triangle',
+    iconColor: 'white',
+    onOpening: function(){
+            $('#frm-error').get(0).reset();
+            $('.input-invalid').addClass('display-none');
+        }
+    });  
+$('#modal-feedback').iziModal({
+    title: 'Góp ý',        
+    overlayClose: true,                        
+    openFullscreen:false,
+    headerColor: '#263238',
+    icon: 'fa fa-envelope',
+    iconColor: 'white',
+    onOpening: function(){
+            $('#frm-feedback').get(0).reset();
+            $('.input-invalid').addClass('display-none');
+        }
+    });
 </script>
 
 <style>
@@ -62,7 +149,10 @@
 *:after {
   box-sizing: border-box;
 }
-
+.input-invalid{
+  color:red;
+  font-style:italic;
+}
 .menu-left-item {
   list-style: none;
   position: fixed;
@@ -143,7 +233,7 @@
 .menu-left-item li .dribbble:hover {
   background: #d2527f;
 }
-.modal-support input {
+.modal-support input, .modal-support textarea {
     border-radius: 0px;
 }
 .required {
@@ -156,5 +246,10 @@
 }
 [class*="fontawesome-"]:before {
   font-family: 'fontawesome', sans-serif;
+}
+@media (max-width: 767px) {
+    .menu-left-item{
+      display:none;
+    }
 }
 </style>

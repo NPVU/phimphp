@@ -96,16 +96,30 @@ class HomeController extends Controller
         return view('layouts.yeucau_min', $data,parent::getDataHeader());
     }
     
-    public function postYeuCau(Request $request){
-        
+    public function postYeuCau(Request $request){        
         DB::table('yeucau')->insert([
             'yeucau_email'          => trim($request->email),
-            'yeucau_content'        => trim($request->content),
+            'yeucau_name'        => trim($request->name),
+            'yeucau_link'        => trim($request->link),
             'yeucau_create_at'      => now()
+        ]);    
+    }
+
+    public function postError(Request $request){
+        DB::table('error_report')->insert([
+            'phim_id'       => 0,
+            'tap_id'        => 0,
+            'er_url'        => trim($request->url),
+            'er_content'    => trim($request->content),
+            'er_create_at'  => now()
         ]);
-        $data['success'] = true;
-        
-        
+    }
+
+    public function postFeedback(Request $request){
+        DB::table('feedback')->insert([               
+            'feedback_content'    => trim($request->content),
+            'feedback_create_at'  => now()
+        ]);
     }
 
     public function indexPhimTheoDoi(){

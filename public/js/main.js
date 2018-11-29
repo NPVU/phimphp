@@ -446,22 +446,105 @@ function openWindowLoading(){
 }
 function closeWindowLoading(){
     $('#loadingWindow').fadeOut();
-}
-function submitYeuCau(){ 
-    var name = $('.request-name').val();
-    if(name){
-        $.ajax({
-            type: 'post',           
-            url: $('meta[name="url"]').attr('content')+'/post-yeu-cau',
-            data: $("#frm-request").serialize(),               
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (data) {  
-
-            }
-        }); 
-    }else{
-        $('.request-name').css('color','red');
-    }                                   
-}
+}        
+    function submitYeuCau(){ 
+        var name = $('.request-name').val();
+        $('.input-invalid').addClass('display-none');
+        if(name){
+            $.ajax({
+                type: 'post',           
+                url: $('meta[name="url"]').attr('content')+'/post-yeu-cau',
+                data: $("#frm-request").serialize(),               
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {  
+                    $('#modal-request').iziModal('startLoading');
+                    $('#frm-request').addClass('display-none');
+                    $('.btn-request-submit').addClass('display-none');
+                    $('#rs-request').removeClass('display-none');
+                    $('.btn-request-continue').removeClass('display-none');
+                    $('#modal-request').iziModal('stopLoading');
+                }
+            }); 
+        }else{
+            $('.input-invalid').removeClass('display-none');
+        }                                   
+    }
+    function nextYeuCau(){
+      $('#modal-request').iziModal('startLoading');
+      $('#frm-request').removeClass('display-none');
+      $('.btn-request-submit').removeClass('display-none');
+      $('#rs-request').addClass('display-none');
+      $('.btn-request-continue').addClass('display-none');
+      $('#frm-request').get(0).reset();
+      $('#modal-request').iziModal('stopLoading');
+    }
+    
+    function submitError(){ 
+        var content = $('.error-content').val();
+        $('.input-invalid').addClass('display-none');
+        if(content){
+            $.ajax({
+                type: 'post',           
+                url: $('meta[name="url"]').attr('content')+'/post-error',
+                data: $("#frm-error").serialize(),               
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {  
+                    $('#modal-error').iziModal('startLoading');
+                    $('#frm-error').addClass('display-none');
+                    $('.btn-error-submit').addClass('display-none');
+                    $('#rs-error').removeClass('display-none');
+                    $('.btn-error-continue').removeClass('display-none');
+                    $('#modal-error').iziModal('stopLoading');
+                }
+            }); 
+        }else{
+            $('.input-invalid').removeClass('display-none');
+        }                                   
+    }
+    function nextError(){
+      $('#modal-error').iziModal('startLoading');
+      $('#frm-error').removeClass('display-none');
+      $('.btn-error-submit').removeClass('display-none');
+      $('#rs-error').addClass('display-none');
+      $('.btn-error-continue').addClass('display-none');
+      $('#frm-error').get(0).reset();
+      $('#modal-error').iziModal('stopLoading');
+    }
+    
+    function submitFeedback(){ 
+        var content = $('.feedback-content').val();
+        $('.input-invalid').addClass('display-none');
+        if(content){
+            $.ajax({
+                type: 'post',           
+                url: $('meta[name="url"]').attr('content')+'/post-feedback',
+                data: $("#frm-feedback").serialize(),               
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {  
+                    $('#modal-feedback').iziModal('startLoading');
+                    $('#frm-feedback').addClass('display-none');
+                    $('.btn-feedback-submit').addClass('display-none');
+                    $('#rs-feedback').removeClass('display-none');
+                    $('.btn-feedback-continue').removeClass('display-none');
+                    $('#modal-feedback').iziModal('stopLoading');
+                }
+            }); 
+        }else{
+            $('.input-invalid').removeClass('display-none');
+        }                                   
+    }
+    function nextFeedback(){
+      $('#modal-feedback').iziModal('startLoading');
+      $('#frm-feedback').removeClass('display-none');
+      $('.btn-feedback-submit').removeClass('display-none');
+      $('#rs-feedback').addClass('display-none');
+      $('.btn-feedback-continue').addClass('display-none');
+      $('#frm-feedback').get(0).reset();
+      $('#modal-feedback').iziModal('stopLoading');
+    }

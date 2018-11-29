@@ -57,15 +57,7 @@
                                     <li style="float:left;width:120px"><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
                                     @endforeach                                    
                                 </ul>
-                            </li>            
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hỗ Trợ <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{url('gop-y')}}">Góp ý</a></li>
-                                    <li><a href="{{url('bao-loi')}}">Báo lỗi</a></li>
-                                    <li><a href="{{url('yeu-cau-phim')}}">Yêu cầu phim</a></li>                                                                       
-                                </ul>
-                            </li>                                            
+                            </li>                                                                 
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="search-addon seach-pc">
