@@ -372,7 +372,7 @@ class HomeController extends Controller
     }
 
     public function getPhimRandom(){             
-        $listRandom = DB::table('phim')->selectRaw('*, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
+        $listRandom = DB::table('phim')->selectRaw('phim_ten, phim_nam, phim_hinhnen, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id ')
                 ->where('phim_xuatban', 1)->orderByRaw('RAND()')
                 ->limit(10)
                 ->get();

@@ -657,7 +657,7 @@ label{
 }
 
 .dropdown-menu {
-    background-color: rgb(38, 50, 56);
+    background-color: rgba(38, 50, 56, 0.84);;
 }
 
 .dropdown-menu>li, .dropdown-menu>li>a{

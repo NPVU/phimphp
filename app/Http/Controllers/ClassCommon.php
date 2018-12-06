@@ -280,12 +280,7 @@ class ClassCommon extends BaseController
         }
         
         $view = 0;
-        for($i = 0; $i < count($listPhim); $i++){
-            $listPhim[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_tapso, tap_tapsohienthi, tap_ngaycapnhat')
-                    ->where('phim_id', $listPhim[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
+        for($i = 0; $i < count($listPhim); $i++){           
             if($listPhim[$i]->phim_luotxem == $view){
                 $phim_idX = $listPhim[$i-1]->phim_id;
                 $phim_idY = $listPhim[$i]->phim_id;

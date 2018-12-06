@@ -17,7 +17,7 @@
 <meta property="og:image" content="{{$phim[0]->phim_hinhnen}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="850">
-
+<meta property="og:site_name" content="XemPhimZero" />
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="<?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>">
 <meta name="twitter:description" content="{{$phim[0]->phim_gioithieu}}">

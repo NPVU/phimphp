@@ -25,18 +25,11 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">                 
-                            <li><a href="{{URL::to('xem-nhieu')}}">XEM NHIỀU</a></li>                                     
+                            <li><a href="{{URL::to('xem-nhieu')}}">Xem Nhiều</a></li>
+                            <li><a href="{{URL::to('tv-series')}}">TV Series</a></li>   
+                            <li><a href="{{URL::to('movie')}}">Movie</a></li>                        
                             <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Loại phim <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{url('/tv-series')}}">TV Series</a></li>                                   
-                                    <li><a href="{{url('/movie')}}">Movie</a></li>
-                                    <li><a href="{{url('/ova')}}">Ova</a></li>
-                                    <li><a href="{{url('/live-action')}}">Live Action</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc gia <span class="caret"></span></a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc Gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <?php 
                                     $listQuocGia = DB::table('quocgia')->orderBy('quocgia_ten')->get(); 
@@ -48,7 +41,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể loại <span class="caret"></span></a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể Loại <span class="caret"></span></a>
                                 <ul class="dropdown-menu" style="min-width:500px">
                                     <?php 
                                     $listTheLoai = DB::table('theloai')->orderBy('theloai_ten')->get(); 
