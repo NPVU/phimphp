@@ -3,7 +3,7 @@
  <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>
 @endsection 
 @section('metaCEO') 
-<meta property="description" content="{{$phim[0]->phim_gioithieu}}" /> 
+<meta name="description" content="{{$phim[0]->phim_gioithieu}}" /> 
 <meta name="keywords" content="<?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?> | <?php echo $phim[0]->phim_tenkhac?>" />
 <meta itemprop="name" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
 <meta itemprop="description" content="{{$phim[0]->phim_gioithieu}}" />
@@ -482,7 +482,7 @@
             </div>
             @endforeach
         @else
-            <div class="text-center"><i style="color:gray">Không tìm thấy phim liên quan</i></div>
+            <div class="text-center"><i style="color:gray">Không tìm thấy phim gợi ý</i></div>
         @endif
     </div>
 </div>

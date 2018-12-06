@@ -1,12 +1,13 @@
 <head>
+    <title>@yield('title')</title>
+    @yield('metaCEO')
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="img/ico" href="{{ asset('img/themes/favicon.ico') }}">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="url" content="{{ url('/') }}">    
-    @yield('metaCEO')     
+    <meta name="url" content="{{ url('/') }}">             
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url('/') }}" />
     <meta property="og:locale" content="vi_VN" />
@@ -17,7 +18,7 @@
     <meta name="googlebot" content="index,follow" />
     <meta name="robots" content="index,follow" />
     <meta name="google-site-verification" content="MGNEEMNGFH1e4yLvIMdE5Hq-9PYNFwn56JCikQQwVzg" />
-    <title>@yield('title')</title>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
