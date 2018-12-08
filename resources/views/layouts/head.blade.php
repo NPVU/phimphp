@@ -32,7 +32,7 @@
     <script type="text/javascript" src="{{ asset('js/iziToast.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/iziModal.min.js') }}"></script>    
     <script type="text/javascript" src="{{ asset('js/main.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/rater.min.js') }}"></script>   
+    <script type="text/javascript" src="{{ asset('js/rater.min.js') }}"></script>    
        
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>        
@@ -61,7 +61,21 @@
         $(function() {
             $('.lazy').lazy();
         });
-    </script>    
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "http://www.xemphimzero.com/",
+        "name": "XemPhimZero.com",
+        "alternateName": "XP Zero",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "http://www.xemphimzero.com/tim-kiem/{keyword}/",
+            "query-input": "required name=keyword"
+        }
+    }
+    </script>
 
     <!-- Styles -->
     <link href="{{ asset('bootstrap-3.3.7/dist/css/bootstrap.min.css') }}" rel="stylesheet">

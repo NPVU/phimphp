@@ -441,7 +441,7 @@ class PhimController extends Controller{
             );  
         } 
         if($request->add_tapphim_luotxem>0){
-            ClassCommon::updateLuotXem($request->add_phim_id);     
+            ClassCommon::updateLuotXem($request->add_phim_id, $request->add_tapphim_luotxem);     
         }   
         if ($request->thongbao){
             ClassCommon::sendPusher($request->add_phim_id, $request->add_tapphim_tap);
@@ -487,7 +487,7 @@ class PhimController extends Controller{
                     ]
         );
         if($request->tapphim_luotxem > 0){
-            ClassCommon::updateLuotXem($request->edit_phim_id);
+            ClassCommon::updateLuotXem($request->edit_phim_id, $request->tapphim_luotxem);
         }        
         
         if($request->thongbao){
