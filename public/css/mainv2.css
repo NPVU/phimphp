@@ -231,6 +231,12 @@ ul.user-menu  li:hover{
     button.xem-ngay {         
         font-size: 14px !important;      
       }
+    .pagination>.page-item{
+        font-size:0.7em;
+    }
+    .pagination>li>a, .pagination>li>span {
+        padding: 4px 8px;
+    }
 }
 @media (max-width: 480px) {
     .slider img{        
@@ -684,14 +690,17 @@ hr{
 }
 .pagination>li>a {
     color: #ffffff;
-    background-color: rgb(38, 50, 56);
+    background-color: rgb(20, 38, 47);    
+}
+.pagination>li>a, .pagination>li>span{
+    border: none;
 }
 .pagination>.active>span, .pagination>.active>span:hover{
     background-color: #3e8f3e;
     border-color: #3e8f3e;
 }
 .pagination>.disabled>span{
-    background-color: rgb(38, 50, 56);
+    background-color: rgb(20, 38, 47);
 }
 @media (min-width: 992px){
     .dropdown-menu{
