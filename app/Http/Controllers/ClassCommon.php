@@ -30,20 +30,21 @@ class ClassCommon extends BaseController
     }
     
     public static function addLuotXem($phimID, $tap){
+        $view = rand(1, 30);
         DB::table('tap')->where([
                         ['phim_id', $phimID],
                         ['tap_id', $tap]
                     ])->update([
-                        'tap_luotxem' => DB::raw('tap_luotxem + 1')
+                        'tap_luotxem' => DB::raw('tap_luotxem + '.$view)
                     ]);        
-        self::updateLuotXem($phimID);
+        self::updateLuotXem($phimID, $view);
     }
     
-    public static function updateLuotXem($phimID){
+    public static function updateLuotXem($phimID, $view){
         DB::table('phim')->where('phim_id', $phimID)->update([
             'phim_luotxem'  => DB::raw('(SELECT SUM(tap_luotxem) FROM tap WHERE tap.phim_id = '.$phimID.')'),
-            'phim_luotxem_tuan'  => DB::raw('(SELECT phim_luotxem_tuan + 1 )'),
-            'phim_luotxem_thang'  => DB::raw('(SELECT phim_luotxem_thang + 1 )')
+            'phim_luotxem_tuan'  => DB::raw('(SELECT phim_luotxem_tuan + '.$view.' )'),
+            'phim_luotxem_thang'  => DB::raw('(SELECT phim_luotxem_thang + '.$view.' )')
         ]);
     }
     
@@ -279,7 +280,7 @@ class ClassCommon extends BaseController
                 . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
         }
         
-        $view = 0;
+        /*$view = 0;
         for($i = 0; $i < count($listPhim); $i++){           
             if($listPhim[$i]->phim_luotxem == $view){
                 $phim_idX = $listPhim[$i-1]->phim_id;
@@ -294,7 +295,7 @@ class ClassCommon extends BaseController
             }else{
                 $view = $listPhim[$i]->phim_luotxem;
             }
-        }
+        }*/
         return $listPhim;
     }
     
