@@ -101,6 +101,8 @@ Route::get('/live-action', 'HomeController@indexLiveAction');
 Route::get('/quoc-gia/{quocgia}/', 'HomeController@indexQuocGia')->name('quocGia');
 Route::get('/the-loai/{theloai}/', 'HomeController@indexTheLoai')->name('theLoai');
 Route::get('/xem-phim/{str}/{tid}', 'XemPhimController@xemPhim')->name('xemPhim');
+Route::get('/xem-phim/{str}', 'XemPhimController@xemPhimVersionOld');
+Route::get('/xem-phim/comment/facebook/{pid}', 'XemPhimController@commentFacebook');
 Route::post('/load', 'XemPhimController@loadVideo');
 Route::post('/adview', 'XemPhimController@addLuotXem');
 Route::get('/danh-gia', 'XemPhimController@addDanhGia');

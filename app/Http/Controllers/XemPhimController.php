@@ -106,13 +106,20 @@ class XemPhimController extends Controller{
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';
-            if(!isset($phim)){
-                $data['backURL'] = URL::to('/');
-            } else {
-                $data['backURL'] = URL::to('/xem-phim'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'?pid='.$phim[0]->phim_id.'&t=1&s='.md5('google').'&token='.Session::token());
-            }
+            $data['backURL'] = URL::to('/');
             return view('errors/index', $data);
         }
+    }
+
+    function xemPhimVersionOld(){                
+        $phim_id = Input::get('pid');
+        $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
+        $tap = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get();
+        return redirect(URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'/'.$tap[0]->tap_id.'.html'));
+    }
+
+    function commentFacebook(){
+        return 'comment';
     }
 
     public function getListTapVietsub($phim_id){
