@@ -62,7 +62,7 @@
                                 </td>
                                 <td class="text-left">
                                     <div style="white-space: pre-line;">
-                                    <?php echo $row->yeucau_content ?>
+                                    <?php echo $row->yeucau_name ?>
                                     </div>
                                 </td>                                                                                                                      
                                 <td class="text-center">

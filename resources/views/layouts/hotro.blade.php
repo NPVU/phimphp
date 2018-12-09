@@ -1,12 +1,12 @@
 <ul class="menu-left-item">
   <li>
-    <a href="javascript:void(0)" class="spotify" data-izimodal-open="#modal-feedback"><span>Góp ý</span><b class="entypo-mail"></b></a>
+    <a href="javascript:void(0)" class="spotify" data-izimodal-open="#modal-feedback"><span>Góp ý</span><b class="fa fa-envelope"></b></a>
   </li>
   <li>
-    <a href="javascript:void(0)" class="soundcloud" data-izimodal-open="#modal-error"><span>Báo lỗi</span><b class="entypo-attention"></b></a>
+    <a href="javascript:void(0)" class="soundcloud" data-izimodal-open="#modal-error"><span>Báo lỗi</span><b class="fa fa-exclamation-triangle"></b></a>
   </li>
   <li>
-    <a href="javascript:void(0)" class="skype" data-izimodal-open="#modal-request"><span>Yêu cầu</span><b class="entypo-upload"></b></a>
+    <a href="javascript:void(0)" class="skype" data-izimodal-open="#modal-request"><span>Yêu cầu</span><b class="fa fa-upload"></b></a>
   </li>
   <!--<li>
     <a href="#" class="dribbble"><span></span><b class=""></b></a>
@@ -143,7 +143,7 @@ $('#modal-feedback').iziModal({
 </script>
 
 <style>
-@import url(http://weloveiconfonts.com/api/?family=entypo);
+
 *,
 *:before,
 *:after {
