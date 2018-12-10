@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title') 
- <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>
+ <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> | Vietsub HD
 @endsection 
 @section('metaCEO') 
 <meta name="description" content="{{$phim[0]->phim_gioithieu}}" /> 
@@ -19,9 +19,9 @@
 <meta property="og:image:height" content="850">
 <meta property="og:site_name" content="XemPhimZero" />
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="<?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?>">
+<meta name="twitter:title" content="<?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> | Vietsub HD">
 <meta name="twitter:description" content="{{$phim[0]->phim_gioithieu}}">
-<meta name="twitter:site" content="@xemphimzero">
+<meta name="twitter:site" content="@XemPhimZero">
 <meta name="twitter:image" content="{{$phim[0]->phim_hinhnen}}">
 <script type="text/javascript" src="{{ asset('js/openload-plugin.min.js') }}"></script>
 @endsection 
@@ -153,10 +153,10 @@
                     }                    
                 };       
                 function epBefore(){
-                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{ClassCommon::getPreviousEpisode($tap[0]->tap_id)}}.html";
+                    window.location.href = "/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{ClassCommon::getPreviousEpisode($tap[0]->tap_id)}}.html";
                 }
                 function epAfter(){
-                    window.location.href = "{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{ClassCommon::getNextEpisode($tap[0]->tap_id)}}.html";
+                    window.location.href = "/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{ClassCommon::getNextEpisode($tap[0]->tap_id)}}.html";
                 }             
             </script>          
             <style>
@@ -182,7 +182,7 @@
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
                 @if($tap[0]->tap_id != $ep->tap_id)
                 <a class="click-loading btn btn-primary visit btn-tap"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$ep->tap_id}}.html">
+                   href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$ep->tap_id}}.html">
                     <span style="padding: 0px 5px;">{{$ep->tap_tapsohienthi}}</span>
                 </a>
                 @else
@@ -204,7 +204,7 @@
             <div class="col-xs-3 col-sm-2 col-md-1 no-padding">
                 @if($tap[0]->tap_id != $ep->tap_id)
                 <a class="click-loading btn btn-primary visit btn-tap"
-                   href="{{url('xem-phim')}}/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$ep->tap_id}}.html">
+                   href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))))}}/{{$ep->tap_id}}.html">
                     <span style="padding: 0px 5px;">{{$ep->tap_tapsohienthi}}</span>
                 </a>
                 @else
@@ -326,7 +326,7 @@
                     @if($season->phim_id == $phim[0]->phim_id)
                     <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="javascript:void(0)">
                     @else
-                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/'.$season->tap_id.'.html'}}" data-toggle="modal" data-target="">
+                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/'.$season->tap_id.'.html'}}" data-toggle="modal" data-target="">
                     @endif
                         <div class="box-phim box-phim-lienquan {{$season->phim_id == $phim[0]->phim_id?' phim-runing':''}}">
                             <div class="box-image">
@@ -414,7 +414,7 @@
         @if(count($listGoiY) > 0)
         @foreach($listGoiY as $row)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
+                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img class="lazy" data-src="{{$row->phim_hinhnen}}">
