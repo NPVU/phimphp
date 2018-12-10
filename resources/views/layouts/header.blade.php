@@ -25,9 +25,9 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">                 
-                            <li><a href="{{URL::to('xem-nhieu')}}">Xem Nhiều</a></li>
-                            <li><a href="{{URL::to('tv-series')}}">TV Series</a></li>   
-                            <li><a href="{{URL::to('movie')}}">Movie</a></li>                        
+                            <li><a href="/xem-nhieu">Xem Nhiều</a></li>
+                            <li><a href="/tv-series">TV Series</a></li>   
+                            <li><a href="/movie">Movie</a></li>                        
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Quốc Gia <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -35,7 +35,7 @@
                                     $listQuocGia = DB::table('quocgia')->orderBy('quocgia_ten')->get(); 
                                     ?>                                   
                                     @foreach($listQuocGia as $quocgia)
-                                    <li><a href="{{URL::to('/quoc-gia').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($quocgia->quocgia_ten)))).'-'.$quocgia->quocgia_id}}">{{$quocgia->quocgia_ten}}</a></li>                                    
+                                    <li><a href="/quoc-gia/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($quocgia->quocgia_ten)))).'-'.$quocgia->quocgia_id}}">{{$quocgia->quocgia_ten}}</a></li>                                    
                                     @endforeach                                    
                                     
                                 </ul>
@@ -47,7 +47,7 @@
                                     $listTheLoai = DB::table('theloai')->orderBy('theloai_ten')->get(); 
                                     ?>                                     
                                     @foreach($listTheLoai as $theloai)
-                                    <li style="float:left;width:120px"><a href="{{URL::to('/the-loai').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
+                                    <li style="float:left;width:120px"><a href="/the-loai/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($theloai->theloai_ten)))).'-'.$theloai->theloai_id}}">{{$theloai->theloai_ten}}</a></li>                                    
                                     @endforeach                                    
                                 </ul>
                             </li>                                                                 

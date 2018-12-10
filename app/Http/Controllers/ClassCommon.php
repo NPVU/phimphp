@@ -30,7 +30,7 @@ class ClassCommon extends BaseController
     }
     
     public static function addLuotXem($phimID, $tap){
-        $view = rand(1, 30);
+        $view = rand(1, 5);
         DB::table('tap')->where([
                         ['phim_id', $phimID],
                         ['tap_id', $tap]
@@ -118,7 +118,7 @@ class ClassCommon extends BaseController
                 $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">';
-                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html" data-toggle="modal" data-target="">';
+                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
@@ -205,7 +205,7 @@ class ClassCommon extends BaseController
                 $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">';
-                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="'.URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html" data-toggle="modal" data-target="">';
+                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
@@ -308,7 +308,7 @@ class ClassCommon extends BaseController
         if(count($listResult) > 0){
             foreach ($listResult as $row){
                 $tap = DB::table('tap')->where('phim_id',$row->phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();
-                $html .= '<a href="'.(URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$tap[0]->tap_id.'.html').'"><li>';
+                $html .= '<a href="/xem-phim/'.(strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$tap[0]->tap_id.'.html').'"><li>';
                 $html .=    '<div style="float:left;">';
                 $html .=        '<img class="lazy" src="'.$row->phim_hinhnen.'" style="border-radius:3px;" />';
                 $html .=    '</div>';

@@ -3,7 +3,7 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)
                         @foreach($phimXepHangTuan as $tuan)
-                        <a title="{{$tuan->phim_ten}}&nbsp;{{strlen($tuan->phim_tenvn)>0?'| '.$tuan->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/'.$tuan->tap_id.'.html'}}"><li>
+                        <a title="{{$tuan->phim_ten}}&nbsp;{{strlen($tuan->phim_tenvn)>0?'| '.$tuan->phim_tenvn:''}}" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($tuan->phim_ten)))).'/'.$tuan->tap_id.'.html'}}"><li>
                             <div class="" style="float:left;">
                                 <img class="lazy" src="{{($tuan->phim_thumb!=null?$tuan->phim_thumb:$tuan->phim_hinhnen)}}" style="border-radius:3px;"/>                                
                             </div>
@@ -41,7 +41,7 @@
                     <ul class="list-anime">
                         @if(count($phimXepHangThang) > 0)
                         @foreach($phimXepHangThang as $thang)
-                        <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/'.$thang->tap_id.'.html'}}"><li>
+                        <a title="{{$thang->phim_ten}}&nbsp;{{strlen($thang->phim_tenvn)>0?'| '.$thang->phim_tenvn:''}}" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($thang->phim_ten)))).'/'.$thang->tap_id.'.html'}}"><li>
                             <div class="" style="float:left;">
                                 <img class="lazy" src="{{($thang->phim_thumb!=null?$thang->phim_thumb:$thang->phim_hinhnen)}}" style="border-radius:3px;"/>                                
                             </div>
