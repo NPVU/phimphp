@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title') 
- <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> | Vietsub HD
+ <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> <?php echo strlen($tap[0]->tap_ten)>0? $tap[0]->tap_ten:''?> | VietSub HD
 @endsection 
 @section('metaCEO') 
 <meta name="description" content="<?php echo strlen($phim[0]->phim_tenvn)>0? $phim[0]->phim_tenvn.' | ':''?> <?php echo strlen($phim[0]->phim_tenkhac)>0? $phim[0]->phim_tenkhac.',':''?> Nội dung: {{$phim[0]->phim_gioithieu}}" /> 
