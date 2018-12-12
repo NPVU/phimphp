@@ -284,10 +284,10 @@
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 info-phim" style="margin-top:-20px;">
                                 <ul style="list-style: none;padding-left: 0px;">                            
-                                    <li>
+                                    <!--<li>
                                         <label>Nhóm sub:</label>
                                         <span>{{empty($phim[0]->phim_nguon)?'Đang cập nhật':$phim[0]->phim_nguon}}</span>
-                                    </li>
+                                    </li>-->
                                     <li>
                                         <label>Tóm tắt nội dung:</label>
                                         <span style="white-space: pre-line;">{{empty($phim[0]->phim_gioithieu)?'đang cập nhật':$phim[0]->phim_gioithieu}}</span>
@@ -380,7 +380,7 @@
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$season->quocgia_ten}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$season->phim_luotxem}}
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($season->phim_luotxem)}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
@@ -459,7 +459,7 @@
                                 <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
                             </div>
                             <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$row->phim_luotxem}}
+                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
                             </div>
                             <div class="phim-tip-underten">
                                 <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 

@@ -44,7 +44,7 @@
                     <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
                 </div>
                 <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{$row->phim_luotxem}}
+                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
                 </div>
                 <div class="phim-tip-underten">
                     <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
@@ -69,4 +69,5 @@
 <meta property="og:title" content="XEM PHIM ONLINE MIỄN PHÍ | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
 <meta property="og:description" content="Xem Phim Anime Vietsub Online, Xem phim anime, Anime Hành động, Anime Download, Anime HD, Anime Vietsub Online" /> 
 <meta name="keywords" content="Xem Phim Online Miễn Phí | Xem Phim Không Quảng Cáo | XEMPHIMZERO.COM" />
+<meta name="description" content="Xem Phim Online Miễn Phí | Xem Phim Không Quảng Cáo | XEMPHIMZERO.COM" />
 @endsection 
