@@ -3,7 +3,7 @@
  <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> <?php echo strlen($tap[0]->tap_ten)>0? $tap[0]->tap_ten:''?> | VietSub HD
 @endsection 
 @section('metaCEO') 
-<meta name="description" content="<?php echo strlen($phim[0]->phim_tenvn)>0? $phim[0]->phim_tenvn.' | ':''?> <?php echo strlen($phim[0]->phim_tenkhac)>0? $phim[0]->phim_tenkhac.',':''?> Nội dung: {{$phim[0]->phim_gioithieu}}" /> 
+<meta name="description" content="<?php echo strlen($phim[0]->phim_tenvn)>0? $phim[0]->phim_tenvn.' ':''?> <?php echo strlen($phim[0]->phim_tenkhac)>0? $phim[0]->phim_tenkhac.',':''?> Nội dung: {{$phim[0]->phim_gioithieu}}" /> 
 <meta name="keywords" content="<?php echo $phim[0]->phim_ten?> | <?php echo $phim[0]->phim_tenvn?> | <?php echo $phim[0]->phim_tenkhac?>" />
 <meta itemprop="name" content="<?php echo $phim[0]->phim_ten?> <?php echo strlen($phim[0]->phim_tenvn)>0? '| '.$phim[0]->phim_tenvn:''?>" />
 <meta itemprop="description" content="{{$phim[0]->phim_gioithieu}}" />
@@ -32,10 +32,7 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
         @include('layouts.confirmAge_min') 
-        @include('layouts.video_min') 
-        @if($cookiePhim['openCookie']) 
-            @include('layouts.cookiePhim_min') 
-        @endif 
+        @include('layouts.video_min')         
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
@@ -486,6 +483,9 @@
         @endif
     </div>
 </div>
+@if($cookiePhim['openCookie']) 
+    @include('layouts.cookiePhim_min') 
+@endif 
 @endsection 
 @section('contentRight') 
     @include('layouts.rank_min') 

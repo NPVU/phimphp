@@ -15,9 +15,6 @@ class HomeController extends Controller
 {
     
     public function index(){        
-
-        ClassCommon::processAccess();
-
         Cookie::queue('beforePhimID', 0);
         $htmlTapMoi = ClassCommon::getHTMLTapMoi(Session::get('PhimPerPage'),0);
         $htmlMovieMoi = ClassCommon::getHTMLMovieMoi(Session::get('PhimPerPage'),0);

@@ -30,8 +30,6 @@ class XemPhimController extends Controller{
     }
     
     function xemPhim($url, $tapid){
-                               
-        ClassCommon::processAccess();
         
         $tapid = explode('.', $tapid)[0];
         $check = true;
@@ -327,34 +325,48 @@ class XemPhimController extends Controller{
         return $page;
     }
     function getPhotoGoogle($link){
-        $get = $this->curl($link);
-        $data = explode('url\u003d', $get);
-        if(count($data) > 1){
-            $url = explode('%3Dm', $data[1]);
-            $decode = urldecode($url[0]);
-            $count = count($data);
-            $linkDownload = array();
-            if($count > 4) {
-                $v1080p = $decode.'=m37';
-                $v720p = $decode.'=m22';
-                $v360p = $decode.'=m18';
-                $linkDownload['1080p'] = $v1080p;
-                $linkDownload['720p'] = $v720p;
-                $linkDownload['360p'] = $v360p;
+        $host = explode('//', $link);
+        $host = explode('/', $host[1]);
+        if(strcmp($host[0],"photos.google.com")==0){        
+            $get = $this->curl($link);
+            $data = explode('url\u003d', $get);
+            if(count($data) > 1){
+                $url = explode('%3Dm', $data[1]);
+                $decode = urldecode($url[0]);
+                $count = count($data);
+                $linkDownload = array();
+                if($count > 4) {
+                    $v1080p = $decode.'=m37';
+                    $v720p = $decode.'=m22';
+                    $v360p = $decode.'=m18';
+                    $linkDownload['1080p'] = $v1080p;
+                    $linkDownload['720p'] = $v720p;
+                    $linkDownload['360p'] = $v360p;
+                }
+                if($count > 3) {
+                    $v720p = $decode.'=m22';
+                    $v360p = $decode.'=m18';
+                    $linkDownload['720p'] = $v720p;
+                    $linkDownload['360p'] = $v360p;
+                }
+                if($count > 2) {
+                    $v360p = $decode.'=m18';
+                    $linkDownload['360p'] = $v360p;
+                }
+                return $linkDownload;
+            } else {
+                return null;
             }
-            if($count > 3) {
-                $v720p = $decode.'=m22';
-                $v360p = $decode.'=m18';
-                $linkDownload['720p'] = $v720p;
-                $linkDownload['360p'] = $v360p;
-            }
-            if($count > 2) {
-                $v360p = $decode.'=m18';
-                $linkDownload['360p'] = $v360p;
-            }
+        }else{
+            $get = $this->curl($link);
+            $data = explode('<iframe', $get);
+            $data = explode('</iframe>', $data[1]);
+            $data = explode('src="',$data[0]);
+            $source = explode('"', $data[1]);
+
+            $source = explode('url=',$source[0]);
+            $linkDownload['360p'] = urldecode($source[1]);
             return $linkDownload;
-        } else {
-            return null;
         }
     }
 }
