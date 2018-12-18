@@ -33,7 +33,7 @@
     <script type="text/javascript" src="{{ asset('js/iziModal.min.js') }}"></script>    
     <script type="text/javascript" src="{{ asset('js/main.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/rater.min.js') }}"></script>    
-       
+    <script type="text/javascript" src="{{ asset('js/tippy.min.js') }}"></script>    
     <script src="https://js.pusher.com/4.3/pusher.min.js"></script>
     <script>        
         var pusher = new Pusher('836033107e962f12f88f', {
@@ -61,6 +61,7 @@
         $(function() {
             $('.lazy').lazy();
         });
+        
     </script>
     <script type="application/ld+json">
     {
@@ -87,5 +88,5 @@
     <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
-    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />     
+    <link href="{{ asset('css/mainv2.css') }}" rel="stylesheet" type="text/css" />     
 </head>

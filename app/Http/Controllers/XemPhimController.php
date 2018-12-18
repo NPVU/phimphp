@@ -100,7 +100,7 @@ class XemPhimController extends Controller{
             $data['follows'] = $followAmount;            
             $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, $tapid, $tap_current[0]->tap_tapso);
 
-            return view('xemphim_min', $data, parent::getDataHeader()); 
+            return view('xemphim', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';

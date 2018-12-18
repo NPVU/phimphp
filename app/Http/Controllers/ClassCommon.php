@@ -111,14 +111,14 @@ class ClassCommon extends BaseController
                     ->limit(1)->get();
         }
         
-        if(count($listPhimToday)>0){
+       
             $html = '';
             foreach ($listPhimToday as $row){
                 $idTheLoai = json_decode($row->theloai_id);
                 $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
                 if(count($row->tap)>0){
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">';
-                    $html .=    '<a title="'.$row->phim_ten.(strlen($row->phim_tenvn)>0?' | '.$row->phim_tenvn:'').'" class="click-loading" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html" data-toggle="modal" data-target="">';
+                    $html .=    '<a data-template="phim-'.$row->phim_id.'" class="click-loading" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
@@ -136,37 +136,20 @@ class ClassCommon extends BaseController
 //                    $html .=                '</div>';
                     $html .=            '</div>';                    
                     $html .=        '</div>';
-                    $html .=        '<div class="phim-tip">';
+                    $html .=        '<div id="phim-'.$row->phim_id.'">';
                     $html .=            '<div class="phim-tip-content">';
-                    $html .=                '<div class="phim-tip-ten">'.$row->phim_ten.'</div>';
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span> '.$row->phim_season.' <span style="float:right"><span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span> '.$row->phim_nam.'<span></div>';
-                    if(is_null($row->phim_gioithieu)){
-                        $html .=                '<div class="phim-tip-noidung">Đang cập nhật ...</div>';
-                    } else {
-                        $html .=                '<div class="phim-tip-noidung">'.(strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu).'</div>';
-                    }
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> ';
-                                            for($i = 0; $i < count($listTheLoaiPhim); $i++){
-                                                $html .=  $listTheLoaiPhim[$i]->theloai_ten;
-                                                $html .=  $i+1<count($listTheLoaiPhim)?', ':'.';
-                                            }
-                    $html .=                '</div>';                    
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> '.$row->phim_sotap.'</div>';                    
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> '.$row->loaiphim_ten.'</div>';
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> '.$row->quocgia_ten.'</div>';
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';
-                    $html .=                '<div class="phim-tip-underten"><span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> ';
-                    $star = ClassCommon::getStar($row->phim_id); 
-                    for($i = 1; $i <= 5; $i++){
-                        if($i <= intval($star)){
-                            $html .= '<span class="glyphicon fa fa-star star star-color"></span>';
-                        } else if($i > $star && ($i-1) < $star){
-                            $html .= '<span class="glyphicon fa fa-star-half-alt star star-half-color"></span>';
-                        } else {
-                            $html .= '<span class="fa fa-star star"></span>';
-                        }
-                    }        
-                    $html .=                '</div>';
+                    $html .=                '<div class="tip ten-phim ten-phim-chinh">'.$row->phim_ten.'</div>';
+                    $html .=                '<div class="tip ten-phim ten-phim-phu">'.$row->phim_tenkhac.'</div>';
+                    $html .=                '<div class="tip ten-phim ten-phim-tieng-viet">'.$row->phim_tenvn.'</div>';
+                    $html .=                '<div class="tip the-loai" style="margin-top:10px;"><span class="tip-title">Thể loại:</span> ';
+                                                for($i = 0; $i < count($listTheLoaiPhim); $i++){
+                                                    $html .=  $listTheLoaiPhim[$i]->theloai_ten;
+                                                    $html .=  $i+1<count($listTheLoaiPhim)?', ':'.';
+                                                }
+                    $html .=                '</div>';      
+                    $html .=                '<div class="tip so-tap"><span class="tip-title">Số tập:</span> '.$row->phim_sotap.'</div>'; 
+                    $html .=                '<div class="tip nam"><span class="tip-title">Năm:</span> '.$row->phim_nam.'</div>';                                  
+                    $html .=                '<div class="tip luot-xem"><span class="tip-title">Tổng lượt xem:</span> '.number_format($row->phim_luotxem).'</div>';                                   
                     $html .=            '</div>';
                     $html .=        '</div>';
                     $html .=    '</a>';
@@ -174,9 +157,7 @@ class ClassCommon extends BaseController
                 }
             }
             return $html;
-        } else {
-            return '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><span><i style="color:gray">Không tìm thấy dữ liệu</i></span></div>';
-        }        
+           
     }
 
     public static function getHTMLMovieMoi($limit, $offset){

@@ -21,7 +21,7 @@ class HomeController extends Controller
         $data['htmlTapMoi']     = $htmlTapMoi;
         $data['htmlMovieMoi']     = $htmlMovieMoi;
         $data['listRandom']  = $this->getPhimRandom();
-        return view('home_min', $data, parent::getDataHeader());
+        return view('home', $data, parent::getDataHeader());
     }
 
     public function getGopY(){

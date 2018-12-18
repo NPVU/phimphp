@@ -322,50 +322,24 @@ ul.user-menu  li:hover{
 .info-phim ul li label{
     color:#988568;
 }
-.phim-tip{    
-    position:absolute;
-    font-family: "-webkit-body";
-    min-width:250px;
-    min-height: 350px;  
-    left:210px;
-    top: -90px;
-    background: rgb(237, 249, 238);    
-    z-index: 10;
-    border-radius: 3px;
-    display:none;
-}
-.phim-tip::after{
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 100%;
-    margin-top: -5px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent rgb(237, 249, 238) transparent transparent;
-}
 .phim-tip-content{
-    padding: 15px;
-}
-.phim-tip-content > .phim-tip-ten{
-    font-size: 1.3em;    
-    text-transform: uppercase;
-    color: #00a5ad;
-    font-weight:700;
-}
-.phim-tip-content > .phim-tip-underten, .phim-tip-content > .phim-tip-noidung{
+    padding:10px;
     color:gray;
-    font-size: 1.1em;
+    text-align:left; 
+    width:280px; 
+    font-size:12px; 
+    line-height:1.5;
 }
-.phim-tip-content > .phim-tip-underten .glyphicon, .phim-tip-content > .phim-tip-underten > .title, .phim-tip-underten .title{
-    color:#11c3cb;
+.tip-title{
+    color:rgb(218, 216, 216);
 }
-.phim-tip-content > .phim-tip-noidung {
-    padding: 10px 0px;
-    min-height: 130px;
+.ten-phim-chinh{    
+    color: white;
+    font-weight:700;
+    font-size:14px;
 }
-.box-phim:hover ~ .phim-tip{
-    display: block;
+.ten-phim-phu, .ten-phim-tieng-viet{
+    color:rgb(218, 216, 216);
 }
 .search-mobile{
     display: none !important;
