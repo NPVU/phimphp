@@ -386,6 +386,7 @@ function xtmv(){
         });
 }
 function refreshTippy(){
+    $('.phim-tip-content').removeClass('display-none');
     tippy('a.ttip', {
         arrow: true,
         theme: 'mytheme',
