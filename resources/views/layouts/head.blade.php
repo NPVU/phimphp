@@ -60,7 +60,8 @@
         });          
         $(function() {
             $('.lazy').lazy();
-            refreshTippy();
+            $('.phim-tip-content').removeClass('display-none');
+            refreshTippy();            
         });
         
     </script>
@@ -89,5 +90,5 @@
     <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
-    <link href="{{ asset('css/mainv2.css') }}" rel="stylesheet" type="text/css" />     
+    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />     
 </head>

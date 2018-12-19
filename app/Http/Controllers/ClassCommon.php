@@ -139,7 +139,7 @@ class ClassCommon extends BaseController
                     
                     
                     $html .=        '<div id="phim-'.$row->phim_id.'">';
-                    $html .=            '<div class="phim-tip-content">';
+                    $html .=            '<div class="phim-tip-content display-none">';
                     $html .=                '<div class="tip ten-phim ten-phim-chinh">'.$row->phim_ten.'</div>';
                     $html .=                '<div class="tip ten-phim ten-phim-phu">'.$row->phim_tenkhac.'</div>';
                     $html .=                '<div class="tip ten-phim ten-phim-tieng-viet">'.$row->phim_tenvn.'</div>';
@@ -207,7 +207,7 @@ class ClassCommon extends BaseController
                     $html .=        '</div>';
                     
                     $html .=        '<div id="phim-'.$row->phim_id.'">';
-                    $html .=            '<div class="phim-tip-content">';
+                    $html .=            '<div class="phim-tip-content display-none">';
                     $html .=                '<div class="tip ten-phim ten-phim-chinh">'.$row->phim_ten.'</div>';
                     $html .=                '<div class="tip ten-phim ten-phim-phu">'.$row->phim_tenkhac.'</div>';
                     $html .=                '<div class="tip ten-phim ten-phim-tieng-viet">'.$row->phim_tenvn.'</div>';

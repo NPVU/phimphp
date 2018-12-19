@@ -660,7 +660,7 @@ label{
 }
 
 .dropdown-menu {
-    background-color: rgba(38, 50, 56, 0.84);;
+    background-color: rgba(0, 0, 0, 0.85);
 }
 
 .dropdown-menu>li, .dropdown-menu>li>a{
