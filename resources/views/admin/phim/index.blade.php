@@ -173,7 +173,7 @@
                             <label>Tập hiển thị</label>
                             <input type="text" id="add_tapphim_taphienthi" name="add_tapphim_taphienthi" class="form-control required" value="" placeholder=""/>
                             <span class="help-block add_tapphim_taphienthi_error"></span>
-                        </div>                        
+                        </div>                                                 
                         <div class="form-group add_tapphim_ten">
                             <label>Tên tập phim</label>
                             <input type="text" id="add_tapphim_ten" name="add_tapphim_ten" class="form-control" value="" placeholder=""/>
@@ -194,11 +194,7 @@
                             <label>Lượt xem</label>
                             <input type="number" id="add_tapphim_luotxem" name="add_tapphim_luotxem" class="form-control" value="0" placeholder=""/>
                             <span class="help-block add_tapphim_luotxem_error"></span>
-                        </div>
-                        <div class="form-group">                            
-                            <input type="checkbox" name="thuyetminh" class="flat-red" value="true" />
-                            <label>Thuyết Minh</label>
-                        </div>
+                        </div>                        
                         <div class="form-group">                            
                             <input type="checkbox" name="is_tap_moi" class="flat-red" value="true" />
                             <label>Tập mới</label>
@@ -211,6 +207,25 @@
                         </div>                        
                     </div>
                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Tập phim hiển thị</label>
+                            <input type="text" id="phim_taphienthi" name="phim_taphienthi" class="form-control required" value="" placeholder="" require/>
+                            <span class="help-block"></span>
+                        </div>  
+                        <div class="display-none">
+                        <div class="form-group add_audio_link">
+                            <label>Link Audio</label>
+                            <div class="input-group">                        
+                                <input type="text" id="audioLink" name="audioLink" value="" placeholder="Nhập link audio ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkAudioLink" class="btn btn-success" onclick="checkVideo('AudioLink')">
+                                        <span class="btnCheckAudioLink">Kiểm tra</span>
+                                        <i class="fa iconCheckAudioLink"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <span class="help-block add_audio_link_error"></span>
+                        </div> 
                         <div class="form-group add_facebook_link">
                             <label>ID Facebook</label>
                             <div class="input-group">                        
@@ -250,6 +265,7 @@
                             </div>  
                             <span class="help-block add_openload_link_error"></span>
                         </div>
+                        </div>
                         <div class="form-group add_google_link">
                             <label>Link Google Photos</label>
                             <div class="input-group">                        
@@ -263,19 +279,10 @@
                             </div> 
                             <span class="help-block add_google_link_error"></span>
                         </div>
-                        <div class="form-group add_audio_link">
-                            <label>Link Audio</label>
-                            <div class="input-group">                        
-                                <input type="text" id="audioLink" name="audioLink" value="" placeholder="Nhập link audio ..." class="form-control" />
-                                <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkAudioLink" class="btn btn-success" onclick="checkVideo('AudioLink')">
-                                        <span class="btnCheckAudioLink">Kiểm tra</span>
-                                        <i class="fa iconCheckAudioLink"></i>
-                                    </button>
-                                </div>
-                            </div>  
-                            <span class="help-block add_audio_link_error"></span>
-                        </div>                        
+                        <div class="form-group">                            
+                            <input type="checkbox" name="thuyetminh" class="flat-red" value="true" />
+                            <label>Thuyết Minh</label>
+                        </div>                                             
                     </div>
                     <div class="col-md-4">
                         <div class="form-group text-center">
@@ -380,7 +387,8 @@
         }
         function resetFormAddTapPhim(){
             $('#add_tapphim_ten').val('');
-            $('#add_tapphim_taphienthi').val('');            
+            $('#add_tapphim_taphienthi').val('');
+            $('#phim_taphienthi').val('');
             $('#facebookLink').val('');
             $('#googleLink').val('');
             $('#youtubeLink').val('');

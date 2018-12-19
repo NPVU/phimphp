@@ -340,6 +340,7 @@ class PhimController extends Controller{
                     [
                         'theloai_id'      => json_encode($request->edit_phim_theloai),
                         'phim_ten'        => trim($request->edit_phim_ten),
+                        'phim_taphienthi' => $request->phim_taphienthi,
                         'phim_tenvn'      => trim($request->edit_phim_tenvn),
                         'phim_tenkhac'    => trim($request->edit_phim_tenkhac),
                         'phim_gioithieu'  => $request->edit_phim_gioithieu,
@@ -432,7 +433,14 @@ class PhimController extends Controller{
                     'tap_chatluong'     => $request->chatluong
                 ]
             );
-        }        
+        }
+        DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
+            [
+                'phim_taphienthi'    => $request->phim_taphienthi,
+                'min_tap_id'         => DB::raw('(SELECT tap_id FROM tap WHERE phim_id = '.$request->add_phim_id . ' ORDER BY tap_tapso ASC LIMIT 1)'),
+                'max_tap_id'         => DB::raw('(SELECT tap_id FROM tap WHERE phim_id = '.$request->add_phim_id . ' ORDER BY tap_tapso DESC LIMIT 1)')
+            ]
+        );
         if($request->hoanthanh){
             DB::table('phim')->where('phim_id', $request->add_phim_id)->update(
                 [
@@ -523,6 +531,12 @@ class PhimController extends Controller{
         $tap_id = $request->del_tap_id;                
         $row = DB::table('tap')->where('tap_id', $tap_id)->delete();                
         if($row > 0){
+            DB::table('phim')->where('phim_id', $request->phim_id)->update(
+                [                    
+                    'min_tap_id'         => DB::raw('(SELECT tap_id FROM tap WHERE phim_id = '.$request->phim_id . ' ORDER BY tap_tapso ASC LIMIT 1)'),
+                    'max_tap_id'         => DB::raw('(SELECT tap_id FROM tap WHERE phim_id = '.$request->phim_id . ' ORDER BY tap_tapso DESC LIMIT 1)')
+                ]
+            );
             return redirect()->route('listTap', ['phimID' => $request->phim_id, 'token' => $request->_token])->with('success', 'Xóa tập '.$request->del_tap_hienthi.' thành công !');
         } else {            
             return redirect()->route('listTap', ['phimID' => $request->phim_id, 'token' => $request->_token])->with('error', 'Xóa tập '.$request->del_tap_hienthi.' thất bại !');

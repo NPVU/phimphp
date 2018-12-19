@@ -100,25 +100,14 @@ class ClassCommon extends BaseController
                                           ->orderByRaw('phim_ngaycapnhat_moinhat DESC')
                                           ->offset($offset)
                                           ->limit($limit)
-                                          ->get();
-        
-                
-        for($i = 0; $i < count($listPhimToday); $i++){
-            $listPhimToday[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
-                    ->where('phim_id', $listPhimToday[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
-        }
-        
+                                          ->get();                                        
        
             $html = '';
             foreach ($listPhimToday as $row){
                 $idTheLoai = json_decode($row->theloai_id);
-                $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-                if(count($row->tap)>0){
+                $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();               
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">';
-                    $html .=    '<a data-template="phim-'.$row->phim_id.'" class="click-loading ttip" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html">';
+                    $html .=    '<a data-template="phim-'.$row->phim_id.'" class="click-loading ttip" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->max_tap_id.'.html">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
@@ -129,7 +118,7 @@ class ClassCommon extends BaseController
                     $html .=                    '<div>'.$row->phim_ten.'</div>';
                     $html .=                    '<div class="title-vn">'.$row->phim_tenvn.'</div>';
                     $html .=                '</div>';
-                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapso.'/'.$row->phim_sotap.'</div>';
+                    $html .=                '<div class="box-text">'.$row->phim_taphienthi.'/'.$row->phim_sotap.'</div>';
 //                    $html .=                '<div class="box-text">';
 //                    $html .=                    '<span style="float:left;" class="view-str-'.$row->phim_id.'">'.self::demLuotXem($row->tap[0]->tap_luotxem).' lượt xem</span>';
 //                    $html .=                    '<span style="float:right;">'.self::getStrSoNgayDaQua($row->tap[0]->tap_ngaycapnhat).'</span>';
@@ -158,8 +147,7 @@ class ClassCommon extends BaseController
                     
                     
                     $html .=    '</a>';
-                    $html .= '</div>';
-                }
+                    $html .= '</div>';                
             }
             return $html;
            
@@ -175,23 +163,15 @@ class ClassCommon extends BaseController
                                           ->offset($offset)
                                           ->limit($limit)
                                           ->get();
-                  
-        for($i = 0; $i < count($listPhim); $i++){
-            $listPhim[$i]->tap = DB::table('tap')
-                    ->selectRaw('tap_id, tap_tapso, tap_tapsohienthi, tap_ngaycapnhat, tap_luotxem')
-                    ->where('phim_id', $listPhim[$i]->phim_id) 
-                    ->orderByRaw('tap_tapso DESC')
-                    ->limit(1)->get();
-        }
-        
+                         
         if(count($listPhim)>0){
             $html = '';
             foreach ($listPhim as $row){
                 $idTheLoai = json_decode($row->theloai_id);
                 $listTheLoaiPhim = DB::table('theloai')->whereIn('theloai_id', $idTheLoai)->get();
-                if(count($row->tap)>0){
+                
                     $html .= '<div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">';
-                    $html .=    '<a data-template="phim-'.$row->phim_id.'" class="click-loading ttip" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap[0]->tap_id.'.html" data-toggle="modal" data-target="">';
+                    $html .=    '<a data-template="phim-'.$row->phim_id.'" class="click-loading ttip" href="/xem-phim/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->max_tap_id.'.html" data-toggle="modal" data-target="">';
                     $html .=        '<div class="box-phim">';
                     $html .=            '<div class="box-image">';
                     $html .=                '<img class="lazy" src="'.($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen).'" />';
@@ -202,7 +182,7 @@ class ClassCommon extends BaseController
                     $html .=                    '<div>'.$row->phim_ten.'</div>';
                     $html .=                    '<div class="title-vn">'.$row->phim_tenvn.'</div>';
                     $html .=                '</div>';
-                    $html .=                '<div class="box-text">'.$row->tap[0]->tap_tapsohienthi.'</div>';
+                    $html .=                '<div class="box-text">'.$row->phim_taphienthi.'</div>';
                     $html .=            '</div>';                    
                     $html .=        '</div>';
                     
@@ -225,8 +205,7 @@ class ClassCommon extends BaseController
                     $html .=        '</div>';
                     
                     $html .=    '</a>';
-                    $html .= '</div>';
-                }
+                    $html .= '</div>';                
             }
             return $html;
         } else {
@@ -237,19 +216,19 @@ class ClassCommon extends BaseController
     public static function getBangXepHang($time, $limit, $offset){
         if(strcmp($time, 'week') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh, phim_thumb,'
-                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id'
+                . ' phim_ten, phim_sotap, phim_luotxem_tuan AS phim_luotxem, phim_tenvn, min_tap_id AS tap_id'
                 . ' FROM phim '                
                 . ' WHERE phim_luotxem_tuan > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_tuan DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else if(strcmp($time, 'month') == 0){
             $listPhim = DB::select(DB::raw('SELECT phim_id, phim_hinhnen, phim_hinhanh, phim_thumb, '
-                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id'
+                . ' phim_ten, phim_sotap, phim_luotxem_thang AS phim_luotxem, phim_tenvn, min_tap_id AS tap_id'
                 . ' FROM phim '                
                 . ' WHERE phim_luotxem_thang > 0 AND phim_xuatban = 1 '
                 . ' ORDER BY phim.phim_luotxem_thang DESC LIMIT '.$limit.' OFFSET '.$offset));
         } else {
-            $listPhim = DB::select(DB::raw('SELECT *, (SELECT tap_id FROM tap WHERE tap.phim_id = phim.phim_id ORDER BY tap_tapso ASC LIMIT 1) AS tap_id FROM phim WHERE phim_xuatban = 1 '                
-                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset));
+            $listPhim = DB::select(DB::raw('(SELECT *, min_tap_id AS tap_id FROM phim WHERE phim_xuatban = 1 '                
+                . ' ORDER BY phim.phim_luotxem DESC LIMIT '.$limit.' OFFSET '.$offset .')'));
         }
         
         /*$view = 0;

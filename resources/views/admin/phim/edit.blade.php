@@ -121,7 +121,11 @@
                                        placeholder="VD: Naruto"/>
                                 <span class="help-block"><?php echo isset($edit_phim_ten_error)?$edit_phim_ten_error:''; ?></span>
                             </div>                            
-                            
+                            <div class="form-group">
+                                <label>Tập phim hiển thị</label>
+                                <input type="text" id="phim_taphienthi" name="phim_taphienthi" class="form-control required" value="<?php echo isset($_POST['phim_taphienthi']) ? $_POST['phim_taphienthi'] : $phim[0]->phim_taphienthi ?>" require/>
+                                <span class="help-block"></span>
+                            </div>
                             <div class="form-group <?php echo isset($edit_phim_sotap_error)?'has-error':''; ?>">
                                 <label>Số tập</label>
                                 <input type="text" name="edit_phim_sotap" class="form-control required" 
