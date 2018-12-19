@@ -60,6 +60,7 @@
         });          
         $(function() {
             $('.lazy').lazy();
+            refreshTippy();
         });
         
     </script>

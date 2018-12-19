@@ -341,6 +341,29 @@ ul.user-menu  li:hover{
 .ten-phim-phu, .ten-phim-tieng-viet{
     color:rgb(218, 216, 216);
 }
+.noi-dung{
+    margin-top:10px;
+    white-space: pre-line;
+    word-break: break-word;
+}
+.tippy-popper{
+    text-align:left;
+}
+.tippy-tooltip{
+    background-color: rgba(0, 0, 0, 0.85);
+}
+.tippy-popper[x-placement^='top'] .tippy-tooltip .tippy-arrow {
+  border-top-color: rgba(0, 0, 0, 0.85);
+}
+.tippy-popper[x-placement^='bottom'] .tippy-tooltip .tippy-arrow {
+  border-bottom-color: rgba(0, 0, 0, 0.85);
+}
+.tippy-popper[x-placement^='left'] .tippy-tooltip .tippy-arrow {
+  border-left-color: rgba(0, 0, 0, 0.85);
+}
+.tippy-popper[x-placement^='right'] .tippy-tooltip .tippy-arrow {
+  border-right-color: rgba(0, 0, 0, 0.85);
+}
 .search-mobile{
     display: none !important;
 }

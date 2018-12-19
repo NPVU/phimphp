@@ -1,5 +1,5 @@
 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
+    <a data-template="phim-{{$row->phim_id}}" class="click-loading ttip" href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
         <div class="box-phim">
             <div class="box-image">
                 <img class="lazy" data-src="{{$row->phim_thumb!=null?$row->phim_thumb:$row->phim_hinhnen}}">
@@ -13,56 +13,20 @@
                 <div class="box-text">@if(!empty($row->tap[0])) {{$row->tap[0]->tap_tapso.'/'}} @else 0.'/' @endif {{$row->phim_sotap}}</div>
             </div>
         </div>
-        <div class="phim-tip">
+        <div id="phim-{{$row->phim_id}}">
             <div class="phim-tip-content">
-                <div class="phim-tip-ten">{{$row->phim_ten}}</div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span>&nbsp; {{$row->phim_season}}
-                    <span style="float:right">
-                        <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span>&nbsp; {{$row->phim_nam}}
-                        <span></span>
-                    </span>
-                </div>
-                <div class="phim-tip-noidung">
-                    @if(is_null($row->phim_gioithieu))
-                    Đang cập nhật ...
-                    @else
-                    {{strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu}}
-                    @endif                            
-                </div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> 
-                    {{$row->listTheLoai}}
-                </div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$row->phim_sotap}}
-                </div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$row->loaiphim_ten}}
-                </div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
-                </div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
-                </div>
-                <div class="phim-tip-underten">
-                    <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
-                    <?php
-                    $star = ClassCommon::getStar($row->phim_id);
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i <= intval($star)) {
-                            echo '<span class="glyphicon fa fa-star star star-color"></span>';
-                        } else if ($i > $star && ($i - 1) < $star) {
-                            echo '<span class="glyphicon fa fa-star-half-alt star star-half-color"></span>';
-                        } else {
-                            echo '<span class="fa fa-star star"></span>';
-                        }
-                    }
-                    ?>
-                </div>
+                <div class="tip ten-phim ten-phim-chinh">{{$row->phim_ten}}</div>
+                    <div class="tip ten-phim ten-phim-phu">{{$row->phim_tenkhac}}</div>
+                    <div class="tip ten-phim ten-phim-tieng-viet">{{$row->phim_tenvn}}</div>
+                    <div class="tip the-loai" style="margin-top:10px;"><span class="tip-title">Thể loại:</span>
+                            {{$row->listTheLoai}}
+                    </div>     
+                    <div class="tip so-tap"><span class="tip-title">Số tập:</span> {{$row->phim_sotap}}</div>
+                    <div class="tip nam"><span class="tip-title">Năm:</span> {{$row->phim_nam}}</div>                                
+                    <div class="tip luot-xem"><span class="tip-title">Tổng lượt xem:</span> {{number_format($row->phim_luotxem)}}</div>
+                    <div class="tip noi-dung">{{$row->phim_gioithieu}}</div>
             </div>
-        </div>
+        </div>        
     </a>
 </div>
 @section('metaCEO')

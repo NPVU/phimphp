@@ -364,6 +364,7 @@ function xt(){
                         newPage.className = 'tapmoi-page-' + nextPage;
                         $('.listTapMoi').append(newPage);
                         $('.lazy').lazy();
+                        refreshTippy();
                 }
         });
 }
@@ -380,8 +381,19 @@ function xtmv(){
                         newPage.className = 'moviemoi-page-' + nextPage;
                         $('.listMovieMoi').append(newPage);
                         $('.lazy').lazy();
+                        refreshTippy();
                 }
         });
+}
+function refreshTippy(){
+    tippy('a.ttip', {
+        arrow: true,
+        theme: 'mytheme',
+        placement: 'right',
+        content(reference) {
+          return document.getElementById(reference.getAttribute('data-template'))
+        }
+     })
 }
 function confirmAge(pid){
     $.ajax({

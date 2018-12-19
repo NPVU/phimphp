@@ -99,25 +99,6 @@ ANIME VIETSUB ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM
         <i onclick="xtmv()" aria-page="2" class="xtmv npv-icon-xemthem glyphicon glyphicon-2x glyphicon-chevron-down" data-toggle="tooltip" title="Xem thêm"></i>
     </div>
 </div>
-<script>
-tippy('a', {
-  arrow: true,
-  placement: 'right',
-  content(reference) {
-    return document.getElementById(reference.getAttribute('data-template'))
-  }
-})
-</script>
-<style>
-.tippy-popper{
-    text-align:left;
-}
-.tippy-tooltip.honeybee-theme .tippy-backdrop {
-  background-color: yellow;
-  font-weight: bold;
-  color: #333;
-}
-</style>
 @endsection 
 @section('contentRight') 
     @include('layouts.rank_min') 

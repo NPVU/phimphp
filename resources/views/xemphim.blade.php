@@ -318,84 +318,48 @@
     </div>
     <div>
         
-            @foreach($listSeason as $season)
+            @foreach($listSeason as $row)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                    @if($season->phim_id == $phim[0]->phim_id)
-                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="javascript:void(0)">
+                    @if($row->phim_id == $phim[0]->phim_id)
+                    <a data-template="phim-{{$row->phim_id}}" class="click-loading ttip" href="javascript:void(0)">
                     @else
-                    <a title="{{$season->phim_ten}}&nbsp;{{strlen($season->phim_tenvn)>0?'| '.$season->phim_tenvn:''}}" class="click-loading" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($season->phim_ten)))).'/'.$season->tap_id.'.html'}}" data-toggle="modal" data-target="">
+                    <a data-template="phim-{{$row->phim_id}}" class="click-loading ttip" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
                     @endif
-                        <div class="box-phim box-phim-lienquan {{$season->phim_id == $phim[0]->phim_id?' phim-runing':''}}">
+                        <div class="box-phim box-phim-lienquan {{$row->phim_id == $phim[0]->phim_id?' phim-runing':''}}">
                             <div class="box-image">
-                                <img class="lazy" data-src="{{$season->phim_hinhnen}}">
+                                <img class="lazy" data-src="{{$row->phim_hinhnen}}">
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
                                 <div class="box-title">
-                                    <div>{{$season->phim_ten}}</div>
-                                    <div class="title-vn">{{$season->phim_tenvn}}</div>
+                                    <div>{{$row->phim_ten}}</div>
+                                    <div class="title-vn">{{$row->phim_tenvn}}</div>
                                 </div>
-                                @if($season->phim_kieu == 1)
-                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Phần '.$season->phim_season}}</div> 
-                                @elseif($season->phim_kieu == 2)
-                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Movie '.$season->phim_season}}</div> 
-                                @elseif($season->phim_kieu == 3)
-                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Ova '.$season->phim_season}}</div> 
-                                @elseif($season->phim_kieu == 4)
-                                <div class="box-text {{$season->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$season->phim_id == $phim[0]->phim_id?'Đang xem':'Live Action '.$season->phim_season}}</div> 
+                                @if($row->phim_kieu == 1)
+                                <div class="box-text {{$row->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$row->phim_id == $phim[0]->phim_id?'Đang xem':'Phần '.$row->phim_season}}</div> 
+                                @elseif($row->phim_kieu == 2)
+                                <div class="box-text {{$row->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$row->phim_id == $phim[0]->phim_id?'Đang xem':'Movie '.$row->phim_season}}</div> 
+                                @elseif($row->phim_kieu == 3)
+                                <div class="box-text {{$row->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$row->phim_id == $phim[0]->phim_id?'Đang xem':'Ova '.$row->phim_season}}</div> 
+                                @elseif($row->phim_kieu == 4)
+                                <div class="box-text {{$row->phim_id == $phim[0]->phim_id?' box-text-runing':''}}">{{$row->phim_id == $phim[0]->phim_id?'Đang xem':'Live Action '.$row->phim_season}}</div> 
                                 @endif                                
                             </div>
                         </div>
-                        <div class="phim-tip">
+                         <div id="phim-{{$row->phim_id}}">
                             <div class="phim-tip-content">
-                            <div class="phim-tip-ten">{{$season->phim_ten}}</div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span>&nbsp; {{$season->phim_season}}
-                                <span style="float:right">
-                                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span>&nbsp; {{$season->phim_nam}}
-                                    <span></span>
-                                </span>
-                            </div>
-                            <div class="phim-tip-noidung">
-                                @if(is_null($season->phim_gioithieu))
-                                    Đang cập nhật ...
-                                @else
-                                {{strlen($season->phim_gioithieu)>255?substr($season->phim_gioithieu,0,strrpos(substr($season->phim_gioithieu,0,255),' ')).' ...':$season->phim_gioithieu}}
-                                @endif                            
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> 
-                                        {{$season->listTheLoai}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$season->phim_sotap}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$season->loaiphim_ten}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$season->quocgia_ten}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($season->phim_luotxem)}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
-                                <?php
-                                    $star = ClassCommon::getStar($season->phim_id); 
-                                    for($i = 1; $i <= 5; $i++){
-                                        if($i <= intval($star)){
-                                            echo '<span class="glyphicon fa fa-star star star-color"></span>';
-                                        } else if($i > $star && ($i-1) < $star){
-                                            echo '<span class="glyphicon fa fa-star-half-alt star star-half-color"></span>';
-                                        } else {
-                                            echo '<span class="fa fa-star star"></span>';
-                                        }
-                                    }   
-                                ?>
+                                <div class="tip ten-phim ten-phim-chinh">{{$row->phim_ten}}</div>
+                                    <div class="tip ten-phim ten-phim-phu">{{$row->phim_tenkhac}}</div>
+                                    <div class="tip ten-phim ten-phim-tieng-viet">{{$row->phim_tenvn}}</div>
+                                    <div class="tip the-loai" style="margin-top:10px;"><span class="tip-title">Thể loại:</span>
+                                            {{$row->listTheLoai}}
+                                    </div>     
+                                    <div class="tip so-tap"><span class="tip-title">Số tập:</span> {{$row->phim_sotap}}</div>
+                                    <div class="tip nam"><span class="tip-title">Năm:</span> {{$row->phim_nam}}</div>                                
+                                    <div class="tip luot-xem"><span class="tip-title">Tổng lượt xem:</span> {{number_format($row->phim_luotxem)}}</div>
+                                    <div class="tip noi-dung">{{$row->phim_gioithieu}}</div>
                             </div>
                         </div>
-                    </div>
                 </a>
             </div>
             @endforeach
@@ -411,7 +375,7 @@
         @if(count($listGoiY) > 0)
         @foreach($listGoiY as $row)
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3">
-                    <a title="{{$row->phim_ten}}&nbsp;{{strlen($row->phim_tenvn)>0?'| '.$row->phim_tenvn:''}}" class="click-loading" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
+                    <a data-template="phim-{{$row->phim_id}}" class="click-loading ttip" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
                                 <img class="lazy" data-src="{{$row->phim_hinhnen}}">
@@ -425,56 +389,20 @@
                                 <div class="box-text">{{$row->tap[0]->tap_tapso.'/'.$row->phim_sotap}}</div>
                             </div>
                         </div>
-                        <div class="phim-tip">
+                        <div id="phim-{{$row->phim_id}}">
                             <div class="phim-tip-content">
-                            <div class="phim-tip-ten">{{$row->phim_ten}}</div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-time"></span>&nbsp;<span class="title">Season</span>&nbsp; {{$row->phim_season}}
-                                <span style="float:right">
-                                    <span class="glyphicon glyphicon-calendar"></span>&nbsp;<span class="title">Năm</span>&nbsp; {{$row->phim_nam}}
-                                    <span></span>
-                                </span>
-                            </div>
-                            <div class="phim-tip-noidung">
-                                @if(is_null($row->phim_gioithieu))
-                                    Đang cập nhật ...
-                                @else
-                                {{strlen($row->phim_gioithieu)>255?substr($row->phim_gioithieu,0,strrpos(substr($row->phim_gioithieu,0,255),' ')).' ...':$row->phim_gioithieu}}
-                                @endif                            
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;<span class="title">Thể loại:</span> 
-                                        {{$row->listTheLoai}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-list"></span>&nbsp;<span class="title">Số tập:</span> {{$row->phim_sotap}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-expand"></span>&nbsp;<span class="title">Loại phim:</span> {{$row->loaiphim_ten}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-globe"></span>&nbsp;<span class="title">Quốc gia:</span> {{$row->quocgia_ten}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span class="title">Lượt xem:</span> {{number_format($row->phim_luotxem)}}
-                            </div>
-                            <div class="phim-tip-underten">
-                                <span class="glyphicon glyphicon-star"></span>&nbsp;<span class="title">Đánh giá:</span> 
-                                <?php
-                                    $star = ClassCommon::getStar($row->phim_id); 
-                                    for($i = 1; $i <= 5; $i++){
-                                        if($i <= intval($star)){
-                                            echo '<span class="glyphicon fa fa-star star star-color"></span>';
-                                        } else if($i > $star && ($i-1) < $star){
-                                            echo '<span class="glyphicon fa fa-star-half-alt star star-half-color"></span>';
-                                        } else {
-                                            echo '<span class="fa fa-star star"></span>';
-                                        }
-                                    }   
-                                ?>
+                                <div class="tip ten-phim ten-phim-chinh">{{$row->phim_ten}}</div>
+                                    <div class="tip ten-phim ten-phim-phu">{{$row->phim_tenkhac}}</div>
+                                    <div class="tip ten-phim ten-phim-tieng-viet">{{$row->phim_tenvn}}</div>
+                                    <div class="tip the-loai" style="margin-top:10px;"><span class="tip-title">Thể loại:</span>
+                                            {{$row->listTheLoai}}
+                                    </div>     
+                                    <div class="tip so-tap"><span class="tip-title">Số tập:</span> {{$row->phim_sotap}}</div>
+                                    <div class="tip nam"><span class="tip-title">Năm:</span> {{$row->phim_nam}}</div>                                
+                                    <div class="tip luot-xem"><span class="tip-title">Tổng lượt xem:</span> {{number_format($row->phim_luotxem)}}</div>
+                                    <div class="tip noi-dung">{{$row->phim_gioithieu}}</div>
                             </div>
                         </div>
-                    </div>
                 </a>
             </div>
             @endforeach
