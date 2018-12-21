@@ -80,7 +80,7 @@
                                 <td class="text-center">
                                     <div class="list-action-icon">
                                         @if(empty($row->er_url))
-                                        <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/?pid='.$row->phim_id.'&t='.$row->tap_tapso.'&s='.md5('google')}}" target="_blank">
+                                        <a href="{{URL::to('/xem-phim').'/'.strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" target="_blank">
                                             <span data-toggle="tooltip" title="Đi đến">
                                                 <i class="fa fa-internet-explorer  text-light-blue"></i>
                                             </span>
