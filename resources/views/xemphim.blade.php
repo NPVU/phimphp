@@ -1,6 +1,6 @@
 @extends('layouts.app') 
 @section('title') 
- <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> <?php echo strlen($tap[0]->tap_ten)>0? $tap[0]->tap_ten:''?> | VietSub HD 
+ <?php echo $phim[0]->phim_ten.' - Tập '.$tap[0]->tap_tapsohienthi?> <?php echo strlen($tap[0]->tap_ten)>0? $tap[0]->tap_ten:''?>
 @endsection 
 @section('metaCEO') 
 <meta name="description" content="<?php echo strlen($phim[0]->phim_tenvn)>0? $phim[0]->phim_tenvn.' ':''?> <?php echo strlen($phim[0]->phim_tenkhac)>0? $phim[0]->phim_tenkhac.',':''?> Nội dung: {{$phim[0]->phim_gioithieu}}" /> 
@@ -386,7 +386,14 @@
                                     <div>{{$row->phim_ten}}</div>
                                     <div class="title-vn">{{$row->phim_tenvn}}</div>
                                 </div>
-                                <div class="box-text">{{$row->tap[0]->tap_tapso.'/'.$row->phim_sotap}}</div>
+                                <div class="box-text">
+                                    @if($row->phim_kieu != 2)
+                                        {{$row->phim_taphienthi.'/'.$row->phim_sotap}}
+                                    @else
+                                        {{$row->phim_taphienthi}}
+                                    @endif
+                                    
+                                </div>
                             </div>
                         </div>
                         <div id="phim-{{$row->phim_id}}">
