@@ -212,29 +212,34 @@ class PhimController extends Controller{
             if($request->add_phim_xuatban){
                 $xuatban = 1;
             }
-            DB::table('phim')->insert(
-                    [
-                        'theloai_id'      => json_encode($request->add_phim_theloai),
-                        'phim_ten'        => trim($request->add_phim_ten),
-                        'phim_tenvn'    => trim($request->add_phim_tenvn),
-                        'phim_tenkhac'    => trim($request->add_phim_tenkhac),
-                        'phim_gioithieu'  => $request->add_phim_gioithieu,
-                        'phim_sotap'      => $request->add_phim_sotap,
-                        'phim_nam'        => $request->add_phim_nam,
-                        'phim_season'     => $request->add_phim_season,
-                        'quocgia_id'      => $request->add_phim_quocgia,
-                        'phim_kieu'       => $request->loaiphim,
-                        'phim_dotuoi'     => $request->add_phim_dotuoi,
-                        'phim_tag'        => $request->add_phim_tag,
-                        'phim_hinhanh'    => $url_icon,
-                        'phim_hinhnen'    => $url_background,
-                        'phim_thumb'      => $url_thumb,
-                        'phim_nguon'      => $request->add_phim_nguon,
-                        'phim_anime'      => $isanime,
-                        'phim_xuatban'    => $xuatban,
-                        'phim_ngaycapnhat'=> now()
-                    ]
-                );
+            $phim_id = DB::table('phim')->insertGetId(
+                            [
+                                'theloai_id'      => json_encode($request->add_phim_theloai),
+                                'phim_ten'        => trim($request->add_phim_ten),
+                                'phim_tenvn'    => trim($request->add_phim_tenvn),
+                                'phim_tenkhac'    => trim($request->add_phim_tenkhac),
+                                'phim_gioithieu'  => $request->add_phim_gioithieu,
+                                'phim_sotap'      => $request->add_phim_sotap,
+                                'phim_nam'        => $request->add_phim_nam,
+                                'phim_season'     => $request->add_phim_season,
+                                'quocgia_id'      => $request->add_phim_quocgia,
+                                'phim_kieu'       => $request->loaiphim,
+                                'phim_dotuoi'     => $request->add_phim_dotuoi,
+                                'phim_tag'        => $request->add_phim_tag,
+                                'phim_hinhanh'    => $url_icon,
+                                'phim_hinhnen'    => $url_background,
+                                'phim_thumb'      => $url_thumb,
+                                'phim_nguon'      => $request->add_phim_nguon,
+                                'phim_anime'      => $isanime,
+                                'phim_xuatban'    => $xuatban,
+                                'phim_ngaycapnhat'=> now()
+                            ]
+                        );
+            DB::table('danhgia')->insert([
+                'phim_id' => $phim_id,
+                'danhgia_star' => 4,
+                'danhgia_ngay' => now()
+            ]);
             return redirect(Session::get('backURLAdmin'))->with('success', 'Cập nhật thành công !');
         } else {
             $listTheLoai = DB::table('theloai')->orderByRaw('theloai_ten')->get();

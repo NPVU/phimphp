@@ -357,7 +357,7 @@ class XemPhimController extends Controller{
             } else {
                 return null;
             }
-        }else{
+        }else if(strcmp($host[0],"animetvn.tv")==0){
             $get = $this->curl($link);
             $data = explode('<iframe', $get);
             $data = explode('</iframe>', $data[1]);
@@ -366,6 +366,9 @@ class XemPhimController extends Controller{
 
             $source = explode('url=',$source[0]);
             $linkDownload['360p'] = urldecode($source[1]);
+            return $linkDownload;
+        }else{
+            $linkDownload['360p'] = $link;
             return $linkDownload;
         }
     }
