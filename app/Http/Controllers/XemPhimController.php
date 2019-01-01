@@ -359,14 +359,26 @@ class XemPhimController extends Controller{
             }
         }else if(strcmp($host[0],"animetvn.tv")==0){
             $get = $this->curl($link);
-            $data = explode('<iframe', $get);
-            $data = explode('</iframe>', $data[1]);
-            $data = explode('src="',$data[0]);
-            $source = explode('"', $data[1]);
+            $data = explode('setup(', $get);
+            if(count($data) > 1){
+                $data = explode(')', $data[1]);
+                $data = explode('"file":"', $data[0]);
+                $data = explode('"', $data[2]);
+                $linkDownload['360p'] = $data[0];
+                $data = explode('m18', $data[0]);
+                $linkDownload['720p'] = $data[0].'m22';
+                return $linkDownload;
+            }else{
+                $data = explode('<iframe', $get);
+                $data = explode('</iframe>', $data[1]);
+                $data = explode('src="',$data[0]);
+                $source = explode('"', $data[1]);
 
-            $source = explode('url=',$source[0]);
-            $linkDownload['360p'] = urldecode($source[1]);
-            return $linkDownload;
+                $source = explode('url=',$source[0]);
+                $linkDownload['360p'] = urldecode($source[1]);
+                return $linkDownload;
+            }
+            
         }else{
             $linkDownload['360p'] = $link;
             return $linkDownload;

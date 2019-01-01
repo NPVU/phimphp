@@ -161,11 +161,7 @@ class PhimController extends Controller{
         if(empty($request->add_phim_season)){
             $data['add_phim_season_error'] = 'Season phim không được bỏ trống';
             $valid = false;
-        }
-        if($request->add_phim_nam < 1980 || $request->add_phim_nam > date('Y')){
-            $data['add_phim_nam_error'] = 'Năm phát hành hợp lệ phải từ năm 1980 - '.date('Y');
-            $valid = false;
-        }
+        }        
         if(empty($request->add_phim_image) && empty($request->add_phim_image_link)){            
             $data['add_phim_image_error'] = 'Ảnh icon của phim là bắt buộc';
             $valid = false;
