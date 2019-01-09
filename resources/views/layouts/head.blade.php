@@ -17,7 +17,7 @@
     <meta property="fb:admins" content="1078149449014815"/>
     <meta name="googlebot" content="index,follow" />
     <meta name="robots" content="index,follow" />
-    <meta name="google-site-verification" content="MGNEEMNGFH1e4yLvIMdE5Hq-9PYNFwn56JCikQQwVzg" />
+    <meta name="google-site-verification" content="7j1ujTZTYuBw7gSgVCJLa7vM_uBlLZ7OpbgTuo8m_QQ" />
 
 
     <!-- Scripts -->
