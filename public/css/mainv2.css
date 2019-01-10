@@ -15,8 +15,8 @@ body::-webkit-scrollbar {
     height: 6px !important;
 }
 a:visited.btn-tap{
-    background: #2f383c;
-    border-color: #263238;
+    background-color: #204d74;;
+    border-color: #204d74;;
 }
 body::-webkit-scrollbar-thumb {
     background-color: #0f1416 !important;

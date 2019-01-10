@@ -32,7 +32,9 @@
                             {file: data['1080p'],label:'1080p','type':'mp4'},
                             @endif                                                         
                         ],
-                    autostart: autoplay,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+                    autostart: autoplay,
+                    playbackRateControls:[0.5,0.75,1,1.5,2],
+                    image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
                 });    
                 xpr.on('error', function() { 
                     @if(!empty($tap[0]->tap_facebooklink))                       
@@ -52,6 +54,7 @@
                                         {file: data.hd,label:'720p','type':'mp4','default': 'true'},                                                
                                     ],
                                     autostart: true,
+                                    playbackRateControls:[0.5,0.75,1,1.5,2],
                                     image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
                                 });
                             }
@@ -64,7 +67,9 @@
                             sources: [
                                     {file:sourcesTemp,label:'360p','type':'mp4','default': 'true'},                                                                
                                 ],
-                            autostart: true,image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
+                            autostart: true,
+                            playbackRateControls:[0.5,0.75,1,1.5,2],
+                            image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
                         });
                     @endif
                     jwplayer('my-player').load();
@@ -129,13 +134,14 @@
                 },
                 success: function (data) {                                
                     jwplayer('my-player').setup({            
-                    width: "100%",
-                    height: "100%",
-                    sources: [
-                        {file: data.sd,label:'360p','type':'mp4'},     
-                        {file: data.hd,label:'720p','type':'mp4','default': 'true'},                                                
-                    ],
-                    autostart: true,
+                        width: "100%",
+                        height: "100%",
+                        sources: [
+                            {file: data.sd,label:'360p','type':'mp4'},     
+                            {file: data.hd,label:'720p','type':'mp4','default': 'true'},                                                
+                        ],
+                        autostart: true,
+                        playbackRateControls:[0.5,0.75,1,1.5,2],
                         image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
                     });
                     jwplayer('my-player').load();
