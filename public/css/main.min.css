@@ -17,12 +17,12 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
     background-color: #0f1416 !important;
 }
+a:visited.btn-tap{
+    background: #204d74;
+    border-color: #204d74;
+}
 a:hover, a:focus{
     text-decoration: none;
-}
-a:visited.btn-tap{
-    background-color: #204d74;
-    border-color: #204d74;
 }
 .no-padding {
     padding-left:0px !important;

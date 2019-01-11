@@ -14,12 +14,15 @@ body::-webkit-scrollbar {
     width: 6px;
     height: 6px !important;
 }
-a:visited.btn-tap{
-    background-color: #204d74;;
-    border-color: #204d74;;
-}
 body::-webkit-scrollbar-thumb {
     background-color: #0f1416 !important;
+}
+a:visited.btn-tap{
+    background: #204d74;
+    border-color: #204d74;
+}
+a:hover, a:focus{
+    text-decoration: none;
 }
 .no-padding {
     padding-left:0px !important;
@@ -232,9 +235,13 @@ ul.user-menu  li:hover{
     .slider-name{
         font-size:1.3em;
     }
-    button.xem-ngay {         
+    button.xem-ngay {      
+        height: 27px !important; 
         font-size: 14px !important;      
-      }
+    }
+    button.xem-ngay.active {        
+        width: 27px !important;     
+    }
     .pagination>.page-item{
         font-size:0.7em;
     }
@@ -425,25 +432,25 @@ ul.user-menu  li:hover{
 }
 @media (max-width: 480px) {
     .box-phim {
-        height: 160px;
+        height: 140px;
     }
     .box-phim-lienquan{    
         height: 165px !important;   
     }
     .box-info>.box-text{
-        top:-160px;
+        top:-140px;
     }
     .box-image > img {
-        height: 160px;
+        height: 140px;
     }
     .npv-box-phim {
-        height: 160px;
+        height: 140px;
     }
     .box-info>.box-title{
         font-size: 0.8em;
     }
     .box-overlay-rich{
-        top:-20px;
+        top:-10px;
     }
     .vote-times{       
         left: 200px;
