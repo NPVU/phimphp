@@ -32,7 +32,7 @@
                             {file: data['1080p'],label:'1080p','type':'mp4'},
                             @endif                                                         
                         ],
-                    autostart: autoplay,
+                    autostart: true,
                     playbackRateControls:[0.5,0.75,1,1.5,2],
                     image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
                 });    

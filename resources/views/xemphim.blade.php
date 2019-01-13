@@ -289,8 +289,7 @@
                                         <label>Nhóm sub:</label>
                                         <span>{{empty($phim[0]->phim_nguon)?'Đang cập nhật':$phim[0]->phim_nguon}}</span>
                                     </li>-->
-                                    <li>
-                                        <label>Tóm tắt nội dung:</label>
+                                    <li>                                        
                                         <span style="white-space: pre-line;">{{empty($phim[0]->phim_gioithieu)?'đang cập nhật':$phim[0]->phim_gioithieu}}</span>
                                     </li>
                                 </ul>
@@ -331,7 +330,7 @@
                     @endif
                         <div class="box-phim box-phim-lienquan {{$row->phim_id == $phim[0]->phim_id?' phim-runing':''}}">
                             <div class="box-image">
-                                <img class="lazy" data-src="{{$row->phim_hinhnen}}">
+                                <img class="lazy" data-src="{{($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen)}}">
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
@@ -382,7 +381,7 @@
                     <a data-template="phim-{{$row->phim_id}}" class="click-loading ttip" href="/xem-phim/{{strtolower(str_replace('/','-',str_replace(' ', '-',ClassCommon::removeVietnamese($row->phim_ten)))).'/'.$row->tap_id.'.html'}}" data-toggle="modal" data-target="">
                         <div class="box-phim">
                             <div class="box-image">
-                                <img class="lazy" data-src="{{$row->phim_hinhnen}}">
+                                <img class="lazy" data-src="{{($row->phim_thumb!=null? $row->phim_thumb:$row->phim_hinhnen)}}">
                             </div>
                             <div class="box-overlay-rich"></div>
                             <div class="box-info">
