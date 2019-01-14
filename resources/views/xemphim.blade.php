@@ -174,7 +174,7 @@
     </div>
 </div>
 
-<div class="content-left-section" >
+<div class="content-left-section" >    
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <h2 class="content-left-title">TẬP - VIETSUB</h2>
     </div>
@@ -217,7 +217,19 @@
             </div>               
         @endforeach 
     </div>
-    @endif    
+    @endif  
+    @if(strlen($phim[0]->phim_ghichu)>0)
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div style="
+            text-align: center;
+            white-space: pre-line;
+            margin-top: 10px;
+            color:white
+        ">
+           {{$phim[0]->phim_ghichu}}
+        </div>
+    </div>
+    @endif
 </div>
 <div class="content-left-section" >
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
