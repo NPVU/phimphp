@@ -244,7 +244,7 @@
                             <span class="help-block add_facebook_link_error"></span>
                         </div>                        
                         <div class="form-group add_youtube_link">
-                            <label>ID Youtube</label>
+                            <label>Embed 2</label>
                             <div class="input-group">                        
                                 <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập ID youtube ..." class="form-control" />
                                 <div class="input-group-btn">
@@ -257,7 +257,7 @@
                             <span class="help-block add_youtube_link_error"></span>
                         </div>
                         <div class="form-group add_openload_link">
-                            <label>ID Openload</label>
+                            <label>Embed 1</label>
                             <div class="input-group">                        
                                 <input type="text" id="openloadLink" name="openloadLink" value="" placeholder="Nhập ID openload ..." class="form-control" />
                                 <div class="input-group-btn">
