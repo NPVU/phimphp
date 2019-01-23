@@ -448,6 +448,9 @@ function loadServer(event, server, tapid, dataid){
     if(server == 3){
         $('#my-player').html('<iframe id="frame-youtube" class="npv-youtube" src="https://www.youtube.com/embed/'+dataid+'?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="100%"></iframe>');                         
     }
+    if(server == 2){
+        $('#my-player').html('<iframe src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="border: 1px solid white" width="100%" height="100%"></iframe>');                         
+    }
     $('img').removeClass('server-active');
     $(event).find('img').addClass('server-active');
 }

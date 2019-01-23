@@ -43,12 +43,17 @@
         <a style="float:left;" class="click-loading" onclick="loadServer(this,1, {{$tap[0]->tap_id}},'')">
             <img class="server server-active" src="{{asset('img/themes/server-1.svg')}}" width="24" data-toggle="tooltip" title="Server chính" />
         </a>
-        @endif      
+        @endif    
+        @if(!empty($tap[0]->tap_openloadlink))
+        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'{{$tap[0]->tap_openloadlink}}')">
+            <img class="server" src="{{asset('img/themes/server-2.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
+        </a>
+        @endif
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
             <img class="server" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
         </a>
-        @endif               
+        @endif        
         <span class="title-video">
             {{'Tập '.$tap[0]->tap_tapsohienthi}} <span class="name-video">{{strlen($tap[0]->tap_ten)>0?': '.$tap[0]->tap_ten:''}}</span>
         </span>        
