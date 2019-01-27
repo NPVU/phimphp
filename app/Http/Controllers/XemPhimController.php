@@ -33,6 +33,7 @@ class XemPhimController extends Controller{
         
         $tapid = explode('.', $tapid)[0];
         $check = true;
+        $this->addLuotXem($tapid);
         $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();          
         
         if (count($tap_current) <= 0) {
@@ -86,7 +87,7 @@ class XemPhimController extends Controller{
         //   NotificationUtils::removeNotificationForUserOfPhim(Input::get('pid'));
         //}
         //$followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
-        if($check){            
+        if($check){                        
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
             $data['listTapVS'] = $this->getListTapVietsub($phim_id); 
@@ -161,8 +162,8 @@ class XemPhimController extends Controller{
        
     }
     
-    public function addLuotXem(){
-            $tap = DB::table('tap')->where('tap_id', Input::get('id'))->get();
+    public function addLuotXem($tapid){
+            $tap = DB::table('tap')->where('tap_id', $tapid)->get();
             ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
                         ['phim_id', $tap[0]->phim_id],

@@ -1,5 +1,5 @@
 <div id="video" class="video-js">
-    <div id="my-player">       
+    <div id="my-player" style="width: 100%; height: 100%;">       
         @if(empty($tap[0]->tap_googlelink))
             @if(!empty($tap[0]->tap_openloadlink))
                 <iframe src="{{$tap[0]->tap_openloadlink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
@@ -81,23 +81,23 @@
                         });
                     @endif
                     jwplayer('my-player').load();
-                    jwplayer('my-player').on('play', function(){        
+                    /*jwplayer('my-player').on('play', function(){        
                         if(vupdate===0){
                             vupdate=1;                                          
                             setTimeout(function(){
                                 viewTimes({{$tap[0]->tap_id}});
                             }, 10000);
                         }        
-                    });
+                    });*/
                 });
-                xpr.on('play', function(){        
+                /*xpr.on('play', function(){        
                     if(vupdate===0){
                         vupdate=1;                                     
                         setTimeout(function(){
                             viewTimes({{$tap[0]->tap_id}});
                         }, 10000);
                     }        
-                });   
+                });*/
                 xpr.on('complete', function(){      
                     var autoconfig = $('.btn-auto-next').attr('aria-auto').trim();
                     if(xpr.getDuration() - xpr.getPosition() === 0 && autoconfig==1){
@@ -153,14 +153,14 @@
                         image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",}
                     });
                     jwplayer('my-player').load();
-                    jwplayer('my-player').on('play', function(){        
+                    /*jwplayer('my-player').on('play', function(){        
                         if(vupdate===0){
                             vupdate=1;                                          
                             setTimeout(function(){
                                 viewTimes({{$tap[0]->tap_id}});
                             }, 10000);
                         }        
-                    });
+                    });*/
                 }
             });
             
