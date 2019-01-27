@@ -33,9 +33,12 @@ class XemPhimController extends Controller{
         
         $tapid = explode('.', $tapid)[0];
         $check = true;
-        $this->addLuotXem($tapid);
-        $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();          
         
+        $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();          
+        if(empty($tap_current[0]->tap_googlelink)){
+            $this->addLuotXemEmbed($tapid);
+            $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();
+        }
         if (count($tap_current) <= 0) {
             $tap_current = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();        
         }    
@@ -87,7 +90,7 @@ class XemPhimController extends Controller{
         //   NotificationUtils::removeNotificationForUserOfPhim(Input::get('pid'));
         //}
         //$followAmount = DB::table('follow_phim')->where('phim_id', $phim[0]->phim_id)->count();
-        if($check){                        
+        if($check){            
             $data['phim'] = $phim;
             $data['listTheLoaiPhim'] = $listTheLoaiPhim;
             $data['listTapVS'] = $this->getListTapVietsub($phim_id); 
@@ -101,7 +104,7 @@ class XemPhimController extends Controller{
             $data['follows'] = $followAmount;            
             $data['cookiePhim'] = $this->getCookieXemPhim($phim_id, $tapid, $tap_current[0]->tap_tapso);
 
-            return view('xemphim', $data, parent::getDataHeader()); 
+            return view('xemphim_min', $data, parent::getDataHeader()); 
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';
@@ -110,13 +113,13 @@ class XemPhimController extends Controller{
         }
     }
 
-    function xemPhimVersionOld(){                
+    function xemPhimVersionOld(){
         $phim_id = Input::get('pid');
         $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
         $tap = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get();
         return redirect(URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'/'.$tap[0]->tap_id.'.html'));
     }
-
+    
     function commentFacebook(){
         return 'comment';
     }
@@ -162,8 +165,29 @@ class XemPhimController extends Controller{
        
     }
     
-    public function addLuotXem($tapid){
+    public function addLuotXemEmbed($tapid){
             $tap = DB::table('tap')->where('tap_id', $tapid)->get();
+            ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
+            $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
+                        ['phim_id', $tap[0]->phim_id],
+                        ['tap_id', $tap[0]->tap_id]
+                ])->get();
+            $phim = DB::table('phim')->selectRaw('phim_luotxem, phim_luotxem_tuan, phim_luotxem_thang')->where('phim_id', $tap[0]->phim_id)->get();
+            $data['event']      = 'view';
+            $array['tapid']     = $luotxem[0]->tap_id;
+            $array['tview']     = ClassCommon::formatLuotXem($luotxem[0]->tap_luotxem);
+            $array['phimid']    = $tap[0]->phim_id;
+            $array['pview']     = ClassCommon::formatLuotXem($phim[0]->phim_luotxem);
+            $array['pviewweek'] = ClassCommon::formatLuotXem($phim[0]->phim_luotxem_tuan);
+            $array['pviewmonth']= ClassCommon::formatLuotXem($phim[0]->phim_luotxem_thang);
+            $array['pstrview']  = ClassCommon::demLuotXem($phim[0]->phim_luotxem);
+            $data['content']    = $array;
+            event(new PusherEvent($data));            
+        
+    }
+    
+    public function addLuotXem(){
+            $tap = DB::table('tap')->where('tap_id', Input::get('id'))->get();
             ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
                         ['phim_id', $tap[0]->phim_id],
@@ -379,7 +403,6 @@ class XemPhimController extends Controller{
                 $linkDownload['360p'] = urldecode($source[1]);
                 return $linkDownload;
             }
-            
         }else{
             $linkDownload['360p'] = $link;
             return $linkDownload;
