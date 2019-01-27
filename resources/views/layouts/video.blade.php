@@ -1,7 +1,15 @@
 <div id="video" class="video-js">
     <div id="my-player">       
+        @if(empty($tap[0]->tap_googlelink))
+            @if(!empty($tap[0]->tap_openloadlink))
+                <iframe src="{{$tap[0]->tap_openloadlink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
+            @else
+                <iframe src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
+            @endif
+        @endif
     </div>
 </div>
+@if(!empty($tap[0]->tap_googlelink))
 <script type="text/javascript" src="{{ asset('js/jwplayer.min.js') }}"></script>
 <script type="text/javascript">    
     jwplayer.key=$videoKey;    
@@ -170,3 +178,4 @@
         }
     }
 </script>
+@endif
