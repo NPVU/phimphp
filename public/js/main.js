@@ -445,12 +445,47 @@ function loadServer(event, server, tapid, dataid){
             }
         });
     }
-    if(server == 3){
-        $('#my-player').html('<iframe id="frame-youtube" class="npv-youtube" src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
-    }
     if(server == 2){
+        var sourcesTemp = '';
+        $.ajax({
+            type: 'post',           
+            url: $('meta[name="url"]').attr('content')+'/load-video-2',
+            data: {'id':tapid },        
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {                
+                sourcesTemp = data['360p'];
+                jwplayer('my-player').setup({
+                    width: "100%",
+                    height: "100%",
+                    sources: [
+                            {file: data['360p'],label:'360p','type':'mp4'},                                          
+                            {file: data['720p'],label:'720p','type':'mp4','default': 'true'},                                                      
+                        ],
+                    autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                }); 
+                jwplayer('my-player').load();  
+                jwplayer('my-player').on('error', function() { 
+                    jwplayer('my-player').setup({
+                        width: "100%",
+                        height: "100%",
+                        sources: [
+                                {file:sourcesTemp,label:'360p','type':'mp4','default': 'true'},                                                                
+                            ],
+                            autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                    });
+                    jwplayer('my-player').load();
+                }); 
+            }
+        });
+    }
+    if(server == 3){
         $('#my-player').html('<iframe src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
     }
+    if(server == 4){
+        $('#my-player').html('<iframe id="frame-youtube" class="npv-youtube" src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
+    }    
     $('img').removeClass('server-active');
     $(event).find('img').addClass('server-active');
 }

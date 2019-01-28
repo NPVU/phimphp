@@ -43,15 +43,20 @@
         <a style="float:left;" class="click-loading" onclick="loadServer(this,1, {{$tap[0]->tap_id}},'')">
             <img class="server server-active" src="{{asset('img/themes/server-1.svg')}}" width="24" data-toggle="tooltip" title="Server chính" />
         </a>
-        @endif    
-        @if(!empty($tap[0]->tap_openloadlink))
-        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'{{$tap[0]->tap_openloadlink}}')">
-            <img class="server" src="{{asset('img/themes/server-2.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
+        @endif  
+        @if(!empty($tap[0]->tap_googlelink_2))
+        <a style="float:left;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'{{$tap[0]->tap_googlelink_2}}')">
+            <img class="server" src="{{asset('img/themes/server-2.svg')}}" width="24" data-toggle="tooltip" title="Server 2" />
+        </a>
+        @endif  
+        @if(!empty($tap[0]->tap_embed_1))
+        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_embed_1}}')">
+            <img class="server" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server 3" />
         </a>
         @endif
-        @if(!empty($tap[0]->tap_youtubelink))
-        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
-            <img class="server" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server phụ" />
+        @if(!empty($tap[0]->tap_embed_2))
+        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,4, {{$tap[0]->tap_id}},'{{$tap[0]->tap_embed_2}}')">
+            <img class="server" src="{{asset('img/themes/server-4.png')}}" width="24" data-toggle="tooltip" title="Server 4" />
         </a>
         @endif        
         <span class="title-video">

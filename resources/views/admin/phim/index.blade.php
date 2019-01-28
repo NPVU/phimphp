@@ -216,7 +216,7 @@
                             <input type="text" id="phim_taphienthi" name="phim_taphienthi" class="form-control required" value="" placeholder="" require/>
                             <span class="help-block"></span>
                         </div>  
-                        <div class="display-none">
+                        <div class="">
                         <div class="form-group add_audio_link">
                             <label>Link Audio</label>
                             <div class="input-group">                        

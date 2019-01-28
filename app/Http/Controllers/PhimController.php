@@ -404,10 +404,10 @@ class PhimController extends Controller{
                     'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
                     'tap_tapso'         => $request->add_tapphim_tap,
                     'tap_thuyetminh'    => $thuyetminh,
-                    'tap_facebooklink' => trim($request->facebookLink),
+                    'tap_facebooklink'  => trim($request->facebookLink),
                     'tap_googlelink'    => trim($request->googleLink),
-                    'tap_youtubelink'   => trim($request->youtubeLink),
-                    'tap_openloadlink'  => trim($request->openloadLink),
+                    'tap_embed_2'       => trim($request->youtubeLink),
+                    'tap_embed_1'       => trim($request->openloadLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem,
                     'tap_chatluong'     => $request->chatluong,
                     'tap_ngaycapnhat'   => now()
@@ -426,10 +426,10 @@ class PhimController extends Controller{
                     'tap_tapsohienthi'  => trim($request->add_tapphim_taphienthi),
                     'tap_tapso'         => $request->add_tapphim_tap,
                     'tap_thuyetminh'    => $thuyetminh,
-                    'tap_facebooklink' => trim($request->facebookLink),
+                    'tap_facebooklink'  => trim($request->facebookLink),
                     'tap_googlelink'    => trim($request->googleLink),
-                    'tap_youtubelink'   => trim($request->youtubeLink),
-                    'tap_openloadlink'  => trim($request->openloadLink),
+                    'tap_embed_2'       => trim($request->youtubeLink),
+                    'tap_embed_1'       => trim($request->openloadLink),
                     'tap_luotxem'       => $request->add_tapphim_luotxem,
                     'tap_chatluong'     => $request->chatluong
                 ]
@@ -487,10 +487,10 @@ class PhimController extends Controller{
                     [                        
                         'tap_ten'           => trim($request->tapphim_ten),
                         'tap_tapsohienthi'  => trim($request->tapphim_taphienthi),                        
-                        'tap_facebooklink' => trim($request->facebookLink),
+                        'tap_facebooklink'  => trim($request->facebookLink),
                         'tap_googlelink'    => trim($request->googleLink),
-                        'tap_youtubelink'   => trim($request->youtubeLink),
-                        'tap_openloadlink'  => trim($request->openloadLink),
+                        'tap_embed_2'       => trim($request->youtubeLink),
+                        'tap_embed_1'       => trim($request->openloadLink),
                         'tap_luotxem'       => $request->tapphim_luotxem,
                         'tap_chatluong'     => $request->chatluong                        
                     ]
@@ -510,10 +510,10 @@ class PhimController extends Controller{
                     [                        
                         'tap_ten'           => trim($request->tapphim_ten),
                         'tap_tapsohienthi'  => trim($request->tapphim_taphienthi),                        
-                        'tap_facebooklink' => trim($request->facebookLink),
+                        'tap_facebooklink'  => trim($request->facebookLink),
                         'tap_googlelink'    => trim($request->googleLink),
-                        'tap_youtubelink'   => trim($request->youtubeLink),
-                        'tap_openloadlink'  => trim($request->openloadLink),
+                        'tap_embed_2'       => trim($request->youtubeLink),
+                        'tap_embed_1'       => trim($request->openloadLink),
                         'tap_luotxem'       => $request->tapphim_luotxem                        
                     ]
         );

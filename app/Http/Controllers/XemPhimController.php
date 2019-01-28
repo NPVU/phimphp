@@ -154,15 +154,21 @@ class XemPhimController extends Controller{
         ->get();
     }
 
-    public function loadVideo(){
-        
+    public function loadVideo(){        
             $tap_current = DB::table('tap')->where('tap_id', Input::get('id'))->get();
             if (!empty($tap_current[0]->tap_googlelink)) {               
                 return $this->getPhotoGoogle($tap_current[0]->tap_googlelink);
             } else {
                 return null;
-            }
-       
+            }       
+    }
+    public function loadVideo2(){        
+            $tap_current = DB::table('tap')->where('tap_id', Input::get('id'))->get();
+            if (!empty($tap_current[0]->tap_googlelink_2)) {               
+                return $this->getPhotoGoogle($tap_current[0]->tap_googlelink_2);
+            } else {
+                return null;
+            }       
     }
     
     public function addLuotXemEmbed($tapid){

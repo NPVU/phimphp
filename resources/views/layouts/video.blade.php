@@ -1,10 +1,10 @@
 <div id="video" class="video-js">
     <div id="my-player" style="width: 100%; height: 100%;">       
-        @if(empty($tap[0]->tap_googlelink))
-            @if(!empty($tap[0]->tap_openloadlink))
-                <iframe src="{{$tap[0]->tap_openloadlink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
+        @if(empty($tap[0]->tap_embed_1))
+            @if(!empty($tap[0]->tap_embed_1))
+                <iframe src="{{$tap[0]->tap_embed_1}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
             @else
-                <iframe src="{{$tap[0]->tap_youtubelink}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
+                <iframe src="{{$tap[0]->tap_embed_2}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>
             @endif
         @endif
     </div>
