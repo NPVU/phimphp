@@ -255,6 +255,7 @@ class XemPhimController extends Controller{
                         'tap_id' => $tap[0]->tap_id,
                         'er_url' => '',
                         'er_content' => $request->content,
+                        'email' => $request->email,
                         'er_create_at' => now()
                     ]);
                 }

@@ -93,6 +93,7 @@ $(document).ready(function(){
     $('.btn-report-error').click(function(){        
         var token = $('#current-token').val();
         var content = $('#input-report-error').val();
+        var email = $('#input-report-email').val();
         if(content.trim().length < 6){
             $('.help-block-report-error').html('Vui lòng mô tả lỗi ít nhất 6 ký tự');
             $('.help-block-report-error').css('color','#b92c28');
@@ -101,7 +102,7 @@ $(document).ready(function(){
             $.ajax({
                 type: 'get',           
                 url: $('meta[name="url"]').attr('content')+'/report-error/',
-                data: {'_token':token,'pid':$('meta[name="pid"]').attr('content'), 't':$('meta[name="tid"]').attr('content'), 'content':content},        
+                data: {'_token':token,'pid':$('meta[name="pid"]').attr('content'), 't':$('meta[name="tid"]').attr('content'), 'content':content, 'email':email},        
                 headers: {
                     'X-CSRF-TOKEN': token
                 },

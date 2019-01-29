@@ -106,6 +106,7 @@ class HomeController extends Controller
         DB::table('error_report')->insert([
             'phim_id'       => 0,
             'tap_id'        => 0,
+            'email'         => trim($request->email),
             'er_url'        => trim($request->url),
             'er_content'    => trim($request->content),
             'er_create_at'  => now()

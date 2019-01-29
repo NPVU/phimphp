@@ -53,9 +53,13 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <form id="frm-error">                    
                     <div class="form-group">
+                        <label>Email (nếu có)</label>
+                        <input type="email" name="email" class="form-control" placeholder="Nhập email để nhận phản hồi..."/>
+                    </div>
+                    <div class="form-group">
                         <label>URL lỗi</label>
                         <input type="text" name="url" class="form-control" placeholder="Nhập url bị lỗi..."/>
-                    </div>
+                    </div>                    
                     <div class="form-group">
                         <label>Mô tả lỗi</label>
                         <input type="text" class="required error-content form-control" required name="content" placeholder="Nhập mô tả lỗi..."/>                                        
