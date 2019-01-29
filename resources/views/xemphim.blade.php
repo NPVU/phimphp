@@ -99,6 +99,13 @@
                     <div class="row">                
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">
+                                <label>Email (nếu có)</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><span class="fa fa-envelope"></span></span>
+                                    <input type="email" class="form-control" id="input-report-email" placeholder="Nhập email để nhận phản hồi" />
+                                </div>                                                                                            
+                            </div>
+                            <div class="form-group">
                                 <label>Mô tả lỗi</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><span class="fa fa-exclamation-circle"></span></span>
@@ -134,6 +141,7 @@
                         iconColor: 'white',
                         onOpening: function(){
                             $('#input-report-error').val('');
+                            $('#input-report-email').val('');
                             $('.help-block-report-error').html('');
                         }
                     }); 
