@@ -216,8 +216,8 @@
                             <input type="text" id="phim_taphienthi" name="phim_taphienthi" class="form-control required" value="" placeholder="" require/>
                             <span class="help-block"></span>
                         </div>  
-                        <div class="">
-                        <div class="form-group add_audio_link">
+                        <div>
+                        <div class="form-group add_audio_link display-none">
                             <label>Link Audio</label>
                             <div class="input-group">                        
                                 <input type="text" id="audioLink" name="audioLink" value="" placeholder="Nhập link audio ..." class="form-control" />
@@ -242,20 +242,7 @@
                                 </div>
                             </div> 
                             <span class="help-block add_facebook_link_error"></span>
-                        </div>                        
-                        <div class="form-group add_youtube_link">
-                            <label>Embed 2</label>
-                            <div class="input-group">                        
-                                <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập ID youtube ..." class="form-control" />
-                                <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success" onclick="checkVideo('Youtube')">
-                                        <span class="btnCheckYoutubeLink">Kiểm tra</span>
-                                        <i class="fa iconCheckYoutubeLink"></i>
-                                    </button>
-                                </div>
-                            </div>  
-                            <span class="help-block add_youtube_link_error"></span>
-                        </div>
+                        </div>    
                         <div class="form-group add_openload_link">
                             <label>Embed 1</label>
                             <div class="input-group">                        
@@ -268,6 +255,19 @@
                                 </div>
                             </div>  
                             <span class="help-block add_openload_link_error"></span>
+                        </div>
+                        <div class="form-group add_youtube_link">
+                            <label>Embed 2</label>
+                            <div class="input-group">                        
+                                <input type="text" id="youtubeLink" name="youtubeLink" value="" placeholder="Nhập ID youtube ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkYoutubeLink" class="btn btn-success" onclick="checkVideo('Youtube')">
+                                        <span class="btnCheckYoutubeLink">Kiểm tra</span>
+                                        <i class="fa iconCheckYoutubeLink"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <span class="help-block add_youtube_link_error"></span>
                         </div>
                         </div>
                         <div class="form-group add_google_link">
