@@ -57,6 +57,7 @@
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,4, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
             <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 4" >#4</button>
+        </a>
         @endif        
         <span class="title-video">
             {{'Tập '.$tap[0]->tap_tapsohienthi}} <span class="name-video">{{strlen($tap[0]->tap_ten)>0?': '.$tap[0]->tap_ten:''}}</span>
@@ -273,7 +274,7 @@
                     border-color: #2e6da4;
                     color:white;
                 }
-                .btn-server:hover{
+                .btn-server:hover,.btn-server:active, .btn-server:focus{
                     color:white;
                 }
                 .btn-active{
