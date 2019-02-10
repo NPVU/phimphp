@@ -872,3 +872,11 @@ img.lazy {
               transform: rotateZ(360deg);
     }
   }
+  @media (max-width: 480px) {
+    .auto-mobile{
+        display:unset  !important;
+    }
+    .auto-desktop{
+        display:none;
+    }
+}

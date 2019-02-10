@@ -168,13 +168,13 @@ $(document).ready(function(){
             success: function (data) {           
                 if(auto==1){
                     $('.btn-auto-next').attr('aria-auto', 0);
-                    $('.btn-auto-next').attr('title', 'Bật Auto');
+                    $('.btn-auto-next').attr('title', 'Bật Auto chuyển tập');
                     $('.text-auto-next').html(' Tắt');
                     $('.icon-auto-next').addClass('fa-ban');
                     $('.icon-auto-next').removeClass('fa-check-circle');
                 }else{
                     $('.btn-auto-next').attr('aria-auto', 1);
-                    $('.btn-auto-next').attr('title', 'Tắt Auto');
+                    $('.btn-auto-next').attr('title', 'Tắt Auto chuyển tập');
                     $('.text-auto-next').html(' Bật');
                     $('.icon-auto-next').addClass('fa-check-circle');
                     $('.icon-auto-next').removeClass('fa-ban');
@@ -603,3 +603,7 @@ function closeWindowLoading(){
       $('#frm-feedback').get(0).reset();
       $('#modal-feedback').iziModal('stopLoading');
     }
+    function download(){
+        var url = $('video').attr('src');
+        window.open("https://123link.co/st?api=a50a96b4fab46696202e02ee3f0d54cc0fc26abd&url="+url, "_blank");
+    } 

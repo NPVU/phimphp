@@ -694,6 +694,12 @@ a.visit:visited{
     }
 }
 @media(max-width: 414px){
+    .auto-mobile{
+        display:block  !important;
+    }
+    .auto-desktop{
+        display:none;
+    }
     iframe.npv-youtube {
         height: 220px;
     }

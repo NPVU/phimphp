@@ -79,10 +79,13 @@
             <button class="btn btn-primary" title="Tập tiếp theo" onclick="epAfter()" {{ClassCommon::isLastEpisode($tap[0]->tap_id)?'disabled':''}}><span class="glyphicon glyphicon-step-forward" style="cursor:unset;"></span></button>  
         </div>         
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 func_phim_align" style="margin-top:5px;">   
+        <div class="col-xs-12 col-sm-12 col-md-12 col-l-8g func_phim_align" style="margin-top:5px;">   
               
-            <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif">
-                <i class="icon-auto-next fa @if(Session::has('autoNext')) {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}} @else fa-check-circle @endif">&nbsp;<span>Tự chuyển tập:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
+            <button class="btn btn-success" onclick="download();" title="Download">
+                <i class="fa fa-download"></i> Tải về
+            </button>
+            <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif chuyển tập">
+                <i class="icon-auto-next fa @if(Session::has('autoNext')) {{Session::get('autoNext')==1?' fa-check-circle':' fa-ban'}} @else fa-check-circle @endif">&nbsp;<span><span class="auto-desktop">Tự chuyển tập</span><span class="auto-mobile display-none">Auto</span>:<span class="text-auto-next">@if(Session::has('autoNext')) {{Session::get('autoNext')==1?' Bật':' Tắt'}} @else Bật @endif</span></span></i>
             </button>
        
             <!--<button class="btn btn-primary btn-follow-phim" title="{{$follow_phim == 0?'Theo dõi':'Bỏ theo dõi'}}" follow="{{$follow_phim}}">
@@ -129,7 +132,11 @@
                     
                 </div>
             </div>
-            <script>                       
+            <script>      
+                function download(){
+                    var url = $('video').attr('src');
+                    window.open("https://123link.co/st?api=a50a96b4fab46696202e02ee3f0d54cc0fc26abd&url="+url, "_blank");
+                }                 
                 $('#modal-report-error').iziModal({
                         title: 'Báo lỗi',
                         top: 100,
