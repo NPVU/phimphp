@@ -41,23 +41,22 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
         <a style="float:left;" class="click-loading" onclick="loadServer(this,1, {{$tap[0]->tap_id}},'')">
-            <img class="server server-active" src="{{asset('img/themes/server-1.svg')}}" width="24" data-toggle="tooltip" title="Server chính" />
+            <button class="btn btn-server btn-active" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server chính" >#1</button>
         </a>
         @endif  
         @if(!empty($tap[0]->tap_googlelink_2))
         <a style="float:left;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'{{$tap[0]->tap_googlelink_2}}')">
-            <img class="server" src="{{asset('img/themes/server-2.svg')}}" width="24" data-toggle="tooltip" title="Server 2" />
+            <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 2" >#2</button>
         </a>
         @endif  
         @if(!empty($tap[0]->tap_openloadlink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_openloadlink}}')">
-            <img class="server" src="{{asset('img/themes/server-3.png')}}" width="24" data-toggle="tooltip" title="Server 3" />
+            <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 3" >#3</button>
         </a>
         @endif
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,4, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
-            <img class="server" src="{{asset('img/themes/server-4.png')}}" width="24" data-toggle="tooltip" title="Server 4" />
-        </a>
+            <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 4" >#4</button>
         @endif        
         <span class="title-video">
             {{'Tập '.$tap[0]->tap_tapsohienthi}} <span class="name-video">{{strlen($tap[0]->tap_ten)>0?': '.$tap[0]->tap_ten:''}}</span>
@@ -137,6 +136,89 @@
                     var url = $('video').attr('src');
                     window.open("https://123link.co/st?api=a50a96b4fab46696202e02ee3f0d54cc0fc26abd&url="+url, "_blank");
                 }                 
+                function loadServer(event, server, tapid, dataid){
+                    if($(event).find('button').hasClass('btn-active')){
+                            return false;
+                    }
+                    if(server == 1){                    
+                        var sourcesTemp = '';
+                        $.ajax({
+                            type: 'post',           
+                            url: $('meta[name="url"]').attr('content')+'/load',
+                            data: {'id':tapid },        
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {                
+                                sourcesTemp = data['360p'];
+                                jwplayer('my-player').setup({
+                                    width: "100%",
+                                    height: "100%",
+                                    sources: [
+                                            {file: data['360p'],label:'360p','type':'mp4'},                                          
+                                            {file: data['720p'],label:'720p','type':'mp4','default': 'true'},                                                      
+                                        ],
+                                    autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                                }); 
+                                jwplayer('my-player').load();  
+                                jwplayer('my-player').on('error', function() { 
+                                    jwplayer('my-player').setup({
+                                        width: "100%",
+                                        height: "100%",
+                                        sources: [
+                                                {file:sourcesTemp,label:'360p','type':'mp4','default': 'true'},                                                                
+                                            ],
+                                            autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                                    });
+                                    jwplayer('my-player').load();
+                                }); 
+                            }
+                        });
+                    }
+                    if(server == 2){
+                        var sourcesTemp = '';
+                        $.ajax({
+                            type: 'post',           
+                            url: $('meta[name="url"]').attr('content')+'/load-video-2',
+                            data: {'id':tapid },        
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (data) {                
+                                sourcesTemp = data['360p'];
+                                jwplayer('my-player').setup({
+                                    width: "100%",
+                                    height: "100%",
+                                    sources: [
+                                            {file: data['360p'],label:'360p','type':'mp4'},                                          
+                                            {file: data['720p'],label:'720p','type':'mp4','default': 'true'},                                                      
+                                        ],
+                                    autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                                }); 
+                                jwplayer('my-player').load();  
+                                jwplayer('my-player').on('error', function() { 
+                                    jwplayer('my-player').setup({
+                                        width: "100%",
+                                        height: "100%",
+                                        sources: [
+                                                {file:sourcesTemp,label:'360p','type':'mp4','default': 'true'},                                                                
+                                            ],
+                                            autostart: true,image: "","skin" : {"url":$('meta[name="url"]').attr('content')+"/css/jwplayer-skin.min.css","name": "glow",},
+                                    });
+                                    jwplayer('my-player').load();
+                                }); 
+                            }
+                        });
+                    }
+                    if(server == 3){
+                        $('#my-player').html('<iframe src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
+                    }
+                    if(server == 4){
+                        $('#my-player').html('<iframe id="frame-youtube" class="npv-youtube" src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
+                    }    
+                    $('button').removeClass('btn-active');
+                    $(event).find('button').addClass('btn-active');
+                }
                 $('#modal-report-error').iziModal({
                         title: 'Báo lỗi',
                         top: 100,
@@ -186,6 +268,19 @@
                 }             
             </script>          
             <style>
+                .btn-server{
+                    background-color: #337ab7;
+                    border-color: #2e6da4;
+                    color:white;
+                }
+                .btn-server:hover{
+                    color:white;
+                }
+                .btn-active{
+                    background-color: #5cb85c;
+                    border-color: #4cae4c;
+                    color:white;
+                }
                 .sticky-video {
                     position: fixed;
                     bottom: 60px;

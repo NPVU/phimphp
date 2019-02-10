@@ -408,7 +408,7 @@ function confirmAge(pid){
     });
 }
 function loadServer(event, server, tapid, dataid){
-    if($(event).find('img').hasClass('server-active')){
+    if($(event).find('button').hasClass('btn-active')){
             return false;
     }
     if(server == 1){                    
@@ -487,8 +487,8 @@ function loadServer(event, server, tapid, dataid){
     if(server == 4){
         $('#my-player').html('<iframe id="frame-youtube" class="npv-youtube" src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
     }    
-    $('img').removeClass('server-active');
-    $(event).find('img').addClass('server-active');
+    $('.btn-server').removeClass('btn-active');
+    $(event).find('button').addClass('btn-active');
 }
 function openLoading(){
     $('#loading').fadeIn();
