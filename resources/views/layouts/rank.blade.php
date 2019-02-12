@@ -1,4 +1,14 @@
-				<div class="content-right-section">
+            <div class="content-right-section" style="background: none;padding: 0px;margin: 0px;">               
+                <div align="center">
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <script> (adsbygoogle = window.adsbygoogle || []).push({
+                    google_ad_client: "ca-pub-2839502508878727",
+                    enable_page_level_ads: true
+                    });
+                    </script>
+                </div>
+            </div>
+            <div class="content-right-section">
                     <h4 class="content-right-title">BẢNG XẾP HẠNG TUẦN</h4>
                     <ul class="list-anime">
                         @if(count($phimXepHangTuan) > 0)

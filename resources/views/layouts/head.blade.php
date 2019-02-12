@@ -90,12 +90,5 @@
     <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
-    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />     
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-2839502508878727",
-        enable_page_level_ads: true
-    });
-    </script>
+    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />         
 </head>
