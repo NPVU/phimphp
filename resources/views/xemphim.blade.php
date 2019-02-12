@@ -81,7 +81,7 @@
         
         <div class="col-xs-12 col-sm-12 col-md-12 col-l-8g func_phim_align" style="margin-top:5px;">   
               
-            <button class="btn btn-success" onclick="download();" title="Download">
+            <button class="btn btn-success btn-download @if(empty($tap[0]->tap_googlelink)) display-none @endif" onclick="download();" title="Download">
                 <i class="fa fa-download"></i> Tải về
             </button>
             <button class="btn btn-primary btn-auto-next" aria-auto="@if(Session::has('autoNext')) {{Session::get('autoNext')}} @else 1 @endif" title="@if(Session::has('autoNext')) {{Session::get('autoNext')==1?'Tắt Auto':'Bật Auto'}} @else Tắt Auto @endif chuyển tập">
@@ -141,6 +141,7 @@
                     if($(event).find('button').hasClass('btn-active')){
                             return false;
                     }
+                    $('.btn-download').addClass('display-none');
                     if(server == 1){                    
                         var sourcesTemp = '';
                         $.ajax({
@@ -175,6 +176,7 @@
                                 }); 
                             }
                         });
+                        $('.btn-download').removeClass('display-none');
                     }
                     if(server == 2){
                         var sourcesTemp = '';
@@ -210,6 +212,7 @@
                                 }); 
                             }
                         });
+                        $('.btn-download').removeClass('display-none');
                     }
                     if(server == 3){
                         $('#my-player').html('<iframe src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         

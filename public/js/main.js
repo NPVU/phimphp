@@ -411,6 +411,7 @@ function loadServer(event, server, tapid, dataid){
     if($(event).find('button').hasClass('btn-active')){
             return false;
     }
+    $('.btn-download').addClass('display-none');
     if(server == 1){                    
         var sourcesTemp = '';
         $.ajax({
@@ -445,6 +446,7 @@ function loadServer(event, server, tapid, dataid){
                 }); 
             }
         });
+        $('.btn-download').removeClass('display-none');
     }
     if(server == 2){
         var sourcesTemp = '';
@@ -480,6 +482,7 @@ function loadServer(event, server, tapid, dataid){
                 }); 
             }
         });
+        $('.btn-download').removeClass('display-none');
     }
     if(server == 3){
         $('#my-player').html('<iframe src="'+dataid+'" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%"></iframe>');                         
