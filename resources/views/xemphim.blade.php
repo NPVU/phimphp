@@ -44,8 +44,8 @@
             <button class="btn btn-server btn-active" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server chính" >#1</button>
         </a>
         @endif  
-        @if(!empty($tap[0]->tap_googlelink_2))
-        <a style="float:left;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'{{$tap[0]->tap_googlelink_2}}')">
+        @if(!empty($tap[0]->tap_googlelink2))
+        <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'')">
             <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 2" >#2</button>
         </a>
         @endif  

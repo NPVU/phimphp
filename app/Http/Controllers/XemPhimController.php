@@ -162,8 +162,8 @@ class XemPhimController extends Controller{
     }
     public function loadVideo2(){        
             $tap_current = DB::table('tap')->where('tap_id', Input::get('id'))->get();
-            if (!empty($tap_current[0]->tap_googlelink_2)) {               
-                return $this->getPhotoGoogle($tap_current[0]->tap_googlelink_2);
+            if (!empty($tap_current[0]->tap_googlelink2)) {               
+                return $this->getPhotoGoogle($tap_current[0]->tap_googlelink2);
             } else {
                 return null;
             }       
