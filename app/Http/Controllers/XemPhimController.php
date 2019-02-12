@@ -33,12 +33,10 @@ class XemPhimController extends Controller{
         
         $tapid = explode('.', $tapid)[0];
         $check = true;
-        
-        $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();          
-        if(empty($tap_current[0]->tap_googlelink)){
-            $this->addLuotXemEmbed($tapid);
-            $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();
-        }
+
+        $this->addLuotXemEmbed($tapid);
+        $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();
+                    
         if (count($tap_current) <= 0) {
             $tap_current = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();        
         }    
@@ -193,6 +191,7 @@ class XemPhimController extends Controller{
     }
     
     public function addLuotXem(){
+        /*
             $tap = DB::table('tap')->where('tap_id', Input::get('id'))->get();
             ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
@@ -209,7 +208,8 @@ class XemPhimController extends Controller{
             $array['pviewmonth']= ClassCommon::formatLuotXem($phim[0]->phim_luotxem_thang);
             $array['pstrview']  = ClassCommon::demLuotXem($phim[0]->phim_luotxem);
             $data['content']    = $array;
-            event(new PusherEvent($data));            
+            event(new PusherEvent($data));        
+            */    
         
     }
 
