@@ -216,20 +216,7 @@
                             <input type="text" id="phim_taphienthi" name="phim_taphienthi" class="form-control required" value="" placeholder="" require/>
                             <span class="help-block"></span>
                         </div>  
-                        <div>
-                        <div class="form-group add_audio_link display-none">
-                            <label>Link Audio</label>
-                            <div class="input-group">                        
-                                <input type="text" id="audioLink" name="audioLink" value="" placeholder="Nhập link audio ..." class="form-control" />
-                                <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkAudioLink" class="btn btn-success" onclick="checkVideo('AudioLink')">
-                                        <span class="btnCheckAudioLink">Kiểm tra</span>
-                                        <i class="fa iconCheckAudioLink"></i>
-                                    </button>
-                                </div>
-                            </div>  
-                            <span class="help-block add_audio_link_error"></span>
-                        </div> 
+                        <div>                        
                         <div class="form-group add_facebook_link">
                             <label>ID Facebook</label>
                             <div class="input-group">                        
@@ -283,6 +270,19 @@
                             </div> 
                             <span class="help-block add_google_link_error"></span>
                         </div>
+                        <div class="form-group add_google2_link display-none">
+                            <label>Link Google Photos 2</label>
+                            <div class="input-group">                        
+                                <input type="text" id="google2Link" name="google2Link" value="" placeholder="Nhập link google photos 2 ..." class="form-control" />
+                                <div class="input-group-btn">
+                                    <button type="button" name="btn" value="checkGoogle2Link" class="btn btn-success" onclick="checkVideo('Google2')">
+                                        <span class="btnCheckGoogle2Link">Kiểm tra</span>
+                                        <i class="fa iconCheckGoogle2Link"></i>
+                                    </button>
+                                </div>
+                            </div>  
+                            <span class="help-block add_google2_link_error"></span>
+                        </div> 
                         <div class="form-group">                            
                             <input type="checkbox" name="thuyetminh" class="flat-red" value="true" />
                             <label>Thuyết Minh</label>
@@ -403,6 +403,7 @@
             $('#phim_taphienthi').val('');
             $('#facebookLink').val('');
             $('#googleLink').val('');
+            $('#google2Link').val('');
             $('#youtubeLink').val('');
             $('#openloadLink').val('');
             $('#videoCheck').attr('src', '');
@@ -496,7 +497,7 @@
                 $('.add_'+clasLower+'_link_error').html('');
             }
             $('.btnCheck'+clas.toString()+'Link').html('Kiểm tra ...');
-            if(clas === 'Google'){
+            if(clas === 'Google' || clas === 'Google2'){
                 var url = "{{url('services/google/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
             }
             $.ajax({

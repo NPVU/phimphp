@@ -207,18 +207,18 @@
                             </div> 
                             <span class="help-block google_link_error"></span>
                         </div>
-                        <div class="form-group audio_link">
-                            <label>Link Audio</label>
+                        <div class="form-group google2_link">
+                            <label>Link Google Photos 2</label>
                             <div class="input-group">                        
-                                <input type="text" id="audioLink" name="audioLink" value="" placeholder="Nhập link audio ..." class="form-control" />
+                                <input type="text" id="google2Link" name="google2Link" value="" placeholder="Nhập link google photos 2 ..." class="form-control" />
                                 <div class="input-group-btn">
-                                    <button type="button" name="btn" value="checkAudioLink" class="btn btn-success" onclick="checkVideo('AudioLink')">
-                                        <span class="btnCheckAudioLink">Kiểm tra</span>
-                                        <i class="fa iconCheckAudioLink"></i>
+                                    <button type="button" name="btn" value="checkGoogle2Link" class="btn btn-success" onclick="checkVideo('Google2')">
+                                        <span class="btnCheckGoogle2Link">Kiểm tra</span>
+                                        <i class="fa iconCheckGoogle2Link"></i>
                                     </button>
                                 </div>
                             </div>  
-                            <span class="help-block add_audio_link_error"></span>
+                            <span class="help-block google2_link_error"></span>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -353,6 +353,7 @@
                            $('#chatluong').val(data.content.tap_chatluong);
                            $('#facebookLink').val(data.content.tap_facebooklink);
                            $('#googleLink').val(data.content.tap_googlelink);
+                           $('#google2Link').val(data.content.tap_googlelink2);
                            $('#youtubeLink').val(data.content.tap_youtubelink);
                            $('#openloadLink').val(data.content.tap_openloadlink);
                        }
@@ -409,6 +410,8 @@
             }
             $('.btnCheck'+clas.toString()+'Link').html('Kiểm tra ...');
             if(clas === 'Google'){
+                var url = "{{url('services/google/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
+            }else if(clas === 'Google2'){
                 var url = "{{url('services/google/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
             } else if(clas === 'Openload'){
                 var url = "{{url('services/openload/')}}"+"/?url="+link+"&token="+$('meta[name="csrf-token"]').attr('content');
@@ -490,6 +493,7 @@
                     $('#chatluong').val(data[0].tap_chatluong);
                     $('#facebookLink').val(data[0].tap_facebooklink);
                     $('#googleLink').val(data[0].tap_googlelink);
+                    $('#google2Link').val(data[0].tap_googlelink2);
                     $('#youtubeLink').val(data[0].tap_youtubelink);
                     $('#openloadLink').val(data[0].tap_openloadlink);
                 }
