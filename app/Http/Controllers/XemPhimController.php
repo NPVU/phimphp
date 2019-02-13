@@ -172,6 +172,7 @@ class XemPhimController extends Controller{
     public function addLuotXemEmbed($tapid){
             $tap = DB::table('tap')->where('tap_id', $tapid)->get();
             ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
+            /*
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
                         ['phim_id', $tap[0]->phim_id],
                         ['tap_id', $tap[0]->tap_id]
@@ -186,7 +187,8 @@ class XemPhimController extends Controller{
             $array['pviewmonth']= ClassCommon::formatLuotXem($phim[0]->phim_luotxem_thang);
             $array['pstrview']  = ClassCommon::demLuotXem($phim[0]->phim_luotxem);
             $data['content']    = $array;
-            event(new PusherEvent($data));            
+            event(new PusherEvent($data)); 
+            */           
         
     }
     
