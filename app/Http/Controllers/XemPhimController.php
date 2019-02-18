@@ -38,7 +38,7 @@ class XemPhimController extends Controller{
         $tap_current = DB::table('tap')->where('tap_id', $tapid)->get();
                     
         if (count($tap_current) <= 0) {
-            $tap_current = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso ASC')->limit(1)->get();        
+            return redirect(URL::to('/'));      
         }    
 
         $phim_id = $tap_current[0]->phim_id;
@@ -112,10 +112,7 @@ class XemPhimController extends Controller{
     }
 
     function xemPhimVersionOld(){
-        $phim_id = Input::get('pid');
-        $phim = DB::table('phim')->where('phim_id', $phim_id)->get();
-        $tap = DB::table('tap')->where('phim_id', $phim_id)->orderByRaw('tap_tapso DESC')->limit(1)->get();
-        return redirect(URL::to('/xem-phim/'.strtolower(str_replace(' ', '-',ClassCommon::removeVietnamese($phim[0]->phim_ten))).'/'.$tap[0]->tap_id.'.html'));
+        return redirect(URL::to('/'));
     }
     
     function commentFacebook(){
@@ -171,7 +168,9 @@ class XemPhimController extends Controller{
     
     public function addLuotXemEmbed($tapid){
             $tap = DB::table('tap')->where('tap_id', $tapid)->get();
-            ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
+            if(count($tap)>0){
+                ClassCommon::addLuotXem($tap[0]->phim_id, $tap[0]->tap_id);            
+            }            
             /*
             $luotxem = DB::table('tap')->selectRaw('tap_luotxem, tap_id')->where([
                         ['phim_id', $tap[0]->phim_id],
