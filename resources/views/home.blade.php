@@ -3,14 +3,14 @@
 ANIME VIETSUB ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM 
 @endsection 
 @section('metaCEO')
-<meta name="description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" />
-<meta name="keywords" content="xem phim không quảng cáo, xem anime không quảng cáo, xem phim không lag, xem anime không lag" />
+<meta name="description" content="Xem Phim, Anime Online Miễn Phí" />
+<meta name="keywords" content="Xem Phim, Anime Online Miễn Phí" />
 <meta property="og:image" content="{{asset('img/themes/fb-logo.png')}}">
-<meta property="og:title" content="ANIME VIETSUB ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
-<meta property="og:description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" /> 
-<meta property="description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" /> 
-<meta itemprop="name" content="ANIME VIETSUB ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM" />
-<meta itemprop="description" content="Xem phim, anime chất lượng cao không bị quảng cáo làm gián đoạn" />
+<meta property="og:title" content="ANIME VIETSUB ONLINE | XEMPHIMZERO.COM" />
+<meta property="og:description" content="Xem Phim, Anime Online Miễn Phí" /> 
+<meta property="description" content="Xem Phim, Anime Online Miễn Phí" /> 
+<meta itemprop="name" content="ANIME VIETSUB ONLINE | XEMPHIMZERO.COM" />
+<meta itemprop="description" content="Xem Phim, Anime Online Miễn Phí" />
 <meta itemprop="image" content="{{asset('img/themes/fb-logo.png')}}" />
 @endsection 
 @section('contentLeft')
