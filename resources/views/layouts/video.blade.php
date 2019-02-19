@@ -45,7 +45,9 @@
                     image: "{{$phim[0]->phim_hinhnen}}","skin" : {"url":"{{asset('css/jwplayer-skin.min.css')}}","name": "glow",},
                     advertising: {
                         client: "vast",
-                        tag: "https://www.vidcpm.com/watch.xml?key=4b2443e53815439b0fcde73ec4671226&custom=%7B%27width%27%3A%27__player-width__%27%2C%27height%27%3A%27__player-height__%27%7D&cb=__random-number__&vastref=__page-url__"
+                        tag: "https://www.vidcpm.com/watch.xml?key=4b2443e53815439b0fcde73ec4671226&custom=%7B%27width%27%3A%27__player-width__%27%2C%27height%27%3A%27__player-height__%27%7D&cb=__random-number__&vastref=__page-url__",
+                        skipoffset: 10,
+		                skipmessage: 'Skip this ad in XX'
                     }
                 });    
                 xpr.on('error', function() { 
