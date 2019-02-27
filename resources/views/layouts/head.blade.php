@@ -90,5 +90,14 @@
     <link href="{{ asset('css/toast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziToast.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/iziModal.min.css') }}" rel="stylesheet" type="text/css" />        
-    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />         
+    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet" type="text/css" />  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126631519-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-126631519-1');
+    </script>       
 </head>
