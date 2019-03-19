@@ -268,7 +268,7 @@ class ClassCommon extends BaseController
                 if(strlen($row->phim_tenvn)>0){
                     $html .=        '<div class="title title-vn">'.$row->phim_tenvn.'</div>';
                 }                
-                $html .=        '<div>Season '.$row->phim_season.'</div>';
+                $html .=        '<div>Season '.$row->phim_season.' (Tập '.$row->phim_taphienthi.')</div>';
                 $html .=        '<div>';
                                     $star = ClassCommon::getStar($row->phim_id); 
                                     for($i = 1; $i <= 5; $i++){
