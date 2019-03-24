@@ -61,11 +61,10 @@
                         <thead>
                             <tr class="bg-primary">
                                 <th scope="col" class="text-center" style="width: 3%">#</th>                                
-                                <th scope="col" class="text-left" style="width: 15%">Tên phim</th>
+                                <th scope="col" class="text-left" style="width: 20%">Tên phim</th>
                                 <th scope="col" class="text-center" style="width: 10%">Số tập</th>
-                                <th scope="col" class="text-left" style="width: 20%">Tag</th>       
-                                <th scope="col" class="text-left" style="width: 27%">Nhóm sub</th>
-                                <th scope="col" class="text-center" style="width:10%">Bình luận</th>                                                          
+                                <th scope="col" class="text-left" style="width: 25%">Tag</th>       
+                                <th scope="col" class="text-left" style="width: 27%">Nhóm sub</th>                                                                                       
                                 <th scope="col" class="text-center" style="width: 15%"></th>
                             </tr>
                         </thead>
@@ -93,10 +92,7 @@
                                 </td> 
                                 <td onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" style="cursor:pointer;">
                                     {{$row->phim_nguon}}
-                                </td>               
-                                <td class="text-center">
-                                    <span class="fb-comments-count" data-href="{{url('xem-phim')}}/comment/facebook/{{$row->phim_id}}"></span>
-                                </td>                                                                               
+                                </td>                                                                                                                           
                                 <td class="text-center">                                      
                                     <div class="list-action-icon">                                        
                                         <span onclick="preAddTapPhim({{$row->phim_id}}, '{{$row->phim_ten}}', '{{$row->phim_sotap}}', {{$row->tap==null?'0':$row->tap}},{{$row->maxtap==null?'0':$row->maxtap}})" data-toggle="tooltip" title="Thêm tập">

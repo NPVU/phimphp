@@ -101,5 +101,5 @@ ANIME VIETSUB ONLINE | XEM PHIM KHÔNG QUẢNG CÁO | XEMPHIMZERO.COM
 </div>
 @endsection 
 @section('contentRight') 
-    @include('layouts.rank_min') 
+    @include('layouts.rank') 
 @endsection 

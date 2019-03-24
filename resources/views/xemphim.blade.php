@@ -35,8 +35,8 @@
         <h2 class="content-left-title">{{$phim[0]->phim_ten}}</h2>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="min-height:300px;">                                       
-        @include('layouts.confirmAge_min') 
-        @include('layouts.video_min')         
+        @include('layouts.confirmAge') 
+        @include('layouts.video')         
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 5px 10px;">
         @if(!empty($tap[0]->tap_googlelink))
@@ -95,8 +95,7 @@
                 </i>
             </button>-->            
             <button class="btn btn-warning" data-izimodal-open="#modal-report-error" title="Báo lỗi"><i class="fa fa-exclamation-triangle">&nbsp;<span>Báo lỗi</span></i></button>
-            
-            <!--@include('layouts.infophim_min')-->            
+                        
             <div id="modal-report-error" data-izimodal-transitionin="comingInDown">
                 <div class="modal-body" style="padding: 20px">        
                     <div class="row">                
@@ -558,9 +557,9 @@
     </div>
 </div>
 @if($cookiePhim['openCookie']) 
-    @include('layouts.cookiePhim_min') 
+    @include('layouts.cookiePhim') 
 @endif 
 @endsection 
 @section('contentRight') 
-    @include('layouts.rank_min') 
+    @include('layouts.rank') 
 @endsection

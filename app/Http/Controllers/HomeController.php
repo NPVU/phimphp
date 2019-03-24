@@ -21,12 +21,12 @@ class HomeController extends Controller
         $data['htmlTapMoi']     = $htmlTapMoi;
         $data['htmlMovieMoi']     = $htmlMovieMoi;
         $data['listRandom']  = $this->getPhimRandom();
-        return view('home_min', $data, parent::getDataHeader());
+        return view('home', $data, parent::getDataHeader());
     }
 
     public function getGopY(){
         $data['captcha'] = captcha_img();
-        return view('layouts.gopy_min', $data,parent::getDataHeader());
+        return view('layouts.gopy', $data,parent::getDataHeader());
     }
 
     public function postGopY(Request $request){
@@ -43,12 +43,12 @@ class HomeController extends Controller
             ]);
             $data['reported'] = true;
         }
-        return view('layouts.gopy_min', $data,parent::getDataHeader());
+        return view('layouts.gopy', $data,parent::getDataHeader());
     }
 
     public function getBaoLoi(){
         $data['captcha'] = captcha_img();
-        return view('layouts.baoloi_min', $data,parent::getDataHeader());
+        return view('layouts.baoloi', $data,parent::getDataHeader());
     }
 
     public function postBaoLoi(Request $request){
@@ -68,12 +68,12 @@ class HomeController extends Controller
             ]);
             $data['reported'] = true;
         }
-        return view('layouts.baoloi_min', $data,parent::getDataHeader());
+        return view('layouts.baoloi', $data,parent::getDataHeader());
     }
 
     public function getYeuCauPhim(){
         $data['captcha'] = captcha_img();
-        return view('layouts.yeucau_min', $data,parent::getDataHeader());
+        return view('layouts.yeucau', $data,parent::getDataHeader());
     }
 
     public function postYeuCauPhim(Request $request){
@@ -90,7 +90,7 @@ class HomeController extends Controller
             ]);
             $data['success'] = true;
         }
-        return view('layouts.yeucau_min', $data,parent::getDataHeader());
+        return view('layouts.yeucau', $data,parent::getDataHeader());
     }
     
     public function postYeuCau(Request $request){        
@@ -141,7 +141,7 @@ class HomeController extends Controller
                     ->limit(1)->get();
             }                                                    
             $data['listPhim'] = $listPhim;
-            return view('userphim_min', $data, parent::getDataHeader());
+            return view('userphim', $data, parent::getDataHeader());
         } else {
             $data['title'] = 'Không tìm thấy trang';
             $data['page'] = 'errors.404';
@@ -176,7 +176,7 @@ class HomeController extends Controller
         }                                        
         $data['theloai'] = $theloai;
         $data['listPhimTheloai'] = $listPhimTheloai;
-        return view('theloai_min', $data, parent::getDataHeader());
+        return view('theloai', $data, parent::getDataHeader());
     }
 
     public function indexQuocGia($quocgia){
@@ -206,7 +206,7 @@ class HomeController extends Controller
         }    
         $data['quocgia'] = $quocgia;
         $data['listPhimQuocGia'] = $listPhimQuocGia;
-        return view('quocgia_min', $data, parent::getDataHeader());
+        return view('quocgia', $data, parent::getDataHeader());
     }
 
     public function indexXemNhieu(){        
@@ -233,7 +233,7 @@ class HomeController extends Controller
                     ->limit(1)->get();
         } 
         $data['listPhimXemNhieu'] = $listPhimXemNhieu;
-        return view('xemnhieu_min', $data, parent::getDataHeader());      
+        return view('xemnhieu', $data, parent::getDataHeader());      
     }
 
     public function indexTvSeries(){
@@ -259,7 +259,7 @@ class HomeController extends Controller
         }           
         $data['kieuphim'] = 'TV Series'; 
         $data['listPhim'] = $listPhim;
-        return view('kieuphim_min', $data, parent::getDataHeader());
+        return view('kieuphim', $data, parent::getDataHeader());
     }
 
     public function indexMovie(){
@@ -285,7 +285,7 @@ class HomeController extends Controller
         }            
         $data['kieuphim'] = 'Movie';
         $data['listPhim'] = $listPhim;
-        return view('kieuphim_min', $data, parent::getDataHeader());
+        return view('kieuphim', $data, parent::getDataHeader());
     }
 
     public function indexOva(){
@@ -311,7 +311,7 @@ class HomeController extends Controller
         }            
         $data['kieuphim'] = 'Ova';
         $data['listPhim'] = $listPhim;
-        return view('kieuphim_min', $data, parent::getDataHeader());
+        return view('kieuphim', $data, parent::getDataHeader());
     }
 
     public function indexLiveAction(){
@@ -337,7 +337,7 @@ class HomeController extends Controller
         }            
         $data['kieuphim'] = 'Live Action';
         $data['listPhim'] = $listPhim;
-        return view('kieuphim_min', $data, parent::getDataHeader());
+        return view('kieuphim', $data, parent::getDataHeader());
     }
     
     public function xemThemTapMoi(){ 
