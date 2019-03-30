@@ -46,17 +46,17 @@
         @endif  
         @if(!empty($tap[0]->tap_googlelink2))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,2, {{$tap[0]->tap_id}},'')">
-            <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 2" >#2</button>
+            <button class="btn btn-server @if(empty($tap[0]->tap_googlelink)) btn-active @endif" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 2" >#2</button>
         </a>
         @endif  
         @if(!empty($tap[0]->tap_openloadlink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,3, {{$tap[0]->tap_id}},'{{$tap[0]->tap_openloadlink}}')">
-            <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 3" >#3</button>
+            <button class="btn btn-server @if(empty($tap[0]->tap_googlelink) && empty($tap[0]->tap_googlelink2)) btn-active @endif" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 3" >#3</button>
         </a>
         @endif
         @if(!empty($tap[0]->tap_youtubelink))
         <a style="float:left; margin-left:5px;" class="click-loading" onclick="loadServer(this,4, {{$tap[0]->tap_id}},'{{$tap[0]->tap_youtubelink}}')">
-            <button class="btn btn-server" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 4" >#4</button>
+            <button class="btn btn-server @if(empty($tap[0]->tap_googlelink) && empty($tap[0]->tap_googlelink2) && empty($tap[0]->tap_openloadlink)) btn-active @endif" style="width:30px; padding:0px;" data-toggle="tooltip" title="Server 4" >#4</button>
         </a>
         @endif        
         <span class="title-video">
